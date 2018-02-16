@@ -153,11 +153,18 @@ namespace Abeced.UI.Web.Controllers
         {
             //if (ModelState.IsValid)
             //{
-
-
-                HttpResponseMessage response = DataAccess.WebClient.PostAsJsonAsync("User", User).Result;
+            try
+            {
+                HttpResponseMessage response = DataAccess.WebClient.PostAsJsonAsync("User", user).Result;
                 TempData["SuccessMessage"] = "Saved Successfully";
                 return RedirectToAction("Index", "Home");
+            }
+            catch (AggregateException e)
+            {
+
+            }
+
+            
 
                 //var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
                 //var result = await UserManager.CreateAsync(user, model.Password);
@@ -178,7 +185,7 @@ namespace Abeced.UI.Web.Controllers
            
 
                 // If we got this far, something failed, redisplay form
-               // return View(user);
+               return View(user);
             
         }
 
