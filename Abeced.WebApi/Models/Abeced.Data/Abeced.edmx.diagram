@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="8b6ea29b6e3747aaa9478f9be9b2aac9" Name="Diagram1">
+        <EntityTypeShape EntityType="AbecedModel.Course" Width="1.5" PointX="3" PointY="11.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="AbecedModel.Fact" Width="1.5" PointX="5.25" PointY="16.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AbecedModel.FactInfo" Width="1.5" PointX="7.5" PointY="17.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="AbecedModel.FactList" Width="1.5" PointX="3.75" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="AbecedModel.LeaderBoard" Width="1.5" PointX="3" PointY="19" IsExpanded="true" />
+        <EntityTypeShape EntityType="AbecedModel.MainCategory" Width="1.5" PointX="1.5" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="AbecedModel.Rating" Width="1.5" PointX="5.25" PointY="21.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="AbecedModel.Revision" Width="1.5" PointX="6" PointY="12" IsExpanded="true" />
+        <EntityTypeShape EntityType="AbecedModel.Reward" Width="1.5" PointX="3" PointY="25.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="AbecedModel.StudySession" Width="1.5" PointX="6" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="AbecedModel.SubCategory" Width="1.5" PointX="0.75" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="AbecedModel.User" Width="1.75" PointX="0.75" PointY="10.75" IsExpanded="true" />
+        <AssociationConnector Association="AbecedModel.FK_Course_To_SubCat" ManuallyRouted="false" />
+        <AssociationConnector Association="AbecedModel.FK_Course_To_User" ManuallyRouted="false" />
+        <AssociationConnector Association="AbecedModel.FK_Fact_To_Course" ManuallyRouted="false" />
+        <AssociationConnector Association="AbecedModel.FK_Rating_To_Course" ManuallyRouted="false" />
+        <AssociationConnector Association="AbecedModel.FK_FactInfo_To_Fact" ManuallyRouted="false" />
+        <AssociationConnector Association="AbecedModel.FK_FactInfo_To_FactList" ManuallyRouted="false" />
+        <AssociationConnector Association="AbecedModel.FK_StudySession_To_FactList" ManuallyRouted="false" />
+        <AssociationConnector Association="AbecedModel.FK_LeaderBoard_To_User" ManuallyRouted="false" />
+        <AssociationConnector Association="AbecedModel.FK_SubCategory_To_MainCategory" ManuallyRouted="false" />
+        <AssociationConnector Association="AbecedModel.FK_Revision_To_Session" ManuallyRouted="false" />
+        <AssociationConnector Association="AbecedModel.FK_Revision_To_User" ManuallyRouted="false" />
+        <AssociationConnector Association="AbecedModel.FK_Table_To_User" ManuallyRouted="false" />
+        <AssociationConnector Association="AbecedModel.FK_StudySession_To_User" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
