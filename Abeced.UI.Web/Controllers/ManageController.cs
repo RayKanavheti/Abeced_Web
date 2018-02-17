@@ -55,8 +55,8 @@ namespace Abeced.UI.Web.Controllers
         public async Task<ActionResult> Index(ManageMessageId? message)
         {
             ViewBag.StatusMessage =
-                message == ManageMessageId.ChangePasswordSuccess ? "Your password has been changed."
-                : message == ManageMessageId.SetPasswordSuccess ? "Your password has been set."
+                message == ManageMessageId.ChangepasswordSuccess ? "Your password has been changed."
+                : message == ManageMessageId.SetpasswordSuccess ? "Your password has been set."
                 : message == ManageMessageId.SetTwoFactorSuccess ? "Your two-factor authentication provider has been set."
                 : message == ManageMessageId.Error ? "An error has occurred."
                 : message == ManageMessageId.AddPhoneSuccess ? "Your phone number was added."
@@ -66,7 +66,7 @@ namespace Abeced.UI.Web.Controllers
             var userId = User.Identity.GetUserId();
             var model = new IndexViewModel
             {
-                HasPassword = HasPassword(),
+                HasPassword = Haspassword(),
                 PhoneNumber = await UserManager.GetPhoneNumberAsync(userId),
                 TwoFactor = await UserManager.GetTwoFactorEnabledAsync(userId),
                 Logins = await UserManager.GetLoginsAsync(userId),
@@ -214,17 +214,17 @@ namespace Abeced.UI.Web.Controllers
         }
 
         //
-        // GET: /Manage/ChangePassword
-        public ActionResult ChangePassword()
+        // GET: /Manage/Changepassword
+        public ActionResult Changepassword()
         {
             return View();
         }
 
         //
-        // POST: /Manage/ChangePassword
+        // POST: /Manage/Changepassword
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> ChangePassword(ChangePasswordViewModel model)
+        public async Task<ActionResult> Changepassword(ChangePasswordViewModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -238,24 +238,24 @@ namespace Abeced.UI.Web.Controllers
                 {
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
                 }
-                return RedirectToAction("Index", new { Message = ManageMessageId.ChangePasswordSuccess });
+                return RedirectToAction("Index", new { Message = ManageMessageId.ChangepasswordSuccess });
             }
             AddErrors(result);
             return View(model);
         }
 
         //
-        // GET: /Manage/SetPassword
-        public ActionResult SetPassword()
+        // GET: /Manage/Setpassword
+        public ActionResult Setpassword()
         {
             return View();
         }
 
         //
-        // POST: /Manage/SetPassword
+        // POST: /Manage/Setpassword
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> SetPassword(SetPasswordViewModel model)
+        public async Task<ActionResult> Setpassword(SetPasswordViewModel model)
         {
             if (ModelState.IsValid)
             {
@@ -267,7 +267,7 @@ namespace Abeced.UI.Web.Controllers
                     {
                         await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
                     }
-                    return RedirectToAction("Index", new { Message = ManageMessageId.SetPasswordSuccess });
+                    return RedirectToAction("Index", new { Message = ManageMessageId.SetpasswordSuccess });
                 }
                 AddErrors(result);
             }
@@ -353,7 +353,7 @@ namespace Abeced.UI.Web.Controllers
             }
         }
 
-        private bool HasPassword()
+        private bool Haspassword()
         {
             var user = UserManager.FindById(User.Identity.GetUserId());
             if (user != null)
@@ -376,9 +376,9 @@ namespace Abeced.UI.Web.Controllers
         public enum ManageMessageId
         {
             AddPhoneSuccess,
-            ChangePasswordSuccess,
+            ChangepasswordSuccess,
             SetTwoFactorSuccess,
-            SetPasswordSuccess,
+            SetpasswordSuccess,
             RemoveLoginSuccess,
             RemovePhoneSuccess,
             Error

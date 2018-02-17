@@ -44,9 +44,9 @@
                 <p>
                     @Html.ActionLink("Register as a new user", "Register")
                 </p>
-                @* Enable this once you have account confirmation enabled for password reset functionality
+                @* Enable this once you have account confirmation enabled for Password reset functionality
                     <p>
-                        @Html.ActionLink("Forgot your password?", "ForgotPassword")
+                        @Html.ActionLink("Forgot your Password?", "ForgotPassword")
                     </p>*@
             }
         </section>
@@ -60,4 +60,14 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+        $(function () {
+             var successMessage = '@TempData["SuccessMessage"]';
+            if (successMessage != '') {
+
+                alertify.success(successMessage);
+            }
+        });
+    </script>
 }

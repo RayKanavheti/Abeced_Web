@@ -76,7 +76,7 @@ namespace Abeced.UI.Web.Controllers
             }
 
             // This doesn't count login failures towards account lockout
-            // To enable password failures to trigger account lockout, change to shouldLockout: true
+            // To enable Password failures to trigger account lockout, change to shouldLockout: true
             var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
             switch (result)
             {
@@ -98,7 +98,7 @@ namespace Abeced.UI.Web.Controllers
         [AllowAnonymous]
         public async Task<ActionResult> VerifyCode(string provider, string returnUrl, bool rememberMe)
         {
-            // Require that the user has already logged in via username/password or external login
+            // Require that the user has already logged in via username/Password or external login
             if (!await SignInManager.HasBeenVerifiedAsync())
             {
                 return View("Error");
@@ -151,42 +151,45 @@ namespace Abeced.UI.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Register(RegisterViewModel user)
         {
-            //if (ModelState.IsValid)
-            //{
-            try
-            {
-                HttpResponseMessage response = DataAccess.WebClient.PostAsJsonAsync("User", user).Result;
-                TempData["SuccessMessage"] = "Saved Successfully";
-                return RedirectToAction("Index", "Home");
-            }
-            catch (AggregateException e)
-            {
-
-            }
-
             
-
-                //var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
-                //var result = await UserManager.CreateAsync(user, model.Password);
-                //if (result.Succeeded)
-                //{
-                //    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-
-                //    // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
-                //    // Send an email with this link
-                //    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                //    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                //    // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
-
                 
-                //}
-                //AddErrors(result);
-           // }
-           
-
-                // If we got this far, something failed, redisplay form
-               return View(user);
+           if (ModelState.IsValid) { 
             
+                HttpResponseMessage response = DataAccess.WebClient.PostAsJsonAsync("User", user).Result;
+                TempData["SuccessMessage"] = "Registered Successfully";
+                return RedirectToAction("Login");
+            }
+            else {
+                TempData["SuccessMessage"] = "Registration Failed !!!";
+                return View(user);
+            }
+
+            
+
+
+
+
+            //var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+            //var result = await UserManager.CreateAsync(user, model.Password);
+            //if (result.Succeeded)
+            //{
+            //    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
+
+            //    // For more information on how to enable account confirmation and Password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
+            //    // Send an email with this link
+            //    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+            //    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+            //    // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+
+
+            //}
+            //AddErrors(result);
+            // }
+
+
+            // If we got this far, something failed, redisplay form
+            // return View(user);
+
         }
 
         //
@@ -226,11 +229,11 @@ namespace Abeced.UI.Web.Controllers
                     return View("ForgotPasswordConfirmation");
                 }
 
-                // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
+                // For more information on how to enable account confirmation and Password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                 // Send an email with this link
                 // string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
                 // var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);		
-                // await UserManager.SendEmailAsync(user.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                // await UserManager.SendEmailAsync(user.Id, "Reset Password", "Please reset your Password by clicking <a href=\"" + callbackUrl + "\">here</a>");
                 // return RedirectToAction("ForgotPasswordConfirmation", "Account");
             }
 
@@ -360,7 +363,7 @@ namespace Abeced.UI.Web.Controllers
                     // If the user does not have an account, then prompt the user to create an account
                     ViewBag.ReturnUrl = returnUrl;
                     ViewBag.LoginProvider = loginInfo.Login.LoginProvider;
-                    return View("ExternalLoginConfirmation", new ExternalLoginConfirmationViewModel { Email = loginInfo.Email });
+                    return View("ExternalLoginConfirmation", new ExternalLoginConfirmationViewModel { email = loginInfo.Email });
             }
         }
 
@@ -384,7 +387,7 @@ namespace Abeced.UI.Web.Controllers
                 {
                     return View("ExternalLoginFailure");
                 }
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser { UserName = model.email, Email = model.email };
                 var result = await UserManager.CreateAsync(user);
                 if (result.Succeeded)
                 {

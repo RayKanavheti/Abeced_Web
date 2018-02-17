@@ -114,5 +114,17 @@ namespace Abeced.WebApi.Controllers
         {
             return db.Users.Count(e => e.UserId == id) > 0;
         }
+        [HttpGet]
+        [Route("api/User/LoginUser/{Email:string}/{Password:string}")]
+        public User LoginUser(string Email, string Password)
+        {
+            User person = null;
+             person = (from u in db.Users
+                               where u.Email == Email && u.Password == Password
+                               select u).SingleOrDefault();
+
+            return person;
+ 
+        }
     }
 }
