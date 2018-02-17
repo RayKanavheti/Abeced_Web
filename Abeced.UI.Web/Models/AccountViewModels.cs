@@ -8,7 +8,7 @@ namespace Abeced.UI.Web.Models
     {
         [Required]
         [Display(Name = "Email")]
-        public string Email { get; set; }
+        public string email { get; set; }
     }
 
     public class ExternalLoginListViewModel
@@ -44,7 +44,7 @@ namespace Abeced.UI.Web.Models
     {
         [Required]
         [Display(Name = "Email")]
-        public string Email { get; set; }
+        public string email { get; set; }
     }
 
     public class LoginViewModel
@@ -80,57 +80,57 @@ namespace Abeced.UI.Web.Models
         public string Password { get; set; }
 
         [DataType(DataType.Password)]
-        [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [Display(Name = "Confirm Password")]
+        [Compare("Password", ErrorMessage = "The Password and confirmation Password do not match.")]
         public string ConfirmPassword { get; set; }
 
         [Required]
         [Display(Name = "First Name")]
-        public string Fname { get; set; }
+        public string fname { get; set; }
 
         [Required]
         [Display(Name = "Last Name")]
-        public string Lname { get; set; }
+        public string lname { get; set; }
 
         
         [Display(Name = "User Name")]
-        public string Username { get; set; }
+        public string username { get; set; }
 
         [Display(Name = "Gender")]
-        public string Gender { get; set; }
+        public string gender { get; set; }
 
         [Display(Name = "Age")]
-        public int Age { get; set; }
+        public int age { get; set; }
 
         [Display(Name = "Date Of Birth")]
-        public DateTime DOB { get; set; }
+        public string dob { get; set; }
 
         [Display(Name = "Occupation")]
-        public string Occupation { get; set; }
+        public string occupation { get; set; }
 
         [Display(Name = "Education Level")]
-        public string EducationLevel { get; set; }
+        public string educationLevel { get; set; }
 
         [Display(Name = "Title")]
-        public string Title { get; set; }
+        public string title { get; set; }
 
         [Display(Name = "Street Address")]
-        public string StreetAddress { get; set; }
+        public string streetAddress { get; set; }
 
         [Display(Name = "City")]
-        public string City { get; set; }
+        public string city { get; set; }
 
         [Display(Name = "Province")]
-        public string Province { get; set; }
+        public string province { get; set; }
 
         [Display(Name = "Postal Code")]
-        public string PostalCode { get; set; }
+        public string postalCode { get; set; }
 
         [Display(Name = "Country")]
-        public string Country { get; set; }
+        public string country { get; set; }
 
         [Display(Name = "Phone Number")]
-        public string PhoneNumber { get; set; }
+        public string phoneNumber { get; set; }
 
 
     }
@@ -149,8 +149,8 @@ namespace Abeced.UI.Web.Models
         public string Password { get; set; }
 
         [DataType(DataType.Password)]
-        [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [Display(Name = "Confirm Password")]
+        [Compare("Password", ErrorMessage = "The Password and confirmation Password do not match.")]
         public string ConfirmPassword { get; set; }
 
         public string Code { get; set; }

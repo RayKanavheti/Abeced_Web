@@ -27,8 +27,8 @@ namespace Abeced.WebApi.Models.Abeced.Data
         public string fname { get; set; }
         public string lname { get; set; }
         public string username { get; set; }
-        public string email { get; set; }
-        public string password { get; set; }
+        public string Email { get; set; }
+        public string Password { get; set; }
         public string gender { get; set; }
         public Nullable<int> age { get; set; }
         public Nullable<System.DateTime> dob { get; set; }

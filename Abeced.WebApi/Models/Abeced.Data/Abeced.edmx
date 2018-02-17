@@ -167,8 +167,8 @@
           <Property Name="fname" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="lname" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="username" Type="varchar" MaxLength="50" />
-          <Property Name="email" Type="varchar" MaxLength="100" Nullable="false" />
-          <Property Name="password" Type="text" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Password" Type="text" Nullable="false" />
           <Property Name="gender" Type="varchar" MaxLength="6" />
           <Property Name="age" Type="int" />
           <Property Name="dob" Type="datetime" />
@@ -592,8 +592,8 @@
           <Property Name="fname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="lname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="password" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" Type="String" />
+          <Property Name="Password" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" Type="String" />
           <Property Name="gender" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
           <Property Name="age" Type="Int32" />
           <Property Name="dob" Type="DateTime" Precision="3" />
@@ -1009,12 +1009,12 @@
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="AbecedModel.User">
               <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="fname" ColumnName="fname" />
                 <ScalarProperty Name="lname" ColumnName="lname" />
                 <ScalarProperty Name="username" ColumnName="username" />
-                <ScalarProperty Name="email" ColumnName="email" />
-                <ScalarProperty Name="password" ColumnName="password" />
                 <ScalarProperty Name="gender" ColumnName="gender" />
                 <ScalarProperty Name="age" ColumnName="age" />
                 <ScalarProperty Name="dob" ColumnName="dob" />
