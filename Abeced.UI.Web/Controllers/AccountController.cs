@@ -11,6 +11,7 @@ using Microsoft.Owin.Security;
 using Abeced.UI.Web.Models;
 using System.Net.Http;
 using Abeced.UI.Web.Helpers;
+using System.Web.Security;
 
 namespace Abeced.UI.Web.Controllers
 {
@@ -68,29 +69,45 @@ namespace Abeced.UI.Web.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
+        public ActionResult Login(LoginViewModel model, string returnUrl)
         {
-            if (!ModelState.IsValid)
+            HttpResponseMessage response = DataAccess.WebClient.GetAsync("User/LoginUser/"+model.Email+"/"+model.Password).Result;
+            if (ModelState.IsValid && response != null)
             {
-                return View(model);
+             FormsAuthentication.SetAuthCookie(model.Email, model.RememberMe);
+             RegisterViewModel user = response.Content.ReadAsAsync<RegisterViewModel>().Result;
+                Session["UserId"] = user.UserId;
+                Session["Email"] = user.Email;
+                Session["UserName"] = user.username;
+                Session["FirstName"] = user.fname;
+                Session["LastName"] = user.lname;
+                return RedirectToAction("Dashboard", "App");
+
             }
+
+            // If we got this far, something failed, redisplay form
+            ModelState.AddModelError("", "The Email or password provided is incorrect.");
+            return View(model);
+
+
+
 
             // This doesn't count login failures towards account lockout
             // To enable Password failures to trigger account lockout, change to shouldLockout: true
-            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
-            switch (result)
-            {
-                case SignInStatus.Success:
-                    return RedirectToLocal(returnUrl);
-                case SignInStatus.LockedOut:
-                    return View("Lockout");
-                case SignInStatus.RequiresVerification:
-                    return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
-                case SignInStatus.Failure:
-                default:
-                    ModelState.AddModelError("", "Invalid login attempt.");
-                    return View(model);
-            }
+            //    var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+            //    switch (result)
+            //    {
+            //        case SignInStatus.Success:
+            //            return RedirectToLocal(returnUrl);
+            //        case SignInStatus.LockedOut:
+            //            return View("Lockout");
+            //        case SignInStatus.RequiresVerification:
+            //            return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
+            //        case SignInStatus.Failure:
+            //        default:
+            //            ModelState.AddModelError("", "Invalid login attempt.");
+            //            return View(model);
+            //    }
         }
 
         //
