@@ -12,44 +12,44 @@ using Abeced.WebApi.Models.Abeced.Data;
 
 namespace Abeced.WebApi.Controllers
 {
-    public class UserController : ApiController
+    public class FactsController : ApiController
     {
         private AbecedEntities db = new AbecedEntities();
 
-        // GET: api/User
-        public IQueryable<User> GetUsers()
+        // GET: api/Facts
+        public IQueryable<Fact> GetFacts()
         {
-            return db.Users;
+            return db.Facts;
         }
 
-        // GET: api/User/5
-        [ResponseType(typeof(User))]
-        public IHttpActionResult GetUser(int id)
+        // GET: api/Facts/5
+        [ResponseType(typeof(Fact))]
+        public IHttpActionResult GetFact(int id)
         {
-            User user = db.Users.Find(id);
-            if (user == null)
+            Fact fact = db.Facts.Find(id);
+            if (fact == null)
             {
                 return NotFound();
             }
 
-            return Ok(user);
+            return Ok(fact);
         }
 
-        // PUT: api/User/5
+        // PUT: api/Facts/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutUser(int id, User user)
+        public IHttpActionResult PutFact(int id, Fact fact)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != user.UserId)
+            if (id != fact.FactId)
             {
                 return BadRequest();
             }
 
-            db.Entry(user).State = EntityState.Modified;
+            db.Entry(fact).State = EntityState.Modified;
 
             try
             {
@@ -57,7 +57,7 @@ namespace Abeced.WebApi.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!UserExists(id))
+                if (!FactExists(id))
                 {
                     return NotFound();
                 }
@@ -70,35 +70,35 @@ namespace Abeced.WebApi.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/User
-        [ResponseType(typeof(User))]
-        public IHttpActionResult PostUser(User user)
+        // POST: api/Facts
+        [ResponseType(typeof(Fact))]
+        public IHttpActionResult PostFact(Fact fact)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.Users.Add(user);
+            db.Facts.Add(fact);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = user.UserId }, user);
+            return CreatedAtRoute("DefaultApi", new { id = fact.FactId }, fact);
         }
 
-        // DELETE: api/User/5
-        [ResponseType(typeof(User))]
-        public IHttpActionResult DeleteUser(int id)
+        // DELETE: api/Facts/5
+        [ResponseType(typeof(Fact))]
+        public IHttpActionResult DeleteFact(int id)
         {
-            User user = db.Users.Find(id);
-            if (user == null)
+            Fact fact = db.Facts.Find(id);
+            if (fact == null)
             {
                 return NotFound();
             }
 
-            db.Users.Remove(user);
+            db.Facts.Remove(fact);
             db.SaveChanges();
 
-            return Ok(user);
+            return Ok(fact);
         }
 
         protected override void Dispose(bool disposing)
@@ -110,21 +110,9 @@ namespace Abeced.WebApi.Controllers
             base.Dispose(disposing);
         }
 
-        private bool UserExists(int id)
+        private bool FactExists(int id)
         {
-            return db.Users.Count(e => e.UserId == id) > 0;
-        }
-        [HttpGet]
-        [Route("api/User/LoginUser/{Email}/{Password}")]
-        public User LoginUser(string Email, string Password)
-        {
-            User person = null;
-            person = (from u in db.Users
-                      where u.Email == Email
-                      select u).FirstOrDefault();
-
-            return person;
-
+            return db.Facts.Count(e => e.FactId == id) > 0;
         }
     }
 }
