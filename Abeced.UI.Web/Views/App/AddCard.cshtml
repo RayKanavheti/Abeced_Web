@@ -1,0 +1,161 @@
+﻿@model Abeced.UI.Web.Models.FactModel
+
+@{
+    ViewBag.Title = "AddCard";
+}
+
+<h2>AddCard</h2>
+
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>Add Fact</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="row">
+            @*question text*@
+            <div class="col-md-5">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.question, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextAreaFor(model => model.question, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.question, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+            @*question image*@
+            <div class="col-md-4">
+                <div class="form-group">
+                   @Html.LabelFor(model => model.qImage, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        <input type="file" name="qImageUpload" accept="image/png, image/jpeg" onchange="showImagePreview(this, document.getElementById('qImagePreview1'))" />
+                        <img src="Url.Content(Model.qImage)" style="margin:10px" height="200" width="200" id="qImagePreview1"/>
+                       
+                    </div>
+                </div>
+            </div>
+
+            @*question audio*@
+            <div class="col-md-3">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.qAudio, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        <input type="file" name="qAudioUpload " accept="audio/mp3, audio/wav" />
+                        <audio></audio>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            @*Answer Text*@
+            <div class="col-md-5">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.answer, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.answer, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.answer, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            @*Answer Image*@
+            <input type="file" name="aImageUpload" accept="image/png, image/jpeg" onchange="showImagePreview(this, document.getElementById('aImagePreview2'))" />
+            <img src="@Url.Content(Model.aImage)" style="margin:10px" height="200" width="200" id="aImagePreview2" />
+
+            <div class="col-md-4">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.aImage, htmlAttributes: new { new @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                       
+                        
+                    </div>
+                </div>
+            </div>
+            @*Answer Audio*@
+            <div class="col-md-3">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.aAudio, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        <input type="file" name="aAudioUpload" accept="audio/mp3, audio/wav" />
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="row">
+            @*Fact Sheet Text*@
+            <div class="col-md-8">
+            <div class="form-group">
+                @Html.LabelFor(model => model.factsheet, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.TextAreaFor(model => model.factsheet, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.factsheet, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            </div>
+
+            @*Fact Sheet Audio*@
+            <div class="col-md-4">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.fsAudio, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        <input type="file" name="aFSUpload" accept="audio/mp3, audio/wav" />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.points, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.points, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.points, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.flashcardRespTime, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.flashcardRespTime, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.flashcardRespTime, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.quizRespTime, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.quizRespTime, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.quizRespTime, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.courseID, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.courseID, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.courseID, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Create" class="btn btn-default" />
+                </div>
+            </div>
+        
+        </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

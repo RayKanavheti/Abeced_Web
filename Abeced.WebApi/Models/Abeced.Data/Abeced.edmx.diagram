@@ -30,6 +30,7 @@
         <AssociationConnector Association="AbecedModel.FK_Revision_To_User" ManuallyRouted="false" />
         <AssociationConnector Association="AbecedModel.FK_Table_To_User" ManuallyRouted="false" />
         <AssociationConnector Association="AbecedModel.FK_StudySession_To_User" ManuallyRouted="false" />
+        <AssociationConnector Association="AbecedModel.FK_Fact_To_User" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
