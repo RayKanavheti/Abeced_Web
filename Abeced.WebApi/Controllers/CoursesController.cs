@@ -9,6 +9,9 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using Abeced.WebApi.Models.Abeced.Data;
+using System.Threading.Tasks;
+using System.Web;
+using System.IO;
 
 namespace Abeced.WebApi.Controllers
 {
@@ -68,15 +71,84 @@ namespace Abeced.WebApi.Controllers
         }
 
         // POST: api/Courses
-        [ResponseType(typeof(Course))]
-        public IHttpActionResult PostCourse(Course course)
-        {
+        //[ResponseType(typeof(Course))]
+        //public IHttpActionResult PostCourse(Course course)
+        //{
            
-            db.Courses.Add(course);
-            db.SaveChanges();
+        //    db.Courses.Add(course);
+        //    db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = course.CourseId }, course);
+        //    return CreatedAtRoute("DefaultApi", new { id = course.CourseId }, course);
+        //}
+        public async Task<HttpResponseMessage> PostCourse()
+        {
+
+            if (!Request.Content.IsMimeMultipartContent())
+            {
+                throw new HttpResponseException(HttpStatusCode.UnsupportedMediaType);
+            }
+
+            string rootPath = HttpContext.Current.Server.MapPath("~/App_Data");
+            var provider = new MultipartFormDataStreamProvider(rootPath);
+            int SubCatId = 0;
+            string CourseImage = "";
+            string description = "";
+            //string userId = "";
+            string CourseTitle = "";
+
+            try
+            {
+                await Request.Content.ReadAsMultipartAsync(provider);
+                // This illustrates how to get the file names.
+                foreach (MultipartFileData file in provider.FileData)
+                {
+                    string PostName = file.Headers.ContentDisposition.Name.Replace("\"", "");
+                    string name = file.Headers.ContentDisposition.FileName.Replace("\"", "");
+                    string newFileName = Guid.NewGuid() + Path.GetExtension(name);
+                    File.Move(file.LocalFileName, Path.Combine(rootPath, newFileName));
+                    string fileRelativePath = "~/App_Data/" + newFileName;
+
+                    if (PostName == "img")
+                    {
+                        CourseImage = fileRelativePath.ToString();
+
+                    }
+
+
+                }
+                // Show all the key-value pairs.
+                foreach (var key in provider.FormData.AllKeys)
+                {
+                    foreach (var val in provider.FormData.GetValues(key))
+                    {
+                        if (key == "subCatID")
+                        {
+                            SubCatId = int.Parse(val);
+                        }
+                        else if (key == "name")
+                        {
+                            CourseTitle = val.ToString();
+                        }
+                        else if (key == "description")
+                        {
+                            description = val.ToString();
+                        }
+
+                    }
+                }
+                db.Courses.Add(new Course() { subCatID = SubCatId, name = CourseTitle, userID =1, description = description, img = CourseImage, subCatName = "Unknown" });
+                db.SaveChanges();
+                return Request.CreateResponse(HttpStatusCode.OK);
+
+            }
+            catch (Exception ex)
+            {
+
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex);
+            }
+
         }
+
 
         // DELETE: api/Courses/5
         [ResponseType(typeof(Course))]

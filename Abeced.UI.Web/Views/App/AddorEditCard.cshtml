@@ -20,14 +20,15 @@
         @*@Html.HiddenFor(model => model.aImage)*@
         
        
-
         <div class="form-group">
             @Html.LabelFor(model => model.courseID, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.courseID, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.DropDownListFor(model => model.courseID, new SelectList(Model.courseID, "MainCategoryId", "name"), "Select Main Category")
                 @Html.ValidationMessageFor(model => model.courseID, "", new { @class = "text-danger" })
             </div>
         </div>
+        
+        
 
         <div class="row" style="margin-bottom:30px">
             @*question text*@

@@ -7,7 +7,7 @@
 <h2>AddorEditSubCategory</h2>
 
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm("AddorEditSubCategory", "App", FormMethod.Post, new { enctype = "multipart/form-data", onSubmit = "return AddSubCategory(this);" })) 
 {
     @Html.AntiForgeryToken()
     
@@ -19,7 +19,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.mainCatID, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownListFor(model => model.mainCatID, new SelectList(ViewBag.MainCatList, "MainCategoryId", "name"), "Select Main Category")
+                @Html.DropDownListFor(model => model.mainCatID, new SelectList(Model.MainCat, "MainCategoryId", "name"), "Select Main Category")
                 @Html.ValidationMessageFor(model => model.mainCatID, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -40,6 +40,13 @@
             </div>
         </div>
 
+        <div class="form-group">
+            @Html.LabelFor(model => model.img, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input type="file" name="img" accept="image/*"  onchange="showImagePreview(this, document.getElementById('SubCatImagePreview'))" />
+                <img src="~/App_Files/Images/default.png" style="margin:10px" height="100" width="100" id="SubCatImagePreview" />
+            </div>
+        </div>
        
 
         <div class="form-group">
@@ -56,4 +63,48 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+
+
+<script src="~/Scripts/SiteJs/ImagePreview.js"></script>
+
+<script>
+    function AddSubCategory(form) {
+
+        $.validator.unobtrusive.parse(form);
+
+        if ($(form).valid) {
+
+            if ($(form).attr('enctype') == "multipart/form-data") {
+                contentType = false;
+                processData = false;
+            }
+
+            $.ajax({
+                type: 'POST',
+                url: 'http://localhost:20503/api/SubCategories',
+                data: new FormData(form),
+                contentType: contentType,
+                processData: processData,
+                success: function (response) {
+                    alertify.alert(" added successfully !!!")
+
+                },
+                error: function (response) {
+
+                    alertify.alert("failed to add Category !!!")
+                }
+
+            });
+        }
+        return false;
+
+    }
+
+
+</script>
+
+
+
+
+
 }

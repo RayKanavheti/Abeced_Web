@@ -30,7 +30,7 @@ namespace Abeced.UI.Web.Controllers
 
             if (ModelState.IsValid)
             {
-               // HttpResponseMessage response = DataAccess.WebClient.PostAsJsonAsync("Facts", fact).Result;
+        
             }
             return View(fact);
 
@@ -58,11 +58,26 @@ namespace Abeced.UI.Web.Controllers
 
         }
 
-        public ActionResult AddorEditCourse()
+        public ActionResult AddorEditCourse(int id=0)
         {
 
+            CourseModel course = new CourseModel();
+            IEnumerable<SubCategory> subCategoryList;
+            try
+            {
+                HttpResponseMessage response = DataAccess.WebClient.GetAsync("SubCategories").Result;
 
-            return View();
+                subCategoryList = response.Content.ReadAsAsync<IEnumerable<SubCategory>>().Result.ToList();
+                course.subCategoryList = subCategoryList.ToList();
+                //ViewBag.MainCatList = course.subCategoryList;
+                return View(course);
+            }
+            catch (Exception ex)
+            {
+
+                Console.Write(ex.Message);
+                return View();
+            }
         }
         [HttpPost]
         public ActionResult AddorEditCourse(CourseModel course)
@@ -87,22 +102,30 @@ namespace Abeced.UI.Web.Controllers
             return View();
 
         }
-
+       
         public ActionResult AddorEditSubCategory( int id=0)
         {
-            
-           
-            IEnumerable<MainCategoryList> mainCategoryList;
-           
+
             SubCategory subCategory = new SubCategory();
-            HttpResponseMessage response = DataAccess.WebClient.GetAsync("MainCategories").Result;
+            IEnumerable<MainCategoryList> mainCategoryList;
+            try
+            {
+                HttpResponseMessage response = DataAccess.WebClient.GetAsync("MainCategories").Result;
+
+                mainCategoryList = response.Content.ReadAsAsync<IEnumerable<MainCategoryList>>().Result.ToList();
+                subCategory.MainCat = mainCategoryList.ToList();
+                ViewBag.MainCatList = subCategory.MainCat;
+                return View(subCategory);
+            }
+            catch (Exception ex)
+            {
+                
+                Console.Write(ex.Message);
+                return View();
+            }
+
           
-            mainCategoryList = response.Content.ReadAsAsync<IEnumerable<MainCategoryList>>().Result;
-            subCategory.MainCat = mainCategoryList.ToList();
-
-            ViewBag.MainCatList = subCategory.MainCat;
-
-            return View();
+           
             
 
         }

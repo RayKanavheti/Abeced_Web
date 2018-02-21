@@ -30,17 +30,11 @@ namespace Abeced.UI.Web.Models
         public int SubCategoryId { get; set; }
         public string name { get; set; }
         public string description { get; set; }
-        public HttpPostedFileBase img { get; set; }
+        public string img { get; set; }
         public int mainCatID { get; set; }
-
-        [NotMapped]
-        public List<MainCategoryList> MainCat { get; set; }
+        public IEnumerable<MainCategoryList> MainCat { get; set; }
         
-        public SubCategory()
-        {
-            MainCat = new List<MainCategoryList>();
-
-        }
+        
     }
 
     public class CourseModel
@@ -48,7 +42,7 @@ namespace Abeced.UI.Web.Models
         public int CourseId { get; set; }
         public string name { get; set; }
         public string description { get; set; }
-        public HttpPostedFileBase img { get; set; }
+        public string img { get; set; }
         public string duration { get; set; }
         public DateTime? dateCreated { get; set; }
         public string numFacts { get; set; }
@@ -61,14 +55,8 @@ namespace Abeced.UI.Web.Models
         public string mainCatName { get; set; }
         public int? userID { get; set; }
         public string averageRating { get; set; }
-        public List<FactModel> facts { get; set; }
-
-        public CourseModel()
-        {
-            facts = new List<FactModel>();
-
-        }
-
+        public IEnumerable<SubCategory> subCategoryList { get; set; }
+      
 
     }
 }
