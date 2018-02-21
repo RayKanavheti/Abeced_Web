@@ -12,6 +12,7 @@ using Abeced.WebApi.Models.Abeced.Data;
 using System.Threading.Tasks;
 using System.Web;
 using System.IO;
+using System.Web.Hosting;
 
 namespace Abeced.WebApi.Controllers
 {
@@ -20,10 +21,30 @@ namespace Abeced.WebApi.Controllers
         private AbecedEntities db = new AbecedEntities();
 
         // GET: api/Courses
-        public IQueryable<Course> GetCourses()
+        //public IQueryable<Course> GetCourses()
+        //{
+        //    return db.Courses;
+        //}
+
+            public async Task<HttpResponseMessage> GetAllCourses()
         {
-            return db.Courses;
-        }
+            string[] path;
+            int numCourses = db.Courses.Count();
+
+            path = HostingEnvironment.MapPath(path);
+            var response = Request.CreateResponse(HttpStatusCode.OK);
+            foreach (Course course in db.Courses)
+            {
+
+                course.img = 
+
+
+
+
+            }
+
+
+        } 
 
         // GET: api/Courses/5
         [ResponseType(typeof(Course))]

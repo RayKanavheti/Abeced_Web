@@ -14,33 +14,29 @@ namespace Abeced.UI.Web.Controllers
     public class AppController : Controller
     {
         // GET: App
-        public ActionResult Index()
-        {
-            return View();
-        }
 
-        public ActionResult AddCard()
+        public ActionResult AddorEditCard(int i = 0)
         {
-            return View();
-
-        }
-        [HttpPost]
-        public ActionResult AddCard(FactModel fact)
-        {
-
-            if (ModelState.IsValid)
+            FactModel fact = new FactModel();
+            IEnumerable<CourseModel> courseList;
+            try
             {
-        
+                HttpResponseMessage response = DataAccess.WebClient.GetAsync("Courses").Result;
+
+                courseList = response.Content.ReadAsAsync<IEnumerable<CourseModel>>().Result.ToList();
+                fact.CourseList = courseList.ToList();
+                return View(fact);
             }
-            return View(fact);
+            catch (Exception ex)
+            {
+
+                Console.Write(ex.Message);
+                return View();
+            }
 
         }
+       
 
-        public ActionResult AddorEditCard()
-        {
-
-            return View(new FactModel());
-        }
         [HttpPost]
         public ActionResult AddorEditCard(FactModel fact)
         {
@@ -69,7 +65,6 @@ namespace Abeced.UI.Web.Controllers
 
                 subCategoryList = response.Content.ReadAsAsync<IEnumerable<SubCategory>>().Result.ToList();
                 course.subCategoryList = subCategoryList.ToList();
-                //ViewBag.MainCatList = course.subCategoryList;
                 return View(course);
             }
             catch (Exception ex)
