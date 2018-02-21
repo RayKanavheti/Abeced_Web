@@ -252,6 +252,7 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\SiteJs\ImagePreview.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -288,9 +289,10 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\App\AddCard.cshtml" />
     <Content Include="Views\App\AddorEditCard.cshtml" />
     <Content Include="Views\App\AddorEditCourse.cshtml" />
+    <Content Include="Views\App\AddorEditMainCategory.cshtml" />
+    <Content Include="Views\App\AddorEditSubCategory.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

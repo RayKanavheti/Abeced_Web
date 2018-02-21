@@ -180,7 +180,7 @@ namespace Abeced.WebApi.Controllers
                 db.SaveChanges();
                 return Request.CreateResponse(HttpStatusCode.OK);
             }
-            catch (System.Exception e)
+            catch (Exception e)
             {
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, e);
             }

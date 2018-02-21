@@ -9,6 +9,9 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using Abeced.WebApi.Models.Abeced.Data;
+using System.Threading.Tasks;
+using System.Web;
+using System.IO;
 
 namespace Abeced.WebApi.Controllers
 {
@@ -72,18 +75,80 @@ namespace Abeced.WebApi.Controllers
 
         // POST: api/MainCategories
         [ResponseType(typeof(MainCategory))]
-        public IHttpActionResult PostMainCategory(MainCategory mainCategory)
+        //public IHttpActionResult PostMainCategory(MainCategory mainCategory)
+        //{
+           
+
+        //    db.MainCategories.Add(mainCategory);
+        //    db.SaveChanges();
+
+        //    return CreatedAtRoute("DefaultApi", new { id = mainCategory.MainCategoryId }, mainCategory);
+        //}
+
+        public async Task<HttpResponseMessage> PostMainCategory()
         {
-            if (!ModelState.IsValid)
+            if (!Request.Content.IsMimeMultipartContent())
             {
-                return BadRequest(ModelState);
+                throw new HttpResponseException(HttpStatusCode.UnsupportedMediaType);
             }
 
-            db.MainCategories.Add(mainCategory);
-            db.SaveChanges();
+            string rootPath = HttpContext.Current.Server.MapPath("~/App_Data");
+            var provider = new MultipartFormDataStreamProvider(rootPath);
 
-            return CreatedAtRoute("DefaultApi", new { id = mainCategory.MainCategoryId }, mainCategory);
+            string mainCatName = "";
+            string CatImage = "";
+            string description = ""; 
+            try
+            {
+                await Request.Content.ReadAsMultipartAsync(provider);
+                // This illustrates how to get the file names.
+                foreach (MultipartFileData file in provider.FileData)
+                {
+                    string PostName = file.Headers.ContentDisposition.Name.Replace("\"", "");
+                    string name = file.Headers.ContentDisposition.FileName.Replace("\"", "");
+                    string newFileName = Guid.NewGuid() + Path.GetExtension(name);
+                    File.Move(file.LocalFileName, Path.Combine(rootPath, newFileName));
+                    string fileRelativePath = "~/App_Data/" + newFileName;
+
+                    if (PostName == "img")
+                    {
+                        CatImage = fileRelativePath.ToString(); 
+
+                    }
+
+
+                }
+                // Show all the key-value pairs.
+                foreach (var key in provider.FormData.AllKeys)
+                {
+                    foreach (var val in provider.FormData.GetValues(key))
+                    {
+                        //Trace.WriteLine(string.Format("{0}: {1}", key, val));
+                        if (key == "name")
+                        {
+                            mainCatName = val.ToString();
+                        }
+                        else if (key == "description")
+                        {
+                            description = val.ToString();
+                        }
+                      
+                    }
+                }
+                db.MainCategories.Add(new MainCategory() { name = mainCatName, img = CatImage, description = description });
+                db.SaveChanges();
+                return Request.CreateResponse(HttpStatusCode.OK);
+
+            }
+            catch (Exception e)
+            {
+
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, e);
+            }
+
+
         }
+
 
         // DELETE: api/MainCategories/5
         [ResponseType(typeof(MainCategory))]

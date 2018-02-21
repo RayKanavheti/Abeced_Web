@@ -64,6 +64,56 @@ namespace Abeced.UI.Web.Controllers
 
             return View();
         }
+        [HttpPost]
+        public ActionResult AddorEditCourse(CourseModel course)
+        {
+
+
+            return View();
+        }
+
+        public ActionResult AddorEditMainCategory()
+        {
+            return View();
+
+        }
+
+
+        [HttpPost]
+        public ActionResult AddorEditMainCategory(MainCategory mainCategory)
+        {
+           
+
+            return View();
+
+        }
+
+        public ActionResult AddorEditSubCategory( int id=0)
+        {
+            
+           
+            IEnumerable<MainCategoryList> mainCategoryList;
+           
+            SubCategory subCategory = new SubCategory();
+            HttpResponseMessage response = DataAccess.WebClient.GetAsync("MainCategories").Result;
+          
+            mainCategoryList = response.Content.ReadAsAsync<IEnumerable<MainCategoryList>>().Result;
+            subCategory.MainCat = mainCategoryList.ToList();
+
+            ViewBag.MainCatList = subCategory.MainCat;
+
+            return View();
+            
+
+        }
+        [HttpPost]
+        public ActionResult AddorEditSubCategory(SubCategory subCategory)
+        {
+            return View();
+
+
+        }
+
 
     }
 }

@@ -162,19 +162,8 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/SiteJs/ImagePreview.js"></script>
     <script>
-        function showImagePreview(imageUploader, previewImage) {
-            if (imageUploader.files && imageUploader.files[0]) {
-                var reader = new FileReader();
-
-                reader.onload = function (e) {
-                    $(previewImage).attr('src', e.target.result);
-                }
-                reader.readAsDataURL(imageUploader.files[0]);
-            }
-
-        }
-
         function jQueryAjaxPost(form) {
 
             $.validator.unobtrusive.parse(form);
