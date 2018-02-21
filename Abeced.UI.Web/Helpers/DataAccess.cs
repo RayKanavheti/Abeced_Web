@@ -18,6 +18,7 @@ namespace Abeced.UI.Web.Helpers
             WebClient.BaseAddress = new Uri("http://localhost:20503/api/");
             WebClient.DefaultRequestHeaders.Clear();
             WebClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+           
 
         }
 

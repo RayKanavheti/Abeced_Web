@@ -33,9 +33,11 @@ namespace Abeced.WebApi.Models.Abeced.Data
         public string flashcardRespTime { get; set; }
         public string quizRespTime { get; set; }
         public int courseID { get; set; }
+        public Nullable<int> userID { get; set; }
     
         public virtual Course Course { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<FactInfo> FactInfoes { get; set; }
+        public virtual User User { get; set; }
     }
 }

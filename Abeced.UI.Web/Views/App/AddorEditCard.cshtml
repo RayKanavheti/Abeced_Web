@@ -1,0 +1,200 @@
+﻿@model Abeced.UI.Web.Models.FactModel
+
+@{
+    ViewBag.Title = "AddorEditCard";
+}
+
+<h2>AddorEditCard</h2>
+
+
+@using (Html.BeginForm("AddorEditCard", "App", FormMethod.Post, new { enctype= "multipart/form-data", onSubmit="return jQueryAjaxPost(this);"}))
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>FactModel</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @*@Html.HiddenFor(model => model.userID)*@
+        @*@Html.HiddenFor(model => model.qImage)*@ 
+        @*@Html.HiddenFor(model => model.aImage)*@
+        
+       
+        <div class="form-group">
+            @Html.LabelFor(model => model.courseID, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.courseID, new SelectList(Model.CourseList, "CourseId", "name"), "Select Main Category")
+                @Html.ValidationMessageFor(model => model.courseID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        
+        
+
+        <div class="row" style="margin-bottom:30px">
+            @*question text*@
+            <div class="col-md-4">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.question, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextAreaFor(model => model.question, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.question, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+            @*question image*@
+            <div class="col-md-4">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.qImage, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        <input type="file" name="qImage" accept="image/jpeg, image/png, image/gif" onchange="showImagePreview(this, document.getElementById('qImagePreview1'))" />
+                        <img src="~/App_Files/Images/default.png" style="margin:10px" height="100" width="100" id="qImagePreview1" />
+
+                    </div>
+                </div>
+            </div>
+
+            @*question audio*@
+            <div class="col-md-4">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.qAudio, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        <input type="file" name="qAudio" accept="audio/mp3, audio/wav" />
+                        <audio></audio>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row" style="margin-bottom:30px">
+            @*Fact Answer*@
+            <div class="col-md-4">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.answer, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.answer, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.answer, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+            @*Answer Image *@
+            <div class="col-md-4">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.aImage, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        <input type="file" name="aImage" accept="image/jpeg, image/png, image/gif" onchange="showImagePreview(this, document.getElementById('aImagePreview2'))" />
+                        <img src="~/App_Files/Images/default.png" style="margin:10px" height="100" width="100" id="aImagePreview2" />
+                       
+                    </div>
+                </div>
+            </div>
+            @*Answer Audio*@
+
+            <div class="col-md-4">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.aAudio, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        <input type="file" name="aAudio" accept="audio/mp3, audio/wav" />
+                        <audio></audio>
+                    </div>
+                </div>
+            </div>
+            </div>
+
+      <div class="row" style="margin-bottom:30px">
+        @*Fact Sheet*@
+          <div class="col-md-6">
+            <div class="form-group">
+                @Html.LabelFor(model => model.factsheet, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.factsheet, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.factsheet, "", new { @class = "text-danger" })
+                </div>
+            </div>
+          </div>
+        @*Fact Sheet Audio*@
+        <div class="col-md-6">
+            <div class="form-group">
+                @Html.LabelFor(model => model.fsAudio, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <input type="file" name="fsAudio" accept="audio/mp3, audio/wav" />
+                    <audio></audio>
+                </div>
+            </div>
+        </div>
+    </div>
+       
+        <div class="form-group">
+            @Html.LabelFor(model => model.points, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.points, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.points, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.flashcardRespTime, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.flashcardRespTime, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.flashcardRespTime, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.quizRespTime, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.quizRespTime, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.quizRespTime, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/SiteJs/ImagePreview.js"></script>
+    <script>
+        function jQueryAjaxPost(form) {
+
+            $.validator.unobtrusive.parse(form);
+            
+            if ($(form).valid){
+                 
+                if ($(form).attr('enctype') == "multipart/form-data") {
+                    contentType = false;
+                    processData = false;
+                }
+               
+                $.ajax({
+                    type: 'POST',
+                    url: 'http://localhost:20503/api/facts',
+                    data: new FormData(form),
+                    contentType: contentType,
+                    processData: processData,
+                    success: function (response) {
+                        alertify.alert(" added successfully")
+
+                    },
+                    error: function (response) {
+
+                        alertify.alert(" added failed")
+                    }
+
+                });
+            }
+            return false;
+
+        }
+    </script>
+}

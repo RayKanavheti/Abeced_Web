@@ -43,6 +43,7 @@
           <Property Name="flashcardRespTime" Type="varchar" MaxLength="5" />
           <Property Name="quizRespTime" Type="varchar" MaxLength="5" />
           <Property Name="courseID" Type="int" Nullable="false" />
+          <Property Name="userID" Type="int" />
         </EntityType>
         <EntityType Name="FactInfo">
           <Key>
@@ -219,6 +220,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Fact_To_User">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Fact" Type="Self.Fact" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Fact">
+              <PropertyRef Name="userID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_FactInfo_To_Fact">
           <End Role="Fact" Type="Self.Fact" Multiplicity="1" />
           <End Role="FactInfo" Type="Self.FactInfo" Multiplicity="*" />
@@ -364,6 +377,10 @@
             <End Role="Course" EntitySet="Course" />
             <End Role="Fact" EntitySet="Fact" />
           </AssociationSet>
+          <AssociationSet Name="FK_Fact_To_User" Association="Self.FK_Fact_To_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Fact" EntitySet="Fact" />
+          </AssociationSet>
           <AssociationSet Name="FK_FactInfo_To_Fact" Association="Self.FK_FactInfo_To_Fact">
             <End Role="Fact" EntitySet="Fact" />
             <End Role="FactInfo" EntitySet="FactInfo" />
@@ -453,6 +470,8 @@
           <Property Name="courseID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Course" Relationship="Self.FK_Fact_To_Course" FromRole="Fact" ToRole="Course" />
           <NavigationProperty Name="FactInfoes" Relationship="Self.FK_FactInfo_To_Fact" FromRole="Fact" ToRole="FactInfo" />
+          <Property Name="userID" Type="Int32" />
+          <NavigationProperty Name="User" Relationship="AbecedModel.FK_Fact_To_User" FromRole="Fact" ToRole="User" />
         </EntityType>
         <EntityType Name="FactInfo">
           <Key>
@@ -612,6 +631,7 @@
           <NavigationProperty Name="Revisions" Relationship="Self.FK_Revision_To_User" FromRole="User" ToRole="Revision" />
           <NavigationProperty Name="Rewards" Relationship="Self.FK_Table_To_User" FromRole="User" ToRole="Reward" />
           <NavigationProperty Name="StudySessions" Relationship="Self.FK_StudySession_To_User" FromRole="User" ToRole="StudySession" />
+          <NavigationProperty Name="Facts" Relationship="AbecedModel.FK_Fact_To_User" FromRole="User" ToRole="Fact" />
         </EntityType>
         <Association Name="FK_Course_To_SubCat">
           <End Role="SubCategory" Type="Self.SubCategory" Multiplicity="1" />
@@ -834,7 +854,23 @@
             <End Role="User" EntitySet="Users" />
             <End Role="StudySession" EntitySet="StudySessions" />
           </AssociationSet>
+          <AssociationSet Name="FK_Fact_To_User" Association="AbecedModel.FK_Fact_To_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Fact" EntitySet="Facts" />
+          </AssociationSet>
         </EntityContainer>
+        <Association Name="FK_Fact_To_User">
+          <End Type="AbecedModel.User" Role="User" Multiplicity="0..1" />
+          <End Type="AbecedModel.Fact" Role="Fact" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Fact">
+              <PropertyRef Name="userID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -866,6 +902,7 @@
           <EntitySetMapping Name="Facts">
             <EntityTypeMapping TypeName="AbecedModel.Fact">
               <MappingFragment StoreEntitySet="Fact">
+                <ScalarProperty Name="userID" ColumnName="userID" />
                 <ScalarProperty Name="FactId" ColumnName="FactId" />
                 <ScalarProperty Name="question" ColumnName="question" />
                 <ScalarProperty Name="answer" ColumnName="answer" />

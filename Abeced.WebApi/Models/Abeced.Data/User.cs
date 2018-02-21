@@ -21,6 +21,7 @@ namespace Abeced.WebApi.Models.Abeced.Data
             this.Revisions = new HashSet<Revision>();
             this.Rewards = new HashSet<Reward>();
             this.StudySessions = new HashSet<StudySession>();
+            this.Facts = new HashSet<Fact>();
         }
     
         public int UserId { get; set; }
@@ -52,5 +53,7 @@ namespace Abeced.WebApi.Models.Abeced.Data
         public virtual ICollection<Reward> Rewards { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<StudySession> StudySessions { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Fact> Facts { get; set; }
     }
 }

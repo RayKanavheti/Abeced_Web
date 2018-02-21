@@ -11,49 +11,48 @@ using System.Web.Http.Description;
 using Abeced.WebApi.Models.Abeced.Data;
 using System.Threading.Tasks;
 using System.Web;
-using System.Diagnostics;
 using System.IO;
 
 namespace Abeced.WebApi.Controllers
 {
-    public class FactsController : ApiController
+    public class MainCategoriesController : ApiController
     {
         private AbecedEntities db = new AbecedEntities();
 
-        // GET: api/Facts
-        public IQueryable<Fact> GetFacts()
+        // GET: api/MainCategories
+        public IQueryable<MainCategory> GetMainCategories()
         {
-            return db.Facts;
+            return db.MainCategories;
         }
 
-        // GET: api/Facts/5
-        [ResponseType(typeof(Fact))]
-        public IHttpActionResult GetFact(int id)
+        // GET: api/MainCategories/5
+        [ResponseType(typeof(MainCategory))]
+        public IHttpActionResult GetMainCategory(int id)
         {
-            Fact fact = db.Facts.Find(id);
-            if (fact == null)
+            MainCategory mainCategory = db.MainCategories.Find(id);
+            if (mainCategory == null)
             {
                 return NotFound();
             }
 
-            return Ok(fact);
+            return Ok(mainCategory);
         }
 
-        // PUT: api/Facts/5
+        // PUT: api/MainCategories/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutFact(int id, Fact fact)
+        public IHttpActionResult PutMainCategory(int id, MainCategory mainCategory)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != fact.FactId)
+            if (id != mainCategory.MainCategoryId)
             {
                 return BadRequest();
             }
 
-            db.Entry(fact).State = EntityState.Modified;
+            db.Entry(mainCategory).State = EntityState.Modified;
 
             try
             {
@@ -61,7 +60,7 @@ namespace Abeced.WebApi.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!FactExists(id))
+                if (!MainCategoryExists(id))
                 {
                     return NotFound();
                 }
@@ -74,18 +73,19 @@ namespace Abeced.WebApi.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        //// POST: api/Facts
-        //[ResponseType(typeof(Fact))]
-        //public IHttpActionResult PostFact(Fact fact)
+        // POST: api/MainCategories
+        [ResponseType(typeof(MainCategory))]
+        //public IHttpActionResult PostMainCategory(MainCategory mainCategory)
         //{
+           
 
-        //    db.Facts.Add(fact);
+        //    db.MainCategories.Add(mainCategory);
         //    db.SaveChanges();
 
-        //    return CreatedAtRoute("DefaultApi", new { id = fact.FactId }, fact);
+        //    return CreatedAtRoute("DefaultApi", new { id = mainCategory.MainCategoryId }, mainCategory);
         //}
-        [ResponseType(typeof(Fact))]
-        public async Task<HttpResponseMessage> PostFact()
+
+        public async Task<HttpResponseMessage> PostMainCategory()
         {
             if (!Request.Content.IsMimeMultipartContent())
             {
@@ -94,112 +94,76 @@ namespace Abeced.WebApi.Controllers
 
             string rootPath = HttpContext.Current.Server.MapPath("~/App_Data");
             var provider = new MultipartFormDataStreamProvider(rootPath);
-            string qImage = "";
-            string qAudio = "";
-            string aImage = "";
-            string aAudio = "";
-            string fsAudio = "";
-            string question = "";
-            string answer = "";
-            string factsheet = "";
-            string courseId = "";
-            //string userId = "";
+
+            string mainCatName = "";
+            string CatImage = "";
+            string description = ""; 
             try
             {
                 await Request.Content.ReadAsMultipartAsync(provider);
-
                 // This illustrates how to get the file names.
                 foreach (MultipartFileData file in provider.FileData)
                 {
-                    string PostName = file.Headers.ContentDisposition.Name.Replace("\"","");
+                    string PostName = file.Headers.ContentDisposition.Name.Replace("\"", "");
                     string name = file.Headers.ContentDisposition.FileName.Replace("\"", "");
                     string newFileName = Guid.NewGuid() + Path.GetExtension(name);
                     File.Move(file.LocalFileName, Path.Combine(rootPath, newFileName));
                     string fileRelativePath = "~/App_Data/" + newFileName;
 
-                    
-
-
-
-                    if (PostName == "qImage")
+                    if (PostName == "img")
                     {
-                        qImage = fileRelativePath.ToString();
+                        CatImage = fileRelativePath.ToString(); 
 
                     }
-                    else if (PostName == "qAudio")
-                    {
-                        qAudio = fileRelativePath.ToString();
-
-                    }
-                    else if (PostName == "aImage")
-                    {
-                        aImage = fileRelativePath.ToString();
-
-                    }
-                    else if (PostName == "aAudio")
-                    {
-
-                        aAudio = fileRelativePath.ToString();
-                    }
-                    else if (PostName == "fsAudio")
-                    {
-                        fsAudio = fileRelativePath.ToString();
 
 
-                    }
                 }
-
                 // Show all the key-value pairs.
                 foreach (var key in provider.FormData.AllKeys)
                 {
                     foreach (var val in provider.FormData.GetValues(key))
                     {
                         //Trace.WriteLine(string.Format("{0}: {1}", key, val));
-                        if (key == "courseID")
+                        if (key == "name")
                         {
-                            courseId = val;
-                            int.Parse(courseId);
-                        }else if (key== "question")
-                        {
-                            question = val.ToString();
+                            mainCatName = val.ToString();
                         }
-                        else if(key == "answer")
+                        else if (key == "description")
                         {
-                            answer = val.ToString(); 
-
-                        }else if(key == "factsheet")
-                        {
-                            factsheet = val.ToString();
+                            description = val.ToString();
                         }
-
-                
+                      
                     }
                 }
-
-                db.Facts.Add(new Fact() { courseID = int.Parse(courseId), question = question, qImage = qImage, qAudio = qAudio, answer = answer, aImage= aImage, aAudio = aAudio, factsheet = factsheet, fsAudio = fsAudio});
+                db.MainCategories.Add(new MainCategory() { name = mainCatName, img = CatImage, description = description });
                 db.SaveChanges();
                 return Request.CreateResponse(HttpStatusCode.OK);
+
             }
             catch (Exception e)
             {
+
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, e);
             }
+
+
         }
 
-        // DELETE: api/Facts/5
-        [ResponseType(typeof(Fact))]
-        public IHttpActionResult DeleteFact(int id)
+
+        // DELETE: api/MainCategories/5
+        [ResponseType(typeof(MainCategory))]
+        public IHttpActionResult DeleteMainCategory(int id)
         {
-            Fact fact = db.Facts.Find(id);
-            if (fact == null)
+            MainCategory mainCategory = db.MainCategories.Find(id);
+            if (mainCategory == null)
             {
                 return NotFound();
             }
 
-            db.Facts.Remove(fact);
+            db.MainCategories.Remove(mainCategory);
             db.SaveChanges();
 
-            return Ok(fact);
+            return Ok(mainCategory);
         }
 
         protected override void Dispose(bool disposing)
@@ -211,9 +175,9 @@ namespace Abeced.WebApi.Controllers
             base.Dispose(disposing);
         }
 
-        private bool FactExists(int id)
+        private bool MainCategoryExists(int id)
         {
-            return db.Facts.Count(e => e.FactId == id) > 0;
+            return db.MainCategories.Count(e => e.MainCategoryId == id) > 0;
         }
     }
 }
