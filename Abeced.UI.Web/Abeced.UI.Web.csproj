@@ -202,7 +202,6 @@
     <Compile Include="Helpers\DataAccess.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\CategoryModel.cs" />
-    <Compile Include="Models\CourseModel.cs" />
     <Compile Include="Models\FactModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
