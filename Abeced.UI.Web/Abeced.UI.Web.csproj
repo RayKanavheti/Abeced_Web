@@ -201,6 +201,7 @@
     </Compile>
     <Compile Include="Helpers\DataAccess.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\CourseModel.cs" />
     <Compile Include="Models\FactModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -289,6 +290,7 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\App\AddCard.cshtml" />
     <Content Include="Views\App\AddorEditCard.cshtml" />
+    <Content Include="Views\App\AddorEditCourse.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
