@@ -23,5 +23,32 @@ namespace Abeced.WebApi.Models
         public string mainCatName { get; set; }
         public int? userID { get; set; }
         public string averageRating { get; set; }
+
+        //public IList<FactsModel> facts { get; set; }
     }
+    public class FactsModel
+    {
+        public int FactId { get; set; }
+        public string question { get; set; }
+        public string answer { get; set; }
+        public string factsheet { get; set; }
+        public string qAudio { get; set; }
+        public string aAudio { get; set; }
+        public string fsAudio { get; set; }
+        public string qImage { get; set; }
+        public string aImage { get; set; }
+        public string points { get; set; }
+        public string flashcardRespTime { get; set; }
+        public string quizRespTime { get; set; }
+        public int courseID { get; set; }
+        public int? userID { get; set; }
+
+
+
+
+    }
+
+
+
+
 }

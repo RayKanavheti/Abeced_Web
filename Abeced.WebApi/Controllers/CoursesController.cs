@@ -22,12 +22,7 @@ namespace Abeced.WebApi.Controllers
     {
         private AbecedEntities db = new AbecedEntities();
 
-        //GET: api/Courses
-        //public IQueryable<Course> GetCourses()
-        //{
-        //    var co = db.Courses;
-        //    return co;
-        //}
+       
 
             public HttpResponseMessage GetCourses()
         {
