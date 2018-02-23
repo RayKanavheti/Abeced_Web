@@ -21,7 +21,7 @@
           <Property Name="isApproved" Type="bit" />
           <Property Name="approvalDate" Type="datetime" />
           <Property Name="subCatID" Type="int" Nullable="false" />
-          <Property Name="subCatName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="subCatName" Type="varchar" MaxLength="50" />
           <Property Name="mainCatName" Type="varchar" MaxLength="50" />
           <Property Name="userID" Type="int" />
           <Property Name="averageRating" Type="varchar" MaxLength="5" />
@@ -442,7 +442,7 @@
           <Property Name="isApproved" Type="Boolean" />
           <Property Name="approvalDate" Type="DateTime" Precision="3" />
           <Property Name="subCatID" Type="Int32" Nullable="false" />
-          <Property Name="subCatName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="subCatName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="mainCatName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="userID" Type="Int32" />
           <Property Name="averageRating" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />

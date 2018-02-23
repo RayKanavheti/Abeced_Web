@@ -92,7 +92,7 @@ namespace Abeced.WebApi.Controllers
                 throw new HttpResponseException(HttpStatusCode.UnsupportedMediaType);
             }
 
-            string rootPath = HttpContext.Current.Server.MapPath("~/App_Data");
+            string rootPath = HttpContext.Current.Server.MapPath("~/App_Files");
             var provider = new MultipartFormDataStreamProvider(rootPath);
 
             string mainCatName = "";
@@ -108,11 +108,14 @@ namespace Abeced.WebApi.Controllers
                     string name = file.Headers.ContentDisposition.FileName.Replace("\"", "");
                     string newFileName = Guid.NewGuid() + Path.GetExtension(name);
                     File.Move(file.LocalFileName, Path.Combine(rootPath, newFileName));
-                    string fileRelativePath = "~/App_Data/" + newFileName;
+                    string fileRelativePath = "~/App_Files/Images/" + newFileName;
+
+                    Uri baseuri = new Uri(Request.RequestUri.AbsoluteUri.Replace(Request.RequestUri.PathAndQuery, string.Empty));
+                    Uri fileFullPath = new Uri(baseuri, VirtualPathUtility.ToAbsolute(fileRelativePath));
 
                     if (PostName == "img")
                     {
-                        CatImage = fileRelativePath.ToString(); 
+                        CatImage = fileFullPath.ToString(); 
 
                     }
 

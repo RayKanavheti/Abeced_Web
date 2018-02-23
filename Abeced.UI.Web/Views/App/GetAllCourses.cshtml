@@ -1,0 +1,56 @@
+﻿@model IEnumerable<Abeced.UI.Web.Models.CourseModel>
+
+@{
+    ViewBag.Title = "GetAllCourses";
+}
+<style>
+
+    .box{
+        border:1px solid black;
+    }
+
+
+</style>
+
+<h2>GetAllCourses</h2>
+
+
+    <div class="OurCourses">
+       @foreach (var item in Model)
+       {
+           <div class="col-md-4" style="padding:10px">
+                <div class="box">
+                    <div class="img">
+                        <img src="@item.img" height="200" alt="Course Image"/>
+                    </div>
+                    <p class="text-center">@item.name</p>
+                    <p class="text-info">@item.description</p>
+                </div>
+
+           </div>
+
+
+
+       }
+
+
+
+
+
+
+
+
+
+
+    </div>
+
+
+
+
+
+
+
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

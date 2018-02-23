@@ -53,8 +53,10 @@ namespace Abeced.UI.Web.Models
         public int subCatID { get; set; }
         public string subCatName { get; set; }
         public string mainCatName { get; set; }
-        public int? userID { get; set; }
         public string averageRating { get; set; }
+        public int? userID { get; set; }
+
+
         public IEnumerable<SubCategory> subCategoryList { get; set; }
       
 

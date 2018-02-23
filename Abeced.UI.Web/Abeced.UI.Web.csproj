@@ -293,6 +293,7 @@
     <Content Include="Views\App\AddorEditCourse.cshtml" />
     <Content Include="Views\App\AddorEditMainCategory.cshtml" />
     <Content Include="Views\App\AddorEditSubCategory.cshtml" />
+    <Content Include="Views\App\GetAllCourses.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
