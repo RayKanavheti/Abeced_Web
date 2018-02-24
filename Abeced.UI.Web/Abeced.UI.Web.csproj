@@ -313,6 +313,7 @@
     <Content Include="Views\App\AddorEditSubCategory.cshtml" />
     <Content Include="Views\App\GetAllCourses.cshtml" />
     <Content Include="Views\FlashCard\SelectCardIndex.cshtml" />
+    <Content Include="Views\FlashCard\SelectCards.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

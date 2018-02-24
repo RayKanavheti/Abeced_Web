@@ -1,0 +1,68 @@
+﻿
+@{
+    ViewBag.Title = "Select Card ";
+}
+<link href="~/Content/Theme/jquery-ui.min.css" rel="stylesheet" />
+<link href="~/Content/ui.jqgrid.css" rel="stylesheet" />
+
+<h2>Select Cards For this Course</h2>
+@{
+    var JSS = new System.Web.Script.Serialization.JavaScriptSerializer();
+    var factsToJson = JSS.Serialize(ViewBag.Facts);
+}
+
+<br />
+<h3>@ViewBag.CourseName </h3>
+<table id="jqGrid"></table>
+<div id="jqGridPager"></div>
+
+
+
+@section scripts{
+
+    <script src="~/Scripts/jqGrid/grid.locale-en.js"></script>
+    <script src="~/Scripts/jqGrid/jquery.jqGrid.min.js"></script>
+
+    <script>
+        $(function () {
+
+
+            //use Json.parse to convert string to Json
+            var Facts = JSON.parse('@Html.Raw(factsToJson)');
+            var source =
+                {
+                    datatype: "json",
+                    datafields: [
+                        { name: 'FactId' },
+                        { name: 'question' },
+                        { name: 'answer' },
+                        { name: 'factsheet'}
+                       
+                    ],
+                    localdata: Facts,
+                };
+            var dataAdapter = new $.jqx.dataAdapter(source);
+            $grid = $("#jqGrid").jqGrid({
+                source: dataAdapter,
+                colModel: [
+                { label: "Fact ID", name: "FactId", width: 50 },
+                { label: "Fact Question", name: "question", width: 300 },
+                { label: "Fact Answer", name: "answer", width: 300 },
+                { label: "Factsheet", name: "question", width: 400 },
+            ],
+            multiselect: true,
+            viewrecords: true,
+            height: 400,
+            rowList: [10, 20, 30, 40],
+            pager: "#jqGridPager",
+
+        });
+       // $("#jqGrid").jqGrid('navGrid', '#jqGridPager', { edit = false, add: false, del: false });
+        });
+
+
+    </script>
+
+}
+
+

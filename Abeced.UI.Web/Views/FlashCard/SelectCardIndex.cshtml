@@ -9,7 +9,7 @@
 
 
 <br />
-<h3>@ViewBag.CourseName</h3>
+<h3>ViewBag.CourseName </h3>
 <table id="jqGrid"></table>
 <div id="jqGridPager"></div>
 
@@ -23,7 +23,7 @@
     <script>
         $(function () {
             $grid = $("#jqGrid").jqGrid({
-                url: 'http://localhost:20503/api/flashcards/cards/@ViewBag.CourseId ',
+                url: '@Url.Action("SelectCards", "FlashCard")',
                 mtype: "GET",
                 datatype: "json",
                 colModel: [

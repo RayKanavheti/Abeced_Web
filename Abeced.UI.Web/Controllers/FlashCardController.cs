@@ -13,49 +13,48 @@ namespace Abeced.UI.Web.Controllers
     {
 
 
-        public ActionResult SelectCardIndex(int CourseId, string CourseName)
+        public ActionResult SelectCardIndex()
         {
-            ViewBag.CourseName = CourseName;
-            ViewBag.CourseId = CourseId;
+            
             return View();
         }
 
         // GET: FlashCard
-       //public ActionResult SelectCards()
-       // {
-            //IEnumerable<FactModel> factModelList = null;
-            
-            //try
-            //{
-               
-            //    var response = DataAccess.WebClient.GetAsync("flashcards/cards/" + CourseId);
-            //    response.Wait();
-            //    var result = response.Result;
+        public ActionResult SelectCards(int CourseId, string CourseName)
+        {
+            IEnumerable<FactModel> factModelList = null;
 
-            //     if (result.IsSuccessStatusCode)
-            //    {
+            try
+            {
 
-            //        var readTask = result.Content.ReadAsAsync<List<FactModel>>();
-            //        readTask.Wait();
-            //        factModelList = readTask.Result;
+                var response = DataAccess.WebClient.GetAsync("flashcards/cards/" + CourseId);
+                response.Wait();
+                var result = response.Result;
 
-            //    }
-            //    else
-            //    {
-            //        factModelList = Enumerable.Empty<FactModel>();
-            //        ModelState.AddModelError(string.Empty, "Server Error");
+                if (result.IsSuccessStatusCode)
+                {
 
-            //    }
+                    var readTask = result.Content.ReadAsAsync<List<FactModel>>();
+                    readTask.Wait();
+                    factModelList = readTask.Result;
 
-            //    return Json(new { row = factModelList }, JsonRequestBehavior.AllowGet);
-                
+                }
+                else
+                {
+                    factModelList = Enumerable.Empty<FactModel>();
+                    ModelState.AddModelError(string.Empty, "Server Error");
 
-            //}
-            //catch (Exception)
-            //{
+                }
+                ViewBag.Facts = factModelList;
+                return View();
 
-            //    throw;
-            //}
-        //}
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }
