@@ -32,16 +32,16 @@ namespace Abeced.WebApi.Models
         public string question { get; set; }
         public string answer { get; set; }
         public string factsheet { get; set; }
-        public string qAudio { get; set; }
-        public string aAudio { get; set; }
-        public string fsAudio { get; set; }
-        public string qImage { get; set; }
-        public string aImage { get; set; }
-        public string points { get; set; }
-        public string flashcardRespTime { get; set; }
-        public string quizRespTime { get; set; }
-        public int courseID { get; set; }
-        public int? userID { get; set; }
+        //public string qAudio { get; set; }
+        //public string aAudio { get; set; }
+        //public string fsAudio { get; set; }
+        //public string qImage { get; set; }
+        //public string aImage { get; set; }
+        //public string points { get; set; }
+       // public string flashcardRespTime { get; set; }
+        //public string quizRespTime { get; set; }
+       // public int courseID { get; set; }
+       // public int? userID { get; set; }
 
 
 

@@ -1,0 +1,49 @@
+﻿
+@{
+    ViewBag.Title = "Select Card ";
+}
+<link href="~/Content/Theme/jquery-ui.min.css" rel="stylesheet" />
+<link href="~/Content/ui.jqgrid.css" rel="stylesheet" />
+
+<h2>Select Cards For this Course</h2>
+
+
+<br />
+<h3>@ViewBag.CourseName</h3>
+<table id="jqGrid"></table>
+<div id="jqGridPager"></div>
+
+
+
+@section scripts{
+
+    <script src="~/Scripts/jqGrid/grid.locale-en.js"></script>
+    <script src="~/Scripts/jqGrid/jquery.jqGrid.min.js"></script>
+
+    <script>
+        $(function () {
+            $grid = $("#jqGrid").jqGrid({
+                url: 'http://localhost:20503/api/flashcards/cards/@ViewBag.CourseId ',
+                mtype: "GET",
+                datatype: "json",
+                colModel: [
+                    { label: "Fact Question", name: "question", width: 300 },
+                    { label: "Fact Answer", name: "answer", width: 300 },
+                    { label: "Factsheet", name: "question", width: 400 },
+                ],
+                multiselect: true,
+                viewrecords: true,
+                height: 400,
+                rowList: [10, 20, 30, 40],
+                pager: "#jqGridPager",
+
+            });
+            $("#jqGrid").jqGrid('navGrid', '#jqGridPager', { edit = false, add: false, del: false });
+        });
+
+
+    </script>
+
+}
+
+

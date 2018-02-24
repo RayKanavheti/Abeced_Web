@@ -21,20 +21,20 @@ namespace Abeced.WebApi.Controllers
 
         [HttpGet]
         [ActionName("cards")]
-        [Route ("flashcards/cards/{courseId}")]
+        [Route ("api/flashcards/cards/{courseId}")]
         public HttpResponseMessage GetCoursefacts(int CourseId)
         {
             
                 List<Fact> factList = new List<Fact>();
                 factList = db.Facts.Where(x => x.courseID == CourseId).ToList();
 
-                List<FactsModel> factsModelList = factList.Select(x => new FactsModel
-                {
-                    FactId = x.FactId,
-                    question = x.question,
-                    answer = x.answer,
-                    factsheet = x.factsheet
-                }).ToList();
+            List<FactsModel> factsModelList = factList.Select(x => new FactsModel
+            {
+                FactId = x.FactId,
+                question = x.question,
+                answer = x.answer,
+                factsheet = x.factsheet
+            }).ToList();
 
                 HttpResponseMessage response;
                 response = Request.CreateResponse(HttpStatusCode.OK, factsModelList);
@@ -42,11 +42,6 @@ namespace Abeced.WebApi.Controllers
          
 
         }
-
-      
-
-       
-        
 
         protected override void Dispose(bool disposing)
         {

@@ -13,13 +13,13 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Diagnostics;
 using System.IO;
+using Abeced.WebApi.Models;
 
 namespace Abeced.WebApi.Controllers
 {
     public class FactsController : ApiController
     {
         private AbecedEntities db = new AbecedEntities();
-
         // GET: api/Facts
         public IQueryable<Fact> GetFacts()
         {
