@@ -42,11 +42,7 @@ namespace Abeced.WebApi.Controllers
         [ResponseType(typeof(void))]
         public IHttpActionResult PutMainCategory(int id, MainCategory mainCategory)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
+          
             if (id != mainCategory.MainCategoryId)
             {
                 return BadRequest();
@@ -75,15 +71,7 @@ namespace Abeced.WebApi.Controllers
 
         // POST: api/MainCategories
         [ResponseType(typeof(MainCategory))]
-        //public IHttpActionResult PostMainCategory(MainCategory mainCategory)
-        //{
-           
-
-        //    db.MainCategories.Add(mainCategory);
-        //    db.SaveChanges();
-
-        //    return CreatedAtRoute("DefaultApi", new { id = mainCategory.MainCategoryId }, mainCategory);
-        //}
+        
 
         public async Task<HttpResponseMessage> PostMainCategory()
         {

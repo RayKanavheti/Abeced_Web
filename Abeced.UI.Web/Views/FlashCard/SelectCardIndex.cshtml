@@ -2,46 +2,57 @@
 @{
     ViewBag.Title = "Select Card ";
 }
-<link href="~/Content/Theme/jquery-ui.min.css" rel="stylesheet" />
-<link href="~/Content/ui.jqgrid.css" rel="stylesheet" />
 
+<link href="~/Content/jquery.dataTables.min.css" rel="stylesheet" />
 <h2>Select Cards For this Course</h2>
 
 
 <br />
-<h3>ViewBag.CourseName </h3>
-<table id="jqGrid"></table>
-<div id="jqGridPager"></div>
+<h3>@ViewBag.CourseTitle</h3>
+<table id="FactsTable">
+    <thead>
+        <tr>
+            <th>Fact ID</th>
+            <th>Fact Question</th>
+            <th>Fact Answer</th>
+            <th>Fact Sheet</th>
+        </tr>
+    </thead>
+
+
+
+</table>
+
+
+
+
 
 
 
 @section scripts{
 
-    <script src="~/Scripts/jqGrid/grid.locale-en.js"></script>
-    <script src="~/Scripts/jqGrid/jquery.jqGrid.min.js"></script>
-
+    
+    <script src="~/Scripts/jquery.dataTables.min.js"></script>
     <script>
-        $(function () {
-            $grid = $("#jqGrid").jqGrid({
-                url: '@Url.Action("SelectCards", "FlashCard")',
-                mtype: "GET",
-                datatype: "json",
-                colModel: [
-                    { label: "Fact Question", name: "question", width: 300 },
-                    { label: "Fact Answer", name: "answer", width: 300 },
-                    { label: "Factsheet", name: "question", width: 400 },
-                ],
-                multiselect: true,
-                viewrecords: true,
-                height: 400,
-                rowList: [10, 20, 30, 40],
-                pager: "#jqGridPager",
 
-            });
-            $("#jqGrid").jqGrid('navGrid', '#jqGridPager', { edit = false, add: false, del: false });
+        $(document).ready(function () {
+
+            $("#FactsTable").DataTable(
+                {
+                    "ajax": {
+                        "url":"/FlashCard/SelectCards",
+                        "type": "Get",
+                        "datatype":"json"
+                    },
+                    "columns": [
+                        { "data": "FactId" },
+                        { "data": "question" },
+                        { "data": "answer" },
+                        { "data": "factsheet" }
+                    ] 
+                }
+            );
         });
-
-
     </script>
 
 }

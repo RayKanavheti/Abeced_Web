@@ -13,7 +13,7 @@ namespace Abeced.UI.Web.Controllers
 {
     public class AppController : Controller
     {
-        // GET: App
+        //// GET: App
 
         public ActionResult AddorEditCard(int i = 0)
         {

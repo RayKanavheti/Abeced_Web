@@ -12,22 +12,25 @@ namespace Abeced.UI.Web.Controllers
     public class FlashCardController : Controller
     {
 
-
-        public ActionResult SelectCardIndex()
+        //int CourseId;
+        public ActionResult SelectCardIndex(string CourseID, string CourseName)
         {
-            
+            ViewBag.CourseTitle = CourseName;
+            TempData["CourseId"] = Int32.Parse(CourseID);
+            TempData.Keep();
+            //SelectCards(newCourseId);
             return View();
         }
 
         // GET: FlashCard
-        public ActionResult SelectCards(int CourseId, string CourseName)
+        public ActionResult SelectCards()
         {
             IEnumerable<FactModel> factModelList = null;
 
             try
             {
 
-                var response = DataAccess.WebClient.GetAsync("flashcards/cards/" + CourseId);
+                var response = DataAccess.WebClient.GetAsync("flashcards/cards/" + TempData["CourseId"]);
                 response.Wait();
                 var result = response.Result;
 
@@ -45,8 +48,8 @@ namespace Abeced.UI.Web.Controllers
                     ModelState.AddModelError(string.Empty, "Server Error");
 
                 }
-                ViewBag.Facts = factModelList;
-                return View();
+                //ViewBag.Facts = factModelList;
+                return Json(new {data =  factModelList},JsonRequestBehavior.AllowGet);
 
 
             }
