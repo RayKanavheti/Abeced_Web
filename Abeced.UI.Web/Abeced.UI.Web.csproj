@@ -194,6 +194,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AppController.cs" />
+    <Compile Include="Controllers\FlashCardController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Global.asax.cs">
@@ -228,6 +229,22 @@
     <Content Include="Content\alertifyjs\themes\semantic.rtl.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\jquery.dataTables.min.css" />
+    <Content Include="Content\Theme\images\ui-bg_glass_100_f5f0e5_1x400.png" />
+    <Content Include="Content\Theme\images\ui-bg_glass_25_cb842e_1x400.png" />
+    <Content Include="Content\Theme\images\ui-bg_glass_70_ede4d4_1x400.png" />
+    <Content Include="Content\Theme\images\ui-bg_highlight-hard_100_f4f0ec_1x100.png" />
+    <Content Include="Content\Theme\images\ui-bg_highlight-hard_65_fee4bd_1x100.png" />
+    <Content Include="Content\Theme\images\ui-bg_highlight-hard_75_f5f5b5_1x100.png" />
+    <Content Include="Content\Theme\images\ui-bg_inset-soft_100_f4f0ec_1x100.png" />
+    <Content Include="Content\Theme\images\ui-icons_c47a23_256x240.png" />
+    <Content Include="Content\Theme\images\ui-icons_cb672b_256x240.png" />
+    <Content Include="Content\Theme\images\ui-icons_f08000_256x240.png" />
+    <Content Include="Content\Theme\images\ui-icons_f35f07_256x240.png" />
+    <Content Include="Content\Theme\images\ui-icons_ff7519_256x240.png" />
+    <Content Include="Content\Theme\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="Content\Theme\jquery-ui.min.css" />
+    <Content Include="Content\ui.jqgrid.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -242,9 +259,12 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\jqGrid\grid.locale-en.js" />
+    <Content Include="Scripts\jqGrid\jquery.jqGrid.min.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.dataTables.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -293,6 +313,8 @@
     <Content Include="Views\App\AddorEditCourse.cshtml" />
     <Content Include="Views\App\AddorEditMainCategory.cshtml" />
     <Content Include="Views\App\AddorEditSubCategory.cshtml" />
+    <Content Include="Views\App\GetAllCourses.cshtml" />
+    <Content Include="Views\FlashCard\SelectCardIndex.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

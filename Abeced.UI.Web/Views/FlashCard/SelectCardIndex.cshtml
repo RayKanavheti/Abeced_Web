@@ -1,0 +1,60 @@
+﻿
+@{
+    ViewBag.Title = "Select Card ";
+}
+
+<link href="~/Content/jquery.dataTables.min.css" rel="stylesheet" />
+<h2>Select Cards For this Course</h2>
+
+
+<br />
+<h3>@ViewBag.CourseTitle</h3>
+<table id="FactsTable">
+    <thead>
+        <tr>
+            <th>Fact ID</th>
+            <th>Fact Question</th>
+            <th>Fact Answer</th>
+            <th>Fact Sheet</th>
+        </tr>
+    </thead>
+
+
+
+</table>
+
+
+
+
+
+
+
+@section scripts{
+
+    
+    <script src="~/Scripts/jquery.dataTables.min.js"></script>
+    <script>
+
+        $(document).ready(function () {
+
+            $("#FactsTable").DataTable(
+                {
+                    "ajax": {
+                        "url":"/FlashCard/SelectCards",
+                        "type": "Get",
+                        "datatype":"json"
+                    },
+                    "columns": [
+                        { "data": "FactId" },
+                        { "data": "question" },
+                        { "data": "answer" },
+                        { "data": "factsheet" }
+                    ] 
+                }
+            );
+        });
+    </script>
+
+}
+
+

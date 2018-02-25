@@ -13,14 +13,16 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Diagnostics;
 using System.IO;
+using Abeced.WebApi.Models;
 
 namespace Abeced.WebApi.Controllers
 {
     public class FactsController : ApiController
     {
         private AbecedEntities db = new AbecedEntities();
-
         // GET: api/Facts
+
+        [Authorize]
         public IQueryable<Fact> GetFacts()
         {
             return db.Facts;
@@ -92,7 +94,7 @@ namespace Abeced.WebApi.Controllers
                 throw new HttpResponseException(HttpStatusCode.UnsupportedMediaType);
             }
 
-            string rootPath = HttpContext.Current.Server.MapPath("~/App_Data");
+            string rootPath = HttpContext.Current.Server.MapPath("~/App_Files/Images");
             var provider = new MultipartFormDataStreamProvider(rootPath);
             string qImage = "";
             string qAudio = "";
@@ -115,35 +117,37 @@ namespace Abeced.WebApi.Controllers
                     string name = file.Headers.ContentDisposition.FileName.Replace("\"", "");
                     string newFileName = Guid.NewGuid() + Path.GetExtension(name);
                     File.Move(file.LocalFileName, Path.Combine(rootPath, newFileName));
-                    string fileRelativePath = "~/App_Data/" + newFileName;
-
+                    string fileRelativePath = "~/App_Files/Images/" + newFileName;
                     
-
+                    
+                    Uri baseuri = new Uri(Request.RequestUri.AbsoluteUri.Replace(Request.RequestUri.PathAndQuery, string.Empty));
+                    Uri fileFullPath = new Uri(baseuri, VirtualPathUtility.ToAbsolute(fileRelativePath));
+                   
 
 
                     if (PostName == "qImage")
                     {
-                        qImage = fileRelativePath.ToString();
+                        qImage = fileFullPath.ToString();
 
                     }
                     else if (PostName == "qAudio")
                     {
-                        qAudio = fileRelativePath.ToString();
+                        qAudio = fileFullPath.ToString();
 
                     }
                     else if (PostName == "aImage")
                     {
-                        aImage = fileRelativePath.ToString();
+                        aImage = fileFullPath.ToString();
 
                     }
                     else if (PostName == "aAudio")
                     {
 
-                        aAudio = fileRelativePath.ToString();
+                        aAudio = fileFullPath.ToString();
                     }
                     else if (PostName == "fsAudio")
                     {
-                        fsAudio = fileRelativePath.ToString();
+                        fsAudio = fileFullPath.ToString();
 
 
                     }

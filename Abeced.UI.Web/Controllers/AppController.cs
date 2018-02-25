@@ -13,7 +13,7 @@ namespace Abeced.UI.Web.Controllers
 {
     public class AppController : Controller
     {
-        // GET: App
+        //// GET: App
 
         public ActionResult AddorEditCard(int i = 0)
         {
@@ -119,16 +119,61 @@ namespace Abeced.UI.Web.Controllers
                 return View();
             }
 
-          
-           
-            
-
         }
         [HttpPost]
         public ActionResult AddorEditSubCategory(SubCategory subCategory)
         {
             return View();
 
+
+        }
+
+        public ActionResult GetAllFacts()
+        {
+            try
+            {
+                return View();
+            }
+            catch (Exception ex)
+            {
+                throw;
+                
+            }
+
+
+        }
+        [HttpGet]
+        public ActionResult GetAllCourses()
+        {
+            IEnumerable<CourseModel> courseModel = null;
+            try
+            {
+                
+                
+                var response = DataAccess.WebClient.GetAsync("Courses");
+                response.Wait();
+                var result = response.Result;
+                    
+
+                if (result.IsSuccessStatusCode) {
+                    var readTask = result.Content.ReadAsAsync<List<CourseModel>>();
+                    readTask.Wait();
+                    courseModel = readTask.Result;
+                }
+                else
+                {
+
+                    courseModel = Enumerable.Empty<CourseModel>();
+                    ModelState.AddModelError(string.Empty, "Server Error");
+                }
+                return View(courseModel);
+            }
+            catch (Exception ex)
+            {
+                Console.Write(ex.Message);
+                throw;
+            }
+      
 
         }
 

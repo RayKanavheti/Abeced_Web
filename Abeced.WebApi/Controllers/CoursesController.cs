@@ -13,6 +13,8 @@ using System.Threading.Tasks;
 using System.Web;
 using System.IO;
 using System.Web.Hosting;
+using System.Net.Http.Headers;
+using Abeced.WebApi.Models;
 
 namespace Abeced.WebApi.Controllers
 {
@@ -20,31 +22,39 @@ namespace Abeced.WebApi.Controllers
     {
         private AbecedEntities db = new AbecedEntities();
 
-        // GET: api/Courses
-        //public IQueryable<Course> GetCourses()
-        //{
-        //    return db.Courses;
-        //}
+       
 
-            public async Task<HttpResponseMessage> GetAllCourses()
+            public HttpResponseMessage GetCourses()
         {
-            string[] path;
-            int numCourses = db.Courses.Count();
+           
+            List<Course> list = new List<Course>();
+            list = db.Courses.ToList();
+            CourseModel courseModel = new CourseModel();
+            List<CourseModel> NewList = list.Select(x => new CourseModel {
+                CourseId = x.CourseId,
+                name = x.name, description = x.description,
+                img = x.img,
+                duration = x.duration,
+                dateCreated = x.dateCreated,
+                numFacts = x.numFacts,
+                points = x.points,
+                creatorName = x.creatorName,
+                isApproved = x.isApproved,
+                approvalDate = x.approvalDate,
+                subCatID = x.subCatID,
+                subCatName = x.subCatName,
+                mainCatName = x.mainCatName,
+                userID = x.userID,
+                averageRating = x.averageRating })
+                .ToList();
+            
+            HttpResponseMessage response;
+            response = Request.CreateResponse(HttpStatusCode.OK, NewList);
+            return response;
 
-            path = HostingEnvironment.MapPath(path);
-            var response = Request.CreateResponse(HttpStatusCode.OK);
-            foreach (Course course in db.Courses)
-            {
+        }
 
-                course.img = 
-
-
-
-
-            }
-
-
-        } 
+        
 
         // GET: api/Courses/5
         [ResponseType(typeof(Course))]
@@ -109,7 +119,7 @@ namespace Abeced.WebApi.Controllers
                 throw new HttpResponseException(HttpStatusCode.UnsupportedMediaType);
             }
 
-            string rootPath = HttpContext.Current.Server.MapPath("~/App_Data");
+            string rootPath = HttpContext.Current.Server.MapPath("~/App_Files/Images");
             var provider = new MultipartFormDataStreamProvider(rootPath);
             int SubCatId = 0;
             string CourseImage = "";
@@ -127,11 +137,14 @@ namespace Abeced.WebApi.Controllers
                     string name = file.Headers.ContentDisposition.FileName.Replace("\"", "");
                     string newFileName = Guid.NewGuid() + Path.GetExtension(name);
                     File.Move(file.LocalFileName, Path.Combine(rootPath, newFileName));
-                    string fileRelativePath = "~/App_Data/" + newFileName;
+                    string fileRelativePath = "~/App_Files/Images/" + newFileName;
+
+                    Uri baseuri = new Uri(Request.RequestUri.AbsoluteUri.Replace(Request.RequestUri.PathAndQuery, string.Empty));
+                    Uri fileFullPath = new Uri(baseuri, VirtualPathUtility.ToAbsolute(fileRelativePath));
 
                     if (PostName == "img")
                     {
-                        CourseImage = fileRelativePath.ToString();
+                        CourseImage = fileFullPath.ToString();
 
                     }
 
