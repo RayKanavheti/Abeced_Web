@@ -3,13 +3,15 @@
     ViewBag.Title = "Select Card ";
 }
 
-<link href="~/Content/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="~/Content/JqueryDataTable/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="~/Content/JqueryDataTable/dataTables.checkboxes.css" rel="stylesheet" />
+
 <h2>Select Cards For this Course</h2>
 
 
 <br />
 <h3>@ViewBag.CourseTitle</h3>
-<table id="FactsTable">
+<table id="FactsTable" class="display">
     <thead>
         <tr>
             <th>Fact ID</th>
@@ -28,11 +30,10 @@
 
 
 
-
 @section scripts{
-
+<script src="~/Scripts/JqueryDataTable/jquery.dataTables.min.js"></script>
     
-    <script src="~/Scripts/jquery.dataTables.min.js"></script>
+<script src="~/Scripts/JqueryDataTable/dataTables.checkboxes.min.js"></script>
     <script>
 
         $(document).ready(function () {
@@ -49,7 +50,19 @@
                         { "data": "question" },
                         { "data": "answer" },
                         { "data": "factsheet" }
-                    ] 
+                    ], 
+                    "columnDefs": [
+                        {
+                            "targets": 0,
+                            "checkboxes": {
+                                "selectRow": true
+                            }
+                        }
+                    ],
+                    "select": {
+                        "style": "multi"
+                    },
+                    "order": [[1, "asc"]]
                 }
             );
         });
