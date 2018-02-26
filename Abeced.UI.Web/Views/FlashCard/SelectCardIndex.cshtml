@@ -11,19 +11,30 @@
 
 <br />
 <h3>@ViewBag.CourseTitle</h3>
-<table id="FactsTable" class="display">
-    <thead>
-        <tr>
-            <th>Fact ID</th>
-            <th>Fact Question</th>
-            <th>Fact Answer</th>
-            <th>Fact Sheet</th>
-        </tr>
-    </thead>
+<!--It submits the selected rows ids to the controller action and redirects to the selected app page -->
+
+    <!-- the use of the form-->
+    <table id="FactsTable" class="display" cellspacing="0" width="100%">
+        <thead>
+            <tr>
+                <th>Fact ID</th>
+                <th>Fact Question</th>
+                <th>Fact Answer</th>
+                <th>Fact Sheet</th>
+            </tr>
+        </thead>
+        <tfoot>
+            <tr>
+                <th>Fact ID</th>
+                <th>Fact Question</th>
+                <th>Fact Answer</th>
+                <th>Fact Sheet</th>
+            </tr>
+        </tfoot>
+    </table>
 
 
-
-</table>
+<button id="submit" class="btn btn-default">Submit</button>
 
 
 
@@ -38,7 +49,7 @@
 
         $(document).ready(function () {
 
-            $("#FactsTable").DataTable(
+          var table =  $("#FactsTable").DataTable(
                 {
                     "ajax": {
                         "url":"/FlashCard/SelectCards",
@@ -63,8 +74,51 @@
                         "style": "multi"
                     },
                     "order": [[1, "asc"]]
-                }
-            );
+                });
+            // Handle form submission event
+            // $('#Submit-selected-rows').on('submit', function (e) {
+            $('#submit').click(function () {
+
+           
+                var form = this;
+
+                var rows_selected = table.column(0).checkboxes.selected();
+                var myIds = new Array();
+                // Iterate over all selected checkboxes
+                $.each(rows_selected, function (index, rowId) {
+                    // Create a hidden element
+
+                    myIds.push(rowId);
+
+                    //$(form).append(
+                    //    $('<input>')
+                    //        .attr('type', 'hidden')
+                    //        .attr('name', 'FactId[]')
+                    //        .val(rowId)
+                    //);
+                });
+                console.log(myIds);
+                $.ajax({
+                    type: 'POST',
+                    url: '/FlashCard/GetData',
+                    data: { 'myIds': myIds.join() },
+
+                    success: function (response) {
+                        alertify.alert("ids added succesfully !!!")
+
+                    },
+                    error: function (response) {
+
+                        alertify.alert("ids failed to add !!!")
+                    }
+
+                });
+
+
+
+            });
+            
+
         });
     </script>
 

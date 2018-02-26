@@ -59,5 +59,23 @@ namespace Abeced.UI.Web.Controllers
                 throw;
             }
         }
+
+
+
+        public ActionResult GetData(string myIds)
+        {
+
+            var FactIds = myIds.Split(',').Select(x => Int32.Parse(x)).ToArray();
+
+            for(int i = 0; i < FactIds.Length; i++)
+            {
+                //
+
+
+
+            }
+
+            return RedirectToAction("GetAllCourses","App");
+        }
     }
 }
