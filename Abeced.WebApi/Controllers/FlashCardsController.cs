@@ -42,6 +42,43 @@ namespace Abeced.WebApi.Controllers
          
 
         }
+        [HttpGet]
+        [ActionName("cards")]
+        [Route("api/flashcards/selectedCards/{factIds}")]
+        public HttpResponseMessage GetSelectedFacts(int[] factIds)
+        {
+            //string[] factids = factIds.Split(',');
+         
+            
+            List<Fact> factList = new List<Fact>();
+
+
+            for (int i = 0; i < factIds.Length; i++)
+            {
+                factList = db.Facts.Where(x => x.FactId == factIds[i]).ToList();
+            }
+                
+            
+
+            List<FactsModel> SelectedFactsList = factList.Select(x => new FactsModel {
+
+                FactId = x.FactId,
+                question = x.question,
+                answer = x.answer,
+                factsheet = x.factsheet,
+                qAudio = x.qAudio,
+                aAudio = x.aAudio,
+                fsAudio = x.fsAudio,
+                qImage = x.qImage,
+                aImage = x.aImage,
+
+            }).ToList();
+            HttpResponseMessage response;
+            response = Request.CreateResponse(HttpStatusCode.OK, SelectedFactsList);
+            return response;
+        }
+
+
 
         protected override void Dispose(bool disposing)
         {

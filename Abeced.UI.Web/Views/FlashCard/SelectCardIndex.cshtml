@@ -34,11 +34,7 @@
     </table>
 
 
-<button id="submit" class="btn btn-default">Submit</button>
-
-
-
-
+<button id="Proceed" class="btn btn-default">Submit</button>
 
 
 @section scripts{
@@ -75,36 +71,26 @@
                     },
                     "order": [[1, "asc"]]
                 });
-            // Handle form submission event
-            // $('#Submit-selected-rows').on('submit', function (e) {
-            $('#submit').click(function () {
-
-           
-                var form = this;
+            $('#Proceed').click(function () {
 
                 var rows_selected = table.column(0).checkboxes.selected();
-                var myIds = new Array();
+
+                var myIds = new Array();// an array that keep track of all selected rows
+
                 // Iterate over all selected checkboxes
                 $.each(rows_selected, function (index, rowId) {
-                    // Create a hidden element
-
                     myIds.push(rowId);
-
-                    //$(form).append(
-                    //    $('<input>')
-                    //        .attr('type', 'hidden')
-                    //        .attr('name', 'FactId[]')
-                    //        .val(rowId)
-                    //);
                 });
-                console.log(myIds);
+                var Postdata = JSON.stringify({ FactIds: myIds }); // posting the ids as a json object
+              
                 $.ajax({
                     type: 'POST',
-                    url: '/FlashCard/GetData',
-                    data: { 'myIds': myIds.join() },
-
-                    success: function (response) {
-                        alertify.alert("ids added succesfully !!!")
+                    url: '/FlashCard/GetData', 
+                     //posting the selected the ids as a string to the /flashcard/getdata controller
+                    data: { 'myIds': myIds.join() }, //You can post the ids as a string 
+                    success: function (data) {
+                        alertify.alert("ids added succesfully !!!");
+                        window.location.href = "/FlashCard/FactsToMatch?SelectedCards=" + data.factIds;
 
                     },
                     error: function (response) {
