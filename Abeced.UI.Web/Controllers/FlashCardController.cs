@@ -26,7 +26,7 @@ namespace Abeced.UI.Web.Controllers
         // GET: FlashCard
         public ActionResult SelectCards()
         {
-            IEnumerable<FactModel> factModelList = null;
+            IEnumerable<FactModelRetrieve> factModelList = null;
 
             try
             {
@@ -38,14 +38,14 @@ namespace Abeced.UI.Web.Controllers
                 if (result.IsSuccessStatusCode)
                 {
 
-                    var readTask = result.Content.ReadAsAsync<List<FactModel>>();
+                    var readTask = result.Content.ReadAsAsync<List<FactModelRetrieve>>();
                     readTask.Wait();
                     factModelList = readTask.Result;
 
                 }
                 else
                 {
-                    factModelList = Enumerable.Empty<FactModel>();
+                    factModelList = Enumerable.Empty<FactModelRetrieve>();
                     ModelState.AddModelError(string.Empty, "Server Error");
 
                 }
@@ -75,13 +75,10 @@ namespace Abeced.UI.Web.Controllers
 
         public ActionResult FactsToMatch(string SelectedCards)
         {
-            var factIds = SelectedCards.Split(',').Select(x => Int32.Parse(x)).ToArray();
+            //factIds variable to be consistent with the parameter in the web apis
+            string factIds = SelectedCards;
 
-
-            IEnumerable<FactModel> selectedFactsList = null;
-           // string[] factIds = SelectedCards.Split(',');
-           
-
+            IEnumerable<FactModelRetrieve> selectedFactsList = null;
             var response = DataAccess.WebClient.GetAsync("flashcards/selectedCards/"+ factIds);
             
             response.Wait();
@@ -91,18 +88,18 @@ namespace Abeced.UI.Web.Controllers
             if (result.IsSuccessStatusCode)
             {
 
-                var readTask = result.Content.ReadAsAsync<List<FactModel>>();
+                var readTask = result.Content.ReadAsAsync<List<FactModelRetrieve>>();
                 readTask.Wait();
                 selectedFactsList = readTask.Result;
             }
             else
             {
-                selectedFactsList = Enumerable.Empty<FactModel>();
+                selectedFactsList = Enumerable.Empty<FactModelRetrieve>();
                 ModelState.AddModelError(string.Empty, "Server Error");
             }
             
             
-            return View();
+            return View(selectedFactsList);
 
         }
     }

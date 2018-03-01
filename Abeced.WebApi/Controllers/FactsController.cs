@@ -45,11 +45,8 @@ namespace Abeced.WebApi.Controllers
         [ResponseType(typeof(void))]
         public IHttpActionResult PutFact(int id, Fact fact)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
+            
+        
             if (id != fact.FactId)
             {
                 return BadRequest();
@@ -76,16 +73,7 @@ namespace Abeced.WebApi.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        //// POST: api/Facts
-        //[ResponseType(typeof(Fact))]
-        //public IHttpActionResult PostFact(Fact fact)
-        //{
-
-        //    db.Facts.Add(fact);
-        //    db.SaveChanges();
-
-        //    return CreatedAtRoute("DefaultApi", new { id = fact.FactId }, fact);
-        //}
+    
         [ResponseType(typeof(Fact))]
         public async Task<HttpResponseMessage> PostFact()
         {
@@ -96,6 +84,9 @@ namespace Abeced.WebApi.Controllers
 
             string rootPath = HttpContext.Current.Server.MapPath("~/App_Files/Images");
             var provider = new MultipartFormDataStreamProvider(rootPath);
+
+            
+
             string qImage = "";
             string qAudio = "";
             string aImage = "";
@@ -115,6 +106,7 @@ namespace Abeced.WebApi.Controllers
                 {
                     string PostName = file.Headers.ContentDisposition.Name.Replace("\"","");
                     string name = file.Headers.ContentDisposition.FileName.Replace("\"", "");
+                    string type = Path.GetExtension(name);
                     string newFileName = Guid.NewGuid() + Path.GetExtension(name);
                     File.Move(file.LocalFileName, Path.Combine(rootPath, newFileName));
                     string fileRelativePath = "~/App_Files/Images/" + newFileName;
@@ -123,8 +115,6 @@ namespace Abeced.WebApi.Controllers
                     Uri baseuri = new Uri(Request.RequestUri.AbsoluteUri.Replace(Request.RequestUri.PathAndQuery, string.Empty));
                     Uri fileFullPath = new Uri(baseuri, VirtualPathUtility.ToAbsolute(fileRelativePath));
                    
-
-
                     if (PostName == "qImage")
                     {
                         qImage = fileFullPath.ToString();

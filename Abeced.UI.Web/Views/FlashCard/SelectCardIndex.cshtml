@@ -5,6 +5,7 @@
 
 <link href="~/Content/JqueryDataTable/jquery.dataTables.min.css" rel="stylesheet" />
 <link href="~/Content/JqueryDataTable/dataTables.checkboxes.css" rel="stylesheet" />
+<link href="~/Content/checkboxes-bootstrap.css" rel="stylesheet" />
 
 <h2>Select Cards For this Course</h2>
 
@@ -14,7 +15,7 @@
 <!--It submits the selected rows ids to the controller action and redirects to the selected app page -->
 
     <!-- the use of the form-->
-    <table id="FactsTable" class="display" cellspacing="0" width="100%">
+    <table id="FactsTable" cellspacing="0" width="100%" class="display table table-bordered table-striped">
         <thead>
             <tr>
                 <th>Fact ID</th>
@@ -61,8 +62,16 @@
                     "columnDefs": [
                         {
                             "targets": 0,
+                            "render": function (data, type, row, meta) {
+                                if (type === 'display') {
+                                    data = '<div class="checkbox"><input type="checkbox" class="dt-checkboxes"><label></label></div>';
+                                }
+                                return data;
+                            },
                             "checkboxes": {
-                                "selectRow": true
+                                "selectRow": true,
+                                "selectAllRender": '<div class="checkbox"><input type="checkbox" class="dt-checkboxes"><label></label></div>'
+
                             }
                         }
                     ],
