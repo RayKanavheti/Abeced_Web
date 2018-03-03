@@ -16,6 +16,7 @@ namespace Abeced.UI.Web.Controllers
         //int CourseId;
         public ActionResult SelectCardIndex(string CourseID, string CourseName)
         {
+            
             ViewBag.CourseTitle = CourseName;
             TempData["CourseId"] = Int32.Parse(CourseID);
             TempData.Keep();
@@ -49,6 +50,8 @@ namespace Abeced.UI.Web.Controllers
                     ModelState.AddModelError(string.Empty, "Server Error");
 
                 }
+                TempData["SelectedCards"] = factModelList;
+                TempData.Keep();
                 //ViewBag.Facts = factModelList;
                 return Json(new {data =  factModelList},JsonRequestBehavior.AllowGet);
 
@@ -62,7 +65,7 @@ namespace Abeced.UI.Web.Controllers
         }
 
 
-
+        //returning a string of Ids in Json format
         public JsonResult GetData(string myIds)
         {
            //do whatever you want with the an array of selected cards
@@ -100,6 +103,46 @@ namespace Abeced.UI.Web.Controllers
             
             
             return View(selectedFactsList);
+
+        }
+
+
+        public ActionResult Quizes(string SelectedCards)
+        {
+            TempData["SelectedIds"] = SelectedCards;
+            TempData.Keep();
+
+            return View();
+        }
+
+
+        public ActionResult QuizesJSONData()
+        {
+
+            string factIds = TempData["SelectedIds"] as string;
+
+            IEnumerable<FactModelRetrieve> selectedFactsList = null;
+            var response = DataAccess.WebClient.GetAsync("flashcards/selectedCards/" + factIds);
+
+            response.Wait();
+
+            var result = response.Result;
+
+            if (result.IsSuccessStatusCode)
+            {
+
+                var readTask = result.Content.ReadAsAsync<List<FactModelRetrieve>>();
+                readTask.Wait();
+                selectedFactsList = readTask.Result;
+            }
+            else
+            {
+                selectedFactsList = Enumerable.Empty<FactModelRetrieve>();
+                ModelState.AddModelError(string.Empty, "Server Error");
+            }
+
+
+            return Json(new { factList = selectedFactsList }, JsonRequestBehavior.AllowGet);
 
         }
     }

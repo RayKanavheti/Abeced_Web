@@ -35,7 +35,9 @@
     </table>
 
 
-<button id="Proceed" class="btn btn-default">Submit</button>
+<button id="ProceedToFactsToMatch" style="margin-right:15px" class="btn btn-default">Proceed To Facts-To-Match</button>
+<button id="ProceedToFlashCards" style="margin-right:15px"  class="btn btn-default">Proceed To Flash Cards</button>
+<button id="ProceedToQuizes" style="margin-right:15px"  class="btn btn-default">Proceed To Quizes</button>
 
 
 @section scripts{
@@ -46,6 +48,7 @@
 
         $(document).ready(function () {
 
+           // DataTable that keep tracks of cards selected by user
           var table =  $("#FactsTable").DataTable(
                 {
                     "ajax": {
@@ -80,18 +83,18 @@
                     },
                     "order": [[1, "asc"]]
                 });
-            $('#Proceed').click(function () {
+            // End ===============================================//
 
-                var rows_selected = table.column(0).checkboxes.selected();
 
-                var myIds = new Array();// an array that keep track of all selected rows
-
-                // Iterate over all selected checkboxes
-                $.each(rows_selected, function (index, rowId) {
-                    myIds.push(rowId);
-                });
-                var Postdata = JSON.stringify({ FactIds: myIds }); // posting the ids as a json object
+            //Proceed To Facts To Match 
+          $('#ProceedToFactsToMatch').click(function () {
+              var rows_selected = table.column(0).checkboxes.selected();
+              var myIds = new Array();// an array that keep track of all selected rows
+              // Iterate over all selected checkboxes
               
+              $.each(rows_selected, function (index, rowId) {
+                  myIds.push(rowId);
+              });
                 $.ajax({
                     type: 'POST',
                     url: '/FlashCard/GetData', 
@@ -111,9 +114,78 @@
 
 
 
-            });
-            
+          });
+            // End ===============================================//
 
+            //Proceed To Flash Cards
+          $('#ProceedToFlashCards').click(function () {
+
+              var rows_selected = table.column(0).checkboxes.selected();
+
+              var myIds = new Array();// an array that keep track of all selected rows
+
+              // Iterate over all selected checkboxes
+              $.each(rows_selected, function (index, rowId) {
+                  myIds.push(rowId);
+              });
+              //var Postdata = JSON.stringify({ FactIds: myIds }); // posting the ids as a json object
+
+              $.ajax({
+                  type: 'POST',
+                  url: '/FlashCard/GetData',
+                  //posting the selected the ids as a string to the /flashcard/getdata controller
+                  data: { 'myIds': myIds.join() }, //You can post the ids as a string 
+                  success: function (data) {
+                     // alertify.alert("ids added succesfully !!!");
+                      window.location.href = "/FlashCard/FlashCards?SelectedCards=" + data.factIds;
+
+                  },
+                  error: function (response) {
+
+                      alertify.alert("ids failed to add !!!")
+                  }
+
+              });
+
+
+
+          });
+            // End ===============================================//
+
+            //Proceed To Quizes
+          $('#ProceedToQuizes').click(function () {
+
+              var rows_selected = table.column(0).checkboxes.selected();
+
+              var myIds = new Array();// an array that keep track of all selected rows
+
+              // Iterate over all selected checkboxes
+              $.each(rows_selected, function (index, rowId) {
+                  myIds.push(rowId);
+              });
+              //var Postdata = JSON.stringify({ FactIds: myIds }); // posting the ids as a json object
+
+              $.ajax({
+                  type: 'POST',
+                  url: '/FlashCard/GetData',
+                  //posting the selected the ids as a string to the /flashcard/getdata controller
+                  data: { 'myIds': myIds.join() }, //You can post the ids as a string 
+                  success: function (data) {
+                      //alertify.alert("ids added succesfully !!!");
+                      window.location.href = "/FlashCard/Quizes?SelectedCards=" + data.factIds;
+
+                  },
+                  error: function (response) {
+
+                      alertify.alert("ids failed to add !!!")
+                  }
+
+              });
+
+
+
+          });  
+            // End ===============================================//
         });
     </script>
 

@@ -77,6 +77,8 @@ namespace Abeced.UI.Web.Models
         public string points { get; set; }
         public string flashcardRespTime { get; set; }
         public string quizRespTime { get; set; }
+        public string Answered { get; set; }
+        public string Correct { get; set; }
         public IEnumerable<CourseModel> CourseList { get; set; }
 
     }

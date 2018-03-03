@@ -1,0 +1,217 @@
+﻿@model IEnumerable<Abeced.UI.Web.Models.FactModelRetrieve>
+
+@{
+    ViewBag.Title = "Quizes";
+}
+
+<h2>Quizes</h2>
+<!--holder for our AngularJs App-->
+<div ng-app="QuizApp">
+    <div ng-controller="ListController as FactList">
+        <div class="container">
+            <!--Progress Area-->
+            <div class="row">
+                    <div class="col-md-8">
+                        <h2>Progress:</h2>
+                        <div class="btn-toolbar">
+                            <button class="btn" ng-repeat="question in FactList.data.factList"
+                                    ng-class="{'btn-info': question.Answered !== null, 
+                                    'btn-danger': question.Answered === null}">
+                                <span class="glyphicon" ng-class="{'glyphicon-pencil':question.Answered !== null,
+                                      'glyphicon-question-sign': question.Answered === null}"></span>
+                            </button>
+
+                        </div>
+
+
+                    </div>
+                    <div class="col-md-4">
+                        <h3>Legend:</h3>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <button class="btn btn-info"><span class="glyphicon glyphicon-pencil" ></span></button>
+                                <p>Answered</p>
+                            </div>
+                            <div class="col-md-6">
+                                <button class="btn btn-danger"><span class="glyphicon glyphicon-question-sign"></span></button>
+                                <p>Unaswered</p>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+
+            @*///Progress Area ends==============================*@
+            <!--Question and Answers-->
+            <div class="row">
+               
+                    <div class="col-md-12">
+                        <div class="well well-sm">
+                            <div class="question-text">
+                                <h3>{{FactList.ActiveQuestion+1 + ". " + FactList.data.factList[FactList.ActiveQuestion].question}}</h3>
+                                
+                            </div>
+                    
+                            <span class="clearfix"></span>
+                            <div class="row" style="margin-bottom:15px">
+                                <div class="col-md-6 col-md-offset-3">
+                                    <input type="text" class="form-control" style="display:inline" placeholder="Enter Answer here" ng-model="FactList.InputedAnswer" />
+                                    
+                                    <button class="btn btn-warning pull-right" style="display:inline"
+                                            ng-click="FactList.SubmitAnswer()"
+                                            ng-class="{'disabled': FactList.InputedAnswer ==''}">View Answer</button>
+                                </div>
+                                </div>
+                            <button class="btn btn-success" ng-click="FactList.questionAnswered()">Continue</button>
+                        </div>
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+
+<script src="~/Scripts/angular/angular.min.js"></script>
+<script>
+    (function () {
+        var QuizApp = angular.module("QuizApp", []);
+        QuizApp.controller("ListController", ListController);
+
+
+        function ListController(FactListService) {
+            var ViewModel = this;
+            ViewModel.ActiveQuestion = 0;
+            ViewModel.questionAnswered = questionAnswered;
+            ViewModel.setActiveQuestion = setActiveQuestion;
+            ViewModel.SubmitAnswer = SubmitAnswer;
+            ViewModel.InputedAnswer = "";
+
+            var numQuestionsAnswered = 0;
+            FactListService.GetFactList().then(function (response) {
+                ViewModel.data = response.data;
+
+            });
+
+            function setActiveQuestion() {
+                var stopLoop = false;
+                var quizLength = ViewModel.data.factList.length - 1;
+                while (!stopLoop) {
+                    ViewModel.ActiveQuestion = ViewModel.ActiveQuestion < quizLength ? ++ViewModel.ActiveQuestion : 0;
+                    if (ViewModel.data.factList[ViewModel.ActiveQuestion].Answered === null) {
+                        stopLoop = true;
+                    }
+
+                }
+
+            }
+
+            function questionAnswered() {
+                ViewModel.InputedAnswer = "";
+                var quizLength = ViewModel.data.factList.length;
+                if (ViewModel.data.factList[ViewModel.ActiveQuestion].Answered !== null) {
+                    numQuestionsAnswered++;
+                    if (numQuestionsAnswered >= quizLength) {
+                        //finalise App
+                    }
+
+                }
+                ViewModel.setActiveQuestion();
+
+            }
+            function SubmitAnswer() {
+                ViewModel.data.factList[ViewModel.ActiveQuestion].Answered = ViewModel.InputedAnswer;
+                
+                if (ViewModel.data.factList[ViewModel.ActiveQuestion].Answered !== ViewModel.data.factList[ViewModel.ActiveQuestion].answer) {
+                    ViewModel.InputedAnswer = ViewModel.data.factList[ViewModel.ActiveQuestion].Answered;
+                    alertify.alert("Sorry You got it wrong");
+
+                } else {
+                    ViewModel.InputedAnswer = ViewModel.data.factList[ViewModel.ActiveQuestion].Answered;
+                    levenshtein(ViewModel.data.factList[ViewModel.ActiveQuestion].Answered, ViewModel.data.factList[ViewModel.ActiveQuestion].answer);
+                    //levenstein distance
+
+                    alertify.alert("Great !!! You got it correct");
+                }
+
+
+            }
+
+            function levenshtein(str1, str2) {
+                var cost = new Array(),
+                    n = str1.length,
+                    m = str2.length,
+                    i, j;
+
+                var minimum = function (a, b, c) {
+                    var min = a;
+                    if (b < min) {
+                        min = b;
+                    }
+                    if (c < min) {
+                        min = c;
+                    }
+                    return min;
+                }
+
+                if (n == 0) {
+                    return;
+                }
+                if (m == 0) {
+                    return;
+                }
+
+                for (var i = 0; i <= n; i++) {
+                    cost[i] = new Array();
+                }
+
+                for (i = 0; i <= n; i++) {
+                    cost[i][0] = i;
+                }
+
+                for (j = 0; j <= m; j++) {
+                    cost[0][j] = j;
+                }
+
+                for (i = 1; i <= n; i++) {
+                    var x = str1.charAt(i - 1);
+
+                    for (j = 1; j <= m; j++) {
+                        var y = str2.charAt(j - 1);
+
+                        if (x == y) {
+                            cost[i][j] = cost[i - 1][j - 1];
+                        } else {
+                            cost[i][j] = 1 + minimum(cost[i - 1][j - 1], cost[i][j - 1], cost[i - 1][j]);
+                        }
+
+                    } //endfor
+
+                } //endfor
+
+                return cost[n][m];
+            }
+
+
+        }
+
+        QuizApp.factory("FactListService", ['$http', function ($http) {
+            var result = {};
+            result.GetFactList = function () {
+               return  $http.get("/FlashCard/QuizesJSONData");
+                
+            }
+
+            return result;
+
+        }
+        ]);
+
+    })();
+
+
+
+</script>

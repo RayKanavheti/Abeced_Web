@@ -295,6 +295,7 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\levenshtein.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
@@ -344,6 +345,7 @@
     <Content Include="Views\App\GetAllCourses.cshtml" />
     <Content Include="Views\FlashCard\SelectCardIndex.cshtml" />
     <Content Include="Views\FlashCard\FactsToMatch.cshtml" />
+    <Content Include="Views\FlashCard\Quizes.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

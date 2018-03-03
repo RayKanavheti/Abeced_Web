@@ -146,8 +146,7 @@ namespace Abeced.UI.Web.Controllers
         public ActionResult GetAllCourses()
         {
             IEnumerable<CourseModel> courseModel = null;
-            try
-            {
+            
                 
                 
                 var response = DataAccess.WebClient.GetAsync("Courses");
@@ -167,12 +166,7 @@ namespace Abeced.UI.Web.Controllers
                     ModelState.AddModelError(string.Empty, "Server Error");
                 }
                 return View(courseModel);
-            }
-            catch (Exception ex)
-            {
-                Console.Write(ex.Message);
-                throw;
-            }
+           
       
 
         }
