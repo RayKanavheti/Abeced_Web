@@ -69,7 +69,7 @@ namespace Abeced.UI.Web.Controllers
         public JsonResult GetData(string myIds)
         {
            //do whatever you want with the an array of selected cards
-            var FactIds = myIds.Split(',').Select(x => Int32.Parse(x)).ToArray();
+           // var FactsIds = myIds.Split(',').Select(x => Int32.Parse(x)).ToArray();
             //return result;
             return Json(new { factIds = myIds }, JsonRequestBehavior.AllowGet);
 
@@ -109,7 +109,7 @@ namespace Abeced.UI.Web.Controllers
 
         public ActionResult Quizes(string SelectedCards)
         {
-            TempData["SelectedIds"] = SelectedCards;
+            TempData["SelectedFactsToMatchIds"] = SelectedCards;
             TempData.Keep();
 
             return View();
@@ -119,7 +119,7 @@ namespace Abeced.UI.Web.Controllers
         public ActionResult QuizesJSONData()
         {
 
-            string factIds = TempData["SelectedIds"] as string;
+            string factIds = TempData["SelectedFactsToMatchIds"] as string;
 
             IEnumerable<FactModelRetrieve> selectedFactsList = null;
             var response = DataAccess.WebClient.GetAsync("flashcards/selectedCards/" + factIds);
@@ -145,5 +145,23 @@ namespace Abeced.UI.Web.Controllers
             return Json(new { factList = selectedFactsList }, JsonRequestBehavior.AllowGet);
 
         }
+
+
+
+        public ActionResult flashcards(string SelectedCards)
+        {
+
+            TempData["SelectedFlashCardIds"] = SelectedCards;
+            TempData.Keep();
+
+            return View();
+            //Since you have a string of selected cards under your disposal choose either if you want to return a view with a list of 
+            // selected cards or Json formatted data like what i did for the quizes.. how to return a json data look at Facts To match
+            // It all depends on the dynamics of the feature you want to develop
+
+        }
+
+
+        
     }
 }
