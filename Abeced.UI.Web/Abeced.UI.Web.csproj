@@ -210,6 +210,8 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Files\audios\silence.mp3" />
+    <Content Include="App_Files\audios\tck1.mp3" />
     <Content Include="App_Files\Images\default.png" />
     <Content Include="Content\alertifyjs\alertify.css" />
     <Content Include="Content\alertifyjs\alertify.min.css" />
@@ -227,9 +229,26 @@
     <Content Include="Content\alertifyjs\themes\semantic.min.css" />
     <Content Include="Content\alertifyjs\themes\semantic.rtl.css" />
     <Content Include="Content\alertifyjs\themes\semantic.rtl.min.css" />
+    <Content Include="Content\assets\clickFlip.png" />
+    <Content Include="Content\assets\side_bg.jpg" />
+    <Content Include="Content\assets\speak.png" />
+    <Content Include="Content\assets\star-icon.png" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\jquery.dataTables.min.css" />
+    <Content Include="Content\checkboxes-bootstrap.css" />
+    <Content Include="Content\icons\add_user.png" />
+    <Content Include="Content\icons\closebtn.png" />
+    <Content Include="Content\icons\delete.png" />
+    <Content Include="Content\icons\edit.png" />
+    <Content Include="Content\icons\graph.png" />
+    <Content Include="Content\icons\graph2.png" />
+    <Content Include="Content\icons\pause.png" />
+    <Content Include="Content\icons\play.png" />
+    <Content Include="Content\icons\soundsmall.png" />
+    <Content Include="Content\icons\sound_large.png" />
+    <Content Include="Content\icons\start1.png" />
+    <Content Include="Content\JqueryDataTable\dataTables.checkboxes.css" />
+    <Content Include="Content\JqueryDataTable\jquery.dataTables.min.css" />
     <Content Include="Content\Theme\images\ui-bg_glass_100_f5f0e5_1x400.png" />
     <Content Include="Content\Theme\images\ui-bg_glass_25_cb842e_1x400.png" />
     <Content Include="Content\Theme\images\ui-bg_glass_70_ede4d4_1x400.png" />
@@ -244,13 +263,15 @@
     <Content Include="Content\Theme\images\ui-icons_ff7519_256x240.png" />
     <Content Include="Content\Theme\images\ui-icons_ffffff_256x240.png" />
     <Content Include="Content\Theme\jquery-ui.min.css" />
-    <Content Include="Content\ui.jqgrid.css" />
     <Content Include="favicon.ico" />
+    <Content Include="fonts\font-awesome.min.css" />
+    <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\alertify.js" />
     <Content Include="Scripts\alertify.min.js" />
+    <Content Include="Scripts\angular\angular-sanitize.min.js" />
     <Content Include="Scripts\angular\angular.min.js" />
     <Content Include="Scripts\angular\upload-angular.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -258,21 +279,31 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="fonts\fontawesome-webfont.eot" />
+    <Content Include="fonts\fontawesome-webfont.ttf" />
+    <Content Include="fonts\fontawesome-webfont.woff" />
+    <Content Include="fonts\fontawesome-webfont.woff2" />
+    <Content Include="fonts\FontAwesome.otf" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jqGrid\grid.locale-en.js" />
     <Content Include="Scripts\jqGrid\jquery.jqGrid.min.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
-    <Content Include="Scripts\jquery.dataTables.min.js" />
+    <Content Include="Scripts\JqueryDataTable\dataTables.checkboxes.min.js" />
+    <Content Include="Scripts\JqueryDataTable\jquery.dataTables.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\angular\levenshtein.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\SiteJs\bootstrap-switch.min.js" />
+    <Content Include="Scripts\SiteJs\factcard.js" />
     <Content Include="Scripts\SiteJs\ImagePreview.js" />
+    <Content Include="Scripts\angular\quizes.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -315,6 +346,8 @@
     <Content Include="Views\App\AddorEditSubCategory.cshtml" />
     <Content Include="Views\App\GetAllCourses.cshtml" />
     <Content Include="Views\FlashCard\SelectCardIndex.cshtml" />
+    <Content Include="Views\FlashCard\FactsToMatch.cshtml" />
+    <Content Include="Views\FlashCard\Quizes.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

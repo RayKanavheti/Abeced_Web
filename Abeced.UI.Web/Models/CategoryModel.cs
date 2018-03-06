@@ -12,7 +12,7 @@ namespace Abeced.UI.Web.Models
         public string name { get; set; }
         public string description { get; set; }
         public HttpPostedFileBase img { get; set; }
-    
+
     }
     public class MainCategoryList
     {
@@ -22,7 +22,7 @@ namespace Abeced.UI.Web.Models
         public string description { get; set; }
     }
 
-  
+
 
     public class SubCategory
     {
@@ -33,8 +33,8 @@ namespace Abeced.UI.Web.Models
         public string img { get; set; }
         public int mainCatID { get; set; }
         public IEnumerable<MainCategoryList> MainCat { get; set; }
-        
-        
+
+
     }
 
     public class CourseModel
@@ -58,7 +58,34 @@ namespace Abeced.UI.Web.Models
 
 
         public IEnumerable<SubCategory> subCategoryList { get; set; }
-      
 
     }
+
+    public class FactModelRetrieve{
+
+        public int FactId { get; set; }
+        public int courseID { get; set; }
+        public string question { get; set; }
+        public string qImage { get; set; }
+        public string qAudio { get; set; }
+        public string answer { get; set; }
+        public string aImage { get; set; }
+        public string aAudio { get; set; }
+        public string factsheet { get; set; }
+        public string fsAudio { get; set; }
+        public int? userID { get; set; }
+        public string points { get; set; }
+        public string flashcardRespTime { get; set; }
+        public string quizRespTime { get; set; }
+        public string Answered { get; set; }
+        public string Correct { get; set; }
+        public IEnumerable<CourseModel> CourseList { get; set; }
+
+    }
+        
+        
+        
+        
+        
+
 }

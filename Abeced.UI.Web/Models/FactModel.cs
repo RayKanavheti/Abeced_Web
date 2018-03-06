@@ -19,11 +19,11 @@ namespace Abeced.UI.Web.Models
 
         [Display(Name = "Question Image")]
         //public MultipartFormDataContent qImage { get; set; }
-        public string qImage { get; set; }
+        public HttpPostedFileBase qImage { get; set; }
 
         [Display(Name = "Question Audio")]
         //public string qAudio { get; set; }
-        public string qAudio { get; set; }
+        public HttpPostedFileBase qAudio { get; set; }
 
         [Required]
         [Display(Name = "Fact Answer")]
@@ -32,11 +32,11 @@ namespace Abeced.UI.Web.Models
 
         [Display(Name = "Answer Image")]
         //public MultipartFormDataContent aImage { get; set; }
-       public string aImage { get; set; }
+       public HttpPostedFileBase aImage { get; set; }
 
         [Display(Name = "Answer Audio")]
        // public string aAudio { get; set; }
-        public string aAudio { get; set; }
+        public HttpPostedFileBase aAudio { get; set; }
 
         [Required]
         [Display(Name = "FactSheet")]
@@ -44,7 +44,7 @@ namespace Abeced.UI.Web.Models
 
         [Display(Name = "FactSheet Audio")]
         //public string fsAudio { get; set; }
-        public string fsAudio { get; set; }
+        public HttpPostedFileBase fsAudio { get; set; }
 
         public int? userID { get; set; }
         public string points { get; set; }

@@ -59,7 +59,7 @@
                 <div class="form-group">
                     @Html.LabelFor(model => model.qAudio, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
-                        <input type="file" name="qAudio" accept="audio/mp3, audio/wav" />
+                        <input type="file" name="qAudio" accept="audio/*" />
                         <audio></audio>
                     </div>
                 </div>
@@ -95,7 +95,7 @@
                 <div class="form-group">
                     @Html.LabelFor(model => model.aAudio, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
-                        <input type="file" name="aAudio" accept="audio/mp3, audio/wav" />
+                        <input type="file" name="aAudio" accept="audio/*" />
                         <audio></audio>
                     </div>
                 </div>
@@ -118,7 +118,7 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.fsAudio, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    <input type="file" name="fsAudio" accept="audio/mp3, audio/wav" />
+                    <input type="file" name="fsAudio" accept="audio/*" />
                     <audio></audio>
                 </div>
             </div>
