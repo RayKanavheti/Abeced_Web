@@ -1,5 +1,5 @@
 ﻿(function () {
-    var QuizApp = angular.module("QuizApp",[], ['ngSanitize']);
+    var QuizApp = angular.module("QuizApp",['ngSanitize']);
     QuizApp.controller("ListController", ListController);
 
 
@@ -17,6 +17,7 @@
         ViewModel.highlightedAnswer = "";
         ViewModel.UnCompletedError = false;
         ViewModel.finalise = false;
+        ViewModel.progress = "";
 
 
         var numQuestionsAnswered = 0;
@@ -110,8 +111,10 @@
 
                 var distance = levenshtein(ViewModel.data.factList[ViewModel.ActiveQuestion].Answered, ViewModel.data.factList[ViewModel.ActiveQuestion].answer);
                 var failurePercentage = Math.round((distance / correctAnswerLength) * 100);
-                ViewModel.SuccessPercentage = (100 - failurePercentage) + "%";
-
+                ViewModel.SuccessPercentage = (100 - failurePercentage);
+                ViewModel.progress = {
+                    "width": ViewModel.SuccessPercentage +"%",
+                }
 
                
 
@@ -121,7 +124,7 @@
                 for (var i = 0; i < highlightedText.length; i++) {
                     for (var j = 0; j < correctString.length; j++) {
                         if (highlightedText[i] == correctString[j]) {
-                            highlightedText[i] = highlightedText[i].replace(highlightedText[i], '<span style="color:green">' + highlightedText[i] +'</span>');
+                            highlightedText[i] = highlightedText[i].replace(highlightedText[i], '<span class="correct">' + highlightedText[i] +'</span>');
                         }
                     }
 
