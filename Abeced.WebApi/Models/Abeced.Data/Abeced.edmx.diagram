@@ -31,6 +31,8 @@
         <AssociationConnector Association="AbecedModel.FK_Table_To_User" ManuallyRouted="false" />
         <AssociationConnector Association="AbecedModel.FK_StudySession_To_User" ManuallyRouted="false" />
         <AssociationConnector Association="AbecedModel.FK_Fact_To_User" />
+        <EntityTypeShape EntityType="AbecedModel.QuizSession" Width="1.5" PointX="3.25" PointY="0.75" />
+        <AssociationConnector Association="AbecedModel.FK_QuizSession_User" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

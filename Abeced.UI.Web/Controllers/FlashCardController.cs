@@ -16,8 +16,9 @@ namespace Abeced.UI.Web.Controllers
         //int CourseId;
         public ActionResult SelectCardIndex(string CourseID, string CourseName)
         {
-            
-            ViewBag.CourseTitle = CourseName;
+
+            ViewBag.CourseName = CourseName;
+            //ViewData["CouseName"] = CourseName;
             TempData["CourseId"] = Int32.Parse(CourseID);
             TempData.Keep();
             //SelectCards(newCourseId);
@@ -107,10 +108,11 @@ namespace Abeced.UI.Web.Controllers
         }
 
 
-        public ActionResult Quizes(string SelectedCards)
+        public ActionResult Quizes(string SelectedCards, string CourseName)
         {
             TempData["SelectedFactsToMatchIds"] = SelectedCards;
             TempData.Keep();
+            ViewData["CourseTitle"] = CourseName;
 
             return View();
         }

@@ -88,6 +88,20 @@
           <Property Name="description" Type="varchar" MaxLength="300" Nullable="false" />
           <Property Name="img" Type="varchar" MaxLength="300" />
         </EntityType>
+        <EntityType Name="QuizSession">
+          <Key>
+            <PropertyRef Name="QuizSessionId" />
+          </Key>
+          <Property Name="QuizSessionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="CourseName" Type="varchar" MaxLength="100" />
+          <Property Name="FactIds" Type="varchar" MaxLength="50" />
+          <Property Name="AveragaScore" Type="float" />
+          <Property Name="PointsEarned" Type="float" />
+          <Property Name="DateSubmitted" Type="timestamp" StoreGeneratedPattern="Computed" />
+          <Property Name="Numfacts" Type="int" />
+          <Property Name="NumRevised" Type="int" />
+        </EntityType>
         <EntityType Name="Rating">
           <Key>
             <PropertyRef Name="RatingId" />
@@ -268,6 +282,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_QuizSession_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="QuizSession" Type="Self.QuizSession" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="QuizSession">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Rating_To_Course">
           <End Role="Course" Type="Self.Course" Multiplicity="1" />
           <End Role="Rating" Type="Self.Rating" Multiplicity="*" />
@@ -359,6 +385,7 @@
           <EntitySet Name="FactList" EntityType="Self.FactList" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LeaderBoard" EntityType="Self.LeaderBoard" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MainCategory" EntityType="Self.MainCategory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="QuizSession" EntityType="Self.QuizSession" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Rating" EntityType="Self.Rating" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Revision" EntityType="Self.Revision" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Reward" EntityType="Self.Reward" Schema="dbo" store:Type="Tables" />
@@ -392,6 +419,10 @@
           <AssociationSet Name="FK_LeaderBoard_To_User" Association="Self.FK_LeaderBoard_To_User">
             <End Role="User" EntitySet="User" />
             <End Role="LeaderBoard" EntitySet="LeaderBoard" />
+          </AssociationSet>
+          <AssociationSet Name="FK_QuizSession_User" Association="Self.FK_QuizSession_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="QuizSession" EntitySet="QuizSession" />
           </AssociationSet>
           <AssociationSet Name="FK_Rating_To_Course" Association="Self.FK_Rating_To_Course">
             <End Role="Course" EntitySet="Course" />
@@ -632,6 +663,7 @@
           <NavigationProperty Name="Rewards" Relationship="Self.FK_Table_To_User" FromRole="User" ToRole="Reward" />
           <NavigationProperty Name="StudySessions" Relationship="Self.FK_StudySession_To_User" FromRole="User" ToRole="StudySession" />
           <NavigationProperty Name="Facts" Relationship="AbecedModel.FK_Fact_To_User" FromRole="User" ToRole="Fact" />
+          <NavigationProperty Name="QuizSessions" Relationship="AbecedModel.FK_QuizSession_User" FromRole="User" ToRole="QuizSession" />
         </EntityType>
         <Association Name="FK_Course_To_SubCat">
           <End Role="SubCategory" Type="Self.SubCategory" Multiplicity="1" />
@@ -858,6 +890,11 @@
             <End Role="User" EntitySet="Users" />
             <End Role="Fact" EntitySet="Facts" />
           </AssociationSet>
+          <EntitySet Name="QuizSessions" EntityType="AbecedModel.QuizSession" />
+          <AssociationSet Name="FK_QuizSession_User" Association="AbecedModel.FK_QuizSession_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="QuizSession" EntitySet="QuizSessions" />
+          </AssociationSet>
         </EntityContainer>
         <Association Name="FK_Fact_To_User">
           <End Type="AbecedModel.User" Role="User" Multiplicity="0..1" />
@@ -868,6 +905,33 @@
             </Principal>
             <Dependent Role="Fact">
               <PropertyRef Name="userID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="QuizSession">
+          <Key>
+            <PropertyRef Name="QuizSessionId" />
+          </Key>
+          <Property Name="QuizSessionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="CourseName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="FactIds" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AveragaScore" Type="Double" />
+          <Property Name="PointsEarned" Type="Double" />
+          <Property Name="DateSubmitted" Type="Binary" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="Numfacts" Type="Int32" />
+          <Property Name="NumRevised" Type="Int32" />
+          <NavigationProperty Name="User" Relationship="AbecedModel.FK_QuizSession_User" FromRole="QuizSession" ToRole="User" />
+        </EntityType>
+        <Association Name="FK_QuizSession_User">
+          <End Type="AbecedModel.User" Role="User" Multiplicity="1" />
+          <End Type="AbecedModel.QuizSession" Role="QuizSession" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="QuizSession">
+              <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1065,6 +1129,21 @@
                 <ScalarProperty Name="country" ColumnName="country" />
                 <ScalarProperty Name="phoneNumber" ColumnName="phoneNumber" />
                 <ScalarProperty Name="isCreator" ColumnName="isCreator" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="QuizSessions">
+            <EntityTypeMapping TypeName="AbecedModel.QuizSession">
+              <MappingFragment StoreEntitySet="QuizSession">
+                <ScalarProperty Name="NumRevised" ColumnName="NumRevised" />
+                <ScalarProperty Name="Numfacts" ColumnName="Numfacts" />
+                <ScalarProperty Name="DateSubmitted" ColumnName="DateSubmitted" />
+                <ScalarProperty Name="PointsEarned" ColumnName="PointsEarned" />
+                <ScalarProperty Name="AveragaScore" ColumnName="AveragaScore" />
+                <ScalarProperty Name="FactIds" ColumnName="FactIds" />
+                <ScalarProperty Name="CourseName" ColumnName="CourseName" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="QuizSessionId" ColumnName="QuizSessionId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
