@@ -7,10 +7,10 @@
 <h2>AddorEditCard</h2>
 
 
-@using (Html.BeginForm("AddorEditCard", "App", FormMethod.Post, new { enctype= "multipart/form-data", onSubmit="return jQueryAjaxPost(this);"}))
+@using (Html.BeginForm("AddorEditCard", "App", FormMethod.Post, new { enctype = "multipart/form-data", onSubmit = "return jQueryAjaxPost(this);" }))
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>FactModel</h4>
         <hr />

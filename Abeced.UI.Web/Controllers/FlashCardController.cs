@@ -22,6 +22,8 @@ namespace Abeced.UI.Web.Controllers
             TempData["CourseId"] = Int32.Parse(CourseID);
             TempData.Keep();
             //SelectCards(newCourseId);
+
+          
             return View();
         }
 
@@ -69,8 +71,14 @@ namespace Abeced.UI.Web.Controllers
         //returning a string of Ids in Json format
         public JsonResult GetData(string myIds)
         {
+
+            Session["SelectedCardsString"] = myIds;
+            
            //do whatever you want with the an array of selected cards
-           // var FactsIds = myIds.Split(',').Select(x => Int32.Parse(x)).ToArray();
+          // var FactsIds = myIds.Split(',').Select(x => Int32.Parse(x)).ToArray();
+
+            Session["SelectedCardsString"] = myIds;
+            //Session["SelectedCardsArray"] = FactsIds;
             //return result;
             return Json(new { factIds = myIds }, JsonRequestBehavior.AllowGet);
 
@@ -117,7 +125,14 @@ namespace Abeced.UI.Web.Controllers
             return View();
         }
 
+        public ActionResult Testing(string SelectedCards, string CourseName)
+        {
+            TempData["SelectedFactsToMatchIds"] = SelectedCards;
+            TempData.Keep();
+            ViewData["CourseTitle"] = CourseName;
 
+            return View();
+        }
         public ActionResult QuizesJSONData()
         {
 
@@ -162,8 +177,68 @@ namespace Abeced.UI.Web.Controllers
             // It all depends on the dynamics of the feature you want to develop
 
         }
+        [ChildActionOnly]
+        public ActionResult ShareCards()
+        {
+
+            Sharing shares = new Sharing();
+            IEnumerable<RegisterViewModel> AllUsersList = null;
+
+            var response = DataAccess.WebClient.GetAsync("User");
+            response.Wait();
+            var result = response.Result;
 
 
-        
+            if (result.IsSuccessStatusCode)
+            {
+                var readTask = result.Content.ReadAsAsync<List<RegisterViewModel>>();
+                readTask.Wait();
+                AllUsersList = readTask.Result;
+                shares.User = AllUsersList.ToList();
+            }
+            else
+            {
+
+                AllUsersList = Enumerable.Empty<RegisterViewModel>();
+                ModelState.AddModelError(string.Empty, "Server Error");
+            }
+
+            return PartialView(shares);
+            
+
+        }
+        [HttpPost]
+        public ActionResult ShareCards(Sharing sharing)
+        {
+
+            
+            if (Session["SelectedCardsString"] != null)
+            {
+                sharing.SenderId = 2;
+                sharing.SharedWithIds = string.Join(",", sharing.SelectedIds);
+                sharing.FactList = Session["SelectedCardsString"].ToString();
+                HttpResponseMessage response = DataAccess.WebClient.PostAsJsonAsync("Sharings", sharing).Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    Console.Write("Shared");
+
+                }
+                else
+                {
+                    Console.Write("Not shared");
+
+                }
+            }
+            else
+            {
+
+                 ViewBag.Success = "Select Cards First";
+
+            }
+
+            return Json(new { returnmsg = "Success" }, JsonRequestBehavior.AllowGet);
+        }
+
+     
     }
 }

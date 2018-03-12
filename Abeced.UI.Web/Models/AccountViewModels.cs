@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Abeced.UI.Web.Models
 {
@@ -100,7 +101,7 @@ namespace Abeced.UI.Web.Models
         public string gender { get; set; }
 
         [Display(Name = "Age")]
-        public int age { get; set; }
+        public int? age { get; set; }
 
         [Display(Name = "Date Of Birth")]
         public string dob { get; set; }
@@ -132,6 +133,33 @@ namespace Abeced.UI.Web.Models
         [Display(Name = "Phone Number")]
         public string phoneNumber { get; set; }
 
+
+    }
+
+
+    public class Sharing{
+        public int ShareId { get; set; }
+        public int SenderId { get; set; }
+        public string SenderName { get; set; }
+        public string SenderEmail { get; set; }
+        public string CourseName { get; set; }
+        public Nullable<int> CourseId { get; set; }
+        public string FactList { get; set; }
+        public byte[] DateShared { get; set; }
+        public string SharedWithIds { get; set; }
+        public string SharedWithUserNames { get; set; }
+        public string SharedWithEmails { get; set; }
+
+        [NotMapped]
+        public List<RegisterViewModel> User { get; set; }
+
+        [NotMapped]
+        public string[] SelectedIds { get; set; }
+
+        public Sharing()
+        {
+            User = new List<RegisterViewModel>();
+        }
 
     }
 

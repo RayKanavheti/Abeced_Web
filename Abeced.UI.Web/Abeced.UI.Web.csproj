@@ -237,6 +237,9 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\checkboxes-bootstrap.css" />
+    <Content Include="Content\chosen-sprite%402x.png" />
+    <Content Include="Content\chosen-sprite.png" />
+    <Content Include="Content\chosen.min.css" />
     <Content Include="Content\icons\add_user.png" />
     <Content Include="Content\icons\closebtn.png" />
     <Content Include="Content\icons\delete.png" />
@@ -278,7 +281,9 @@
     <Content Include="Scripts\alertify.js" />
     <Content Include="Scripts\alertify.min.js" />
     <Content Include="Scripts\angular\angular-sanitize.min.js" />
+    <Content Include="Scripts\angular\angular.js" />
     <Content Include="Scripts\angular\angular.min.js" />
+    <Content Include="Scripts\angular\Testing.js" />
     <Content Include="Scripts\angular\upload-angular.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -311,6 +316,7 @@
     <Content Include="fonts\roboto\Roboto-Thin.woff" />
     <Content Include="fonts\roboto\Roboto-Thin.woff2" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\chosen.jquery.min.js" />
     <Content Include="Scripts\jqGrid\grid.locale-en.js" />
     <Content Include="Scripts\jqGrid\jquery.jqGrid.min.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -380,6 +386,9 @@
     <Content Include="Views\FlashCard\SelectCardIndex.cshtml" />
     <Content Include="Views\FlashCard\FactsToMatch.cshtml" />
     <Content Include="Views\FlashCard\Quizes.cshtml" />
+    <Content Include="Views\Shared\_Users.cshtml" />
+    <Content Include="Views\FlashCard\ShareCards.cshtml" />
+    <Content Include="Views\FlashCard\Testing.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

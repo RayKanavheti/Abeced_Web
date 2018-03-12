@@ -234,6 +234,7 @@
     <Compile Include="Controllers\FlashCardsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MainCategoriesController.cs" />
+    <Compile Include="Controllers\SharingsController.cs" />
     <Compile Include="Controllers\SubCategoriesController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
@@ -282,6 +283,9 @@
       <DependentUpon>Abeced.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Abeced.Data\Reward.cs">
+      <DependentUpon>Abeced.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Abeced.Data\Sharing.cs">
       <DependentUpon>Abeced.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Abeced.Data\StudySession.cs">

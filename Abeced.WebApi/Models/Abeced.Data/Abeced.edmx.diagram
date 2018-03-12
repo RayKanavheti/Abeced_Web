@@ -33,6 +33,8 @@
         <AssociationConnector Association="AbecedModel.FK_Fact_To_User" />
         <EntityTypeShape EntityType="AbecedModel.QuizSession" Width="1.5" PointX="3.25" PointY="0.75" />
         <AssociationConnector Association="AbecedModel.FK_QuizSession_User" />
+        <EntityTypeShape EntityType="AbecedModel.Sharing" Width="1.5" PointX="3.25" PointY="30.25" />
+        <AssociationConnector Association="AbecedModel.FK_Sharing_User" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -1,0 +1,351 @@
+﻿@model IEnumerable<Abeced.UI.Web.Models.FactModelRetrieve>
+
+@{
+    ViewBag.Title = "Test";
+}
+
+
+<style>
+    .uppercase {
+        text-transform: uppercase;
+        font-size: 11px;
+    }
+
+    .frozen-dreams-gradient {
+        background-image: linear-gradient(to top, #fdcbf1 0%, #fdcbf1 1%, #e6dee9 100%);
+    }
+
+    .dusty-grass-gradient {
+        background-image: linear-gradient(120deg, #d4fc79 0%, #96e6a1 100%);
+    }
+
+    .container__item {
+        margin-left: 30px;
+    }
+
+    .correctInt {
+        color: green;
+    }
+
+    .color-block {
+        border-radius: 50%;
+        height: 35px;
+        width: 35px;
+        padding: 10px
+    }
+
+    .btn-progress {
+        margin-bottom: 5px;
+    }
+
+        .btn-progress span {
+            font-size: 15px;
+        }
+
+    .btn--primary {
+        background: #1C2331;
+        color: #fff;
+        box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.1);
+        border-radius: 2px;
+        padding: 12px 20px;
+    }
+
+    .btn-continue {
+        background: #ffa726;
+        color: #fff;
+        box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.1);
+        border-radius: 2px;
+        padding: 12px 20px;
+        margin-left: 13px;
+    }
+
+    .btn--primary:hover {
+        background: #3E4551;
+        color: #fff
+    }
+
+    .btn--primary:active {
+        background: #1C2331;
+        box-shadow: inset 0 0 10px 2px rgba(0, 0, 0, 0.2);
+        color: #fff;
+    }
+
+
+    .form__field {
+        width: 80%;
+        background: #fff;
+        color: #a3a3a3;
+        font: inherit;
+        box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.1);
+        border: 0;
+        outline: 0;
+        padding: 5px 18px;
+        max-width: 1000px;
+    }
+
+    .jumbotron {
+        padding: 15px;
+        line-height: 1.4;
+    }
+
+    .correct-answer {
+        padding: 5px 20px;
+        /*border-radius: 10px;*/
+        /*border: 1px solid #bbb;*/
+        background-color: #eceff1;
+        /*box-shadow: 0 6px 30px 0 rgba(0,0,0,0.06);*/
+        color: red;
+        border: 0;
+        outline: 0;
+        box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.1);
+    }
+
+        .correct-answer hr, .review hr {
+            margin: 0;
+        }
+
+        .correct-answer h3 {
+            color: #10426E;
+            font-size: 25px;
+            font-weight: 400;
+            letter-spacing: 2px;
+            text-align: left;
+        }
+
+    .correct {
+        background-color: #76ff03;
+        color: #3E4551;
+        font-weight:500;
+        font-size:16px;
+    }
+    .answer-display{
+        color:darkred;
+    }
+
+    progress[value] {
+        width: 100%;
+        height: 10px;
+        background-color: #00b8d4;
+        border-radius: 3px;
+        box-shadow: 0 2px 3px rgba(0,0,0,.5) inset;
+        color: #3E4551;
+        position: relative;
+        margin: 0 0 3px;
+    }
+
+        progress[value]::-webkit-progress-bar {
+            background-color: #00b8d4;
+            border-radius: 3px;
+            box-shadow: 0 2px 3px rgba(0,0,0,.5) inset;
+        }
+
+        progress[value]::-webkit-progress-value {
+            position: relative;
+            background-size: 35px 20px, 100% 100%, 100% 100%;
+            border-radius: 3px;
+            animation: animate-stripes 5s linear infinite;
+        }
+
+            progress[value]::-webkit-progress-value:after {
+                content: '';
+                position: absolute;
+                width: 5px;
+                height: 5px;
+                top: 7px;
+                right: 7px;
+                background-color: white;
+                border-radius: 100%;
+            }
+
+        progress[value]::-moz-progress-bar {
+            background-image: -moz-linear-gradient( 135deg, transparent, transparent 33%, rgba(0,0,0,.1) 33%, rgba(0,0,0,.1) 66%, transparent 66%), -moz-linear-gradient( top, rgba(255, 255, 255, .25), rgba(0,0,0,.2)), -moz-linear-gradient( left, #09c, #f44);
+            background-size: 35px 20px, 100% 100%, 100% 100%;
+            border-radius: 3px;
+        }
+
+
+    .progress-bar {
+        background-color: #00b8d4;
+        border-radius: 3px;
+        box-shadow: 0 2px 3px rgba(0,0,0,.5) inset;
+        width: 100%;
+        height: 10px;
+    }
+
+        .progress-bar span {
+            background-color: royalblue;
+            border-radius: 3px;
+            display: block;
+            text-indent: -9999px;
+        }
+
+    p[data-value] {
+        position: relative;
+    }
+
+        p[data-value]:after {
+            content: attr(data-value) '%';
+            position: absolute;
+            right: 0;
+        }
+
+    .css3::-webkit-progress-value {
+        background-image: -webkit-linear-gradient( 135deg, transparent, transparent 33%, rgba(0,0,0,.1) 33%, rgba(0,0,0,.1) 66%, transparent 66%), -webkit-linear-gradient( top, rgba(255, 255, 255, .25), rgba(0,0,0,.2)), -webkit-linear-gradient( left, #09c, #ff0);
+    }
+
+
+
+    .css3::-moz-progress-bar {
+        background-image: -moz-linear-gradient( 135deg, transparent, transparent 33%, rgba(0,0,0,.1) 33%, rgba(0,0,0,.1) 66%, transparent 66%), -moz-linear-gradient( top, rgba(255, 255, 255, .25), rgba(0,0,0,.2)), -moz-linear-gradient( left, #09c, #ff0);
+    }
+</style>
+
+
+<h2>Welcome To the testing!! Wish You the best</h2>
+
+<div ng-app="QuizApp">
+    <div ng-controller="testsController as FactList">
+        
+        <div class="container" ng-hide="FactList.Review ==true">
+            <div class="row">
+                <div class="col-md-8">
+                    <h2>Progress:</h2>
+                    <div class="btn-toolbar">
+                        <button class="btn" ng-repeat="question in FactList.data.factList"
+                                ng-class="{'btn-info': question.Answered !== null,
+                                    'btn-danger': question.Answered === null}"
+                                ng-click="FactList.setActiveQuestion($index)">
+                            <span class="glyphicon" ng-class="{'glyphicon-pencil':question.Answered !== null,
+                                      'glyphicon-question-sign': question.Answered === null}"></span>
+                        </button>
+
+                    </div>
+
+                    <progress max="{{FactList.NumFacts}}" ng-value="FactList.ProgressIncrement" class="css3">
+                        <div class="progress-bar" style="margin-top:4px">
+                            <span ng-style="FactList.progress">{{FactList.NumFacts}}</span>
+                        </div>
+                    </progress>
+
+                </div>
+
+                <div class="col-md-4">
+                    <h3>Legend:</h3>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <button class="btn btn-info"><span class="glyphicon glyphicon-pencil"></span></button>
+                            <p>Answered</p>
+                        </div>
+                        <div class="col-md-6">
+                            <button class="btn btn-danger"><span class="glyphicon glyphicon-question-sign"></span></button>
+                            <p>Unaswered</p>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div class="alert alert-danger"
+                     ng-show="FactList.UnCompletedError">
+                    You haven't finished answering all the questions, Finish all questions first
+                    <button class="close" ng-click="FactList.UnCompletedError = false">&times;</button>
+
+                </div>
+                <div class="col-md-10">
+                    <div class="jumbotron frozen-dreams-gradient" ng-hide="FactList.finalise">
+                        <div class="question-text">
+                            <h3>{{FactList.ActiveQuestion+1 + ". " + FactList.data.factList[FactList.ActiveQuestion].question}}</h3>
+
+                        </div>
+                        <span class="clearfix"></span>
+                        <div class="row" style="margin-bottom:15px">
+                            <div class="container__item">
+                                <form>
+                                    <input type="text" id="adjinput" class="form__field" placeholder="Enter Answer here" ng-model="FactList.InputedAnswer" />
+                                    <button style="color:#fff" type="button" class="btn btn--primary btn--inside uppercase"
+                                            ng-click="FactList.questionAnswered()"
+                                            ng-class="{'disabled': FactList.InputedAnswer ==''}">
+                                        Next
+                                    </button>
+                                </form>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+                <div class="jumbotron" style="background-color:#fafafa"
+                     ng-show="FactList.finalise">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <h2> Are you sure you are done answering all questions?</h2>
+                            <button style="background:#00C851; margin-right:15px;" class="btn btn--primary" ng-click="FactList.GoToReview()">Yes</button>
+                            <button style="background:#ff4444" class="btn btn--primary" ng-click="FactList.finalise = false">No</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--/. Row ends here-->
+        </div>
+
+
+        <div class="container review" ng-show="FactList.Review ==true">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="jumbotron" ng-repeat="fact in FactList.data.factList">
+                        <h2 class="h1-reponsive mb-3 blue-text"><strong>{{$index+1 + ". " + FactList.data.factList[$index].question}}</strong></h2>
+                        <hr class="my-4">
+
+                        <div style="margin:5px">
+                            <span style="font-size:14px" class="badge indigo">Correct Answer:</span>
+                            <span style="font-size:15px" class="answer-display" ng-bind-html="FactList.highlightedAnswer[$index]">
+                               
+
+                            </span>
+                        </div>
+
+                        <hr class="my-4">
+                        <div style="margin:5px"><span style="font-size:14px" class="badge amber darken-2">Your Answer:</span><span style="margin-left:10px;font-size:15px">{{FactList.InputedAnswerArray[$index]}}</span></div>
+
+                        <hr class="my-4" style="margin-bottom:5px">
+
+                        <div style="margin:15px"><span style="font-size:14px" class="badge badge-pill purple ">You Scored</span>  <span class="color-block z-depth-2 dusty-grass-gradient"> {{FactList.SuccessPercentage[$index]}}% </span>
+                        <span style="font-size:50px; margin-top:-18px" class="pull-right">
+                            <i ng-if="FactList.SuccessPercentage[$index] < 50" style="color:red" class="fa fa-close"></i>
+                            <i ng-if="FactList.SuccessPercentage[$index] > 50" style="color:green" class="fa fa-check"></i>
+                        </span>
+                        </div>
+
+
+
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="summary">
+
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+
+
+
+
+
+
+<script src="~/Scripts/angular/angular.js"></script>
+<script src="~/Scripts/angular/angular-sanitize.min.js"></script>
+<script src="~/Scripts/angular/levenshtein.js"></script>
+<script src="~/Scripts/angular/quizes.js"></script>
