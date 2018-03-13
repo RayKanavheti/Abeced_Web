@@ -4,49 +4,82 @@
     ViewBag.Title = "AddorEditMainCategory";
 }
 
-<h2>AddorEditMainCategory</h2>
-
-
-@using (Html.BeginForm("AddorEditMainCategory", "App", FormMethod.Post, new { enctype = "multipart/form-data", onSubmit = "return AddMainCategory(this);" }))
-{
-    @Html.AntiForgeryToken()
+<style>
+    .form-header {
+        color: #fff;
+        text-align: center;
+        margin-top: -50px;
+        margin-bottom: 3rem;
+        padding: 1rem;
+        border-radius: 2px;
+    }
+    .rounded {
+        box-shadow: 0 5px 11px 0 rgba(0,0,0,.18), 0 4px 15px 0 rgba(0,0,0,.15);
+    }
     
-    <div class="form-horizontal">
-        <h4>MainCategory</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.name, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.name, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.name, "", new { @class = "text-danger" })
+    .deep-blue-gradient {
+        background-image: linear-gradient(120deg, #e0c3fc 0%, #8ec5fc 100%);
+    }
+</style>
+<div class="container d-flex align-items-center
+                justify-content-center mt-3">
+<div class="row">
+    <div class="col-md-12">
+        <div class="card grey lighten-5">
+            <div class="card-body">
+                    @using (Html.BeginForm("AddorEditMainCategory", "App", FormMethod.Post, new { enctype = "multipart/form-data", onSubmit = "return AddMainCategory(this);" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <div class="form-header deep-blue-gradient rounded">
+                            <h3 class="text-center">Create Main Category</h3>
+                        </div>
+
+                         @*<div class="row justify-content-center">
+                             <div class="col-md-12">*@
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            <div class="md-form">
+                            
+                                    <i class="fa fa-edit prefix grey-text"></i>
+                                    @Html.EditorFor(model => model.name, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.LabelFor(model => model.name, htmlAttributes: new { @class = "font-weight-light" })
+                                    @Html.ValidationMessageFor(model => model.name, "", new { @class = "text-danger" })
+                            </div>
+
+                            <div class="md-form">
+                                    <i class="fa fa-pencil prefix grey-text"></i>                           
+                                    
+                                    @*@Html.TextAreaFor(model => model.description, new { htmlAttributes = new { @class = "form-control md-textarea", @rows="3", @type="text" } })*@
+                                    <textarea type="text" name="description" id="description" class="form-control md-textarea" rows="2"></textarea>
+                                    <label  id="description" class="font-weight-light">Category Description</label>
+                                    @*@Html.LabelFor(model => model.description, htmlAttributes: new { @class = "font-weight-light" })*@
+
+                                    @Html.ValidationMessageFor(model => model.description, "", new { @class = "text-danger" })
+                       
+                            </div>
+
+                            <div class="md-form">
+                                     <i class="fa fa-upload prefix grey-text"></i>
+                                    <input type="file" name="img" accept="image/*" onchange="showImagePreview(this, document.getElementById('catImagePreview'))" />  
+                            </div>
+                                 <div class="text-center">
+
+                                     <img src="~/App_Files/Images/cat5.png" style="margin:10px" height="100" width="100" id="catImagePreview" />
+                                 </div>
+
+                            <div class="text-center">
+                                <input class="btn btn-cyan" type="submit" value="Create" />
+                            </div>
+
+                        @*</div>
+                    </div>*@
+
+
+                    }
             </div>
         </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.description, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.description, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.description, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.img, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <input type="file" name="img" accept="image/*" onchange="showImagePreview(this, document.getElementById('catImagePreview'))" />
-                <img src="~/App_Files/Images/default.png" style="margin:10px" height="100" width="100" id="catImagePreview" />
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
         </div>
     </div>
-}
-
+</div>
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
