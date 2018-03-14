@@ -212,8 +212,8 @@
   <ItemGroup>
     <Content Include="App_Files\audios\silence.mp3" />
     <Content Include="App_Files\audios\tck1.mp3" />
+    <Content Include="App_Files\Images\books.jpg" />
     <Content Include="App_Files\Images\cat5.png" />
-    <Content Include="App_Files\Images\default.png" />
     <Content Include="Content\alertifyjs\alertify.css" />
     <Content Include="Content\alertifyjs\alertify.min.css" />
     <Content Include="Content\alertifyjs\alertify.rtl.css" />
