@@ -1,7 +1,8 @@
 ﻿@model Abeced.UI.Web.Models.MainCategory
 
 @{
-    ViewBag.Title = "AddorEditMainCategory";
+    ViewBag.Title = "AddorEditCard";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
 }
 
 <style>
@@ -9,8 +10,8 @@
         color: #fff;
         text-align: center;
         margin-top: -50px;
-        margin-bottom: 3rem;
-        padding: 1rem;
+        margin-bottom: 15px;
+        padding: 5px;
         border-radius: 2px;
     }
     .rounded {
@@ -20,12 +21,15 @@
     .deep-blue-gradient {
         background-image: linear-gradient(120deg, #e0c3fc 0%, #8ec5fc 100%);
     }
+    .morpheus-den-gradient {
+        background-image: linear-gradient(to top, #30cfd0 0%, #330867 100%);
+    }
 </style>
 <div class="container d-flex align-items-center
-                justify-content-center mt-3">
+                justify-content-center" style="margin-top:40px">
 <div class="row">
     <div class="col-md-12">
-        <div class="card grey lighten-5">
+        <div class="card">
             <div class="card-body">
                     @using (Html.BeginForm("AddorEditMainCategory", "App", FormMethod.Post, new { enctype = "multipart/form-data", onSubmit = "return AddMainCategory(this);" }))
                     {
@@ -33,45 +37,35 @@
                         <div class="form-header deep-blue-gradient rounded">
                             <h3 class="text-center">Create Main Category</h3>
                         </div>
-
-                         @*<div class="row justify-content-center">
-                             <div class="col-md-12">*@
+                        
                             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                            <div class="md-form">
-                            
-                                    <i class="fa fa-edit prefix grey-text"></i>
-                                    @Html.EditorFor(model => model.name, new { htmlAttributes = new { @class = "form-control" } })
-                                    @Html.LabelFor(model => model.name, htmlAttributes: new { @class = "font-weight-light" })
+                            <div class="form-group">
+                                   
+                                    @Html.EditorFor(model => model.name, new { htmlAttributes = new { @class = "form-control", @placeholder="Category Name" } })
                                     @Html.ValidationMessageFor(model => model.name, "", new { @class = "text-danger" })
                             </div>
 
-                            <div class="md-form">
-                                    <i class="fa fa-pencil prefix grey-text"></i>                           
+                            <div class="form-group">                                    
                                     
-                                    @*@Html.TextAreaFor(model => model.description, new { htmlAttributes = new { @class = "form-control md-textarea", @rows="3", @type="text" } })*@
-                                    <textarea type="text" name="description" id="description" class="form-control md-textarea" rows="2"></textarea>
-                                    <label  id="description" class="font-weight-light">Category Description</label>
-                                    @*@Html.LabelFor(model => model.description, htmlAttributes: new { @class = "font-weight-light" })*@
-
-                                    @Html.ValidationMessageFor(model => model.description, "", new { @class = "text-danger" })
-                       
+                                    @Html.TextAreaFor(model => model.description, htmlAttributes: new { @class = "form-control md-textarea-auto", @placeholder = "Category Description", @rows = "2" })
+                                    @Html.ValidationMessageFor(model => model.description, "", new { @class = "text-danger" })                       
                             </div>
 
-                            <div class="md-form">
+                            <div class="form-group text-center">
+                                    <label>Upload Category Image</label><br />
                                      <i class="fa fa-upload prefix grey-text"></i>
-                                    <input type="file" name="img" accept="image/*" onchange="showImagePreview(this, document.getElementById('catImagePreview'))" />  
+                                    <input type="file" name="img" class="btn btn-blue-grey btn-sm" accept="image/*" onchange="showImagePreview(this, document.getElementById('catImagePreview'))" />  
                             </div>
-                                 <div class="text-center">
+                                 <div class="text-center" style="margin-top:-10px">
 
-                                     <img src="~/App_Files/Images/cat5.png" style="margin:10px" height="100" width="100" id="catImagePreview" />
+                                     <img src="~/App_Files/Images/cat5.png"  class="img-thumbnail"  height="100" width="100" id="catImagePreview" />
                                  </div>
 
                             <div class="text-center">
-                                <input class="btn btn-cyan" type="submit" value="Create" />
+                                <input class="btn btn-indigo" type="submit" value="Create" />
                             </div>
 
-                        @*</div>
-                    </div>*@
+                  
 
 
                     }
@@ -80,9 +74,7 @@
         </div>
     </div>
 </div>
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

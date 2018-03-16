@@ -2,6 +2,7 @@
 
 @{
     ViewBag.Title = "AddorEditCard";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
 }
 <link href="~/Content/chosen.min.css" rel="stylesheet" />
 <style>
@@ -10,13 +11,12 @@
         text-align: center;
         margin-top: -50px;
         margin-bottom: 10px;
-        padding: 1rem;
+        padding: 5px;
+        /*padding:1em;*/
         border-radius: 2px;
     }
 
-    .rounded {
-        box-shadow: 0 5px 11px 0 rgba(0,0,0,.18), 0 4px 15px 0 rgba(0,0,0,.15);
-    }
+    
     textarea,input{
         max-width:none;
     }
@@ -25,7 +25,7 @@
     }
 </style>
 
-<div class="card" style="margin-top:50px">
+<div class="card" style="margin-top:55px">
     <div class="card-body">
 
         @using (Html.BeginForm("AddorEditCard", "App", FormMethod.Post, new { enctype = "multipart/form-data", onSubmit = "return jQueryAjaxPost(this);" }))
@@ -164,7 +164,7 @@
                     <!--/. Grid Row -->
                                 <div class="form-group">
                                     <div class="col-md-12 text-center">
-                                        <input type="submit" value="Add Fact" class="btn btn-indigo btn-block" />
+                                        <input type="submit" value="Add Fact" class="btn btn-indigo btn-lg btn-block" />
                                     </div>
                                 </div>
 

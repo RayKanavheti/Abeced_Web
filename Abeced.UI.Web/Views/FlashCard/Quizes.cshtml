@@ -1,8 +1,8 @@
 ﻿@model IEnumerable<Abeced.UI.Web.Models.FactModelRetrieve>
 
 @{
-    ViewBag.Title = "Quizes";
-    
+    ViewBag.Title = "AddorEditCard";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
 }
 
 <style>
@@ -48,7 +48,7 @@
         box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.1);
         border-radius: 2px;
         padding: 12px 20px;
-        margin-left:13px;
+        margin-left:30px;
     }
     .btn--primary:hover {
         background: #3E4551;
@@ -70,7 +70,7 @@
         box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.1);
         border: 0;
         outline: 0;
-        padding: 5px 18px;
+        padding: 12px 18px;
         max-width:1000px;
     }
     .jumbotron{
@@ -217,9 +217,34 @@ p[data-value]:after {
      -moz-linear-gradient( left, #09c, #ff0);
 }
 
+    .form-header {
+        color: #fff;
+        text-align: center;
+        margin-top: 25px;
+        margin-bottom: 10px;
+        padding: 5px;
+        /*padding:1em;*/
+        border-radius: 2px;
+    }
+
+    .rounded {
+        box-shadow: 0 5px 11px 0 rgba(0,0,0,.18), 0 4px 15px 0 rgba(0,0,0,.15);
+    }
+
+    textarea, input {
+        max-width: none;
+    }
+
+    .deep-blue-gradient {
+        background-image: linear-gradient(120deg, #e0c3fc 0%, #8ec5fc 100%);
+    }
+
 </style>
 
 <!--holder for our AngularJs App-->
+<div class="form-header deep-blue-gradient rounded">
+    <h3 class="text-center">Welcome To Quizes</h3>
+</div>
 <div ng-app="QuizApp">
     <h2>@ViewData["CourseTitle"]</h2>
     <div ng-controller="ListController as FactList">
@@ -230,12 +255,12 @@ p[data-value]:after {
                         <h2>Progress:</h2>
                        
                         <div class="btn-toolbar">
-                            <button class="btn" ng-repeat="question in FactList.data.factList"
-                                    ng-class="{'btn-info': question.Answered !== null, 
-                                    'btn-danger': question.Answered === null}"
+                            <button class="btn btn-sm  waves-effect" ng-repeat="question in FactList.data.factList"
+                                    ng-class="{'btn-outline-success': question.Answered !== null, 
+                                    'btn-outline-danger': question.Answered === null}"
                                     ng-click="FactList.setActiveQuestion($index)">
-                                <span class="glyphicon" ng-class="{'glyphicon-pencil':question.Answered !== null,
-                                      'glyphicon-question-sign': question.Answered === null}"></span>
+                                <span class="fa" ng-class="{'fa-pencil':question.Answered !== null,
+                                      'fa-question': question.Answered === null}"></span>
                             </button>
 
                         </div>
@@ -250,11 +275,11 @@ p[data-value]:after {
                         <h3>Legend:</h3>
                         <div class="row">
                             <div class="col-md-6">
-                                <button class="btn btn-info"><span class="glyphicon glyphicon-pencil" ></span></button>
+                                <button class="btn btn-outline-success waves-effect btn-sm"><span class="fa fa-pencil" ></span></button>
                                 <p>Answered</p>
                             </div>
                             <div class="col-md-6">
-                                <button class="btn btn-danger"><span class="glyphicon glyphicon-question-sign"></span></button>
+                                <button class="btn btn-outline-danger waves-effect btn-sm"><span class="fa fa-question"></span></button>
                                 <p>Unaswered</p>
                             </div>
                         </div>
@@ -267,7 +292,7 @@ p[data-value]:after {
             <div class="row">
                <div class="alert alert-danger"
                     ng-show="FactList.UnCompletedError" >
-                   You haven't finished answering all the questions, Finish all questions first
+                   Answer All Questions First !!!
                    <button class="close" ng-click="FactList.UnCompletedError = false">&times;</button>
 
                </div>
@@ -280,41 +305,45 @@ p[data-value]:after {
                     
                             <span class="clearfix"></span>
                             <div class="row" style="margin-bottom:15px">
-                                <div class="container__item">
-                                    <form >
-                                        <input type="text" id="adjinput" class="form__field" placeholder="Enter Answer here"  ng-model="FactList.InputedAnswer" />
-                                        <button style="color:#fff" type="button" class="btn btn--primary btn--inside uppercase"
-                                                ng-click="FactList.SubmitAnswer()"
-                                                ng-class="{'disabled': FactList.InputedAnswer ==''}">View Answer</button>
-                                    </form>
-                              
+                                <div class="col-md-12">
+                                    <div class="container__item">
+                                        <form>
+                                            <input type="text" id="adjinput" class="form__field" placeholder="Enter Answer here" ng-model="FactList.InputedAnswer" />
+                                            <button style="color:#fff" type="button" class="btn btn--primary btn--inside uppercase"
+                                                    ng-click="FactList.SubmitAnswer()"
+                                                    ng-class="{'disabled': FactList.InputedAnswer ==''}">
+                                                View Answer
+                                            </button>
+                                        </form>
+
+                                    </div>
                                 </div>
-                                
                             </div>
                             <div class="row" style="padding-left:30px; padding-right:30px" ng-if="FactList.DisplayAnswer == true">
-                                <div class="correct-answer" >
-                                    <h3>Correct Answer</h3>
-                                    <hr/>
-                                    <h4  ng-bind-html="FactList.highlightedAnswer[FactList.ActiveQuestion]"></h4>
-                                </div>
-                                <h3 ng-value="FactList.SuccessPercentage[FactList.ActiveQuestion]">You scored {{FactList.SuccessPercentage[FactList.ActiveQuestion]}}% in this Question</h3>
-                                <progress max="100" ng-value="FactList.SuccessPercentage[FactList.ActiveQuestion]" class="css3">
-                                    <div class="progress-bar">
-                                        <span ng-style="FactList.progress">{{FactList.SuccessPercentage[FactList.ActiveQuestion]}}%</span>
+                                <div class="col-md-12">
+                                    <div class="correct-answer">
+                                        <h3>Correct Answer</h3>
+                                        <hr />
+                                        <h4 ng-bind-html="FactList.highlightedAnswer[FactList.ActiveQuestion]"></h4>
                                     </div>
-                                </progress>
+                                    <h3 ng-value="FactList.SuccessPercentage[FactList.ActiveQuestion]">You scored {{FactList.SuccessPercentage[FactList.ActiveQuestion]}}% in this Question</h3>
+                                    <progress max="100" ng-value="FactList.SuccessPercentage[FactList.ActiveQuestion]" class="css3">
+                                        <div class="progress-bar">
+                                            <span ng-style="FactList.progress">{{FactList.SuccessPercentage[FactList.ActiveQuestion]}}%</span>
+                                        </div>
+                                    </progress>
 
-
+                                </div>
                                
                             </div>
-                            <button class="btn btn-continue btn--inside uppercase" ng-click="FactList.questionAnswered()">Continue</button>
+                            <button  class="btn btn-continue btn--inside uppercase" ng-click="FactList.questionAnswered()">Continue</button>
                         </div>
 
                 </div>
-               <div class="well well-sm"
+               <div class="jumbotron"
                     ng-show="FactList.finalise">
                    <div class="row">
-                       <div class="col-xs-12">
+                       <div class="col-xs-12 text-center">
                            <h2> Are you sure you are done answering all questions?</h2>
                            <button style="background:#00C851; margin-right:15px;" class="btn btn--primary" ng-click="FactList.GoToReview()">Yes</button>
                            <button style="background:#ff4444" class="btn btn--primary" ng-click="FactList.finalise = false" >No</button>

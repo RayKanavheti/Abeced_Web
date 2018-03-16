@@ -1,0 +1,31 @@
+.search-container {
+  display:flex;
+  font-size:14px;
+  margin-top:3px;
+  /*padding-left:200px;*/
+  padding-right:0;
+  width:100%
+}
+
+.search-input {
+  border:1px solid #ddd;
+  border-radius:0px;
+  padding:1px;
+  padding-left:3px;
+  border-right:none;
+  width:100%;
+}
+
+.btn.btn-default.search-btn {
+  border:1px solid #ddd;
+  background-color:#FFFFFF !important;
+  border-radius:0px;
+  border-left:none;
+  background-image:none;
+  box-shadow:none;
+  color:#919693;
+}
+.search-container.col-md-3.form-inline{
+    width:100%
+}
+

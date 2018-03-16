@@ -214,6 +214,7 @@
     <Content Include="App_Files\audios\tck1.mp3" />
     <Content Include="App_Files\Images\books.jpg" />
     <Content Include="App_Files\Images\cat5.png" />
+    <Content Include="Content\ace.min.css" />
     <Content Include="Content\alertifyjs\alertify.css" />
     <Content Include="Content\alertifyjs\alertify.min.css" />
     <Content Include="Content\alertifyjs\alertify.rtl.css" />
@@ -241,6 +242,8 @@
     <Content Include="Content\chosen-sprite%402x.png" />
     <Content Include="Content\chosen-sprite.png" />
     <Content Include="Content\chosen.min.css" />
+    <Content Include="Content\factsToMatch.css" />
+    <Content Include="Content\footer-distributed.css" />
     <Content Include="Content\icons\add_user.png" />
     <Content Include="Content\icons\closebtn.png" />
     <Content Include="Content\icons\delete.png" />
@@ -254,6 +257,11 @@
     <Content Include="Content\icons\start1.png" />
     <Content Include="Content\JqueryDataTable\dataTables.checkboxes.css" />
     <Content Include="Content\JqueryDataTable\jquery.dataTables.min.css" />
+    <Content Include="Content\JqueryDataTable\select.bootstrap4.min.css" />
+    <Content Include="Content\nav-sticky-top.css" />
+    <Content Include="Content\Search-Field-With-Icon.css" />
+    <Content Include="Content\sidebar-advanced.css" />
+    <Content Include="Content\Theme\bootstrap.min.css" />
     <Content Include="Content\Theme\images\ui-bg_glass_100_f5f0e5_1x400.png" />
     <Content Include="Content\Theme\images\ui-bg_glass_25_cb842e_1x400.png" />
     <Content Include="Content\Theme\images\ui-bg_glass_70_ede4d4_1x400.png" />
@@ -274,6 +282,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\logo.png" />
     <Content Include="mdb\css\bootstrap.css" />
     <Content Include="mdb\css\bootstrap.min.css" />
     <Content Include="mdb\css\mdb.css" />
@@ -299,6 +308,8 @@
     <Content Include="mdb\js\mdb.js" />
     <Content Include="mdb\js\mdb.min.js" />
     <Content Include="mdb\js\popper.min.js" />
+    <Content Include="Scripts\ace-elements.min.js" />
+    <Content Include="Scripts\ace.min.js" />
     <Content Include="Scripts\alertify.js" />
     <Content Include="Scripts\alertify.min.js" />
     <Content Include="Scripts\angular\angular-sanitize.min.js" />
@@ -366,12 +377,15 @@
     <Content Include="mdb\scss\_custom.scss" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\chosen.jquery.min.js" />
+    <Content Include="Scripts\index.js" />
     <Content Include="Scripts\jqGrid\grid.locale-en.js" />
     <Content Include="Scripts\jqGrid\jquery.jqGrid.min.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\JqueryDataTable\dataTables.bootstrap4.js" />
     <Content Include="Scripts\JqueryDataTable\dataTables.checkboxes.min.js" />
+    <Content Include="Scripts\JqueryDataTable\dataTables.select.min.js" />
     <Content Include="Scripts\JqueryDataTable\jquery.dataTables.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
@@ -439,6 +453,7 @@
     <Content Include="Views\Shared\_Users.cshtml" />
     <Content Include="Views\FlashCard\ShareCards.cshtml" />
     <Content Include="Views\FlashCard\Testing.cshtml" />
+    <Content Include="Views\Shared\_MainLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
