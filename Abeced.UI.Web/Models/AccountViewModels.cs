@@ -133,10 +133,34 @@ namespace Abeced.UI.Web.Models
         [Display(Name = "Phone Number")]
         public string phoneNumber { get; set; }
 
+        public Gender Usergender { get; set; }
+        public Title titles { get; set; }
+        public EducLevel level { get; set; }
+    }
+    public enum Title
+    {
+        Mr, 
+        Mrs,
+        Miss,
+        Dr,
+        Prof,
+        Sir
 
+    } 
+
+    public enum Gender
+    {
+        Male,
+        Female
     }
 
+    public enum EducLevel
+    {
+        PrimarySchool,
+        HighSchool,
+        TertiaryEducation
 
+    }
     public class Sharing{
         public int ShareId { get; set; }
         public int SenderId { get; set; }

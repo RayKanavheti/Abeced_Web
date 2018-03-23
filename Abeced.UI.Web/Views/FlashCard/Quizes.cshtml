@@ -246,7 +246,7 @@ p[data-value]:after {
     <h3 class="text-center">Welcome To Quizes</h3>
 </div>
 <div ng-app="QuizApp">
-    <h2>@ViewData["CourseTitle"]</h2>
+    <h2 id="CourseName">@ViewBag.CourseName</h2>
     <div ng-controller="ListController as FactList">
         <div class="container" ng-hide="FactList.Review ==true">
             <!--Progress Area-->
@@ -384,8 +384,16 @@ p[data-value]:after {
 
             </div>
             <div class="row">
-                <div class="summary">
-
+                <div class="summary col-md-12">
+                    <div class="jumbotron deep-blue-gradient" style="width:100%; font-size:25px">
+                        <h3>Quize Summary Review </h3>
+                        <hr/>
+                        <p>You got an Average score of <span class="badge blue lighten-3"><strong>{{FactList.AverageScore}}%</strong></span></p>
+                        <p>Points Earned for this Quiz <span class=" badge purple lighten-3"><strong>{{FactList.AverageScore}}++</strong></span></p>
+                        <button ng-click="FacctList.submitQuiz()" class="btn btn-elegant pull-right btn-md">Save</button>
+                        <br/>
+                        <br/>
+                    </div>
 
                 </div>
 

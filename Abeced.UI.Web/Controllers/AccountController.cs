@@ -72,21 +72,39 @@ namespace Abeced.UI.Web.Controllers
         public ActionResult Login(LoginViewModel model, string returnUrl)
         {
             HttpResponseMessage response = DataAccess.WebClient.GetAsync("User/LoginUser/"+model.Email+"/"+model.Password).Result;
-            if (ModelState.IsValid && response != null)
+           
+            if (response.IsSuccessStatusCode )// persistCookie: model.RememberMe)))
             {
-             FormsAuthentication.SetAuthCookie(model.Email, model.RememberMe);
+             
              RegisterViewModel user = response.Content.ReadAsAsync<RegisterViewModel>().Result;
-                Session["UserId"] = user.UserId;
-                Session["Email"] = user.Email;
-                Session["UserName"] = user.username;
-                Session["FirstName"] = user.fname;
-                Session["LastName"] = user.lname;
-                return RedirectToAction("Dashboard", "App");
 
+                if (model.Email == user.Email && model.Password == user.Password)
+                {
+                    FormsAuthentication.SetAuthCookie(model.Email, model.RememberMe);
+                    Session["UserId"] = user.UserId;
+                    Session["Email"] = user.Email;
+                    Session["UserName"] = user.username;
+                    Session["FirstName"] = user.fname;
+                    Session["LastName"] = user.lname;
+                    if (returnUrl != null)
+                    {
+                        return Redirect(returnUrl);
+                    }
+                    else
+                    {
+                        return RedirectToAction("Dashboard", "FlashCard");
+                    }
+                    
+                }
+                else
+                {
+                    ModelState.AddModelError("", "The Email or password provided is incorrect.");
+                    return View(model);
+                }
             }
 
             // If we got this far, something failed, redisplay form
-            ModelState.AddModelError("", "The Email or password provided is incorrect.");
+            ModelState.AddModelError("", "Network Error Please try again");
             return View(model);
 
 

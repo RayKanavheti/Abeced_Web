@@ -41,18 +41,18 @@
     .deep-blue-gradient {
         background-image: linear-gradient(120deg, #e0c3fc 0%, #8ec5fc 100%);
     }
+
+    .cloudy-knoxville-gradient {
+        background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
+    }
 </style>
 <div class="form-header deep-blue-gradient rounded">
     <h3 class="text-center">Select Cards</h3>
 </div>
-
-@*@{ Html.RenderAction("sharecards", "flashcard"); }*@
-
-
-
+<label style="display:none" id="CourseName">@ViewBag.CourseName</label>
 <!--It submits the selected rows ids to the controller action and redirects to the selected app page -->
 <!-- the use of the form-->
-<div class="card" style="padding:8px">
+<div class="card cloudy-knoxville-gradient" style="padding:8px">
     <div class="card-body">
 
 
@@ -86,9 +86,17 @@
     <button id="ProceedToQuizes" style="margin-right:15px" class="btn btn-elegant btn-sm">Proceed To Quizes</button>
     <button id="ProceedToTest" style="margin-right:15px" class="btn btn-indigo btn-sm">Proceed To Test</button>
 </div>
-<br />
-<br/>
+@*@{ Html.RenderAction("sharecards", "flashcard"); }*@
+<div style="margin-top:15px">
+    @using (Html.BeginForm("sharecards", "flashcard", FormMethod.Post, new { onSubmit = "return sharings(this)" }))
+    {
+        @Html.ListBoxFor(model => model.SelectedIds, new MultiSelectList(Model.User, "UserId", "Email"), new { id = "multiSelectDropdown", multiple = "multiple" })
+    <!--<input type="submit" id="sharecards" value="Share Cards with friends" class="btn btn-secondary">-->
 
+        <input type="submit" id="mySubmit" class="btn btn-primary" value="Share Cards with friends" />
+    }
+
+</div>
 
 @section scripts{
     <script src="~/Scripts/JqueryDataTable/jquery.dataTables.min.js"></script>
@@ -193,7 +201,7 @@
                     data: { 'myIds': myIds.join(',') }, //You can post the ids as a string
                     success: function (data) {
                         // alertify.alert("ids added succesfully !!!");
-                        window.location.href = "/FlashCard/FlashCards?SelectedCards=" + data.factIds;
+                        window.location.href = "/FlashCard/FlashCards?SelectedCards=" + data.factIds + "&CourseName=" + document.getElementById("CourseName").innerText;
 
                     },
                     error: function (response) {
@@ -228,7 +236,7 @@
                     data: { 'myIds': myIds.join(',') }, //You can post the ids as a string
                     success: function (data) {
                         //alertify.alert("ids added succesfully !!!");
-                        window.location.href = "/FlashCard/Quizes?SelectedCards=" + data.factIds;
+                        window.location.href = "/FlashCard/Quizes?SelectedCards=" + data.factIds + "&CourseName=" + document.getElementById("CourseName").innerText;
 
                     },
                     error: function (response) {
@@ -261,7 +269,38 @@
                     data: { 'myIds': myIds.join(',') }, //You can post the ids as a string
                     success: function (data) {
                         //alertify.alert("ids added succesfully !!!");
-                        window.location.href = "/FlashCard/Testing?SelectedCards=" + data.factIds;
+                        window.location.href = "/FlashCard/Testing?SelectedCards=" + data.factIds + + "&CourseName=" + document.getElementById("CourseName").innerText;
+
+                    },
+                    error: function (response) {
+
+                        alertify.alert("ids failed to add !!!")
+                    }
+
+                });
+
+
+            });
+
+            $('#mySubmit').click(function () {
+                var rows_selected = table.column(0).checkboxes.selected();
+
+                var myIds = new Array();// an array that keep track of all selected rows
+
+                // Iterate over all selected checkboxes
+                $.each(rows_selected, function (index, rowId) {
+                    myIds.push(rowId);
+                });
+                //var Postdata = JSON.stringify({ FactIds: myIds }); // posting the ids as a json object
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/FlashCard/GetData',
+                    //posting the selected the ids as a string to the /flashcard/getdata controller
+                    data: { 'myIds': myIds.join(',') }, //You can post the ids as a string
+                    success: function (response) {
+                        alertify.alert("ids added succesfully !!!");
+                        
 
                     },
                     error: function (response) {
@@ -278,7 +317,7 @@
 
     </script>
 
-@*<script src="~/Scripts/chosen.jquery.min.js"></script>*@
+<script src="~/Scripts/chosen.jquery.min.js"></script>
 <script>
     $(document).ready(function () {
 

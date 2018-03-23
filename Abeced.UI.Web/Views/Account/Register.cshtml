@@ -2,73 +2,191 @@
 @{
     ViewBag.Title = "Register";
 }
-
+@using Abeced.UI.Web.Models
+<link href="~/Content/chosen.min.css" rel="stylesheet" />
 <h2>@ViewBag.Title.</h2>
 
-@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-{
-    @Html.AntiForgeryToken()
-    <h4>Create a new account.</h4>
-    <hr />
-    @Html.ValidationSummary("", new { @class = "text-danger" })
+<div class="card" style="margin-top:55px">
+    <div class="card-body">
 
-    <div class="form-group">
-        @Html.LabelFor(m => m.fname, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.TextBoxFor(m => m.fname, new { @class = "form-control" })
-        </div>
-    </div>
+        @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+        {
+            @Html.AntiForgeryToken()
+            <h4>Create a new account.</h4>
+            <hr />
+            @Html.ValidationSummary("", new { @class = "text-danger" })
+            <!--Grid Row-->
+            <div class="form-row">
+                <!--Grid Col-->
+                <div class="form-group col-md-1">
+                    <label for="title">Title</label>
+                    @Html.DropDownListFor(m => m.title,
+                    new SelectList(Enum.GetValues(typeof(Title))),
+                    "Title", new { id = "myDropdown3" })
+                </div>
+                <!--/.Grid Col-->
+                <!--Grid Col-->
+                <div class="form-group col-md-5">                   
+                        <label for="fname">First Name</label>
+                        @Html.TextBoxFor(m => m.fname, new { @class = "form-control" })                  
+                </div>
+                <!--/.Grid Col-->
+                <!--Grid Col-->
+                <div class="form-group col-md-6">   
+                         <label for="lname">Last Name</label>
+                        @Html.TextBoxFor(m => m.lname, new { @class = "form-control" })
+                    
+                </div>
+                <!--/.Grid Col-->
+            </div>
+            <!--/. Grid Row-->
 
-    <div class="form-group">
-        @Html.LabelFor(m => m.lname, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.TextBoxFor(m => m.lname, new { @class = "form-control" })
-        </div>
-    </div>
 
-    <div class="form-group">
-        @Html.LabelFor(m => m.username, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.TextBoxFor(m => m.username, new { @class = "form-control" })
-        </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
-        </div>
-    </div>
+            <!--Grid Row-->
+            <div class="form-row">
+                <!--Grid Col-->
+                <div class="form-group col-md-6">
+                        <label for="username">User Name</label>
+                        @Html.TextBoxFor(m => m.username, new { @class = "form-control" })
+                    
+                </div>
+                <!--/.Grid Col-->
 
-    <div class="form-group">
-        @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
-        </div>
-    </div>
+                <!--Grid Col-->
+                <div class="form-group col-md-6">
+                        <label for="Email">Email</label>
+                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                   
+                </div>
+                <!--/.Grid Col-->
+            </div>
+             <!--/.Grid Row-->
+            <div class="form-row">
+                <!--Grid Col-->
+                    <div class="form-group col-md-6">
+                             <label for="Password"> Password</label>                        
+                            @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                      
+                    </div>
+                <!--/.Grid Col-->
+                
+                <!--Grid Col-->
+                    <div class="form-group col-md-6">
+                            <label for="ConfirmPassword">Confirm Password</label>
+                            @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
+                       
+                    </div>
+                <!--/.Grid Col-->
+                </div>
+             <!--Grid Row-->
+            <!--Grid Row-->
+            <div class="form-row">
+                <!--Grid Col-->
+                <div class="form-group col-md-2">
+                    <label for="title">Title</label>
+                    @Html.DropDownListFor(m => m.gender,
+                    new SelectList(Enum.GetValues(typeof(Gender))),
+                    "Gender", new { id = "myDropdown4" })
 
-    <div class="form-group">
-        @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
-        </div>
-    </div>
+                </div>
+                <!--/.Grid Col-->
+                <!--Grid Col-->
+                <div class="form-group col-md-4">
+                    <label for="occupation">Occupation</label>
+                    @Html.TextBoxFor(m => m.occupation, new { @class = "form-control" })
 
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" class="btn btn-default" value="Register" />
-        </div>
-    </div>
-}
+                </div>
+                <!--/.Grid Col-->
+                <!--Grid Col-->
+                <div class="form-group col-md-4">
+                    <label for="educationLevel">Education Level</label>
+                    @Html.DropDownListFor(m => m.educationLevel,
+                    new SelectList(Enum.GetValues(typeof(EducLevel))),
+                    "Education Level", new { id = "myDropdown5" })
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
+                </div>
+                <!--/.Grid Col-->
+
+            </div>
+            <!--Grid Row-->
+
+
+            <!--Grid Row-->
+            <div class="form-row">
+               <!--Grid Col-->
+                <div class="form-group col-md-6">
+                   <label for="streetAddress">Street Address</label>
+                    @Html.TextAreaFor(model => model.streetAddress, htmlAttributes: new { @class = "form-control", @placeholder = "Street Adress", @rows = "4", @cols = "60" })
+
+                </div>
+                <!--/.Grid Col-->
+                <!--Grid Row-->  
+                <div class="form-row col-md-6">
+                    <!--Grid Col-->
+                    <div class="form-group col-md-12">
+                        <label for="city">City</label>
+                        @Html.TextBoxFor(m => m.city, new { @class = "form-control" })
+                    </div>
+                    <!--/.Grid Col-->
+
+                    <!--Grid Col-->
+                    <div class="form-group col-md-12">
+                        <label for="Email">Province</label>
+                        @Html.TextBoxFor(m => m.province, new { @class = "form-control" })
+                    </div>
+                    <!--/.Grid Col-->
+                </div>
+                <!--Grid Row-->  
+            </div>
+             <!--Grid Row-->
+            <div class="form-row">
+                <!--Grid Col-->
+                <div class="form-group col-md-6">
+                    <label for="postalCode">Postal Code</label>
+                    @Html.TextBoxFor(m => m.postalCode, new { @class = "form-control" })
+                </div>
+                <!--/.Grid Col-->
+
+                <!--Grid Col-->
+                <div class="form-group col-md-6">
+                    <label for="country">Country</label>
+                    @Html.TextBoxFor(m => m.country, new { @class = "form-control" })
+                </div>
+                <!--/.Grid Col-->
+            </div>
+             <!--/.Grid Row-->
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" class="btn btn-default" value="Register" />
+                </div>
+            </div>
+        }
+
+    </div>
+</div>
+
+        @section Scripts {
+            @Scripts.Render("~/bundles/jqueryval")
+            <script>
+                    $(function () {
+                         var successMessage = '@TempData["SuccessMessage"]';
+                        if (successMessage != '') {
+
+                            alertify.success(successMessage);
+                        }
+                    });
+            </script>
+
+<script src="~/Scripts/chosen.jquery.min.js"></script>
 <script>
-        $(function () {
-             var successMessage = '@TempData["SuccessMessage"]';
-            if (successMessage != '') {
+    $(document).ready(function () {
 
-                alertify.success(successMessage);
-            }
+        $("#myDropdown3, #myDropdown4, #myDropdown5").chosen({
+            width: "100%"
+
         });
+    });
 </script>
-}
+
+        }

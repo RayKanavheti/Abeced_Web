@@ -22,7 +22,7 @@ namespace Abeced.WebApi.Controllers
         private AbecedEntities db = new AbecedEntities();
         // GET: api/Facts
 
-        [Authorize]
+        
         public IQueryable<Fact> GetFacts()
         {
             return db.Facts;

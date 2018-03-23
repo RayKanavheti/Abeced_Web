@@ -31,7 +31,7 @@
         ViewModel.NumFacts;
         ViewModel.AverageScore = 0;
         ViewModel.ProgressIncrement = 0;
-
+        ViewModel.CourseName = document.getElementById("CourseName").innerText;
         var numQuestionsAnswered = 0;
         FactListService.GetFactList().then(function (response) {
             ViewModel.data = response.data;// setting the ViewModel.data to our factList json File
@@ -235,10 +235,6 @@
 
       }
 
-
-
-
-
     ]);
 
 
@@ -261,6 +257,7 @@
           ViewModel.WrongWords = "";
           ViewModel.CorrectWords = "";
           ViewModel.UnCompletedError = false;
+          ViewModel.CourseName = document.getElementById("CourseName").innerText;
 
 
           var numQuestionsAnswered = 0;

@@ -58,6 +58,8 @@ namespace Abeced.UI.Web.Controllers
         {
 
             CourseModel course = new CourseModel();
+            course.userID = Convert.ToInt32(Session["UserId"]);
+
             IEnumerable<SubCategory> subCategoryList;
             try
             {
@@ -77,7 +79,15 @@ namespace Abeced.UI.Web.Controllers
         [HttpPost]
         public ActionResult AddorEditCourse(CourseModel course)
         {
+            if (Session["UserId"] != null)
+            {
+                course.userID = Convert.ToInt32(Session["UserId"]);
+            }
+            else{
 
+                course.userID = null;
+            }
+           
 
             return View();
         }

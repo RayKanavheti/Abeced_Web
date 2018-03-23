@@ -197,6 +197,7 @@
     <Compile Include="Controllers\FlashCardController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -315,6 +316,7 @@
     <Content Include="Scripts\angular\angular-sanitize.min.js" />
     <Content Include="Scripts\angular\angular.js" />
     <Content Include="Scripts\angular\angular.min.js" />
+    <Content Include="Scripts\angular\flashcard.js" />
     <Content Include="Scripts\angular\Testing.js" />
     <Content Include="Scripts\angular\upload-angular.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -396,7 +398,6 @@
     <Content Include="Scripts\mdb\bootstrap.min.js" />
     <Content Include="Scripts\mdb\jquery-3.2.1.min.js" />
     <Content Include="Scripts\mdb\mdb.js" />
-    <Content Include="Scripts\mdb\mdb.min.js" />
     <Content Include="Scripts\mdb\popper.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
@@ -454,9 +455,12 @@
     <Content Include="Views\FlashCard\ShareCards.cshtml" />
     <Content Include="Views\FlashCard\Testing.cshtml" />
     <Content Include="Views\Shared\_MainLayout.cshtml" />
+    <Content Include="Views\FlashCard\Dashboard.cshtml" />
+    <Content Include="Views\FlashCard\flashcards.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Users\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

@@ -80,7 +80,10 @@ namespace Abeced.UI.Web.Models
         public string Answered { get; set; }
         public string Correct { get; set; }
         public double Score { get; set; }
+        public string Outcome { get; set; }
         public IEnumerable<CourseModel> CourseList { get; set; }
+
+       
 
     }
     public class StudySession
@@ -130,5 +133,5 @@ namespace Abeced.UI.Web.Models
         public int? Numfacts { get; set; }
         public int? NumRevised { get; set; }
     }
-
+   
 }

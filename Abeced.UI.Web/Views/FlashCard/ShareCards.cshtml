@@ -3,13 +3,13 @@
 
 
 
-<div style="margin-top:30px">
+<div style="margin-top:15px">
     @using (Html.BeginForm("sharecards", "flashcard", FormMethod.Post, new { onSubmit = "return sharings(this)" }))
     {
         @Html.ListBoxFor(model => model.SelectedIds, new MultiSelectList(Model.User, "UserId", "Email"), new { id = "multiSelectDropdown", multiple = "multiple" })
     <!--<input type="submit" id="sharecards" value="Share Cards with friends" class="btn btn-secondary">-->
 
-        <input type="submit" id="mySubmit" class="btn btn-primary" value="share" />
+        <input type="submit" id="mySubmit" class="btn btn-primary" value="Share Cards with friends" />
     }
 
 </div>

@@ -23,8 +23,33 @@ namespace Abeced.UI.Web.Controllers
             TempData.Keep();
             //SelectCards(newCourseId);
 
-          
-            return View();
+
+            Sharing shares = new Sharing();
+            IEnumerable<RegisterViewModel> AllUsersList = null;
+
+            var response = DataAccess.WebClient.GetAsync("User");
+            response.Wait();
+            var result = response.Result;
+
+
+            if (result.IsSuccessStatusCode)
+            {
+                var readTask = result.Content.ReadAsAsync<List<RegisterViewModel>>();
+                readTask.Wait();
+                AllUsersList = readTask.Result;
+                shares.User = AllUsersList.ToList();
+            }
+            else
+            {
+
+                AllUsersList = Enumerable.Empty<RegisterViewModel>();
+                ModelState.AddModelError(string.Empty, "Server Error");
+            }
+
+
+
+
+            return View(shares);
         }
 
         // GET: FlashCard
@@ -120,7 +145,7 @@ namespace Abeced.UI.Web.Controllers
         {
             TempData["SelectedFactsToMatchIds"] = SelectedCards;
             TempData.Keep();
-            ViewData["CourseTitle"] = CourseName;
+            ViewBag.CourseName = CourseName;
 
             return View();
         }
@@ -133,6 +158,49 @@ namespace Abeced.UI.Web.Controllers
 
             return View();
         }
+
+        public ActionResult flashcards(string SelectedCards)
+        {
+
+            TempData["SelectedFlashCardIds"] = SelectedCards;
+            TempData.Keep();
+
+            return View();
+            //Since you have a string of selected cards under your disposal choose either if you want to return a view with a list of 
+            // selected cards or Json formatted data like what i did for the quizes.. how to return a json data look at Facts To match
+            // It all depends on the dynamics of the feature you want to develop
+
+        }
+
+        public ActionResult flashCardsJSONData(string SelectedCards)
+        {
+            string factIds = TempData["SelectedFlashCardIds"] as string;
+            IEnumerable<FactModelRetrieve> selectedFactsList = null;
+            var response = DataAccess.WebClient.GetAsync("flashcards/selectedCards/" + factIds);
+
+            response.Wait();
+
+            var result = response.Result;
+
+            if (result.IsSuccessStatusCode)
+            {
+
+                var readTask = result.Content.ReadAsAsync<List<FactModelRetrieve>>();
+                readTask.Wait();
+                selectedFactsList = readTask.Result;
+            }
+            else
+            {
+                selectedFactsList = Enumerable.Empty<FactModelRetrieve>();
+                ModelState.AddModelError(string.Empty, "Server Error");
+            }
+
+
+            return Json(new { factList = selectedFactsList }, JsonRequestBehavior.AllowGet);
+
+
+        }
+
         public ActionResult QuizesJSONData()
         {
 
@@ -165,18 +233,7 @@ namespace Abeced.UI.Web.Controllers
 
 
 
-        public ActionResult flashcards(string SelectedCards)
-        {
-
-            TempData["SelectedFlashCardIds"] = SelectedCards;
-            TempData.Keep();
-
-            return View();
-            //Since you have a string of selected cards under your disposal choose either if you want to return a view with a list of 
-            // selected cards or Json formatted data like what i did for the quizes.. how to return a json data look at Facts To match
-            // It all depends on the dynamics of the feature you want to develop
-
-        }
+       
         [ChildActionOnly]
         public ActionResult ShareCards()
         {
@@ -237,6 +294,13 @@ namespace Abeced.UI.Web.Controllers
             }
 
             return Json(new { returnmsg = "Success" }, JsonRequestBehavior.AllowGet);
+        }
+        [Authorize]
+        public ActionResult Dashboard()
+        {
+
+            return View();
+           
         }
 
      
