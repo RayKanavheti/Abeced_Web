@@ -2,7 +2,7 @@
 
 @{
     ViewBag.Title = "AddorEditCard";
-    Layout = "~/Views/Shared/_MainLayout.cshtml";
+    Layout = "~/Views/Shared/_AbecedDashboard.cshtml";
 }
 <link href="~/Content/chosen.min.css" rel="stylesheet" />
 <style>
@@ -16,163 +16,216 @@
         border-radius: 2px;
     }
 
-    
-    textarea,input{
-        max-width:none;
+
+    textarea, input {
+        max-width: none;
     }
+
     .deep-blue-gradient {
         background-image: linear-gradient(120deg, #e0c3fc 0%, #8ec5fc 100%);
     }
+
+    .audio-download {
+        list-style-type:none;
+        margin:0;
+        padding:0;
+
+    }
 </style>
 
-<div class="card" style="margin-top:55px">
-    <div class="card-body">
 
-        @using (Html.BeginForm("AddorEditCard", "App", FormMethod.Post, new { enctype = "multipart/form-data", onSubmit = "return jQueryAjaxPost(this);" }))
-        {
-            @Html.AntiForgeryToken()
-
-
-            <div class="form-header deep-blue-gradient rounded">
-                <h3 class="text-center">Add A Fact</h3>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-10">
+            <div class="heading-grey text-center p-2 mb-3 z-depth-1">
+                <span id="CourseName" class=" h3-responsive">Add A Fact</span>
             </div>
-            @Html.HiddenFor(model => model.userID)
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                    <label for="courseID">Select Course</label>
-                    @Html.DropDownListFor(model => model.courseID, new SelectList(Model.CourseList, "CourseId", "name"), "Select Course", new { id = "myDropdown" })
-                    @Html.ValidationMessageFor(model => model.courseID, "", new { @class = "text-danger" })
+        <div class="card mb-3">
+            <div class="card-body">
 
-                </div>
-            </div>
-           
-                        <!--Grid Row-->
-                        <div class="form-row">
-                            <!--Grid Col-->
-                            @*question text*@
-                            <div class="form-group col-md-4">
-                                @Html.LabelFor(model => model.question)
-                                @Html.TextAreaFor(model => model.question, htmlAttributes: new { @class = "form-control md-textarea-auto", @placeholder = "Enter Question here", @rows = "2" })
-                                @Html.ValidationMessageFor(model => model.question, "", new { @class = "text-danger" })
-                            </div>
-                            <!--/.Grid Col-->
-                            <!-- Grid Col-->
-                            @*question image*@
-                            <div class="form-group col-md-4 text-center">
-                                <label>Upload Question Image</label>
-                                <input type="file" name="qImage" class="btn btn-blue-grey btn-sm" accept="image/jpeg, image/png, image/gif" onchange="showImagePreview(this, document.getElementById('qImagePreview1'))" />
-                                <img src="~/App_Files/Images/books.jpg" class="img-thumbnail" style="margin:10px" height="100" width="100" id="qImagePreview1" />
-                            </div>
-                            <!--/.Grid Col-->
-                            <!-- Grid Col-->
-                            @*question audio*@
+                @using (Html.BeginForm("AddorEditCard", "App", FormMethod.Post, new { enctype = "multipart/form-data", onSubmit = "return jQueryAjaxPost(this);" }))
+            {
+                    @Html.AntiForgeryToken()
 
-                            <div class="form-group col-md-4 text-center">
-                                <label>Record Fact Question Audio</label><br />
-                                <button type="button" class="btn btn-dark-green btn-sm" onclick="startRecording(this);">Start Recording</button>
-                                <button type="button" class="btn btn-pink btn-sm" onclick="stopRecording(this);">Stop Recording</button>
-                                <audio></audio>
-                                <ul id="recordingslist"></ul>
-                            </div>
+
+                  
+                    @Html.HiddenFor(model => model.userID)
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="courseID">Select Course</label>
+                            @Html.DropDownListFor(model => model.courseID, new SelectList(Model.CourseList, "CourseId", "name"), "Select Course", new { id = "myDropdown" })
+                            @Html.ValidationMessageFor(model => model.courseID, "", new { @class = "text-danger" })
+
                         </div>
+                    </div>
+
+                        <!--Grid Row-->
+                    <div class="form-row">
+                        <!--Grid Col-->
+                        @*question text*@
+                        <div class="form-group col-md-4">
+                            @Html.LabelFor(model => model.question)
+                            @Html.TextAreaFor(model => model.question, htmlAttributes: new { @class = "form-control md-textarea-auto", @placeholder = "Enter Question here", @rows = "2" })
+                            @Html.ValidationMessageFor(model => model.question, "", new { @class = "text-danger" })
+                        </div>
+                        <!--/.Grid Col-->
+                        <!-- Grid Col-->
+                        @*question image*@
+                        <div class="form-group col-md-4 text-center">
+                            <label>Upload Question Image</label>
+                            <div class="file-field">
+                                <div class="btn btn-blue-grey btn-sm" >
+                                    <span>Upload Image</span>
+                                    <input type="file" name="qImage" accept="image/jpeg, image/png, image/gif" onchange="showImagePreview(this, document.getElementById('qImagePreview1'))" />
+                                </div>
+                             </div>
+                            <img src="~/App_Files/Images/books.jpg" class="img-thumbnail" style="margin:10px" height="100" width="100" id="qImagePreview1" />
+                        </div>
+                        <!--/.Grid Col-->
+                        <!-- Grid Col-->
+                        @*question audio*@
+
+                        <div class="form-group col-md-4 text-center">
+                            <label>Upload or Record Fact Question Audio</label><br />
+                            <div class="file-field">
+                                <div class="btn btn-blue-grey btn-sm">
+                                    <span>Upload Audio</span>
+                                    <input type="file" name="qImage" accept="audio/mp3, audio/wav" />
+                                </div>
+                            </div>
+                           <h5> OR</h5>
+                            <button type="button" class="btn btn-dark-green btn-sm" onclick="startRecording(this);">Start Recording</button>
+                            <button type="button" class="btn btn-pink btn-sm" onclick="stopRecording(this);">Stop Recording</button>
+                            <audio></audio>
+                            <ul class="audio-download" id="recordingslist"></ul>
+                        </div>
+                    </div>
                         <!--/. Grid Row -->
 
 
                         <!- Grid Row -->
-                        <div class="form-row">
-                            <!--Grid Column-->
-                            <div class="form-group col-md-4">
-                                @*Fact Answer*@
-                                @Html.LabelFor(model => model.answer)
-                                @Html.TextAreaFor(model => model.answer, htmlAttributes: new { @class = "form-control md-textarea-auto", @placeholder = "Enter Fact Answer here", @rows = "2" })
-                                @Html.ValidationMessageFor(model => model.answer, "", new { @class = "text-danger" })
-                            </div>
-                            <!--/. Grid Column-->
-                            <!--Grid Column-->
-                            @*Answer Image *@
-                            <div class="form-group col-md-4 text-center">
-                                <label>Upload Answer Image</label>
-                                <input type="file" name="aImage" class="btn btn-blue-grey btn-sm" accept="image/jpeg, image/png, image/gif" onchange="showImagePreview(this, document.getElementById('aImagePreview2'))" />
-                                <img src="~/App_Files/Images/books.jpg" class="img-thumbnail" style="margin:10px" height="100" width="100" id="aImagePreview2" />
-                            </div>
-                            <!--/. Grid Column-->
-                            <!--Grid Column-->
-                            <div class="form-group col-md-4 text-center">
-                                @*Answer Audio*@
-                                <label>Record Fact Answer Audio </label><br />
-                                <button type="button" class="btn btn-dark-green btn-sm" onclick="startRecording2(this);">Start Recording</button>
-                                <button type="button" class="btn btn-pink btn-sm" onclick="stopRecording2(this);">Stop Recording</button>
-                                <audio></audio>
-                                <ul id="recordingslist2"></ul>
-                            </div>
-                            <!--Grid Column-->
+                    <div class="form-row">
+                        <!--Grid Column-->
+                        <div class="form-group col-md-4">
+                            @*Fact Answer*@
+                            @Html.LabelFor(model => model.answer)
+                            @Html.TextAreaFor(model => model.answer, htmlAttributes: new { @class = "form-control md-textarea-auto", @placeholder = "Enter Fact Answer here", @rows = "2" })
+                            @Html.ValidationMessageFor(model => model.answer, "", new { @class = "text-danger" })
                         </div>
+                        <!--/. Grid Column-->
+                        <!--Grid Column-->
+                        @*Answer Image *@
+                        <div class="form-group col-md-4 text-center">
+                            <label>Upload Answer Image</label>
+                            <div class="file-field">
+                                <div class="btn btn-blue-grey btn-sm">
+                                    <span>Upload Image</span>
+                                    <input type="file"name="aImage" accept="image/jpeg, image/png, image/gif" onchange="showImagePreview(this, document.getElementById('aImagePreview2'))" />
+                                </div>
+                            </div>
+                           
+                            <img src="~/App_Files/Images/books.jpg" class="img-thumbnail" style="margin:10px" height="100" width="100" id="aImagePreview2" />
+                        </div>
+                        <!--/. Grid Column-->
+                        <!--Grid Column-->
+                        <div class="form-group col-md-4 text-center">
+                            @*Answer Audio*@
+                            <label>Upload Or Record Fact Answer Audio </label>
+                            <div class="file-field">
+                                <div class="btn btn-blue-grey btn-sm">
+                                    <span>Upload Audio</span>
+                                    <input type="file" name="qImage" accept="audio/mp3, audio/wav" />
+                                </div>
+                            </div>
+                            <h5> OR</h5>
+                            <button type="button" class="btn btn-dark-green btn-sm" onclick="startRecording2(this);">Start Recording</button>
+                            <button type="button" class="btn btn-pink btn-sm" onclick="stopRecording2(this);">Stop Recording</button>
+                            <audio></audio>
+                            <ul class="audio-download" id="recordingslist2"></ul>
+                        </div>
+                        <!--Grid Column-->
+                    </div>
                         <!--/. Grid Row-->
 
                     <!-- Grid Row-->
-                                <div class="form-row ">
-                                    <!--Grid Column-->
-                                    <div class="form-group col-md-8">
-                                        @*Fact Sheet*@
-                                        @Html.LabelFor(model => model.factsheet)
+                    <div class="form-row ">
+                        <!--Grid Column-->
+                        <div class="form-group col-md-8">
+                            @*Fact Sheet*@
+                            @Html.LabelFor(model => model.factsheet)
 
-                                        @Html.TextAreaFor(model => model.factsheet, htmlAttributes: new { @class = "form-control md-textarea-auto", @placeholder = "Enter Fact Sheet here", @rows = "2", @cols = "60" })
-                                        @Html.ValidationMessageFor(model => model.factsheet, "", new { @class = "text-danger" })
-                                    </div>
-                                    <!--/. Grid Column-->
-                                    <!-- Grid Column-->
-                                    <div class="form-group col-md-4 text-center">
-                                        @*Fact Sheet Audio*@
-                                        <label>Record Fact Sheet Audio</label><br />
-                                        <button type="button" class="btn btn-dark-green btn-sm" onclick="startRecording3(this);">Start Recording</button>
-                                        <button type="button" class="btn btn-pink btn-sm" onclick="stopRecording3(this);">Stop Recording</button>
-                                        <audio></audio>
-                                        <ul id="recordingslist3"></ul>
-                                    </div>
-                                    <!--/. Grid Column-->
-
+                            @Html.TextAreaFor(model => model.factsheet, htmlAttributes: new { @class = "form-control md-textarea-auto", @placeholder = "Enter Fact Sheet here", @rows = "2", @cols = "60" })
+                            @Html.ValidationMessageFor(model => model.factsheet, "", new { @class = "text-danger" })
+                        </div>
+                        <!--/. Grid Column-->
+                        <!-- Grid Column-->
+                        <div class="form-group col-md-4 text-center">
+                            @*Fact Sheet Audio*@
+                            <label>Upload Or Record Fact Sheet Audio</label>
+                            <div class="file-field">
+                                <div class="btn btn-blue-grey btn-sm">
+                                    <span>Upload Audio</span>
+                                    <input type="file" name="qImage" accept="audio/mp3, audio/wav" />
                                 </div>
+                            </div>
+                            <h5> OR</h5>
+                            <button type="button" class="btn btn-dark-green btn-sm" onclick="startRecording3(this);">Start Recording</button>
+                            <button type="button" class="btn btn-pink btn-sm" onclick="stopRecording3(this);">Stop Recording</button>
+                            <audio></audio>
+                            <ul class="audio-download" id="recordingslist3"></ul>
+                        </div>
+                        <!--/. Grid Column-->
+
+                    </div>
                     <!--/. Grid Row-->
 
 
                     <!-- Grid Row-->
-                                <div class="form-row">
-                                    <!--Grid Col-->
-                                    <div class="form-group col-md-4">
-                                        <label for="points">Points to be Earned</label>
-                                        @Html.EditorFor(model => model.points, new { htmlAttributes = new { @class = "form-control" } })
-                                        @Html.ValidationMessageFor(model => model.points, "", new { @class = "text-danger" })
+                    @*<div class="form-row">
+                        <!--Grid Col-->
+                        <div class="form-group col-md-4">
+                            <label for="points">Points to be Earned</label>
+                            @Html.EditorFor(model => model.points, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.points, "", new { @class = "text-danger" })
 
-                                    </div>
-                                    <!--/. Grid Col-->
-                                    <!-- Grid Col-->
-                                    <div class="form-group col-md-4">
-                                        @Html.LabelFor(model => model.flashcardRespTime)
-                                        @Html.EditorFor(model => model.flashcardRespTime, new { htmlAttributes = new { @class = "form-control" } })
-                                        @Html.ValidationMessageFor(model => model.flashcardRespTime, "", new { @class = "text-danger" })
-                                    </div>
-                                    <!--/. Grid Col-->
-                                    <!--Grid Col-->
-                                    <div class="form-group col-md-4">
-                                        @Html.LabelFor(model => model.quizRespTime)
-                                        @Html.EditorFor(model => model.quizRespTime, new { htmlAttributes = new { @class = "form-control" } })
-                                        @Html.ValidationMessageFor(model => model.quizRespTime, "", new { @class = "text-danger" })
-                                    </div>
-                                    <!--/. Grid Col-->
-                                </div>
+                        </div>
+                        <!--/. Grid Col-->
+                        <!-- Grid Col-->
+                        <div class="form-group col-md-4">
+                            @Html.LabelFor(model => model.flashcardRespTime)
+                            @Html.EditorFor(model => model.flashcardRespTime, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.flashcardRespTime, "", new { @class = "text-danger" })
+                        </div>
+                        <!--/. Grid Col-->
+                        <!--Grid Col-->
+                        <div class="form-group col-md-4">
+                            @Html.LabelFor(model => model.quizRespTime)
+                            @Html.EditorFor(model => model.quizRespTime, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.quizRespTime, "", new { @class = "text-danger" })
+                        </div>
+                        <!--/. Grid Col-->
+                    </div>*@
                     <!--/. Grid Row -->
-                                <div class="form-group">
-                                    <div class="col-md-12 text-center">
-                                        <input type="submit" value="Add Fact" class="btn btn-indigo btn-lg btn-block" />
-                                    </div>
-                                </div>
+                        <div class="form-group">
+                            <div class="col-md-12 text-center">
+                                <input type="submit" value="Add Fact" class="btn btn-indigo btn-lg btn-block" />
+                            </div>
+                        </div>
 
-        }
+                }
 
+            </div>
+
+        </div>
+            </div>
+        <div class="col-md-2 heading-grey z-depth-1-half mb-4">
+            <div>adds sections</div>
+        </div>
     </div>
-
 </div>
+
+
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
@@ -203,7 +256,7 @@
 
             recorder.clear();
         }
-        
+
         function createDownloadLink() {
             console.log('trying to create download link');
             recorder && recorder.exportWAV(function (blob) {
@@ -216,15 +269,15 @@
                 au.src = url;
                 hf.href = url;
                 hf.download = new Date().toTimeString() + '.mp3';
-                hf.innerHTML = 'click to download..  ' + hf.download;
+                hf.innerHTML = hf.download;
                 li.appendChild(au);
                 li.appendChild(hf);
-                
+
                 recordingslist.appendChild(li);
                 console.log(li);
-             
+
                 blob.lastModifiedDate = new Date();
-                fileObject = new File([blob], new Date().toTimeString() + '.mp3' , {
+                fileObject = new File([blob], new Date().toTimeString() + '.mp3', {
                     type: 'audio/mpeg'
                 });
 
@@ -266,7 +319,7 @@
                 au.src = url;
                 hf.href = url;
                 hf.download = new Date().toTimeString() + '.mp3';
-                hf.innerHTML = 'click to download..' + hf.download;
+                hf.innerHTML =  hf.download;
                 li.appendChild(au);
                 li.appendChild(hf);
                 console.log(li);
@@ -281,13 +334,13 @@
         }
 
 
-          //........ Recording Two.............. //
+        //........ Recording Two.............. //
 
 
 
 
 
-          //........ Recording Three.............. //
+        //........ Recording Three.............. //
 
         function startRecording3(button) {
             recorder && recorder.record();
@@ -324,7 +377,7 @@
                 au.src = url;
                 hf.href = url;
                 hf.download = new Date().toTimeString() + '.mp3';
-                hf.innerHTML = 'click to download..' + hf.download;
+                hf.innerHTML = hf.download;
                 li.appendChild(au);
                 li.appendChild(hf);
                 console.log(li);
@@ -345,12 +398,12 @@
 
         function jQueryAjaxPost(form) {
 
-        
+
             $.validator.unobtrusive.parse(form);
-            
-           
+
+
             if ($(form).valid) {
-               
+
                 if ($(form).attr('enctype') == "multipart/form-data") {
                     contentType = false;
                     processData = false;
@@ -360,14 +413,14 @@
                 data.append("aAudio", fileObject2);
                 data.append("fsAudio", fileObject3);
 
-               
+
                 $.ajax({
                     type: 'POST',
-              
+
                     url: '/app/AddorEditCard',
                     //data: new FormData().append("qAudio", fileObject),
-                    data:data,
-                   contentType: contentType,
+                    data: data,
+                    contentType: contentType,
                     processData: processData,
                     success: function (response) {
                         alertify.alert(" added successfully")
@@ -384,13 +437,13 @@
 
         }
     </script>
-<script src="~/Scripts/chosen.jquery.min.js"></script>
+    <script src="~/Scripts/chosen.jquery.min.js"></script>
     <script>
         $(document).ready(function () {
 
             $("#myDropdown").chosen({
                 width: "100%"
-               
+
 
             });
         });
