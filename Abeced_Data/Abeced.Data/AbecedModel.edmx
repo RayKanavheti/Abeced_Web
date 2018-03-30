@@ -1,0 +1,1792 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Abeced.MDFModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
+          </Key>
+          <Property Name="MigrationId" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="ContextKey" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="Model" Type="varbinary(max)" Nullable="false" />
+          <Property Name="ProductVersion" Type="nvarchar" MaxLength="32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetRoles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUserClaims">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ClaimType" Type="nvarchar(max)" />
+          <Property Name="ClaimValue" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="AspNetUserLogins">
+          <Key>
+            <PropertyRef Name="LoginProvider" />
+            <PropertyRef Name="ProviderKey" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="LoginProvider" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ProviderKey" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUserRoles">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="RoleId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="256" />
+          <Property Name="EmailConfirmed" Type="bit" Nullable="false" />
+          <Property Name="PasswordHash" Type="nvarchar(max)" />
+          <Property Name="SecurityStamp" Type="nvarchar(max)" />
+          <Property Name="PhoneNumber" Type="nvarchar(max)" />
+          <Property Name="PhoneNumberConfirmed" Type="bit" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="bit" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="datetime" />
+          <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="int" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="Fname" Type="nvarchar(max)" />
+          <Property Name="Lname" Type="nvarchar(max)" />
+          <Property Name="Title" Type="nvarchar(max)" />
+          <Property Name="Gender" Type="nvarchar(max)" />
+          <Property Name="DOB" Type="nvarchar(max)" />
+          <Property Name="Age" Type="nvarchar(max)" />
+          <Property Name="City" Type="nvarchar(max)" />
+          <Property Name="Province" Type="nvarchar(max)" />
+          <Property Name="Country" Type="nvarchar(max)" />
+          <Property Name="PostalCode" Type="nvarchar(max)" />
+          <Property Name="Occupation" Type="nvarchar(max)" />
+          <Property Name="EducationLevel" Type="nvarchar(max)" />
+          <Property Name="StreetAddress" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Course">
+          <Key>
+            <PropertyRef Name="CourseId" />
+          </Key>
+          <Property Name="CourseId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="description" Type="varchar" MaxLength="300" />
+          <Property Name="img" Type="varchar" MaxLength="300" />
+          <Property Name="duration" Type="varchar" MaxLength="10" />
+          <Property Name="dateCreated" Type="datetime" />
+          <Property Name="numFacts" Type="varchar" MaxLength="5" />
+          <Property Name="points" Type="varchar" MaxLength="50" />
+          <Property Name="creatorName" Type="varchar" MaxLength="110" />
+          <Property Name="isApproved" Type="bit" />
+          <Property Name="approvalDate" Type="datetime" />
+          <Property Name="subCatID" Type="int" Nullable="false" />
+          <Property Name="subCatName" Type="varchar" MaxLength="50" />
+          <Property Name="mainCatName" Type="varchar" MaxLength="50" />
+          <Property Name="userID" Type="int" />
+          <Property Name="averageRating" Type="varchar" MaxLength="5" />
+          <Property Name="AbecedUserId" Type="nvarchar" MaxLength="128" />
+          <Property Name="SubjectIds" Type="int" />
+        </EntityType>
+        <EntityType Name="Fact">
+          <Key>
+            <PropertyRef Name="FactId" />
+          </Key>
+          <Property Name="FactId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="question" Type="varchar" MaxLength="300" Nullable="false" />
+          <Property Name="answer" Type="varchar" MaxLength="300" Nullable="false" />
+          <Property Name="factsheet" Type="varchar" MaxLength="600" Nullable="false" />
+          <Property Name="qAudio" Type="varchar" MaxLength="100" />
+          <Property Name="aAudio" Type="varchar" MaxLength="100" />
+          <Property Name="fsAudio" Type="varchar" MaxLength="100" />
+          <Property Name="qImage" Type="varchar" MaxLength="100" />
+          <Property Name="aImage" Type="varchar" MaxLength="100" />
+          <Property Name="points" Type="varchar" MaxLength="50" />
+          <Property Name="flashcardRespTime" Type="varchar" MaxLength="5" />
+          <Property Name="quizRespTime" Type="varchar" MaxLength="5" />
+          <Property Name="courseID" Type="int" Nullable="false" />
+          <Property Name="userID" Type="int" />
+          <Property Name="AbecedUserId" Type="nvarchar" MaxLength="128" />
+        </EntityType>
+        <EntityType Name="FactInfo">
+          <Key>
+            <PropertyRef Name="FactInfoId" />
+          </Key>
+          <Property Name="FactInfoId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="numTries" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="numRight" Type="varchar" MaxLength="5" />
+          <Property Name="numWrong" Type="varchar" MaxLength="5" />
+          <Property Name="successRate" Type="varchar" MaxLength="5" />
+          <Property Name="flashcardRespTime" Type="varchar" MaxLength="5" />
+          <Property Name="quizRespTime" Type="varchar" MaxLength="5" />
+          <Property Name="factListID" Type="int" Nullable="false" />
+          <Property Name="factID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FactList">
+          <Key>
+            <PropertyRef Name="FactListId" />
+          </Key>
+          <Property Name="FactListId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="courseName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="courseDesc" Type="varchar" MaxLength="300" Nullable="false" />
+          <Property Name="courseRating" Type="varchar" MaxLength="5" />
+          <Property Name="numFacts" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="factsIDs" Type="varchar" MaxLength="1000" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LeaderBoard">
+          <Key>
+            <PropertyRef Name="LeaderBoardId" />
+          </Key>
+          <Property Name="LeaderBoardId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="110" Nullable="false" />
+          <Property Name="userID" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="points" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="AbecedUserId" Type="nvarchar" MaxLength="128" />
+        </EntityType>
+        <EntityType Name="MainCategory">
+          <Key>
+            <PropertyRef Name="MainCategoryId" />
+          </Key>
+          <Property Name="MainCategoryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="description" Type="varchar" MaxLength="300" Nullable="false" />
+          <Property Name="img" Type="varchar" MaxLength="300" />
+        </EntityType>
+        <EntityType Name="QuizSession">
+          <Key>
+            <PropertyRef Name="QuizSessionId" />
+          </Key>
+          <Property Name="QuizSessionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="CourseName" Type="varchar" MaxLength="100" />
+          <Property Name="FactIds" Type="varchar" MaxLength="50" />
+          <Property Name="AveragaScore" Type="float" />
+          <Property Name="PointsEarned" Type="float" />
+          <Property Name="DateSubmitted" Type="timestamp" StoreGeneratedPattern="Computed" />
+          <Property Name="Numfacts" Type="int" />
+          <Property Name="NumRevised" Type="int" />
+        </EntityType>
+        <EntityType Name="Rating">
+          <Key>
+            <PropertyRef Name="RatingId" />
+          </Key>
+          <Property Name="RatingId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="raterName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="raterID" Type="int" Nullable="false" />
+          <Property Name="raterImg" Type="varchar" MaxLength="300" />
+          <Property Name="courseID" Type="int" Nullable="false" />
+          <Property Name="contentName" Type="varchar" MaxLength="100" />
+          <Property Name="rate" Type="int" Nullable="false" />
+          <Property Name="comment" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="date" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Revision">
+          <Key>
+            <PropertyRef Name="RevisionId" />
+          </Key>
+          <Property Name="RevisionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="type" Type="varchar" MaxLength="50" />
+          <Property Name="date" Type="datetime" Nullable="false" />
+          <Property Name="isCompleted" Type="bit" Nullable="false" />
+          <Property Name="isStarted" Type="bit" Nullable="false" />
+          <Property Name="isMandatory" Type="bit" />
+          <Property Name="userID" Type="int" Nullable="false" />
+          <Property Name="sessionIDs" Type="varchar" MaxLength="1000" />
+          <Property Name="mainSessionID" Type="int" Nullable="false" />
+          <Property Name="AbecedUserId" Type="nvarchar" MaxLength="128" />
+        </EntityType>
+        <EntityType Name="Reward">
+          <Key>
+            <PropertyRef Name="RewardId" />
+          </Key>
+          <Property Name="RewardId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="type" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="desc" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="value" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="date" Type="datetime" />
+          <Property Name="img" Type="varchar" MaxLength="300" />
+          <Property Name="data" Type="varchar" MaxLength="300" />
+          <Property Name="userID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Sharing">
+          <Key>
+            <PropertyRef Name="ShareId" />
+          </Key>
+          <Property Name="ShareId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SenderName" Type="varchar" MaxLength="50" />
+          <Property Name="SenderEmail" Type="varchar" MaxLength="50" />
+          <Property Name="CourseName" Type="varchar" MaxLength="50" />
+          <Property Name="CourseId" Type="int" />
+          <Property Name="FactList" Type="varchar" MaxLength="100" />
+          <Property Name="DateShared" Type="timestamp" StoreGeneratedPattern="Computed" />
+          <Property Name="SharedWithIds" Type="varchar" MaxLength="300" />
+          <Property Name="SharedWithUserNames" Type="varchar" MaxLength="500" />
+          <Property Name="SharedWithEmails" Type="varchar" MaxLength="500" />
+          <Property Name="AbecedUserId_Sharer" Type="nvarchar" MaxLength="128" />
+        </EntityType>
+        <EntityType Name="StudySession">
+          <Key>
+            <PropertyRef Name="StudySessionId" />
+          </Key>
+          <Property Name="StudySessionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="dateStarted" Type="datetime" Nullable="false" />
+          <Property Name="dateCompleted" Type="datetime" />
+          <Property Name="isComplete" Type="bit" Nullable="false" />
+          <Property Name="isRevision" Type="bit" Nullable="false" />
+          <Property Name="mainSessionID" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="currentProgress" Type="varchar" MaxLength="5" />
+          <Property Name="currentScore" Type="varchar" MaxLength="5" />
+          <Property Name="lastUpdate" Type="varchar" MaxLength="50" />
+          <Property Name="isFavorite" Type="bit" />
+          <Property Name="nextRevision" Type="varchar" MaxLength="50" />
+          <Property Name="previousRevision" Type="varchar" MaxLength="50" />
+          <Property Name="missedRevision" Type="varchar" MaxLength="50" />
+          <Property Name="numRevisionsDone" Type="varchar" MaxLength="5" />
+          <Property Name="userID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SubCategory">
+          <Key>
+            <PropertyRef Name="SubCategoryId" />
+          </Key>
+          <Property Name="SubCategoryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="description" Type="varchar" MaxLength="300" />
+          <Property Name="img" Type="varchar" MaxLength="300" />
+          <Property Name="mainCatID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Subjects">
+          <Key>
+            <PropertyRef Name="SubjectId" />
+          </Key>
+          <Property Name="SubjectId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SubjectName" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="SubjectDesc" Type="varchar" MaxLength="500" />
+          <Property Name="SubjectImage" Type="varchar" MaxLength="500" />
+          <Property Name="SubCatId" Type="int" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fname" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="lname" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="username" Type="varchar" MaxLength="50" />
+          <Property Name="Email" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Password" Type="text" Nullable="false" />
+          <Property Name="gender" Type="varchar" MaxLength="6" />
+          <Property Name="age" Type="int" />
+          <Property Name="dob" Type="datetime" />
+          <Property Name="occupation" Type="varchar" MaxLength="100" />
+          <Property Name="educationLevel" Type="varchar" MaxLength="50" />
+          <Property Name="title" Type="varchar" MaxLength="50" />
+          <Property Name="streetAddress" Type="varchar" MaxLength="150" />
+          <Property Name="city" Type="varchar" MaxLength="50" />
+          <Property Name="province" Type="varchar" MaxLength="50" />
+          <Property Name="postalCode" Type="varchar" MaxLength="10" />
+          <Property Name="country" Type="varchar" MaxLength="50" />
+          <Property Name="phoneNumber" Type="varchar" MaxLength="20" />
+          <Property Name="isCreator" Type="bit" />
+        </EntityType>
+        <Association Name="FK_Course_AspnetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
+          <End Role="Course" Type="Self.Course" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Course">
+              <PropertyRef Name="AbecedUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Course_Subjects">
+          <End Role="Subjects" Type="Self.Subjects" Multiplicity="0..1" />
+          <End Role="Course" Type="Self.Course" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subjects">
+              <PropertyRef Name="SubjectId" />
+            </Principal>
+            <Dependent Role="Course">
+              <PropertyRef Name="SubjectIds" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Course_To_User">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Course" Type="Self.Course" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Course">
+              <PropertyRef Name="userID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserClaims" Type="Self.AspNetUserClaims" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserClaims">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserLogins" Type="Self.AspNetUserLogins" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserLogins">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+          <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetRoles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Fact_AspnetUser">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
+          <End Role="Fact" Type="Self.Fact" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Fact">
+              <PropertyRef Name="AbecedUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Fact_To_Course">
+          <End Role="Course" Type="Self.Course" Multiplicity="1" />
+          <End Role="Fact" Type="Self.Fact" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Course">
+              <PropertyRef Name="CourseId" />
+            </Principal>
+            <Dependent Role="Fact">
+              <PropertyRef Name="courseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Fact_To_User">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Fact" Type="Self.Fact" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Fact">
+              <PropertyRef Name="userID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FactInfo_To_Fact">
+          <End Role="Fact" Type="Self.Fact" Multiplicity="1" />
+          <End Role="FactInfo" Type="Self.FactInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Fact">
+              <PropertyRef Name="FactId" />
+            </Principal>
+            <Dependent Role="FactInfo">
+              <PropertyRef Name="factID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FactInfo_To_FactList">
+          <End Role="FactList" Type="Self.FactList" Multiplicity="1" />
+          <End Role="FactInfo" Type="Self.FactInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FactList">
+              <PropertyRef Name="FactListId" />
+            </Principal>
+            <Dependent Role="FactInfo">
+              <PropertyRef Name="factListID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LeaderBoard_AspnetUser">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
+          <End Role="LeaderBoard" Type="Self.LeaderBoard" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="LeaderBoard">
+              <PropertyRef Name="AbecedUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LeaderBoard_To_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="LeaderBoard" Type="Self.LeaderBoard" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="LeaderBoard">
+              <PropertyRef Name="LeaderBoardId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_QuizSession_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="QuizSession" Type="Self.QuizSession" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="QuizSession">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Rating_To_Course">
+          <End Role="Course" Type="Self.Course" Multiplicity="1" />
+          <End Role="Rating" Type="Self.Rating" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Course">
+              <PropertyRef Name="CourseId" />
+            </Principal>
+            <Dependent Role="Rating">
+              <PropertyRef Name="courseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Revision_To_Session">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
+          <End Role="Revision" Type="Self.Revision" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Revision">
+              <PropertyRef Name="AbecedUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Revision_To_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Revision" Type="Self.Revision" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Revision">
+              <PropertyRef Name="userID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sharing_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
+          <End Role="Sharing" Type="Self.Sharing" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Sharing">
+              <PropertyRef Name="AbecedUserId_Sharer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudySession_To_FactList">
+          <End Role="FactList" Type="Self.FactList" Multiplicity="1" />
+          <End Role="StudySession" Type="Self.StudySession" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="FactList">
+              <PropertyRef Name="FactListId" />
+            </Principal>
+            <Dependent Role="StudySession">
+              <PropertyRef Name="StudySessionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudySession_To_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="StudySession" Type="Self.StudySession" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="StudySession">
+              <PropertyRef Name="userID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SubCategory_To_MainCategory">
+          <End Role="MainCategory" Type="Self.MainCategory" Multiplicity="1" />
+          <End Role="SubCategory" Type="Self.SubCategory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MainCategory">
+              <PropertyRef Name="MainCategoryId" />
+            </Principal>
+            <Dependent Role="SubCategory">
+              <PropertyRef Name="mainCatID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Subjects_SubCat">
+          <End Role="SubCategory" Type="Self.SubCategory" Multiplicity="0..1" />
+          <End Role="Subjects" Type="Self.Subjects" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SubCategory">
+              <PropertyRef Name="SubCategoryId" />
+            </Principal>
+            <Dependent Role="Subjects">
+              <PropertyRef Name="SubCatId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Table_To_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Reward" Type="Self.Reward" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Reward">
+              <PropertyRef Name="userID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="AbecedMDFModelStoreContainer">
+          <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Course" EntityType="Self.Course" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Fact" EntityType="Self.Fact" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FactInfo" EntityType="Self.FactInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FactList" EntityType="Self.FactList" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LeaderBoard" EntityType="Self.LeaderBoard" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MainCategory" EntityType="Self.MainCategory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="QuizSession" EntityType="Self.QuizSession" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Rating" EntityType="Self.Rating" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Revision" EntityType="Self.Revision" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Reward" EntityType="Self.Reward" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sharing" EntityType="Self.Sharing" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StudySession" EntityType="Self.StudySession" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SubCategory" EntityType="Self.SubCategory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Subjects" EntityType="Self.Subjects" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Course_AspnetUsers" Association="Self.FK_Course_AspnetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Course" EntitySet="Course" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Course_Subjects" Association="Self.FK_Course_Subjects">
+            <End Role="Subjects" EntitySet="Subjects" />
+            <End Role="Course" EntitySet="Course" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Course_To_User" Association="Self.FK_Course_To_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Course" EntitySet="Course" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Fact_AspnetUser" Association="Self.FK_Fact_AspnetUser">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Fact" EntitySet="Fact" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Fact_To_Course" Association="Self.FK_Fact_To_Course">
+            <End Role="Course" EntitySet="Course" />
+            <End Role="Fact" EntitySet="Fact" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Fact_To_User" Association="Self.FK_Fact_To_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Fact" EntitySet="Fact" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FactInfo_To_Fact" Association="Self.FK_FactInfo_To_Fact">
+            <End Role="Fact" EntitySet="Fact" />
+            <End Role="FactInfo" EntitySet="FactInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FactInfo_To_FactList" Association="Self.FK_FactInfo_To_FactList">
+            <End Role="FactList" EntitySet="FactList" />
+            <End Role="FactInfo" EntitySet="FactInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LeaderBoard_AspnetUser" Association="Self.FK_LeaderBoard_AspnetUser">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="LeaderBoard" EntitySet="LeaderBoard" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LeaderBoard_To_User" Association="Self.FK_LeaderBoard_To_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="LeaderBoard" EntitySet="LeaderBoard" />
+          </AssociationSet>
+          <AssociationSet Name="FK_QuizSession_User" Association="Self.FK_QuizSession_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="QuizSession" EntitySet="QuizSession" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Rating_To_Course" Association="Self.FK_Rating_To_Course">
+            <End Role="Course" EntitySet="Course" />
+            <End Role="Rating" EntitySet="Rating" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Revision_To_Session" Association="Self.FK_Revision_To_Session">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Revision" EntitySet="Revision" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Revision_To_User" Association="Self.FK_Revision_To_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Revision" EntitySet="Revision" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sharing_AspNetUsers" Association="Self.FK_Sharing_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Sharing" EntitySet="Sharing" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudySession_To_FactList" Association="Self.FK_StudySession_To_FactList">
+            <End Role="FactList" EntitySet="FactList" />
+            <End Role="StudySession" EntitySet="StudySession" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudySession_To_User" Association="Self.FK_StudySession_To_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="StudySession" EntitySet="StudySession" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SubCategory_To_MainCategory" Association="Self.FK_SubCategory_To_MainCategory">
+            <End Role="MainCategory" EntitySet="MainCategory" />
+            <End Role="SubCategory" EntitySet="SubCategory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Subjects_SubCat" Association="Self.FK_Subjects_SubCat">
+            <End Role="SubCategory" EntitySet="SubCategory" />
+            <End Role="Subjects" EntitySet="Subjects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Table_To_User" Association="Self.FK_Table_To_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Reward" EntitySet="Reward" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Abeced.MDFModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="C__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
+          </Key>
+          <Property Name="MigrationId" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ContextKey" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Model" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <Property Name="ProductVersion" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetRole">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AspNetUsers" Relationship="Self.AspNetUserRoles" FromRole="AspNetRoles" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="AspNetUserClaim">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUser" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUserClaims" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="AspNetUserLogin">
+          <Key>
+            <PropertyRef Name="LoginProvider" />
+            <PropertyRef Name="ProviderKey" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="LoginProvider" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ProviderKey" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AspNetUser" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogins" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="AspNetUser">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
+          <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Fname" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Lname" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Title" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Gender" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DOB" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Age" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Province" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Country" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PostalCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Occupation" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="EducationLevel" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="StreetAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUserClaims" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserClaims" />
+          <NavigationProperty Name="AspNetUserLogins" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
+          <NavigationProperty Name="Courses" Relationship="Self.FK_Course_AspnetUsers" FromRole="AspNetUsers" ToRole="Course" />
+          <NavigationProperty Name="Facts" Relationship="Self.FK_Fact_AspnetUser" FromRole="AspNetUsers" ToRole="Fact" />
+          <NavigationProperty Name="LeaderBoards" Relationship="Self.FK_LeaderBoard_AspnetUser" FromRole="AspNetUsers" ToRole="LeaderBoard" />
+          <NavigationProperty Name="Revisions" Relationship="Self.FK_Revision_To_Session" FromRole="AspNetUsers" ToRole="Revision" />
+          <NavigationProperty Name="Sharings" Relationship="Self.FK_Sharing_AspNetUsers" FromRole="AspNetUsers" ToRole="Sharing" />
+          <NavigationProperty Name="AspNetRoles" Relationship="Self.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
+        </EntityType>
+        <EntityType Name="Course">
+          <Key>
+            <PropertyRef Name="CourseId" />
+          </Key>
+          <Property Name="CourseId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="img" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="duration" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="dateCreated" Type="DateTime" Precision="3" />
+          <Property Name="numFacts" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="points" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="creatorName" Type="String" MaxLength="110" FixedLength="false" Unicode="false" />
+          <Property Name="isApproved" Type="Boolean" />
+          <Property Name="approvalDate" Type="DateTime" Precision="3" />
+          <Property Name="subCatID" Type="Int32" Nullable="false" />
+          <Property Name="subCatName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="mainCatName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="userID" Type="Int32" />
+          <Property Name="averageRating" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="AbecedUserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="SubjectIds" Type="Int32" />
+          <NavigationProperty Name="AspNetUser" Relationship="Self.FK_Course_AspnetUsers" FromRole="Course" ToRole="AspNetUsers" />
+          <NavigationProperty Name="Subject" Relationship="Self.FK_Course_Subjects" FromRole="Course" ToRole="Subjects" />
+          <NavigationProperty Name="User" Relationship="Self.FK_Course_To_User" FromRole="Course" ToRole="User" />
+          <NavigationProperty Name="Facts" Relationship="Self.FK_Fact_To_Course" FromRole="Course" ToRole="Fact" />
+          <NavigationProperty Name="Ratings" Relationship="Self.FK_Rating_To_Course" FromRole="Course" ToRole="Rating" />
+        </EntityType>
+        <EntityType Name="Fact">
+          <Key>
+            <PropertyRef Name="FactId" />
+          </Key>
+          <Property Name="FactId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="question" Type="String" MaxLength="300" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="answer" Type="String" MaxLength="300" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="factsheet" Type="String" MaxLength="600" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="qAudio" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="aAudio" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="fsAudio" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="qImage" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="aImage" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="points" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="flashcardRespTime" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="quizRespTime" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="courseID" Type="Int32" Nullable="false" />
+          <Property Name="userID" Type="Int32" />
+          <Property Name="AbecedUserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUser" Relationship="Self.FK_Fact_AspnetUser" FromRole="Fact" ToRole="AspNetUsers" />
+          <NavigationProperty Name="Course" Relationship="Self.FK_Fact_To_Course" FromRole="Fact" ToRole="Course" />
+          <NavigationProperty Name="User" Relationship="Self.FK_Fact_To_User" FromRole="Fact" ToRole="User" />
+          <NavigationProperty Name="FactInfoes" Relationship="Self.FK_FactInfo_To_Fact" FromRole="Fact" ToRole="FactInfo" />
+        </EntityType>
+        <EntityType Name="FactInfo">
+          <Key>
+            <PropertyRef Name="FactInfoId" />
+          </Key>
+          <Property Name="FactInfoId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="numTries" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="numRight" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="numWrong" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="successRate" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="flashcardRespTime" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="quizRespTime" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="factListID" Type="Int32" Nullable="false" />
+          <Property Name="factID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Fact" Relationship="Self.FK_FactInfo_To_Fact" FromRole="FactInfo" ToRole="Fact" />
+          <NavigationProperty Name="FactList" Relationship="Self.FK_FactInfo_To_FactList" FromRole="FactInfo" ToRole="FactList" />
+        </EntityType>
+        <EntityType Name="FactList">
+          <Key>
+            <PropertyRef Name="FactListId" />
+          </Key>
+          <Property Name="FactListId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="courseName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="courseDesc" Type="String" MaxLength="300" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="courseRating" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="numFacts" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="factsIDs" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="FactInfoes" Relationship="Self.FK_FactInfo_To_FactList" FromRole="FactList" ToRole="FactInfo" />
+          <NavigationProperty Name="StudySession" Relationship="Self.FK_StudySession_To_FactList" FromRole="FactList" ToRole="StudySession" />
+        </EntityType>
+        <EntityType Name="LeaderBoard">
+          <Key>
+            <PropertyRef Name="LeaderBoardId" />
+          </Key>
+          <Property Name="LeaderBoardId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="110" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="userID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="points" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="AbecedUserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUser" Relationship="Self.FK_LeaderBoard_AspnetUser" FromRole="LeaderBoard" ToRole="AspNetUsers" />
+          <NavigationProperty Name="User" Relationship="Self.FK_LeaderBoard_To_User" FromRole="LeaderBoard" ToRole="User" />
+        </EntityType>
+        <EntityType Name="MainCategory">
+          <Key>
+            <PropertyRef Name="MainCategoryId" />
+          </Key>
+          <Property Name="MainCategoryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="300" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="img" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="SubCategories" Relationship="Self.FK_SubCategory_To_MainCategory" FromRole="MainCategory" ToRole="SubCategory" />
+        </EntityType>
+        <EntityType Name="QuizSession">
+          <Key>
+            <PropertyRef Name="QuizSessionId" />
+          </Key>
+          <Property Name="QuizSessionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="CourseName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="FactIds" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AveragaScore" Type="Double" />
+          <Property Name="PointsEarned" Type="Double" />
+          <Property Name="DateSubmitted" Type="Binary" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="Numfacts" Type="Int32" />
+          <Property Name="NumRevised" Type="Int32" />
+          <NavigationProperty Name="User" Relationship="Self.FK_QuizSession_User" FromRole="QuizSession" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Rating">
+          <Key>
+            <PropertyRef Name="RatingId" />
+          </Key>
+          <Property Name="RatingId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="raterName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="raterID" Type="Int32" Nullable="false" />
+          <Property Name="raterImg" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="courseID" Type="Int32" Nullable="false" />
+          <Property Name="contentName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="rate" Type="Int32" Nullable="false" />
+          <Property Name="comment" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="date" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Course" Relationship="Self.FK_Rating_To_Course" FromRole="Rating" ToRole="Course" />
+        </EntityType>
+        <EntityType Name="Revision">
+          <Key>
+            <PropertyRef Name="RevisionId" />
+          </Key>
+          <Property Name="RevisionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="isCompleted" Type="Boolean" Nullable="false" />
+          <Property Name="isStarted" Type="Boolean" Nullable="false" />
+          <Property Name="isMandatory" Type="Boolean" />
+          <Property Name="userID" Type="Int32" Nullable="false" />
+          <Property Name="sessionIDs" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="mainSessionID" Type="Int32" Nullable="false" />
+          <Property Name="AbecedUserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUser" Relationship="Self.FK_Revision_To_Session" FromRole="Revision" ToRole="AspNetUsers" />
+          <NavigationProperty Name="User" Relationship="Self.FK_Revision_To_User" FromRole="Revision" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Reward">
+          <Key>
+            <PropertyRef Name="RewardId" />
+          </Key>
+          <Property Name="RewardId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="desc" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="value" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="date" Type="DateTime" Precision="3" />
+          <Property Name="img" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="data" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="userID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="Self.FK_Table_To_User" FromRole="Reward" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Sharing">
+          <Key>
+            <PropertyRef Name="ShareId" />
+          </Key>
+          <Property Name="ShareId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SenderName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SenderEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CourseName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CourseId" Type="Int32" />
+          <Property Name="FactList" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="DateShared" Type="Binary" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="SharedWithIds" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="SharedWithUserNames" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="SharedWithEmails" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="AbecedUserId_Sharer" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUser" Relationship="Self.FK_Sharing_AspNetUsers" FromRole="Sharing" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="StudySession">
+          <Key>
+            <PropertyRef Name="StudySessionId" />
+          </Key>
+          <Property Name="StudySessionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="dateStarted" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="dateCompleted" Type="DateTime" Precision="3" />
+          <Property Name="isComplete" Type="Boolean" Nullable="false" />
+          <Property Name="isRevision" Type="Boolean" Nullable="false" />
+          <Property Name="mainSessionID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="currentProgress" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="currentScore" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="lastUpdate" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="isFavorite" Type="Boolean" />
+          <Property Name="nextRevision" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="previousRevision" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="missedRevision" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="numRevisionsDone" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="userID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="FactList" Relationship="Self.FK_StudySession_To_FactList" FromRole="StudySession" ToRole="FactList" />
+          <NavigationProperty Name="User" Relationship="Self.FK_StudySession_To_User" FromRole="StudySession" ToRole="User" />
+        </EntityType>
+        <EntityType Name="SubCategory">
+          <Key>
+            <PropertyRef Name="SubCategoryId" />
+          </Key>
+          <Property Name="SubCategoryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="img" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="mainCatID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="MainCategory" Relationship="Self.FK_SubCategory_To_MainCategory" FromRole="SubCategory" ToRole="MainCategory" />
+          <NavigationProperty Name="Subjects" Relationship="Self.FK_Subjects_SubCat" FromRole="SubCategory" ToRole="Subjects" />
+        </EntityType>
+        <EntityType Name="Subject">
+          <Key>
+            <PropertyRef Name="SubjectId" />
+          </Key>
+          <Property Name="SubjectId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SubjectName" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="SubjectDesc" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="SubjectImage" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="SubCatId" Type="Int32" />
+          <NavigationProperty Name="Courses" Relationship="Self.FK_Course_Subjects" FromRole="Subjects" ToRole="Course" />
+          <NavigationProperty Name="SubCategory" Relationship="Self.FK_Subjects_SubCat" FromRole="Subjects" ToRole="SubCategory" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="lname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="gender" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
+          <Property Name="age" Type="Int32" />
+          <Property Name="dob" Type="DateTime" Precision="3" />
+          <Property Name="occupation" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="educationLevel" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="title" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="streetAddress" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="city" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="province" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="postalCode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="country" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="phoneNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="isCreator" Type="Boolean" />
+          <NavigationProperty Name="Courses" Relationship="Self.FK_Course_To_User" FromRole="User" ToRole="Course" />
+          <NavigationProperty Name="Facts" Relationship="Self.FK_Fact_To_User" FromRole="User" ToRole="Fact" />
+          <NavigationProperty Name="LeaderBoard" Relationship="Self.FK_LeaderBoard_To_User" FromRole="User" ToRole="LeaderBoard" />
+          <NavigationProperty Name="QuizSessions" Relationship="Self.FK_QuizSession_User" FromRole="User" ToRole="QuizSession" />
+          <NavigationProperty Name="Revisions" Relationship="Self.FK_Revision_To_User" FromRole="User" ToRole="Revision" />
+          <NavigationProperty Name="Rewards" Relationship="Self.FK_Table_To_User" FromRole="User" ToRole="Reward" />
+          <NavigationProperty Name="StudySessions" Relationship="Self.FK_StudySession_To_User" FromRole="User" ToRole="StudySession" />
+        </EntityType>
+        <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserClaims" Type="Self.AspNetUserClaim" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserClaims">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserLogins" Type="Self.AspNetUserLogin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserLogins">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Course_AspnetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="0..1" />
+          <End Role="Course" Type="Self.Course" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Course">
+              <PropertyRef Name="AbecedUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Fact_AspnetUser">
+          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="0..1" />
+          <End Role="Fact" Type="Self.Fact" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Fact">
+              <PropertyRef Name="AbecedUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LeaderBoard_AspnetUser">
+          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="0..1" />
+          <End Role="LeaderBoard" Type="Self.LeaderBoard" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="LeaderBoard">
+              <PropertyRef Name="AbecedUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Revision_To_Session">
+          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="0..1" />
+          <End Role="Revision" Type="Self.Revision" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Revision">
+              <PropertyRef Name="AbecedUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sharing_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="0..1" />
+          <End Role="Sharing" Type="Self.Sharing" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Sharing">
+              <PropertyRef Name="AbecedUserId_Sharer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Course_Subjects">
+          <End Role="Subjects" Type="Self.Subject" Multiplicity="0..1" />
+          <End Role="Course" Type="Self.Course" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subjects">
+              <PropertyRef Name="SubjectId" />
+            </Principal>
+            <Dependent Role="Course">
+              <PropertyRef Name="SubjectIds" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Course_To_User">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Course" Type="Self.Course" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Course">
+              <PropertyRef Name="userID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Fact_To_Course">
+          <End Role="Course" Type="Self.Course" Multiplicity="1" />
+          <End Role="Fact" Type="Self.Fact" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Course">
+              <PropertyRef Name="CourseId" />
+            </Principal>
+            <Dependent Role="Fact">
+              <PropertyRef Name="courseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Rating_To_Course">
+          <End Role="Course" Type="Self.Course" Multiplicity="1" />
+          <End Role="Rating" Type="Self.Rating" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Course">
+              <PropertyRef Name="CourseId" />
+            </Principal>
+            <Dependent Role="Rating">
+              <PropertyRef Name="courseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Fact_To_User">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Fact" Type="Self.Fact" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Fact">
+              <PropertyRef Name="userID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FactInfo_To_Fact">
+          <End Role="Fact" Type="Self.Fact" Multiplicity="1" />
+          <End Role="FactInfo" Type="Self.FactInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Fact">
+              <PropertyRef Name="FactId" />
+            </Principal>
+            <Dependent Role="FactInfo">
+              <PropertyRef Name="factID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FactInfo_To_FactList">
+          <End Role="FactList" Type="Self.FactList" Multiplicity="1" />
+          <End Role="FactInfo" Type="Self.FactInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FactList">
+              <PropertyRef Name="FactListId" />
+            </Principal>
+            <Dependent Role="FactInfo">
+              <PropertyRef Name="factListID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudySession_To_FactList">
+          <End Role="FactList" Type="Self.FactList" Multiplicity="1" />
+          <End Role="StudySession" Type="Self.StudySession" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="FactList">
+              <PropertyRef Name="FactListId" />
+            </Principal>
+            <Dependent Role="StudySession">
+              <PropertyRef Name="StudySessionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LeaderBoard_To_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="LeaderBoard" Type="Self.LeaderBoard" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="LeaderBoard">
+              <PropertyRef Name="LeaderBoardId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SubCategory_To_MainCategory">
+          <End Role="MainCategory" Type="Self.MainCategory" Multiplicity="1" />
+          <End Role="SubCategory" Type="Self.SubCategory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MainCategory">
+              <PropertyRef Name="MainCategoryId" />
+            </Principal>
+            <Dependent Role="SubCategory">
+              <PropertyRef Name="mainCatID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_QuizSession_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="QuizSession" Type="Self.QuizSession" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="QuizSession">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Revision_To_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Revision" Type="Self.Revision" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Revision">
+              <PropertyRef Name="userID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Table_To_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Reward" Type="Self.Reward" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Reward">
+              <PropertyRef Name="userID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudySession_To_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="StudySession" Type="Self.StudySession" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="StudySession">
+              <PropertyRef Name="userID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Subjects_SubCat">
+          <End Role="SubCategory" Type="Self.SubCategory" Multiplicity="0..1" />
+          <End Role="Subjects" Type="Self.Subject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SubCategory">
+              <PropertyRef Name="SubCategoryId" />
+            </Principal>
+            <Dependent Role="Subjects">
+              <PropertyRef Name="SubCatId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="AspNetUserRoles">
+          <End Role="AspNetRoles" Type="Self.AspNetRole" Multiplicity="*" />
+          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="AbecedEntity" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="C__MigrationHistory" EntityType="Self.C__MigrationHistory" />
+          <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRole" />
+          <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaim" />
+          <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogin" />
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUser" />
+          <EntitySet Name="Courses" EntityType="Self.Course" />
+          <EntitySet Name="Facts" EntityType="Self.Fact" />
+          <EntitySet Name="FactInfoes" EntityType="Self.FactInfo" />
+          <EntitySet Name="FactLists" EntityType="Self.FactList" />
+          <EntitySet Name="LeaderBoards" EntityType="Self.LeaderBoard" />
+          <EntitySet Name="MainCategories" EntityType="Self.MainCategory" />
+          <EntitySet Name="QuizSessions" EntityType="Self.QuizSession" />
+          <EntitySet Name="Ratings" EntityType="Self.Rating" />
+          <EntitySet Name="Revisions" EntityType="Self.Revision" />
+          <EntitySet Name="Rewards" EntityType="Self.Reward" />
+          <EntitySet Name="Sharings" EntityType="Self.Sharing" />
+          <EntitySet Name="StudySessions" EntityType="Self.StudySession" />
+          <EntitySet Name="SubCategories" EntityType="Self.SubCategory" />
+          <EntitySet Name="Subjects" EntityType="Self.Subject" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Course_AspnetUsers" Association="Self.FK_Course_AspnetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Course" EntitySet="Courses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Fact_AspnetUser" Association="Self.FK_Fact_AspnetUser">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Fact" EntitySet="Facts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LeaderBoard_AspnetUser" Association="Self.FK_LeaderBoard_AspnetUser">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="LeaderBoard" EntitySet="LeaderBoards" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Revision_To_Session" Association="Self.FK_Revision_To_Session">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Revision" EntitySet="Revisions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sharing_AspNetUsers" Association="Self.FK_Sharing_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Sharing" EntitySet="Sharings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Course_Subjects" Association="Self.FK_Course_Subjects">
+            <End Role="Subjects" EntitySet="Subjects" />
+            <End Role="Course" EntitySet="Courses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Course_To_User" Association="Self.FK_Course_To_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Course" EntitySet="Courses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Fact_To_Course" Association="Self.FK_Fact_To_Course">
+            <End Role="Course" EntitySet="Courses" />
+            <End Role="Fact" EntitySet="Facts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Rating_To_Course" Association="Self.FK_Rating_To_Course">
+            <End Role="Course" EntitySet="Courses" />
+            <End Role="Rating" EntitySet="Ratings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Fact_To_User" Association="Self.FK_Fact_To_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Fact" EntitySet="Facts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FactInfo_To_Fact" Association="Self.FK_FactInfo_To_Fact">
+            <End Role="Fact" EntitySet="Facts" />
+            <End Role="FactInfo" EntitySet="FactInfoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FactInfo_To_FactList" Association="Self.FK_FactInfo_To_FactList">
+            <End Role="FactList" EntitySet="FactLists" />
+            <End Role="FactInfo" EntitySet="FactInfoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudySession_To_FactList" Association="Self.FK_StudySession_To_FactList">
+            <End Role="FactList" EntitySet="FactLists" />
+            <End Role="StudySession" EntitySet="StudySessions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LeaderBoard_To_User" Association="Self.FK_LeaderBoard_To_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="LeaderBoard" EntitySet="LeaderBoards" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SubCategory_To_MainCategory" Association="Self.FK_SubCategory_To_MainCategory">
+            <End Role="MainCategory" EntitySet="MainCategories" />
+            <End Role="SubCategory" EntitySet="SubCategories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_QuizSession_User" Association="Self.FK_QuizSession_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="QuizSession" EntitySet="QuizSessions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Revision_To_User" Association="Self.FK_Revision_To_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Revision" EntitySet="Revisions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Table_To_User" Association="Self.FK_Table_To_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Reward" EntitySet="Rewards" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudySession_To_User" Association="Self.FK_StudySession_To_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="StudySession" EntitySet="StudySessions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Subjects_SubCat" Association="Self.FK_Subjects_SubCat">
+            <End Role="SubCategory" EntitySet="SubCategories" />
+            <End Role="Subjects" EntitySet="Subjects" />
+          </AssociationSet>
+          <AssociationSet Name="AspNetUserRoles" Association="Self.AspNetUserRoles">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="AbecedMDFModelStoreContainer" CdmEntityContainer="AbecedEntity">
+          <EntitySetMapping Name="C__MigrationHistory">
+            <EntityTypeMapping TypeName="Abeced.MDFModel.C__MigrationHistory">
+              <MappingFragment StoreEntitySet="__MigrationHistory">
+                <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
+                <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetRoles">
+            <EntityTypeMapping TypeName="Abeced.MDFModel.AspNetRole">
+              <MappingFragment StoreEntitySet="AspNetRoles">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUserClaims">
+            <EntityTypeMapping TypeName="Abeced.MDFModel.AspNetUserClaim">
+              <MappingFragment StoreEntitySet="AspNetUserClaims">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
+                <ScalarProperty Name="ClaimValue" ColumnName="ClaimValue" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUserLogins">
+            <EntityTypeMapping TypeName="Abeced.MDFModel.AspNetUserLogin">
+              <MappingFragment StoreEntitySet="AspNetUserLogins">
+                <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
+                <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUsers">
+            <EntityTypeMapping TypeName="Abeced.MDFModel.AspNetUser">
+              <MappingFragment StoreEntitySet="AspNetUsers">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
+                <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
+                <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
+                <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+                <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Fname" ColumnName="Fname" />
+                <ScalarProperty Name="Lname" ColumnName="Lname" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="DOB" ColumnName="DOB" />
+                <ScalarProperty Name="Age" ColumnName="Age" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Province" ColumnName="Province" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="PostalCode" ColumnName="PostalCode" />
+                <ScalarProperty Name="Occupation" ColumnName="Occupation" />
+                <ScalarProperty Name="EducationLevel" ColumnName="EducationLevel" />
+                <ScalarProperty Name="StreetAddress" ColumnName="StreetAddress" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Courses">
+            <EntityTypeMapping TypeName="Abeced.MDFModel.Course">
+              <MappingFragment StoreEntitySet="Course">
+                <ScalarProperty Name="CourseId" ColumnName="CourseId" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="img" ColumnName="img" />
+                <ScalarProperty Name="duration" ColumnName="duration" />
+                <ScalarProperty Name="dateCreated" ColumnName="dateCreated" />
+                <ScalarProperty Name="numFacts" ColumnName="numFacts" />
+                <ScalarProperty Name="points" ColumnName="points" />
+                <ScalarProperty Name="creatorName" ColumnName="creatorName" />
+                <ScalarProperty Name="isApproved" ColumnName="isApproved" />
+                <ScalarProperty Name="approvalDate" ColumnName="approvalDate" />
+                <ScalarProperty Name="subCatID" ColumnName="subCatID" />
+                <ScalarProperty Name="subCatName" ColumnName="subCatName" />
+                <ScalarProperty Name="mainCatName" ColumnName="mainCatName" />
+                <ScalarProperty Name="userID" ColumnName="userID" />
+                <ScalarProperty Name="averageRating" ColumnName="averageRating" />
+                <ScalarProperty Name="AbecedUserId" ColumnName="AbecedUserId" />
+                <ScalarProperty Name="SubjectIds" ColumnName="SubjectIds" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Facts">
+            <EntityTypeMapping TypeName="Abeced.MDFModel.Fact">
+              <MappingFragment StoreEntitySet="Fact">
+                <ScalarProperty Name="FactId" ColumnName="FactId" />
+                <ScalarProperty Name="question" ColumnName="question" />
+                <ScalarProperty Name="answer" ColumnName="answer" />
+                <ScalarProperty Name="factsheet" ColumnName="factsheet" />
+                <ScalarProperty Name="qAudio" ColumnName="qAudio" />
+                <ScalarProperty Name="aAudio" ColumnName="aAudio" />
+                <ScalarProperty Name="fsAudio" ColumnName="fsAudio" />
+                <ScalarProperty Name="qImage" ColumnName="qImage" />
+                <ScalarProperty Name="aImage" ColumnName="aImage" />
+                <ScalarProperty Name="points" ColumnName="points" />
+                <ScalarProperty Name="flashcardRespTime" ColumnName="flashcardRespTime" />
+                <ScalarProperty Name="quizRespTime" ColumnName="quizRespTime" />
+                <ScalarProperty Name="courseID" ColumnName="courseID" />
+                <ScalarProperty Name="userID" ColumnName="userID" />
+                <ScalarProperty Name="AbecedUserId" ColumnName="AbecedUserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FactInfoes">
+            <EntityTypeMapping TypeName="Abeced.MDFModel.FactInfo">
+              <MappingFragment StoreEntitySet="FactInfo">
+                <ScalarProperty Name="FactInfoId" ColumnName="FactInfoId" />
+                <ScalarProperty Name="numTries" ColumnName="numTries" />
+                <ScalarProperty Name="numRight" ColumnName="numRight" />
+                <ScalarProperty Name="numWrong" ColumnName="numWrong" />
+                <ScalarProperty Name="successRate" ColumnName="successRate" />
+                <ScalarProperty Name="flashcardRespTime" ColumnName="flashcardRespTime" />
+                <ScalarProperty Name="quizRespTime" ColumnName="quizRespTime" />
+                <ScalarProperty Name="factListID" ColumnName="factListID" />
+                <ScalarProperty Name="factID" ColumnName="factID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FactLists">
+            <EntityTypeMapping TypeName="Abeced.MDFModel.FactList">
+              <MappingFragment StoreEntitySet="FactList">
+                <ScalarProperty Name="FactListId" ColumnName="FactListId" />
+                <ScalarProperty Name="courseName" ColumnName="courseName" />
+                <ScalarProperty Name="courseDesc" ColumnName="courseDesc" />
+                <ScalarProperty Name="courseRating" ColumnName="courseRating" />
+                <ScalarProperty Name="numFacts" ColumnName="numFacts" />
+                <ScalarProperty Name="factsIDs" ColumnName="factsIDs" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LeaderBoards">
+            <EntityTypeMapping TypeName="Abeced.MDFModel.LeaderBoard">
+              <MappingFragment StoreEntitySet="LeaderBoard">
+                <ScalarProperty Name="LeaderBoardId" ColumnName="LeaderBoardId" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="userID" ColumnName="userID" />
+                <ScalarProperty Name="points" ColumnName="points" />
+                <ScalarProperty Name="AbecedUserId" ColumnName="AbecedUserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MainCategories">
+            <EntityTypeMapping TypeName="Abeced.MDFModel.MainCategory">
+              <MappingFragment StoreEntitySet="MainCategory">
+                <ScalarProperty Name="MainCategoryId" ColumnName="MainCategoryId" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="img" ColumnName="img" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="QuizSessions">
+            <EntityTypeMapping TypeName="Abeced.MDFModel.QuizSession">
+              <MappingFragment StoreEntitySet="QuizSession">
+                <ScalarProperty Name="QuizSessionId" ColumnName="QuizSessionId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="CourseName" ColumnName="CourseName" />
+                <ScalarProperty Name="FactIds" ColumnName="FactIds" />
+                <ScalarProperty Name="AveragaScore" ColumnName="AveragaScore" />
+                <ScalarProperty Name="PointsEarned" ColumnName="PointsEarned" />
+                <ScalarProperty Name="DateSubmitted" ColumnName="DateSubmitted" />
+                <ScalarProperty Name="Numfacts" ColumnName="Numfacts" />
+                <ScalarProperty Name="NumRevised" ColumnName="NumRevised" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ratings">
+            <EntityTypeMapping TypeName="Abeced.MDFModel.Rating">
+              <MappingFragment StoreEntitySet="Rating">
+                <ScalarProperty Name="RatingId" ColumnName="RatingId" />
+                <ScalarProperty Name="raterName" ColumnName="raterName" />
+                <ScalarProperty Name="raterID" ColumnName="raterID" />
+                <ScalarProperty Name="raterImg" ColumnName="raterImg" />
+                <ScalarProperty Name="courseID" ColumnName="courseID" />
+                <ScalarProperty Name="contentName" ColumnName="contentName" />
+                <ScalarProperty Name="rate" ColumnName="rate" />
+                <ScalarProperty Name="comment" ColumnName="comment" />
+                <ScalarProperty Name="date" ColumnName="date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Revisions">
+            <EntityTypeMapping TypeName="Abeced.MDFModel.Revision">
+              <MappingFragment StoreEntitySet="Revision">
+                <ScalarProperty Name="RevisionId" ColumnName="RevisionId" />
+                <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="isCompleted" ColumnName="isCompleted" />
+                <ScalarProperty Name="isStarted" ColumnName="isStarted" />
+                <ScalarProperty Name="isMandatory" ColumnName="isMandatory" />
+                <ScalarProperty Name="userID" ColumnName="userID" />
+                <ScalarProperty Name="sessionIDs" ColumnName="sessionIDs" />
+                <ScalarProperty Name="mainSessionID" ColumnName="mainSessionID" />
+                <ScalarProperty Name="AbecedUserId" ColumnName="AbecedUserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Rewards">
+            <EntityTypeMapping TypeName="Abeced.MDFModel.Reward">
+              <MappingFragment StoreEntitySet="Reward">
+                <ScalarProperty Name="RewardId" ColumnName="RewardId" />
+                <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="desc" ColumnName="desc" />
+                <ScalarProperty Name="value" ColumnName="value" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="img" ColumnName="img" />
+                <ScalarProperty Name="data" ColumnName="data" />
+                <ScalarProperty Name="userID" ColumnName="userID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sharings">
+            <EntityTypeMapping TypeName="Abeced.MDFModel.Sharing">
+              <MappingFragment StoreEntitySet="Sharing">
+                <ScalarProperty Name="ShareId" ColumnName="ShareId" />
+                <ScalarProperty Name="SenderName" ColumnName="SenderName" />
+                <ScalarProperty Name="SenderEmail" ColumnName="SenderEmail" />
+                <ScalarProperty Name="CourseName" ColumnName="CourseName" />
+                <ScalarProperty Name="CourseId" ColumnName="CourseId" />
+                <ScalarProperty Name="FactList" ColumnName="FactList" />
+                <ScalarProperty Name="DateShared" ColumnName="DateShared" />
+                <ScalarProperty Name="SharedWithIds" ColumnName="SharedWithIds" />
+                <ScalarProperty Name="SharedWithUserNames" ColumnName="SharedWithUserNames" />
+                <ScalarProperty Name="SharedWithEmails" ColumnName="SharedWithEmails" />
+                <ScalarProperty Name="AbecedUserId_Sharer" ColumnName="AbecedUserId_Sharer" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StudySessions">
+            <EntityTypeMapping TypeName="Abeced.MDFModel.StudySession">
+              <MappingFragment StoreEntitySet="StudySession">
+                <ScalarProperty Name="StudySessionId" ColumnName="StudySessionId" />
+                <ScalarProperty Name="dateStarted" ColumnName="dateStarted" />
+                <ScalarProperty Name="dateCompleted" ColumnName="dateCompleted" />
+                <ScalarProperty Name="isComplete" ColumnName="isComplete" />
+                <ScalarProperty Name="isRevision" ColumnName="isRevision" />
+                <ScalarProperty Name="mainSessionID" ColumnName="mainSessionID" />
+                <ScalarProperty Name="currentProgress" ColumnName="currentProgress" />
+                <ScalarProperty Name="currentScore" ColumnName="currentScore" />
+                <ScalarProperty Name="lastUpdate" ColumnName="lastUpdate" />
+                <ScalarProperty Name="isFavorite" ColumnName="isFavorite" />
+                <ScalarProperty Name="nextRevision" ColumnName="nextRevision" />
+                <ScalarProperty Name="previousRevision" ColumnName="previousRevision" />
+                <ScalarProperty Name="missedRevision" ColumnName="missedRevision" />
+                <ScalarProperty Name="numRevisionsDone" ColumnName="numRevisionsDone" />
+                <ScalarProperty Name="userID" ColumnName="userID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SubCategories">
+            <EntityTypeMapping TypeName="Abeced.MDFModel.SubCategory">
+              <MappingFragment StoreEntitySet="SubCategory">
+                <ScalarProperty Name="SubCategoryId" ColumnName="SubCategoryId" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="img" ColumnName="img" />
+                <ScalarProperty Name="mainCatID" ColumnName="mainCatID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Subjects">
+            <EntityTypeMapping TypeName="Abeced.MDFModel.Subject">
+              <MappingFragment StoreEntitySet="Subjects">
+                <ScalarProperty Name="SubjectId" ColumnName="SubjectId" />
+                <ScalarProperty Name="SubjectName" ColumnName="SubjectName" />
+                <ScalarProperty Name="SubjectDesc" ColumnName="SubjectDesc" />
+                <ScalarProperty Name="SubjectImage" ColumnName="SubjectImage" />
+                <ScalarProperty Name="SubCatId" ColumnName="SubCatId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="Abeced.MDFModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="fname" ColumnName="fname" />
+                <ScalarProperty Name="lname" ColumnName="lname" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="gender" ColumnName="gender" />
+                <ScalarProperty Name="age" ColumnName="age" />
+                <ScalarProperty Name="dob" ColumnName="dob" />
+                <ScalarProperty Name="occupation" ColumnName="occupation" />
+                <ScalarProperty Name="educationLevel" ColumnName="educationLevel" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="streetAddress" ColumnName="streetAddress" />
+                <ScalarProperty Name="city" ColumnName="city" />
+                <ScalarProperty Name="province" ColumnName="province" />
+                <ScalarProperty Name="postalCode" ColumnName="postalCode" />
+                <ScalarProperty Name="country" ColumnName="country" />
+                <ScalarProperty Name="phoneNumber" ColumnName="phoneNumber" />
+                <ScalarProperty Name="isCreator" ColumnName="isCreator" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="AspNetUserRoles" TypeName="Abeced.MDFModel.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
+            <EndProperty Name="AspNetRoles">
+              <ScalarProperty Name="Id" ColumnName="RoleId" />
+            </EndProperty>
+            <EndProperty Name="AspNetUsers">
+              <ScalarProperty Name="Id" ColumnName="UserId" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

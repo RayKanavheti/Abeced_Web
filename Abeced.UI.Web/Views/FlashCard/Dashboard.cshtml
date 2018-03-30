@@ -1,0 +1,186 @@
+﻿
+@{
+    ViewBag.Title = "Dashboard";
+    Layout = "~/Views/Shared/_AbecedDashboard.cshtml";
+}
+<style>
+    .form-header {
+        color: #fff;
+        text-align: center;
+        margin-top: -50px;
+        margin-bottom: 10px;
+        padding: 5px;
+        /*padding:1em;*/
+        border-radius: 2px;
+    }
+    .frozen-dreams-gradient {
+        background-image: linear-gradient(to top, #fdcbf1 0%, #fdcbf1 1%, #e6dee9 100%);
+    }
+
+    .dusty-grass-gradient {
+        background-image: linear-gradient(120deg, #d4fc79 0%, #96e6a1 100%);
+    }
+
+    textarea, input {
+        max-width: none;
+    }
+
+    .deep-blue-gradient {
+        background-image: linear-gradient(120deg, #e0c3fc 0%, #8ec5fc 100%);
+    }
+    .icon-block {
+        width: 100px;
+        height: 100px;
+        line-height: 100px;
+        text-align: center;
+        display: inline-block;
+        font-size: 35px;
+    }
+        .icon-block.half {
+            width: 50px;
+            height: 50px;
+            line-height: 50px;
+            font-size: 25px;
+        }
+    .img-circle {
+        border-radius: 50%;
+    }
+   
+</style>
+
+<div class="container-fluid">
+<!-- Grid Row -->
+<div class="row">
+    <!-- Grid column -->
+    <div class="col-md-9">
+        <!-- Grid Row -->
+    <div class="row">
+        <!-- Grid column -->
+        <div class="col-md-12 mb-4">
+
+            <!--Card Primary-->
+            <div class="card heading-grey text-center  z-depth-1">
+                <div class="card-body">
+                  
+                    <p class="pull-left mb-0 text-uppercase" align="justify">Welcome @Session["FirstName"] @Session["LastName"]</p>
+                    
+                </div>
+            </div>
+            <!--/.Card Primary-->
+
+        </div>
+        <!-- Grid column -->
+
+    </div>
+    <!-- Grid row -->
+    <div class="row">
+
+        <!-- Grid column -->
+        <div class="col-lg-4 col-md-12 mb-4">
+
+            <!--Panel-->
+            <div class="card">
+                <div class="card-header heading-grey">
+                    Flash Cards
+                </div>
+                <div class="card-body">
+                    <h4 class="card-title">Study History</h4>
+                    <hr/>
+                    <p class="card-text">Check Out Your History</p>
+                    <a class="btn btn-outline-blue-grey">Go !!!</a>
+                </div>
+            </div>
+            <!--/.Panel-->
+
+        </div>
+        <!-- Grid column -->
+        <!-- Grid column -->
+        <div class="col-lg-4 col-md-6 mb-4">
+
+            <!--Panel-->
+            <div class="card">
+                <h3 class="card-header heading-grey">Facts-To-Match</h3>
+                <div class="card-body">
+                    <h4 class="card-title">Listen and know</h4>
+                    <hr />
+                    <a class="btn btn-mdb-color">Go To facts to match now</a>
+                </div>
+            </div>
+            <!--/.Panel-->
+
+        </div>
+        <!-- Grid column -->
+        <!-- Grid column -->
+        <div class="col-lg-4 col-md-6 mb-4">
+
+            <!--Panel-->
+            <div class="card text-center">
+                <div class="card-header heading-grey">
+                    Quizes
+                </div>
+                <div class="card-body">
+                    <h4 class="card-title">Do The Quizes again</h4>
+                    <p class="card-text">Revising makes you perfect</p>
+                    <a class="btn btn-default btn-sm">Go to quizes</a>
+                </div>
+                <div class="card-footer text-muted rgba-black-strong white-text">
+                    <p class="mb-0">2 days ago</p>
+                </div>
+            </div>
+            <!--/.Panel-->
+
+        </div>
+        <!-- Grid column -->
+
+    </div>
+    <!-- Grid row -->
+    <!-- Grid row -->
+    <div class="row">
+
+        <!-- Grid column -->
+        <div class="col-md-6 mb-4">
+
+            <!--Card Primary-->
+            <div class="card text-center z-depth-2">
+                <div class="card-body">
+                    <p class="mb-4" align="justify">Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.</p>
+                    <p class="mb-0" align="justify">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni.</p>
+                </div>
+            </div>
+            <!--/.Card Primary-->
+
+        </div>
+        <!-- Grid column -->
+        <!-- Grid column -->
+        <div class="col-md-6 mb-4">
+
+            <!--Card Danger-->
+            <div class="card z-depth-2">
+                <div class="card-body">
+                    <h3 class="text-left">Rewards</h3>
+                    <p >Your latest Achievements</p>
+                    <div class="icon-bar">
+                        <ul class="list-unstyled list-inline">
+                            <li class="list-inline-item"><span class="icon-block img-circle half rgba-brown-strong"><i class="fa fa-certificate text-white"></i></span></li>
+                            <li class="list-inline-item"><span class="icon-block img-circle half bg-danger"><i class="fa fa-diamond  text-white"></i></span></li>
+                            <li class="list-inline-item"><span class="icon-block img-circle half bg-primary"><i class="fa fa-graduation-cap  text-white"></i></span></li>
+                            <li class="list-inline-item"><span class="icon-block img-circle half bg-secondary"><i class="fa fa-heart-o  text-white"></i></span></li>
+                            <li class="list-inline-item"><span class="icon-block img-circle half bg-info"><i class="fa fa-gift  text-white"></i></span></li>
+                            <li class="list-inline-item"><span class="icon-block img-circle half bg-warning"><i class="fa fa-star  text-white"></i></span></li>
+                            <li class="list-inline-item"><span class="icon-block img-circle half rgba-deep-purple-strong"><i class="fa fa-trophy  text-white"></i></span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!--/.Card Danger-->
+
+        </div>
+        <!-- Grid column -->
+
+    </div>
+    <!-- Grid row -->
+</div>
+    <!--Grid Column-->
+</div>
+<!--/. Grid row-->
+</div>

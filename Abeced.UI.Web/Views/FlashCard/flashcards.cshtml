@@ -1,0 +1,111 @@
+﻿@model Abeced.UI.Web.Models.FactModelRetrieve
+
+@{
+    ViewBag.Title = "flashcards";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<h2>flashcards</h2>
+
+<div ng-app="FlashCardApp">
+    <div ng-controller="flashController as FactList" >
+        <div class="container d-flex align-items-center justify-content-center" style="margin-top:100px">
+            <div class="row">
+                <div class="col-md-12">
+                    <!--Rotating card-->
+                    <div class="card-wrapper" style="width:700px">
+                        <div id="card-2"  class="card-rotating effect__click h-100 w-100">
+
+                            <!--Front Side-->
+                            <div id="flips"  class="face front card" style="background-image:url(@Url.Content("~/Content/assets/side_bg.jpg")">
+
+            
+
+                                <div class="card-body pt-0" >
+                                    <h4 class="card-title">Question {{FactList.ActiveCard+1 }}</h4>
+                                    <!--Content-->
+                                    <div class="content text-center">
+                                        
+                                        <p style="font-size:25px">{{FactList.FlashcardData.factList[FactList.ActiveCard].question}}</p>
+                                        <br />
+                                        <br />
+                                        <br />
+                                        
+                                       
+                                    </div>
+
+                                    <!--/.Content-->
+                                    <hr />
+                                    <div >
+                                        <ul class="list-unstyled list-inline font-small mt-3">
+                                            <li class="list-inline-item pr-2"><a class="rotate-btn align-bottom fa-3x float-left" data-card="card-2"><i class="fa fa-refresh"></i></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <!--/.Front Side-->
+                            <!--Back Side-->
+                            <div class="face back" style="background-image:url(@Url.Content("~/Content/assets/side_bg.jpg")">
+
+                                <div class="card-body pt-0" >
+                                    <h4 class="card-title">Answer</h4>
+                                    <div class="content text-center" >
+                                        <p style="font-size:25px">{{FactList.FlashcardData.factList[FactList.ActiveCard].answer}}</p>
+                                        <br />
+                                        <br />
+                                        <br />
+
+
+
+                                    </div>
+                                    <hr />
+                                    <div class="text-center">
+                                        <ul class="list-unstyled list-inline font-small mt-3">
+                                           
+                                            <li class="list-inline-item pr-2 white-text"><button  ng-click="FactList.RightAnswer()" class="btn rotate-btn btn-outline-green" data-card="2" ><i class="fa fa-thumbs-o-up pr-1"></i> Right</button></li>
+                                            <li class="list-inline-item pr-2"><button id="btnFlip2" ng-click="FactList.WrongAnswer()" data-card="card-2" class="btn  rotate-btn btn-outline-red"><i class="fa fa-thumbs-o-down pr-1"></i>  Wrong</button></li>
+
+                                        </ul>
+                                    </div>
+                                    <hr />
+                                    <div class="">
+                                        <ul class="list-unstyled list-inline font-small mt-3">
+                                            <li class="list-inline-item pr-2"><a class="fa-3x align-bottom rotate-btn float-left" data-card="card-2"><i class="fa fa-refresh "></i></a></li>
+                                        </ul>
+                                    </div>
+                                    <!-- Card footer -->
+
+                                </div>
+
+                                </div>
+                            <!--/.Back Side-->
+
+                        </div>
+                    </div>
+                    <!--/.Rotating card-->
+                        
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+    </div>
+
+</div>
+
+
+
+<script src="~/Scripts/angular/angular.min.js"></script>
+<script src="~/Scripts/angular/angular-sanitize.min.js"></script>
+<script src="~/Scripts/angular/flashcard.js"></script>
+
+@section scripts{
+ 
+
+   
+
+}

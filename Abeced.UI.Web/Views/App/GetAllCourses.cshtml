@@ -1,37 +1,107 @@
 ﻿@model IEnumerable<Abeced.UI.Web.Models.CourseModel>
 
 @{
-    ViewBag.Title = "GetAllCourses";
+    ViewBag.Title = "AddorEditCard";
+    Layout = "~/Views/Shared/_AbecedDashboard.cshtml";
 }
+
+
 <style>
 
-    .box{
-        border:1px solid black;
+    .form-header {
+        color: #fff;
+        text-align: center;
+        margin-top: 25px;
+        margin-bottom: 10px;
+        padding: 5px;
+        /*padding:1em;*/
+        border-radius: 2px;
     }
 
+    .rounded {
+        box-shadow: 0 5px 11px 0 rgba(0,0,0,.18), 0 4px 15px 0 rgba(0,0,0,.15);
+    }
+
+    textarea, input {
+        max-width: none;
+    }
+
+    .deep-blue-gradient {
+        background-image: linear-gradient(120deg, #e0c3fc 0%, #8ec5fc 100%);
+    }
+    .Course-img img{
+        height:200px;
+    }
 
 </style>
 
-<h2>GetAllCourses</h2>    
-       @foreach (var item in Model)
-       {
-        <div class="OurCourses">
-            <div class="col-md-4" style="padding:10px">
-                <div class="box">
-                    <div class="img">
-                        <a href="@Url.Content("~/FlashCard/selectCardIndex?CourseID="+item.CourseId+"&CourseName="+item.name)"><img src="@item.img" height="200" alt="Course Image" /></a>
-                    </div>
-                    <p class="text-center">@item.name</p>
-                    <p class="text-info">@item.description</p>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-10">
+            <div class="heading-grey text-center p-2 z-depth-1">
+                <span class=" h3-responsive">Your Courses</span>
+            </div>
+       <div class="row mb-3">
+          
+            @foreach (var item in Model)
+                    {
+                        <!--First columnn-->
+                        <div  class="col-lg-4 col-md-6 col-sm-12 col-xs-12" style="padding:10px">
+                            <!--Card-->
+                                <div class="card wow fadeIn" data-wow-delay="0.2s">
+                                    <!--Card image-->
+                                    <div class="Course-img">
+                                        <a href="@Url.Content("~/FlashCard/selectCardIndex?CourseID="+item.CourseId+"&CourseName="+item.name)"><img class="img-fluid img-thumbnail card-img"  src="@item.img"  alt="Course Image"/></a>
+                                    </div>
+                                    <!--Card content-->
+                                    <div class="card-body">
+                                        <!--Title-->
+                                        <h5 class="font-bold">
+                                            <strong>@item.name</strong>
+                                            <span class="badge badge-danger">4 Cards</span>
+                                        </h5>
+                                        <hr>
+                                        <h4>
+                                            <strong>2 Hrs 30 mins</strong>
+                                        </h4>
+                                        <!--Text-->
+                                        <p class="card-text mt-4">
+                                            @item.description
+                                        </p>
+
+                                        <a href="@Url.Content("~/FlashCard/selectCardIndex?CourseID="+item.CourseId+"&CourseName="+item.name)" class="btn btn-info btn-sm">Study now </a>
+                                    </div>
+                                    <!--/.Card content-->
+                                </div>
+                            <!--/.Card-->
+                            </div>
+                        <!--First columnn-->
+
+                    }
+
+
                 </div>
+            </div>
+        <div class="col-md-2 heading-grey z-depth-1-half">
+            <div>
+                <h3>Adds Section</h3>
 
             </div>
+
+
+
         </div>
-       }
-
-
-
+     </div>
+</div>
        
-<br/>
 
 
+
+<script>
+    (function () {
+        new WOW().init();
+
+    })();
+        
+</script>

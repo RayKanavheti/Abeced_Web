@@ -11,7 +11,8 @@ namespace Abeced.UI.Web.Models
         public int MainCategoryId { get; set; }
         public string name { get; set; }
         public string description { get; set; }
-        public HttpPostedFileBase img { get; set; }
+        public HttpPostedFileBase imgFile { get; set; }
+        public string img { get; set; }
 
     }
     public class MainCategoryList
@@ -30,6 +31,7 @@ namespace Abeced.UI.Web.Models
         public int SubCategoryId { get; set; }
         public string name { get; set; }
         public string description { get; set; }
+        public HttpPostedFileBase ImageFile { get; set; }
         public string img { get; set; }
         public int mainCatID { get; set; }
         public IEnumerable<MainCategoryList> MainCat { get; set; }
@@ -42,6 +44,7 @@ namespace Abeced.UI.Web.Models
         public int CourseId { get; set; }
         public string name { get; set; }
         public string description { get; set; }
+        public HttpPostedFileBase imgFile { get; set; }
         public string img { get; set; }
         public string duration { get; set; }
         public DateTime? dateCreated { get; set; }
@@ -55,9 +58,25 @@ namespace Abeced.UI.Web.Models
         public string mainCatName { get; set; }
         public string averageRating { get; set; }
         public int? userID { get; set; }
+        public string AbecedUserId { get; set; }
+        public int? SubjectIds { get; set; }
 
 
-        public IEnumerable<SubCategory> subCategoryList { get; set; }
+        public IEnumerable<SubjectModel> SubjectList { get; set; }
+
+    }
+
+
+    public class SubjectModel
+    {
+
+        public int SubjectId { get; set; }
+        public string SubjectName { get; set; }
+        public string SubjectDesc { get; set; }
+        public string SubjectImage { get; set; }
+        public int? SubCatId { get; set; }
+        public IEnumerable<SubCategory> SubCategoryList { get; set; }
+
 
     }
 
@@ -79,13 +98,65 @@ namespace Abeced.UI.Web.Models
         public string quizRespTime { get; set; }
         public string Answered { get; set; }
         public string Correct { get; set; }
+        public double Score { get; set; }
+        public string Outcome { get; set; }
+        public int trials { get; set; }
         public IEnumerable<CourseModel> CourseList { get; set; }
 
-    }
-        
-        
-        
-        
-        
+        //public FactModelRetrieve()
+        //{
+        //   Outcome = new string[4];
+        //}
 
+       
+
+    }
+    public class StudySession
+    {
+        public int StudySessionId { get; set; }
+        public System.DateTime dateStarted { get; set; }
+        public DateTime? dateCompleted { get; set; }
+        public bool isComplete { get; set; }
+        public bool isRevision { get; set; }
+        public string mainSessionID { get; set; }
+        public string currentProgress { get; set; }
+        public string currentScore { get; set; }
+        public string lastUpdate { get; set; }
+        public bool? isFavorite { get; set; }
+        public string nextRevision { get; set; }
+        public string previousRevision { get; set; }
+        public string missedRevision { get; set; }
+        public string numRevisionsDone { get; set; }
+        public int userID { get; set; }
+        public FactList factList { get; set; }
+
+        public StudySession()
+        {
+            factList = new FactList();
+        }
+
+    }
+
+    public class FactList
+    {
+        public int FactListId { get; set; }
+        public string courseName { get; set; }
+        public string courseDesc { get; set; }
+        public string courseRating { get; set; }
+        public string numFacts { get; set; }
+        public string factsIDs { get; set; }
+    }
+
+    public class QuizSession
+    {
+        public int QuizSessionId { get; set; }
+        public int UserId { get; set; }
+        public string CourseName { get; set; }
+        public string FactIds { get; set; }
+        public double? AveragaScore { get; set; }
+        public double? PointsEarned { get; set; }
+        public int? Numfacts { get; set; }
+        public int? NumRevised { get; set; }
+    }
+   
 }

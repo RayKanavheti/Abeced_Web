@@ -234,6 +234,7 @@
     <Compile Include="Controllers\FlashCardsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MainCategoriesController.cs" />
+    <Compile Include="Controllers\SharingsController.cs" />
     <Compile Include="Controllers\SubCategoriesController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
@@ -254,6 +255,18 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Abeced.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\Abeced.Data\AspNetRole.cs">
+      <DependentUpon>Abeced.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Abeced.Data\AspNetUser.cs">
+      <DependentUpon>Abeced.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Abeced.Data\AspNetUserClaim.cs">
+      <DependentUpon>Abeced.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Abeced.Data\AspNetUserLogin.cs">
+      <DependentUpon>Abeced.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Abeced.Data\Course.cs">
       <DependentUpon>Abeced.tt</DependentUpon>
     </Compile>
@@ -272,6 +285,9 @@
     <Compile Include="Models\Abeced.Data\MainCategory.cs">
       <DependentUpon>Abeced.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Abeced.Data\QuizSession.cs">
+      <DependentUpon>Abeced.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Abeced.Data\Rating.cs">
       <DependentUpon>Abeced.tt</DependentUpon>
     </Compile>
@@ -279,6 +295,9 @@
       <DependentUpon>Abeced.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Abeced.Data\Reward.cs">
+      <DependentUpon>Abeced.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Abeced.Data\Sharing.cs">
       <DependentUpon>Abeced.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Abeced.Data\StudySession.cs">

@@ -1,0 +1,158 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{F75929D2-865A-4202-AC00-46D55EE22B99}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Abeced_Data</RootNamespace>
+    <AssemblyName>Abeced_Data</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Abeced.Data\AbecedModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AbecedModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Abeced.Data\AbecedModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AbecedModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Abeced.Data\AbecedModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AbecedModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Abeced.Data\AspNetRole.cs">
+      <DependentUpon>AbecedModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Abeced.Data\AspNetUser.cs">
+      <DependentUpon>AbecedModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Abeced.Data\AspNetUserClaim.cs">
+      <DependentUpon>AbecedModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Abeced.Data\AspNetUserLogin.cs">
+      <DependentUpon>AbecedModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Abeced.Data\Course.cs">
+      <DependentUpon>AbecedModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Abeced.Data\C__MigrationHistory.cs">
+      <DependentUpon>AbecedModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Abeced.Data\Fact.cs">
+      <DependentUpon>AbecedModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Abeced.Data\FactInfo.cs">
+      <DependentUpon>AbecedModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Abeced.Data\FactList.cs">
+      <DependentUpon>AbecedModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Abeced.Data\LeaderBoard.cs">
+      <DependentUpon>AbecedModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Abeced.Data\MainCategory.cs">
+      <DependentUpon>AbecedModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Abeced.Data\QuizSession.cs">
+      <DependentUpon>AbecedModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Abeced.Data\Rating.cs">
+      <DependentUpon>AbecedModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Abeced.Data\Revision.cs">
+      <DependentUpon>AbecedModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Abeced.Data\Reward.cs">
+      <DependentUpon>AbecedModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Abeced.Data\Sharing.cs">
+      <DependentUpon>AbecedModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Abeced.Data\StudySession.cs">
+      <DependentUpon>AbecedModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Abeced.Data\SubCategory.cs">
+      <DependentUpon>AbecedModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Abeced.Data\Subject.cs">
+      <DependentUpon>AbecedModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Abeced.Data\User.cs">
+      <DependentUpon>AbecedModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositery\IRepositery.cs" />
+    <Compile Include="Repositery\Repositery.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Abeced.Data\AbecedModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>AbecedModel.edmx</DependentUpon>
+      <LastGenOutput>AbecedModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Abeced.Data\AbecedModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>AbecedModel.edmx</DependentUpon>
+      <LastGenOutput>AbecedModel.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <EntityDeploy Include="Abeced.Data\AbecedModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>AbecedModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Abeced.Data\AbecedModel.edmx.diagram">
+      <DependentUpon>AbecedModel.edmx</DependentUpon>
+    </None>
+    <None Include="App.Config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

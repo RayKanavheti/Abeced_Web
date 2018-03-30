@@ -197,10 +197,72 @@
     <Compile Include="Controllers\FlashCardController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\DataAccess.cs" />
+    <Compile Include="Migrations\201803261846012_Mynew.cs" />
+    <Compile Include="Migrations\201803261846012_Mynew.Designer.cs">
+      <DependentUpon>201803261846012_Mynew.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803261847133_Fname.cs" />
+    <Compile Include="Migrations\201803261847133_Fname.Designer.cs">
+      <DependentUpon>201803261847133_Fname.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803261848503_Lname.cs" />
+    <Compile Include="Migrations\201803261848503_Lname.Designer.cs">
+      <DependentUpon>201803261848503_Lname.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803261850034_Title.cs" />
+    <Compile Include="Migrations\201803261850034_Title.Designer.cs">
+      <DependentUpon>201803261850034_Title.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803261851547_Gender.cs" />
+    <Compile Include="Migrations\201803261851547_Gender.Designer.cs">
+      <DependentUpon>201803261851547_Gender.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803261855234_DOB.cs" />
+    <Compile Include="Migrations\201803261855234_DOB.Designer.cs">
+      <DependentUpon>201803261855234_DOB.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803261856472_Age.cs" />
+    <Compile Include="Migrations\201803261856472_Age.Designer.cs">
+      <DependentUpon>201803261856472_Age.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803261858101_City.cs" />
+    <Compile Include="Migrations\201803261858101_City.Designer.cs">
+      <DependentUpon>201803261858101_City.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803261859164_Province.cs" />
+    <Compile Include="Migrations\201803261859164_Province.Designer.cs">
+      <DependentUpon>201803261859164_Province.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803261900319_Country.cs" />
+    <Compile Include="Migrations\201803261900319_Country.Designer.cs">
+      <DependentUpon>201803261900319_Country.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803261902267_PostalCode.cs" />
+    <Compile Include="Migrations\201803261902267_PostalCode.Designer.cs">
+      <DependentUpon>201803261902267_PostalCode.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803261904403_Occupation.cs" />
+    <Compile Include="Migrations\201803261904403_Occupation.Designer.cs">
+      <DependentUpon>201803261904403_Occupation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803261906213_EducationLevel.cs" />
+    <Compile Include="Migrations\201803261906213_EducationLevel.Designer.cs">
+      <DependentUpon>201803261906213_EducationLevel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803261907388_StreetAddress.cs" />
+    <Compile Include="Migrations\201803261907388_StreetAddress.Designer.cs">
+      <DependentUpon>201803261907388_StreetAddress.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803261910567_delete.cs" />
+    <Compile Include="Migrations\201803261910567_delete.Designer.cs">
+      <DependentUpon>201803261910567_delete.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\CategoryModel.cs" />
     <Compile Include="Models\FactModel.cs" />
@@ -212,7 +274,9 @@
   <ItemGroup>
     <Content Include="App_Files\audios\silence.mp3" />
     <Content Include="App_Files\audios\tck1.mp3" />
-    <Content Include="App_Files\Images\default.png" />
+    <Content Include="App_Files\Images\books.jpg" />
+    <Content Include="App_Files\Images\cat5.png" />
+    <Content Include="Content\ace.min.css" />
     <Content Include="Content\alertifyjs\alertify.css" />
     <Content Include="Content\alertifyjs\alertify.min.css" />
     <Content Include="Content\alertifyjs\alertify.rtl.css" />
@@ -233,9 +297,15 @@
     <Content Include="Content\assets\side_bg.jpg" />
     <Content Include="Content\assets\speak.png" />
     <Content Include="Content\assets\star-icon.png" />
+    <Content Include="Content\boot-switch.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\checkboxes-bootstrap.css" />
+    <Content Include="Content\chosen-sprite%402x.png" />
+    <Content Include="Content\chosen-sprite.png" />
+    <Content Include="Content\chosen.min.css" />
+    <Content Include="Content\factsToMatch.css" />
+    <Content Include="Content\footer-distributed.css" />
     <Content Include="Content\icons\add_user.png" />
     <Content Include="Content\icons\closebtn.png" />
     <Content Include="Content\icons\delete.png" />
@@ -249,6 +319,16 @@
     <Content Include="Content\icons\start1.png" />
     <Content Include="Content\JqueryDataTable\dataTables.checkboxes.css" />
     <Content Include="Content\JqueryDataTable\jquery.dataTables.min.css" />
+    <Content Include="Content\JqueryDataTable\select.bootstrap4.min.css" />
+    <Content Include="dbs\AbecedDatabaseFile.mdf" />
+    <Content Include="dbs\AbecedDatabaseFile_log.ldf">
+      <DependentUpon>AbecedDatabaseFile.mdf</DependentUpon>
+    </Content>
+    <Content Include="mdb2\css\mdb.min.css" />
+    <Content Include="Content\nav-sticky-top.css" />
+    <Content Include="Content\Search-Field-With-Icon.css" />
+    <Content Include="Content\sidebar-advanced.css" />
+    <Content Include="Content\Theme\bootstrap.min.css" />
     <Content Include="Content\Theme\images\ui-bg_glass_100_f5f0e5_1x400.png" />
     <Content Include="Content\Theme\images\ui-bg_glass_25_cb842e_1x400.png" />
     <Content Include="Content\Theme\images\ui-bg_glass_70_ede4d4_1x400.png" />
@@ -269,10 +349,35 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\logo.png" />
+    <Content Include="mdb2\css\bootstrap.min.css" />
+    <Content Include="mdb2\img\lightbox\default-skin.png" />
+    <Content Include="mdb2\img\lightbox\default-skin.svg" />
+    <Content Include="mdb2\img\lightbox\preloader.gif" />
+    <Content Include="mdb2\img\overlays\01.png" />
+    <Content Include="mdb2\img\overlays\02.png" />
+    <Content Include="mdb2\img\overlays\03.png" />
+    <Content Include="mdb2\img\overlays\04.png" />
+    <Content Include="mdb2\img\overlays\05.png" />
+    <Content Include="mdb2\img\overlays\06.png" />
+    <Content Include="mdb2\img\overlays\07.png" />
+    <Content Include="mdb2\img\overlays\08.png" />
+    <Content Include="mdb2\img\overlays\09.png" />
+    <Content Include="mdb2\img\svg\arrow_left.svg" />
+    <Content Include="mdb2\img\svg\arrow_right.svg" />
+    <Content Include="mdb2\js\bootstrap.min.js" />
+    <Content Include="mdb2\js\jQuery-3.2.1.min.js" />
+    <Content Include="mdb2\js\mdb.min.js" />
+    <Content Include="mdb2\js\popper.min.js" />
+    <Content Include="Scripts\ace-elements.min.js" />
+    <Content Include="Scripts\ace.min.js" />
     <Content Include="Scripts\alertify.js" />
     <Content Include="Scripts\alertify.min.js" />
     <Content Include="Scripts\angular\angular-sanitize.min.js" />
+    <Content Include="Scripts\angular\angular.js" />
     <Content Include="Scripts\angular\angular.min.js" />
+    <Content Include="Scripts\angular\flashcard.js" />
+    <Content Include="Scripts\angular\Testing.js" />
     <Content Include="Scripts\angular\upload-angular.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -284,19 +389,48 @@
     <Content Include="fonts\fontawesome-webfont.woff" />
     <Content Include="fonts\fontawesome-webfont.woff2" />
     <Content Include="fonts\FontAwesome.otf" />
+    <Content Include="mdb2\font\roboto\Roboto-Bold.eot" />
+    <Content Include="mdb2\font\roboto\Roboto-Bold.ttf" />
+    <Content Include="mdb2\font\roboto\Roboto-Bold.woff" />
+    <Content Include="mdb2\font\roboto\Roboto-Bold.woff2" />
+    <Content Include="mdb2\font\roboto\Roboto-Light.eot" />
+    <Content Include="mdb2\font\roboto\Roboto-Light.ttf" />
+    <Content Include="mdb2\font\roboto\Roboto-Light.woff" />
+    <Content Include="mdb2\font\roboto\Roboto-Light.woff2" />
+    <Content Include="mdb2\font\roboto\Roboto-Medium.eot" />
+    <Content Include="mdb2\font\roboto\Roboto-Medium.ttf" />
+    <Content Include="mdb2\font\roboto\Roboto-Medium.woff" />
+    <Content Include="mdb2\font\roboto\Roboto-Medium.woff2" />
+    <Content Include="mdb2\font\roboto\Roboto-Regular.eot" />
+    <Content Include="mdb2\font\roboto\Roboto-Regular.ttf" />
+    <Content Include="mdb2\font\roboto\Roboto-Regular.woff" />
+    <Content Include="mdb2\font\roboto\Roboto-Regular.woff2" />
+    <Content Include="mdb2\font\roboto\Roboto-Thin.eot" />
+    <Content Include="mdb2\font\roboto\Roboto-Thin.ttf" />
+    <Content Include="mdb2\font\roboto\Roboto-Thin.woff" />
+    <Content Include="mdb2\font\roboto\Roboto-Thin.woff2" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\chosen.jquery.min.js" />
+    <Content Include="Scripts\index.js" />
     <Content Include="Scripts\jqGrid\grid.locale-en.js" />
     <Content Include="Scripts\jqGrid\jquery.jqGrid.min.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\JqueryDataTable\dataTables.bootstrap4.js" />
     <Content Include="Scripts\JqueryDataTable\dataTables.checkboxes.min.js" />
+    <Content Include="Scripts\JqueryDataTable\dataTables.select.min.js" />
     <Content Include="Scripts\JqueryDataTable\jquery.dataTables.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\angular\levenshtein.js" />
+    <Content Include="Scripts\mdb\bootstrap.js" />
+    <Content Include="Scripts\mdb\bootstrap.min.js" />
+    <Content Include="Scripts\mdb\jquery-3.2.1.min.js" />
+    <Content Include="Scripts\mdb\mdb.js" />
+    <Content Include="Scripts\mdb\popper.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
@@ -304,6 +438,7 @@
     <Content Include="Scripts\SiteJs\factcard.js" />
     <Content Include="Scripts\SiteJs\ImagePreview.js" />
     <Content Include="Scripts\angular\quizes.js" />
+    <Content Include="Scripts\SiteJs\recorder.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -348,9 +483,17 @@
     <Content Include="Views\FlashCard\SelectCardIndex.cshtml" />
     <Content Include="Views\FlashCard\FactsToMatch.cshtml" />
     <Content Include="Views\FlashCard\Quizes.cshtml" />
+    <Content Include="Views\Shared\_Users.cshtml" />
+    <Content Include="Views\FlashCard\ShareCards.cshtml" />
+    <Content Include="Views\FlashCard\Testing.cshtml" />
+    <Content Include="Views\Shared\_MainLayout.cshtml" />
+    <Content Include="Views\FlashCard\Dashboard.cshtml" />
+    <Content Include="Views\FlashCard\flashcards.cshtml" />
+    <Content Include="Views\Shared\_AbecedDashboard.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Users\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -364,6 +507,59 @@
   <ItemGroup>
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Abeced_Data\Abeced_Data.csproj">
+      <Project>{f75929d2-865a-4202-ac00-46d55ee22b99}</Project>
+      <Name>Abeced_Data</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201803261846012_Mynew.resx">
+      <DependentUpon>201803261846012_Mynew.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803261847133_Fname.resx">
+      <DependentUpon>201803261847133_Fname.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803261848503_Lname.resx">
+      <DependentUpon>201803261848503_Lname.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803261850034_Title.resx">
+      <DependentUpon>201803261850034_Title.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803261851547_Gender.resx">
+      <DependentUpon>201803261851547_Gender.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803261855234_DOB.resx">
+      <DependentUpon>201803261855234_DOB.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803261856472_Age.resx">
+      <DependentUpon>201803261856472_Age.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803261858101_City.resx">
+      <DependentUpon>201803261858101_City.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803261859164_Province.resx">
+      <DependentUpon>201803261859164_Province.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803261900319_Country.resx">
+      <DependentUpon>201803261900319_Country.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803261902267_PostalCode.resx">
+      <DependentUpon>201803261902267_PostalCode.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803261904403_Occupation.resx">
+      <DependentUpon>201803261904403_Occupation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803261906213_EducationLevel.resx">
+      <DependentUpon>201803261906213_EducationLevel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803261907388_StreetAddress.resx">
+      <DependentUpon>201803261907388_StreetAddress.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803261910567_delete.resx">
+      <DependentUpon>201803261910567_delete.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

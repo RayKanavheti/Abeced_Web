@@ -2,184 +2,424 @@
 
 @{
     ViewBag.Title = "AddorEditCard";
+    Layout = "~/Views/Shared/_AbecedDashboard.cshtml";
 }
+<link href="~/Content/chosen.min.css" rel="stylesheet" />
+<style>
+    .form-header {
+        color: #fff;
+        text-align: center;
+        margin-top: -50px;
+        margin-bottom: 10px;
+        padding: 5px;
+        /*padding:1em;*/
+        border-radius: 2px;
+    }
 
-<h2>AddorEditCard</h2>
+
+    textarea, input {
+        max-width: none;
+    }
+
+    .deep-blue-gradient {
+        background-image: linear-gradient(120deg, #e0c3fc 0%, #8ec5fc 100%);
+    }
+
+    .audio-download {
+        list-style-type:none;
+        margin:0;
+        padding:0;
+
+    }
+</style>
 
 
-@using (Html.BeginForm("AddorEditCard", "App", FormMethod.Post, new { enctype= "multipart/form-data", onSubmit="return jQueryAjaxPost(this);"}))
-{
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>FactModel</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @*@Html.HiddenFor(model => model.userID)*@
-        @*@Html.HiddenFor(model => model.qImage)*@ 
-        @*@Html.HiddenFor(model => model.aImage)*@
-        
-       
-        <div class="form-group">
-            @Html.LabelFor(model => model.courseID, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownListFor(model => model.courseID, new SelectList(Model.CourseList, "CourseId", "name"), "Select Main Category")
-                @Html.ValidationMessageFor(model => model.courseID, "", new { @class = "text-danger" })
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-10">
+            <div class="heading-grey text-center p-2 mb-3 z-depth-1">
+                <span id="CourseName" class=" h3-responsive">Add A Fact</span>
             </div>
+        <div class="card mb-3">
+            <div class="card-body">
+
+                @using (Html.BeginForm("AddorEditCard", "App", FormMethod.Post, new { enctype = "multipart/form-data", onSubmit = "return jQueryAjaxPost(this);" }))
+            {
+                    @Html.AntiForgeryToken()
+
+
+                  
+                    @Html.HiddenFor(model => model.userID)
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="courseID">Select Course</label>
+                            @Html.DropDownListFor(model => model.courseID, new SelectList(Model.CourseList, "CourseId", "name"), "Select Course", new { id = "myDropdown" })
+                            @Html.ValidationMessageFor(model => model.courseID, "", new { @class = "text-danger" })
+
+                        </div>
+                    </div>
+
+                        <!--Grid Row-->
+                    <div class="form-row">
+                        <!--Grid Col-->
+                        @*question text*@
+                        <div class="form-group col-md-4">
+                            @Html.LabelFor(model => model.question)
+                            @Html.TextAreaFor(model => model.question, htmlAttributes: new { @class = "form-control md-textarea-auto", @placeholder = "Enter Question here", @rows = "2" })
+                            @Html.ValidationMessageFor(model => model.question, "", new { @class = "text-danger" })
+                        </div>
+                        <!--/.Grid Col-->
+                        <!-- Grid Col-->
+                        @*question image*@
+                        <div class="form-group col-md-4 text-center">
+                            <label>Upload Question Image</label>
+                            <div class="file-field">
+                                <div class="btn btn-blue-grey btn-sm" >
+                                    <span>Upload Image</span>
+                                    <input type="file" name="qImage" accept="image/jpeg, image/png, image/gif" onchange="showImagePreview(this, document.getElementById('qImagePreview1'))" />
+                                </div>
+                             </div>
+                            <img src="~/App_Files/Images/books.jpg" class="img-thumbnail" style="margin:10px" height="100" width="100" id="qImagePreview1" />
+                        </div>
+                        <!--/.Grid Col-->
+                        <!-- Grid Col-->
+                        @*question audio*@
+
+                        <div class="form-group col-md-4 text-center">
+                            <label>Upload or Record Fact Question Audio</label><br />
+                            <div class="file-field">
+                                <div class="btn btn-blue-grey btn-sm">
+                                    <span>Upload Audio</span>
+                                    <input type="file" name="qImage" accept="audio/mp3, audio/wav" />
+                                </div>
+                            </div>
+                           <h5> OR</h5>
+                            <button type="button" class="btn btn-dark-green btn-sm" onclick="startRecording(this);">Start Recording</button>
+                            <button type="button" class="btn btn-pink btn-sm" onclick="stopRecording(this);">Stop Recording</button>
+                            <audio></audio>
+                            <ul class="audio-download" id="recordingslist"></ul>
+                        </div>
+                    </div>
+                        <!--/. Grid Row -->
+
+
+                        <!- Grid Row -->
+                    <div class="form-row">
+                        <!--Grid Column-->
+                        <div class="form-group col-md-4">
+                            @*Fact Answer*@
+                            @Html.LabelFor(model => model.answer)
+                            @Html.TextAreaFor(model => model.answer, htmlAttributes: new { @class = "form-control md-textarea-auto", @placeholder = "Enter Fact Answer here", @rows = "2" })
+                            @Html.ValidationMessageFor(model => model.answer, "", new { @class = "text-danger" })
+                        </div>
+                        <!--/. Grid Column-->
+                        <!--Grid Column-->
+                        @*Answer Image *@
+                        <div class="form-group col-md-4 text-center">
+                            <label>Upload Answer Image</label>
+                            <div class="file-field">
+                                <div class="btn btn-blue-grey btn-sm">
+                                    <span>Upload Image</span>
+                                    <input type="file"name="aImage" accept="image/jpeg, image/png, image/gif" onchange="showImagePreview(this, document.getElementById('aImagePreview2'))" />
+                                </div>
+                            </div>
+                           
+                            <img src="~/App_Files/Images/books.jpg" class="img-thumbnail" style="margin:10px" height="100" width="100" id="aImagePreview2" />
+                        </div>
+                        <!--/. Grid Column-->
+                        <!--Grid Column-->
+                        <div class="form-group col-md-4 text-center">
+                            @*Answer Audio*@
+                            <label>Upload Or Record Fact Answer Audio </label>
+                            <div class="file-field">
+                                <div class="btn btn-blue-grey btn-sm">
+                                    <span>Upload Audio</span>
+                                    <input type="file" name="qImage" accept="audio/mp3, audio/wav" />
+                                </div>
+                            </div>
+                            <h5> OR</h5>
+                            <button type="button" class="btn btn-dark-green btn-sm" onclick="startRecording2(this);">Start Recording</button>
+                            <button type="button" class="btn btn-pink btn-sm" onclick="stopRecording2(this);">Stop Recording</button>
+                            <audio></audio>
+                            <ul class="audio-download" id="recordingslist2"></ul>
+                        </div>
+                        <!--Grid Column-->
+                    </div>
+                        <!--/. Grid Row-->
+
+                    <!-- Grid Row-->
+                    <div class="form-row ">
+                        <!--Grid Column-->
+                        <div class="form-group col-md-8">
+                            @*Fact Sheet*@
+                            @Html.LabelFor(model => model.factsheet)
+
+                            @Html.TextAreaFor(model => model.factsheet, htmlAttributes: new { @class = "form-control md-textarea-auto", @placeholder = "Enter Fact Sheet here", @rows = "2", @cols = "60" })
+                            @Html.ValidationMessageFor(model => model.factsheet, "", new { @class = "text-danger" })
+                        </div>
+                        <!--/. Grid Column-->
+                        <!-- Grid Column-->
+                        <div class="form-group col-md-4 text-center">
+                            @*Fact Sheet Audio*@
+                            <label>Upload Or Record Fact Sheet Audio</label>
+                            <div class="file-field">
+                                <div class="btn btn-blue-grey btn-sm">
+                                    <span>Upload Audio</span>
+                                    <input type="file" name="qImage" accept="audio/mp3, audio/wav" />
+                                </div>
+                            </div>
+                            <h5> OR</h5>
+                            <button type="button" class="btn btn-dark-green btn-sm" onclick="startRecording3(this);">Start Recording</button>
+                            <button type="button" class="btn btn-pink btn-sm" onclick="stopRecording3(this);">Stop Recording</button>
+                            <audio></audio>
+                            <ul class="audio-download" id="recordingslist3"></ul>
+                        </div>
+                        <!--/. Grid Column-->
+
+                    </div>
+                    <!--/. Grid Row-->
+
+
+                    <!-- Grid Row-->
+                    @*<div class="form-row">
+                        <!--Grid Col-->
+                        <div class="form-group col-md-4">
+                            <label for="points">Points to be Earned</label>
+                            @Html.EditorFor(model => model.points, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.points, "", new { @class = "text-danger" })
+
+                        </div>
+                        <!--/. Grid Col-->
+                        <!-- Grid Col-->
+                        <div class="form-group col-md-4">
+                            @Html.LabelFor(model => model.flashcardRespTime)
+                            @Html.EditorFor(model => model.flashcardRespTime, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.flashcardRespTime, "", new { @class = "text-danger" })
+                        </div>
+                        <!--/. Grid Col-->
+                        <!--Grid Col-->
+                        <div class="form-group col-md-4">
+                            @Html.LabelFor(model => model.quizRespTime)
+                            @Html.EditorFor(model => model.quizRespTime, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.quizRespTime, "", new { @class = "text-danger" })
+                        </div>
+                        <!--/. Grid Col-->
+                    </div>*@
+                    <!--/. Grid Row -->
+                        <div class="form-group">
+                            <div class="col-md-12 text-center">
+                                <input type="submit" value="Add Fact" class="btn btn-indigo btn-lg btn-block" />
+                            </div>
+                        </div>
+
+                }
+
+            </div>
+
         </div>
-        
-        
-
-        <div class="row" style="margin-bottom:30px">
-            @*question text*@
-            <div class="col-md-4">
-                <div class="form-group">
-                    @Html.LabelFor(model => model.question, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.TextAreaFor(model => model.question, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.question, "", new { @class = "text-danger" })
-                    </div>
-                </div>
             </div>
-
-            @*question image*@
-            <div class="col-md-4">
-                <div class="form-group">
-                    @Html.LabelFor(model => model.qImage, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        <input type="file" name="qImage" accept="image/jpeg, image/png, image/gif" onchange="showImagePreview(this, document.getElementById('qImagePreview1'))" />
-                        <img src="~/App_Files/Images/default.png" style="margin:10px" height="100" width="100" id="qImagePreview1" />
-
-                    </div>
-                </div>
-            </div>
-
-            @*question audio*@
-            <div class="col-md-4">
-                <div class="form-group">
-                    @Html.LabelFor(model => model.qAudio, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        <input type="file" name="qAudio" accept="audio/*" />
-                        <audio></audio>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="row" style="margin-bottom:30px">
-            @*Fact Answer*@
-            <div class="col-md-4">
-                <div class="form-group">
-                    @Html.LabelFor(model => model.answer, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.answer, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.answer, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-            </div>
-
-            @*Answer Image *@
-            <div class="col-md-4">
-                <div class="form-group">
-                    @Html.LabelFor(model => model.aImage, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        <input type="file" name="aImage" accept="image/jpeg, image/png, image/gif" onchange="showImagePreview(this, document.getElementById('aImagePreview2'))" />
-                        <img src="~/App_Files/Images/default.png" style="margin:10px" height="100" width="100" id="aImagePreview2" />
-                       
-                    </div>
-                </div>
-            </div>
-            @*Answer Audio*@
-
-            <div class="col-md-4">
-                <div class="form-group">
-                    @Html.LabelFor(model => model.aAudio, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        <input type="file" name="aAudio" accept="audio/*" />
-                        <audio></audio>
-                    </div>
-                </div>
-            </div>
-            </div>
-
-      <div class="row" style="margin-bottom:30px">
-        @*Fact Sheet*@
-          <div class="col-md-6">
-            <div class="form-group">
-                @Html.LabelFor(model => model.factsheet, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.factsheet, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.factsheet, "", new { @class = "text-danger" })
-                </div>
-            </div>
-          </div>
-        @*Fact Sheet Audio*@
-        <div class="col-md-6">
-            <div class="form-group">
-                @Html.LabelFor(model => model.fsAudio, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    <input type="file" name="fsAudio" accept="audio/*" />
-                    <audio></audio>
-                </div>
-            </div>
+        <div class="col-md-2 heading-grey z-depth-1-half mb-4">
+            <div>adds sections</div>
         </div>
     </div>
-       
-        <div class="form-group">
-            @Html.LabelFor(model => model.points, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.points, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.points, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.flashcardRespTime, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.flashcardRespTime, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.flashcardRespTime, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.quizRespTime, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.quizRespTime, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.quizRespTime, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
-        </div>
-    </div>
-}
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
 </div>
+
+
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
     <script src="~/Scripts/SiteJs/ImagePreview.js"></script>
+    <script src="~/Scripts/SiteJs/recorder.js"></script>
     <script>
+        var fileObject;
+        var fileObject2;
+        var fileObject3;
+
+        //........ Recording One.............. //
+        function startRecording(button) {
+            recorder && recorder.record();
+            button.disabled = true;
+            button.nextElementSibling.disabled = false;
+            __log('Recording...');
+        }
+
+
+        function stopRecording(button) {
+            recorder && recorder.stop();
+            button.disabled = true;
+            button.previousElementSibling.disabled = false;
+            __log('Stopped recording.');
+
+            // create WAV download link using audio data blob
+            createDownloadLink();
+
+            recorder.clear();
+        }
+
+        function createDownloadLink() {
+            console.log('trying to create download link');
+            recorder && recorder.exportWAV(function (blob) {
+                var url = URL.createObjectURL(blob);
+                var li = document.createElement('li');
+                var au = document.createElement('audio');
+                var hf = document.createElement('a');
+
+                au.controls = true;
+                au.src = url;
+                hf.href = url;
+                hf.download = new Date().toTimeString() + '.mp3';
+                hf.innerHTML = hf.download;
+                li.appendChild(au);
+                li.appendChild(hf);
+
+                recordingslist.appendChild(li);
+                console.log(li);
+
+                blob.lastModifiedDate = new Date();
+                fileObject = new File([blob], new Date().toTimeString() + '.mp3', {
+                    type: 'audio/mpeg'
+                });
+
+            });
+        }
+        //......... Recording One ...................//
+
+
+
+        //........ Recording Two.............. //
+        function startRecording2(button) {
+            recorder && recorder.record();
+            button.disabled = true;
+            button.nextElementSibling.disabled = false;
+            __log('Recording...');
+        }
+
+        function stopRecording2(button) {
+            recorder && recorder.stop();
+            button.disabled = true;
+            button.previousElementSibling.disabled = false;
+            __log('Stopped recording.');
+
+            // create WAV download link using audio data blob
+            createDownloadLink2();
+
+            recorder.clear();
+        }
+
+        function createDownloadLink2() {
+            console.log('trying to create download link');
+            recorder && recorder.exportWAV(function (blob) {
+                var url = URL.createObjectURL(blob);
+                var li = document.createElement('li');
+                var au = document.createElement('audio');
+                var hf = document.createElement('a');
+
+                au.controls = true;
+                au.src = url;
+                hf.href = url;
+                hf.download = new Date().toTimeString() + '.mp3';
+                hf.innerHTML =  hf.download;
+                li.appendChild(au);
+                li.appendChild(hf);
+                console.log(li);
+                recordingslist2.appendChild(li);
+
+                blob.lastModifiedDate = new Date();
+                fileObject2 = new File([blob], new Date().toTimeString() + '.mp3', {
+                    type: 'audio/mpeg'
+                });
+
+            });
+        }
+
+
+        //........ Recording Two.............. //
+
+
+
+
+
+        //........ Recording Three.............. //
+
+        function startRecording3(button) {
+            recorder && recorder.record();
+            button.disabled = true;
+            button.nextElementSibling.disabled = false;
+            __log('Recording...');
+        }
+
+
+
+
+        function stopRecording3(button) {
+            recorder && recorder.stop();
+            button.disabled = true;
+            button.previousElementSibling.disabled = false;
+            __log('Stopped recording.');
+
+            // create WAV download link using audio data blob
+            createDownloadLink3();
+
+            recorder.clear();
+        }
+
+
+        function createDownloadLink3() {
+            console.log('trying to create download link');
+            recorder && recorder.exportWAV(function (blob) {
+                var url = URL.createObjectURL(blob);
+                var li = document.createElement('li');
+                var au = document.createElement('audio');
+                var hf = document.createElement('a');
+
+                au.controls = true;
+                au.src = url;
+                hf.href = url;
+                hf.download = new Date().toTimeString() + '.mp3';
+                hf.innerHTML = hf.download;
+                li.appendChild(au);
+                li.appendChild(hf);
+                console.log(li);
+                recordingslist3.appendChild(li);
+
+                blob.lastModifiedDate = new Date();
+                fileObject3 = new File([blob], new Date().toTimeString() + '.mp3', {
+                    type: 'audio/mpeg'
+                });
+
+            });
+        }
+
+
+        //................ Recording Three .............///
+
+
+
         function jQueryAjaxPost(form) {
 
+
             $.validator.unobtrusive.parse(form);
-            
-            if ($(form).valid){
-                 
+
+
+            if ($(form).valid) {
+
                 if ($(form).attr('enctype') == "multipart/form-data") {
                     contentType = false;
                     processData = false;
                 }
-               
+                var data = new FormData(form);
+                data.append("qAudio", fileObject);
+                data.append("aAudio", fileObject2);
+                data.append("fsAudio", fileObject3);
+
+
                 $.ajax({
                     type: 'POST',
-                    url: 'http://localhost:20503/api/facts',
-                    data: new FormData(form),
+
+                    url: '/app/AddorEditCard',
+                    //data: new FormData().append("qAudio", fileObject),
+                    data: data,
                     contentType: contentType,
                     processData: processData,
                     success: function (response) {
@@ -196,5 +436,16 @@
             return false;
 
         }
+    </script>
+    <script src="~/Scripts/chosen.jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+
+            $("#myDropdown").chosen({
+                width: "100%"
+
+
+            });
+        });
     </script>
 }

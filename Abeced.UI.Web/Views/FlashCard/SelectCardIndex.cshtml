@@ -1,67 +1,151 @@
-﻿
+﻿@model Abeced.UI.Web.Models.Sharing
 @{
-    ViewBag.Title = "Select Card ";
+    ViewBag.Title = "AddorEditCard";
+    Layout = "~/Views/Shared/_AbecedDashboard.cshtml";
 }
 
 <link href="~/Content/JqueryDataTable/jquery.dataTables.min.css" rel="stylesheet" />
 <link href="~/Content/JqueryDataTable/dataTables.checkboxes.css" rel="stylesheet" />
+<link href="~/Content/JqueryDataTable/select.bootstrap4.min.css" rel="stylesheet" />
 <link href="~/Content/checkboxes-bootstrap.css" rel="stylesheet" />
 
-<h2>Select Cards For this Course</h2>
+<style>
+    table td {
+        font-size: 14px;
+    }
+    table th{
+        font-size:16px;
+    }
+    .unique-bg {
+        background-color: #3F729B;
+    }
 
+    .form-header {
+        color: #fff;
+        text-align: center;
+        margin-top: 25px;
+        margin-bottom: 10px;
+        padding: 5px;
+        /*padding:1em;*/
+        border-radius: 2px;
+    }
 
-<br />
-<h3>@ViewBag.CourseTitle</h3>
+    .rounded {
+        box-shadow: 0 5px 11px 0 rgba(0,0,0,.18), 0 4px 15px 0 rgba(0,0,0,.15);
+    }
+
+    textarea, input {
+        max-width: none;
+    }
+
+    .deep-blue-gradient {
+        background-image: linear-gradient(120deg, #e0c3fc 0%, #8ec5fc 100%);
+    }
+
+    .cloudy-knoxville-gradient {
+        background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
+    }
+    table.dataTable tbody > tr.selected, table.dataTable tbody > tr > .selected {
+        background-color: #c5cae9;
+        color:white;
+    }
+</style>
+
+<label style="display:none" id="CourseName">@ViewBag.CourseName</label>
 <!--It submits the selected rows ids to the controller action and redirects to the selected app page -->
-
-    <!-- the use of the form-->
-    <table id="FactsTable" cellspacing="0" width="100%" class="display table table-bordered table-striped">
-        <thead>
-            <tr>
-                <th>Fact ID</th>
-                <th>Fact Question</th>
-                <th>Fact Answer</th>
-                <th>Fact Sheet</th>
-            </tr>
-        </thead>
-        <tfoot>
-            <tr>
-                <th>Fact ID</th>
-                <th>Fact Question</th>
-                <th>Fact Answer</th>
-                <th>Fact Sheet</th>
-            </tr>
-        </tfoot>
-    </table>
+<!-- the use of the form-->
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-10">
+        
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="heading-grey text-center p-2 mb-3 z-depth-1">
+                                <span class=" h3-responsive">@ViewBag.CourseName</span>
+                            </div>
+                                    <div class="card cloudy-knoxville-gradient" style="padding:8px">
+                                        <div class="card-body">
 
 
-<button id="ProceedToFactsToMatch" style="margin-right:15px" class="btn btn-default">Proceed To Facts-To-Match</button>
-<button id="ProceedToFlashCards" style="margin-right:15px"  class="btn btn-default">Proceed To Flash Cards</button>
-<button id="ProceedToQuizes" style="margin-right:15px"  class="btn btn-default">Proceed To Quizes</button>
+
+                                            <table id="FactsTable" cellspacing="0" style="width:100%" class="table table-striped table-bordered table-responsive">
+                                                <thead class="unique-bg">
+                                                    <tr>
+                                                        <th class="th-lg"></th>
+                                                        <th class="th-lg">Fact Question</th>
+                                                        <th class="th-lg">Fact Answer</th>
+                                                        <th class="th-lg">Fact Sheet</th>
+                    
+                                                    </tr>
+                                                </thead>
+                                                <tfoot class="unique-bg">
+                                                    <tr>
+                                                        <th class="th-lg"></th>
+                                                        <th class="th-lg">Fact Question</th>
+                                                        <th class="th-lg">Fact Answer</th>
+                                                        <th class="th-lg">Fact Sheet</th>
+                                                    </tr>
+                                                </tfoot>
+                                            </table>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="text-center">
+                                        <button id="ProceedToFactsToMatch" style="margin-right:15px" class="btn btn-unique btn-sm">Proceed To Facts-To-Match</button>
+                                        <button id="ProceedToFlashCards" style="margin-right:15px" class="btn btn-mdb-color btn-sm">Proceed To Flash Cards</button>
+                                        <button id="ProceedToQuizes" style="margin-right:15px" class="btn btn-elegant btn-sm">Proceed To Quizes</button>
+                                        <button id="ProceedToTest" style="margin-right:15px" class="btn btn-indigo btn-sm">Proceed To Test</button>
+                                    </div>
+                                    @*@{ Html.RenderAction("sharecards", "flashcard"); }*@
+                                    <div style="margin-top:15px">
+                                        @using (Html.BeginForm("sharecards", "flashcard", FormMethod.Post, new { onSubmit = "return sharings(this)" }))
+                                        {
+                                            @Html.ListBoxFor(model => model.SelectedIds, new MultiSelectList(Model.User, "UserId", "Email"), new { id = "multiSelectDropdown", multiple = "multiple" })
+                                        <!--<input type="submit" id="sharecards" value="Share Cards with friends" class="btn btn-secondary">-->
+
+                                            <input type="submit" id="mySubmit" class="btn btn-primary" value="Share Cards with friends" />
+                                        }
+
+                                    </div>
+                            </div>
+                       
+                    </div>
 
 
+
+        </div>
+        <div class="col-md-2 heading-grey z-depth-1-half">
+            <div>adds sections</div>
+        </div>
+         
+     </div>
+</div>
 @section scripts{
-<script src="~/Scripts/JqueryDataTable/jquery.dataTables.min.js"></script>
-    
-<script src="~/Scripts/JqueryDataTable/dataTables.checkboxes.min.js"></script>
+    <script src="~/Scripts/JqueryDataTable/jquery.dataTables.min.js"></script>
+   
+    <script src="~/Scripts/JqueryDataTable/dataTables.bootstrap4.js"></script>
+    <script src="~/Scripts/JqueryDataTable/dataTables.select.min.js"></script>
+    <script src="~/Scripts/JqueryDataTable/dataTables.checkboxes.min.js"></script>
     <script>
 
         $(document).ready(function () {
-
-           // DataTable that keep tracks of cards selected by user
-          var table =  $("#FactsTable").DataTable(
+           
+                 // DataTable that keep tracks of cards selected by user
+            function myTable() {
+                var table = $("#FactsTable").DataTable(
                 {
                     "ajax": {
-                        "url":"/FlashCard/SelectCards",
+                        "url": "/FlashCard/SelectCards",
                         "type": "Get",
-                        "datatype":"json"
+                        "datatype": "json"
                     },
                     "columns": [
                         { "data": "FactId" },
                         { "data": "question" },
                         { "data": "answer" },
                         { "data": "factsheet" }
-                    ], 
+                    ],
                     "columnDefs": [
                         {
                             "targets": 0,
@@ -84,22 +168,25 @@
                     "order": [[1, "asc"]]
                 });
             // End ===============================================//
+                return table;
+            }
 
+            var table = myTable();
 
-            //Proceed To Facts To Match 
-          $('#ProceedToFactsToMatch').click(function () {
-              var rows_selected = table.column(0).checkboxes.selected();
-              var myIds = new Array();// an array that keep track of all selected rows
-              // Iterate over all selected checkboxes
-              
-              $.each(rows_selected, function (index, rowId) {
-                  myIds.push(rowId);
-              });
+            //Proceed To Facts To Match
+            $('#ProceedToFactsToMatch').click(function () {
+                var rows_selected = table.column(0).checkboxes.selected();
+                var myIds = new Array();// an array that keep track of all selected rows
+                // Iterate over all selected checkboxes
+
+                $.each(rows_selected, function (index, rowId) {
+                    myIds.push(rowId);
+                });
                 $.ajax({
                     type: 'POST',
-                    url: '/FlashCard/GetData', 
-                     //posting the selected the ids as a string to the /flashcard/getdata controller
-                    data: { 'myIds': myIds.join() }, //You can post the ids as a string 
+                    url: '/FlashCard/GetData',
+                    //posting the selected the ids as a string to the /flashcard/getdata controller
+                    data: { 'myIds': myIds.join(',') }, //You can post the ids as a string
                     success: function (data) {
                         alertify.alert("ids added succesfully !!!");
                         window.location.href = "/FlashCard/FactsToMatch?SelectedCards=" + data.factIds;
@@ -114,80 +201,191 @@
 
 
 
-          });
+            });
             // End ===============================================//
 
             //Proceed To Flash Cards
-          $('#ProceedToFlashCards').click(function () {
+            $('#ProceedToFlashCards').click(function () {
 
-              var rows_selected = table.column(0).checkboxes.selected();
+                var rows_selected = table.column(0).checkboxes.selected();
 
-              var myIds = new Array();// an array that keep track of all selected rows
+                var myIds = new Array();// an array that keep track of all selected rows
 
-              // Iterate over all selected checkboxes
-              $.each(rows_selected, function (index, rowId) {
-                  myIds.push(rowId);
-              });
-              //var Postdata = JSON.stringify({ FactIds: myIds }); // posting the ids as a json object
+                // Iterate over all selected checkboxes
+                $.each(rows_selected, function (index, rowId) {
+                    myIds.push(rowId);
+                });
+                //var Postdata = JSON.stringify({ FactIds: myIds }); // posting the ids as a json object
 
-              $.ajax({
-                  type: 'POST',
-                  url: '/FlashCard/GetData',
-                  //posting the selected the ids as a string to the /flashcard/getdata controller
-                  data: { 'myIds': myIds.join() }, //You can post the ids as a string 
-                  success: function (data) {
-                     // alertify.alert("ids added succesfully !!!");
-                      window.location.href = "/FlashCard/FlashCards?SelectedCards=" + data.factIds;
+                $.ajax({
+                    type: 'POST',
+                    url: '/FlashCard/GetData',
+                    //posting the selected the ids as a string to the /flashcard/getdata controller
+                    data: { 'myIds': myIds.join(',') }, //You can post the ids as a string
+                    success: function (data) {
+                        // alertify.alert("ids added succesfully !!!");
+                        window.location.href = "/FlashCard/FlashCards?SelectedCards=" + data.factIds + "&CourseName=" + document.getElementById("CourseName").innerText;
 
-                  },
-                  error: function (response) {
+                    },
+                    error: function (response) {
 
-                      alertify.alert("ids failed to add !!!")
-                  }
+                        alertify.alert("ids failed to add !!!")
+                    }
 
-              });
+                });
 
 
 
-          });
+            });
             // End ===============================================//
 
             //Proceed To Quizes
-          $('#ProceedToQuizes').click(function () {
+            $('#ProceedToQuizes').click(function () {
 
-              var rows_selected = table.column(0).checkboxes.selected();
+                var rows_selected = table.column(0).checkboxes.selected();
 
-              var myIds = new Array();// an array that keep track of all selected rows
+                var myIds = new Array();// an array that keep track of all selected rows
 
-              // Iterate over all selected checkboxes
-              $.each(rows_selected, function (index, rowId) {
-                  myIds.push(rowId);
-              });
-              //var Postdata = JSON.stringify({ FactIds: myIds }); // posting the ids as a json object
+                // Iterate over all selected checkboxes
+                $.each(rows_selected, function (index, rowId) {
+                    myIds.push(rowId);
+                });
+                //var Postdata = JSON.stringify({ FactIds: myIds }); // posting the ids as a json object
 
-              $.ajax({
-                  type: 'POST',
-                  url: '/FlashCard/GetData',
-                  //posting the selected the ids as a string to the /flashcard/getdata controller
-                  data: { 'myIds': myIds.join() }, //You can post the ids as a string 
-                  success: function (data) {
-                      //alertify.alert("ids added succesfully !!!");
-                      window.location.href = "/FlashCard/Quizes?SelectedCards=" + data.factIds;
+                $.ajax({
+                    type: 'POST',
+                    url: '/FlashCard/GetData',
+                    //posting the selected the ids as a string to the /flashcard/getdata controller
+                    data: { 'myIds': myIds.join(',') }, //You can post the ids as a string
+                    success: function (data) {
+                        //alertify.alert("ids added succesfully !!!");
+                        window.location.href = "/FlashCard/Quizes?SelectedCards=" + data.factIds + "&CourseName=" + document.getElementById("CourseName").innerText;
 
-                  },
-                  error: function (response) {
+                    },
+                    error: function (response) {
 
-                      alertify.alert("ids failed to add !!!")
-                  }
+                        alertify.alert("ids failed to add !!!")
+                    }
 
-              });
+                });
+              
 
-
-
-          });  
+            });
             // End ===============================================//
+
+            $('#ProceedToTest').click(function () {
+
+                var rows_selected = table.column(0).checkboxes.selected();
+
+                var myIds = new Array();// an array that keep track of all selected rows
+
+                // Iterate over all selected checkboxes
+                $.each(rows_selected, function (index, rowId) {
+                    myIds.push(rowId);
+                });
+                //var Postdata = JSON.stringify({ FactIds: myIds }); // posting the ids as a json object
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/FlashCard/GetData',
+                    //posting the selected the ids as a string to the /flashcard/getdata controller
+                    data: { 'myIds': myIds.join(',') }, //You can post the ids as a string
+                    success: function (data) {
+                        //alertify.alert("ids added succesfully !!!");
+                        window.location.href = "/FlashCard/Testing?SelectedCards=" + data.factIds + + "&CourseName=" + document.getElementById("CourseName").innerText;
+
+                    },
+                    error: function (response) {
+
+                        alertify.alert("ids failed to add !!!")
+                    }
+
+                });
+
+
+            });
+
+            $('#mySubmit').click(function () {
+                var rows_selected = table.column(0).checkboxes.selected();
+
+                var myIds = new Array();// an array that keep track of all selected rows
+
+                // Iterate over all selected checkboxes
+                $.each(rows_selected, function (index, rowId) {
+                    myIds.push(rowId);
+                });
+                //var Postdata = JSON.stringify({ FactIds: myIds }); // posting the ids as a json object
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/FlashCard/GetData',
+                    //posting the selected the ids as a string to the /flashcard/getdata controller
+                    data: { 'myIds': myIds.join(',') }, //You can post the ids as a string
+                    success: function (response) {
+                        alertify.alert("ids added succesfully !!!");
+                        
+
+                    },
+                    error: function (response) {
+
+                        alertify.alert("ids failed to add !!!")
+                    }
+
+                });
+
+
+            });
         });
+
+
     </script>
+
+<script src="~/Scripts/chosen.jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+
+        $("#multiSelectDropdown").chosen({
+            width: "60%",
+            max_selected_options: 5
+
+        });
+
+      
+        function sharings(form) {
+            //var rows_selected = table.column(0).checkboxes.selected();
+
+            //if (rows_selected > 0) {
+            //    $("#mySubmit").show()
+            //}
+            var data = $("#myform").serialize();
+            $.ajax({
+                type: 'POST',
+                url: form.action,
+                data: new FormData(form),
+                success: function (response) {
+                    alertify.alert("Thank you for sharing!!!");
+
+
+                },
+                error: function (response) {
+
+                    alertify.alert("sharing failed !!!")
+                }
+
+            });
+
+        }
+
+
+
+
+
+
+
+    });
+
+
+</script>
 
 }
 

@@ -37,5 +37,11 @@ namespace Abeced.WebApi.Models.Abeced.Data
         public virtual DbSet<StudySession> StudySessions { get; set; }
         public virtual DbSet<SubCategory> SubCategories { get; set; }
         public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<QuizSession> QuizSessions { get; set; }
+        public virtual DbSet<Sharing> Sharings { get; set; }
+        public virtual DbSet<AspNetRole> AspNetRoles { get; set; }
+        public virtual DbSet<AspNetUserClaim> AspNetUserClaims { get; set; }
+        public virtual DbSet<AspNetUserLogin> AspNetUserLogins { get; set; }
+        public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
     }
 }

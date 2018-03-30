@@ -1,678 +1,232 @@
 ﻿@model IEnumerable<Abeced.UI.Web.Models.FactModelRetrieve>
 
 @{
-    ViewBag.Title = "FactsToMatch";
+    ViewBag.Title = "AddorEditCard";
+    Layout = "~/Views/Shared/_AbecedDashboard.cshtml";
 }
 
-<h2>FactsToMatch</h2>
-<div style="margin-top:-10px">
-    <label>Facts-To-Match Sound   &nbsp;&nbsp;</label>
-    <div class="make-switch" id="bgmusic-toggle-switch">
-        <input type="checkbox" class="tgmusic_chk" checked>
-    </div>
 
-
-    <div style="display:none">
-        <audio class="ctlbgmusic" controls id="ctlbgmusic" preload="none">
-            <source src="@Url.Content("~/App_Files/audios/tck1.mp3")" type="audio/mpeg">
-            Your browser does not support the audio element.
-        </audio>
-    </div>
-
-</div>
-       <div id="fldcardCol1" style="float:left; width:60%">
-           <div class="main_side" id="stage">
-                <div class="memorize_card" id="spinner" style="background-image:url(@Url.Content("~/Content/assets/side_bg.jpg")">
-
-                    <div class="headerOptions">
-                        <div class="flashcardNav">
-                            <section>
-                                <div style="float:left; font-size: 140%; color: #767d81; font-family: Trebuchet MS,Verdana,Helvetica,Arial,sans-serif;margin-top:18px; margin-left:50px ">
-                                    @*Subject Area: @ViewData["sub"]*@
-                                </div>
-
-                                <div style="float:right; font-size: 130%; color: #767d81; font-family: Trebuchet MS,Verdana,Helvetica,Arial,sans-serif;margin-top:18px; ">
-                                    <a href="#" id="btnGetAudio" style="color: #767d81;" title="Download Fact Audio"> <i class="fa fa-fw fa-download"></i>Get Audio</a>
-
-                                </div>
-
-                            </section>
-                        </div>
-
-                    </div>
-                    <div class="cardContainer" style="text-align:center">
-                        <div id="introbox" class="instructionsBox" style="display: block;">
-                            <br /><br />
-                            <h3>
-                                Welcome to Fact to Match for @ViewData["sub"]
-                            </h3>
-
-                            @{if (Model.Count() != 0)
-                                {
-                                    <p>
-                                        <h4>
-                                            Click the START button to begin the 4 Seconds facts
-                                        </h4>
-                                    </p>
-                                }
-                                else
-                                {
-                                    <p>
-
-                                        <div class="alert alert-info">
-                                            <h4>Sorry there are NOT ENOUGH cards in subject area currently.</h4>
-                                        </div>
-
-                                    </p>
-                                    <a href="#" id="btnClose" title="Click here to EXIT"><img src="~/Content/icons/closebtn.png" /></a>
-                                }
-                            }
-
-
-                        </div>
-
-                        @{
-                            var flashcount = Model.Count();
-                            var count = 0;
-                            var percentage = "";
-                            var firstCard = "";
-
-                            if (flashcount >= 1)
-                            {
-                                foreach (var carditem in Model)
-                                {
-                                    percentage = ((double)count * 100 / flashcount).ToString() + "%";
-                                    if (count != 1) {
-                                        firstCard = "wizard-step cardContent mcard";
-                                    } else {
-                                        firstCard = "wizard-step first cardContent mcard";
-                                    }
-                                    <div class="@firstCard" data-fact="@count" data-incl="0" style="background:transparent;">
-
-                                        <input id="per" type="hidden" value="@percentage" />
-
-                                        <div class="instructionsBox" style="display: none;">
-                                            <h3>
-                                                How to study your flashcards.
-                                            </h3>
-                                            <p>
-                                                <strong>Right/Left arrow keys:</strong> Navigate between flashcards.<span class="keygraphic rightkey">
-                                                    right
-                                                    arrow key
-                                                </span><span class="keygraphic leftkey">left arrow key</span>
-                                            </p>
-                                            <p>
-                                                <strong>Up/Down arrow keys:</strong> Flip the card between the front and back.<span class="keygraphic downkey">down key</span><span class="keygraphic upkey">up key</span>
-                                            </p>
-                                            <p>
-                                                <strong>H key:</strong> Show hint (3rd side).<span class="keygraphic hkey">h key</span>
-                                            </p>
-                                        </div>
-                                        <div class="frontCard" id="frontCardSide" style="vertical-align: middle;">
-                                            <p>
-                                                <span>
-                                                    <div class="section_header">
-                                                        <h3 style="border-bottom: 0px; margin-top: 60px; text-align:center">@carditem.factsheet</h3>
-                                                    </div>
-                                                    <input class="classcardid" id="cardid" type="hidden" value="@carditem.FactId" />
-                                                    
-                                                    <input type="hidden" value="@carditem.fsAudio" class="factAudio" />
-                                                </span>
-                                            </p>
-                                        </div>
-                                        <div class="backCard" id="backCardSide" style="display: none;vertical-align: middle;">
-                                            <p>
-                                                <span>
-                                                    <div class="section_header">
-                                                        <h3 style="border-bottom: 0px; margin-top: 60px; color: Black; text-align:center">
-                                                            @carditem.answer
-                                                            <input type="hidden" value="@carditem.aAudio)" class="factAudio" />
-                                                        </h3>
-                                                    </div>
-                                                </span>
-                                            </p>
-
-                                        </div>
-                                        
-                             
-                                        <div id="hintCardSide" style="display: none;">
-                                            <p style="display: none;">
-                               
-                                            </p>
-                                            <p>
-                                                <span></span>
-                                            </p>
-                                        </div>
-                                    </div>
-
-                                    count += 2;
-                                }
-                            }
-                            <div class="wizard-step confirm cardContent" style="text-align:center">
-
-                            </div>
-
-
-                        }
-
-                        <div class="clearfix"></div>
-
-                </div>
-                    @{if (Model.Count() >= 1)
-                        {
-
-                            <div class="progress_bar" style="display: block; background:transparent">
-
-                            </div>
-
-                            <div style="display:block; text-align:center">
-
-                                <div style="margin-left:10px; margin-bottom:15px">
-                                    <a href="#" id="btnStart" title="Click here to START"><img src="~/Content/icons/start1.png" /></a>
-                                    <a href="#" id="btnPlay" title="Click here to PLAY"><img src="~/Content/icons/play.png" /></a>
-                                    <a href="#" id="btnPause" title="Click here to PAUSE"><img src="~/Content/icons/pause.png" /></a>
-                                    <a href="#" id="btnClose" title="Click here to EXIT"><img src="~/Content/icons/closebtn.png" /></a>
-
-                                </div>
-                            </div>
-                         }
-                    }
-                </div>
-          </div>
-      </div>
-<style type="text/css">
-
-    .wizard-step
-	{
-		display: none;
-	}
-    .cardContent
-    {
-        cursor: pointer;
-    }
-
-    .memorize_card, .test_flashcard, .userResults
-    {
-        background-image: -moz-linear-gradient(center bottom , #FFFFFF 97%, #E1E1E1 100%);
-        border: 1px solid #E1E1E1;
-        border-radius: 11px 11px 11px 11px;
-        margin-bottom: 26px;
-        overflow: hidden;
-
-    }
-    .memorize_card
-    {
-        min-height: 380px;
-    }
-    .memorize_card .headerOptions, .test_flashcard .headerOptions
-    {
-        border-bottom: 1px solid #E3E1E1;
-        border-top-left-radius: 11px;
-        border-top-right-radius: 11px;
-        font-size: 11px;
-        min-height: 70px;
-    }
-    .memorize_card fieldset, .test_flashcard fieldset
-    {
-        border: medium none !important;
-        float: right;
-        margin: 0 10px 0 0;
-        padding: 0;
-    }
-    #memorize_card fieldset, .test_flashcard fieldset
-    {
-        float: left;
-    }
-
-  @*Parent object of spinning object*@
-      #stage {
-        margin: 1em auto;
-        -webkit-perspective: 1200px;
-        -moz-perspective: 1200px;
-        -ms-perspective: 1200px;
-        perspective: 1200px;
-      }
-
-    @*Animation Keyframes of spinning cards*@
-    @* WebKit and Opera browsers *@
-    @@-webkit-keyframes spin {
-        0%
-        {
-            -webkit-transform: rotateY(0deg);
-        }
-        50%
-        {
-            -webkit-transform: rotateY(-90deg);
-        }
-        50.00001%
-        {
-            -webkit-transform: rotateY(-270deg);
-        }
-        100%
-        {
-            -webkit-transform: rotateY(-360deg);
-        }
-    }
-
-  @* all other browsers *@
-  @@keyframes spin {
-    0%
-    {
-      -moz-transform: rotateY(0deg);
-      -ms-transform: rotateY(0deg);
-      transform: rotateY(0deg);
-    }
-    50%
-    {
-      -moz-transform: rotateY(-90deg);
-      -ms-transform: rotateY(-90deg);
-      transform: rotateY(-90deg);
-    }
-    50.00001%
-    {
-      -moz-transform: rotateY(-270deg);
-      -ms-transform: rotateY(-270deg);
-      transform: rotateY(-270deg);
-    }
-    100%
-    {
-      -moz-transform: rotateY(-360deg);
-      -ms-transform: rotateY(-360deg);
-      transform: rotateY(-360deg);
-    }
-  }
-
-    .spinAnimation
-    {
-        -webkit-animation: spin 0.5s linear 1;
-        -moz-animation:    spin 0.5s linear 1;
-        animation:         spin 0.5s linear 1;
-    }
-
-
-
-    #card-wrapper, .cardContainer, #memorize_card .cardContent
-    {
-        min-height: 210px;
-    }
-    .memorize_card .cardContent p
-    {
-        font-size: 18px;
-        font-weight: bold;
-    }
-    .memorize_card .cardContent p span
-    {
-        vertical-align: baseline;
-    }
-    #memorize_card .cardAnswerArea, .memorize_card .flashcardNav
-    {
-        overflow: hidden;
-    }
-    .memorize_card .cardContent .card p
-    {
-        font-weight: normal;
-    }
-    .memorize_card .flashcardNav
-    {
-        padding: 0px 19px 20px;
-    }
-    .memorize_card .cardAnswerArea p
-    {
-        font-size: 13px;
-        margin: 0 0 5px;
-        vertical-align: top;
-    }
-    .memorize_card .cardAnswerArea p .userMessage
-    {
-        margin: 0 5px;
-        padding: 2px 10px;
-    }
-    .memorize_card .memorize_input
-    {
-        margin: 0 6px 0 0;
-        width: 298px;
-    }
-    .memorize_card .cardAnswerArea .rightFloat p
-    {
-        font-size: 10px;
-    }
-
-    .memorize_card button
-    {
-        margin: 0;
-        padding: 0 20px;
-    }
-
-    .memorize_card .cardContent .answertf
-    {
-        margin: 20px;
+<link href="~/Content/boot-switch.css" rel="stylesheet" />
+<link href="~/Content/factsToMatch.css" rel="stylesheet" />
+<style>
+    .form-header {
+        color: #fff;
         text-align: center;
-    }
-    .memorize_card .cardContent .answertf .wrongAnswer
-    {
-        background: none repeat scroll 0 0 #FFEBE8;
-        font-size: 12px;
-        font-weight: bold;
-        line-height: 16px;
-        padding: 12px;
-    }
-    .memorize_card .cardContent .answertf .rightAnswer
-    {
-        background: none repeat scroll 0 0 #F1F1F1;
-        font-size: 12px;
-        line-height: 16px;
-        padding: 12px;
-    }
-
-    .cardContent > .instructionsBox p
-    {
-        float: left;
-        font-size: 14px;
-        font-weight: normal;
-        line-height: 30px;
-    }
-    .memorize_card .cardAnswerArea
-    {
-        /*background: -moz-linear-gradient(center bottom , #DFDFDF 3%, #F0F0F0 12%, #F7F7F7 89%) repeat scroll 0 0 #F0F0F0;*/
-        border-bottom-left-radius: 8px;
-        border-bottom-right-radius: 8px;
-        border-top: 1px solid #E7E7E7;
-        min-height: 70px;
-        overflow: hidden;
-        padding: 20px 14px 10px;
-        text-align: center;
-        width: 96%;
-    }
-
-    .memorize_card
-    {
-        position: relative;
-    }
-    .memorize_card #loginBtn, #cram-mode-login-button
-    {
-        height: 25px;
-        position: relative;
-        top: 1px;
-    }
-
-    #memorize_card .headerOptions
-    {
-        padding: 0 17px;
-    }
-    #memorize_card
-    {
-        margin-bottom: 0;
-    }
-    #memorize_card fieldset
-    {
-        margin: 0;
-    }
-    #memorize_card #flashcardActions
-    {
-        float: right;
-        margin: -30px 0 0 10px;
-    }
-    #memorize_card .cardContent
-    {
-        cursor: auto;
-    }
-    #memorize_card .instructionsBox, #memorize_card .cram-instruction-box
-    {
-        margin: 56px 40px;
-    }
-    #memorize_card .instructionsBox h3
-    {
-        margin: 0 0 0 -20px;
-    }
-    #memorize_card .instructionsBox span, #memorize_card .cram-instruction-box span
-    {
-        margin-left: 30px;
-    }
-    #memorize_card .instructionsBox h3, #memorize_card .cram-instruction-box h3
-    {
-        margin: 0 0 0 -20px;
-    }
-    #memorize_card .cardContent .instructionsBox p, #memorize_card .cardContent .cram-instruction-box p
-    {
-        font-size: 13px;
-        font-weight: normal;
-        margin-left: -20px;
-        margin-top: 20px;
-    }
-    #memorize_card #flashcardActions
-    {
-        float: right;
-        margin-top: -66px;
-    }
-
-
-    #correctAnswer a, #rightAnswerListed a, #giveUpBlock a
-    {
-        display: inline-block;
-        float: right;
-        width: 18px;
-    }
-    #rightAnswerListed p
-    {
-        display: inline;
-    }
-    #rightAnswerListed div
-    {
-        display: inline-block;
-        float: none;
-    }
-
-    .memorize_card
-    {
-        position: relative;
-    }
-    .memorize_card #loginBtn, #cram-mode-login-button
-    {
-        height: 25px;
-        position: relative;
-        top: 1px;
-    }
-
-    #memorize_card .headerOptions
-    {
-        padding: 0 17px;
-    }
-    #memorize_card
-    {
-        margin-bottom: 0;
-    }
-    #memorize_card fieldset
-    {
-        margin: 0;
-    }
-    #memorize_card #flashcardActions
-    {
-        float: right;
-        margin: -30px 0 0 10px;
-    }
-    #memorize_card .cardContent
-    {
-        cursor: auto;
-    }
-    #memorize_card .instructionsBox, #memorize_card .cram-instruction-box
-    {
-        margin: 56px 40px;
-    }
-    #memorize_card .instructionsBox h3
-    {
-        margin: 0 0 0 -20px;
-    }
-    #memorize_card .instructionsBox span, #memorize_card .cram-instruction-box span
-    {
-        margin-left: 30px;
-    }
-    #memorize_card .instructionsBox h3, #memorize_card .cram-instruction-box h3
-    {
-        margin: 0 0 0 -20px;
-    }
-    #memorize_card .cardContent .instructionsBox p, #memorize_card .cardContent .cram-instruction-box p
-    {
-        font-size: 13px;
-        font-weight: normal;
-        margin-left: -20px;
-        margin-top: 20px;
-    }
-    #memorize_card #flashcardActions
-    {
-        float: right;
-        margin-top: -66px;
-    }
-
-    #txtFlip
-    {
-        background: url("@Url.Content("~/Content/assets/clickFlip.png")") no-repeat scroll center center transparent;
-        cursor: pointer;
-        float: left;
-        height: 80px;
-        margin-top: -30px;
-        padding: 10px 20px 0 10px;
-    }
-    #txtFlip > div
-    {
-        font-size: 10px;
-        margin-top: 40px;
-    }
-
-    #correctAnswer a, #rightAnswerListed a, #giveUpBlock a
-    {
-        display: inline-block;
-        float: right;
-        width: 18px;
-    }
-
-    .headerOptions
-    {
-        background: none repeat scroll 0 0 #F7F7F7;
-    }
-    .headerOptions fieldset > ul
-    {
-        left: 5px;
-        position: relative;
-        top: 6px;
-    }
-    .headerOptions .mini_nav li ul
-    {
-        top: 25px;
-    }
-    .headerOptions fieldset .start_button
-    {
-        font-size: 11px;
+        margin-top: 25px;
+        margin-bottom: 10px;
         padding: 5px;
-        position: relative;
-        top: 8px;
-    }
-     .allRounded
-    {
-        border-radius: 4px 4px 4px 4px;
-    }
-    .cardContent, .progress_bar
-    {
-        background: none repeat scroll 0 0 #FFFFFF;
-    }
-     .progress_bar
-    {
-        margin: 0 0 10px 18px;
-    }
-    .progress_bar span
-    {
-        font-size: 10px;
-        text-align: center;
-    }
-    .progress_bar p
-    {
-        background: -moz-linear-gradient(center bottom , #FAFAFA 31%, #F7F7F8 66%) repeat scroll 0 0 #F7F7F8;
-        border: 1px solid #ECECEC;
-        display: inline-block;
-        height: 17px;
-        margin: 0 13px 0 23px;
-        position: relative;
-        top: 6px;
-        width: 90%;
-    }
-    .progress_bar p span em
-    {
-        padding: 4px;
-    }
-    .progress_bar p span
-    {
-        background-color:#1569C7;
-        display: block;
-        height: 18px;
-        position: absolute;
-        top: -1px;
-        z-index: 1;
+        /*padding:1em;*/
+        border-radius: 2px;
     }
 
-    .greyBtn
-    {
-        -moz-border-bottom-colors: none;
-        -moz-border-left-colors: none;
-        -moz-border-right-colors: none;
-        -moz-border-top-colors: none;
-        background-color: whiteSmoke;
-        background-image: -moz-linear-gradient(center top , #FAFAFA, #E6E6E6);
-        border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
-        border-image: none;
-        border-style: solid;
-        border-width: 1px;
-        box-shadow: 0 -1px 0 #FFFFFF inset, 1px 0 0 rgba(255, 255, 255, 0.3) inset, -1px 0 0 rgba(255, 255, 255, 0.3) inset, 0 1px 0 rgba(255, 255, 255, 0.7) inset, 0 1px 0 rgba(100, 100, 100, 0.1), 0 2px 0
+    .rounded {
+        box-shadow: 0 5px 11px 0 rgba(0,0,0,.18), 0 4px 15px 0 rgba(0,0,0,.15);
+    }
 
-rgba(150, 150, 150, 0.1);
-        color: #333333;
-        cursor: pointer;
-        text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
+    textarea, input {
+        max-width: none;
     }
-    .greyBtn:hover
-    {
-        background: none repeat scroll 0 0 #E6E6E6;
-        text-decoration: none;
-    }
-    .greyBtn:active
-    {
-        box-shadow: 0.05em 0.15em 0.4em rgba(0, 0, 0, 0.4) inset, 0 0 0.2em rgba(255, 255, 255, 0.3) inset, 0 1px 2px rgba(0, 0, 0, 0.9) inset;
-    }
-    .greenBtn
-    {
-        -moz-border-bottom-colors: none;
-        -moz-border-left-colors: none;
-        -moz-border-right-colors: none;
-        -moz-border-top-colors: none;
-        background-color: #7DA92A;
-        background-image: -moz-linear-gradient(center top , #A3CB54 0px, #8CB73A 50%, #8CB73A 50%, #7DA92A 100%);
-        border-color: #7DA92A #A3CB54 #6D7E46;
-        border-image: none;
-        border-style: solid;
-        border-width: 1px;
-        box-shadow: 0 -1px 0 rgba(255, 255, 255, 0.3) inset, 1px 0 0 rgba(255, 255, 255, 0.22) inset, -1px 0 0 rgba(255, 255, 255, 0.22) inset, 0 1px 0 rgba(255, 255, 255, 0.4) inset, 0 1px 0 rgba(100, 100,
 
-100, 0.1), 0 2px 0 rgba(150, 150, 150, 0.1);
-        color: #FFFFFF;
-        cursor: pointer;
-        text-shadow: 1px 2px 0 rgba(0, 0, 0, 0.25);
+    .deep-blue-gradient {
+        background-image: linear-gradient(120deg, #e0c3fc 0%, #8ec5fc 100%);
     }
-    .greenBtn:hover
-    {
-        background: -moz-linear-gradient(center top , #7DA92A 0px, #8CB73A 50%, #8CB73A 50%, #A3CB54 100%) repeat scroll 0 0 transparent;
-        text-decoration: none;
-    }
-    .greenBtn:active
-    {
-        box-shadow: 0.05em 0.15em 0.4em rgba(0, 0, 0, 0.4) inset, 0 0 0.2em rgba(255, 255, 255, 0.3) inset, 0 1px 2px rgba(0, 0, 0, 0.9) inset;
-    }
-    .section_header {
-	width: 100%;
-	margin-bottom: 0px; /*60*/
-}
-
-
-
 </style>
 
+
+
+<div class="container-fluid align-items-center justify-content-center">
+    <div class="row">
+        <div class="col-md-10">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="heading-grey text-center p-2 mb-3 z-depth-1">
+                        <span class=" h3-responsive">Facts To Match</span>
+                    </div>
+                    <div id="fldcardCol1" style="float:left; width:100%">
+                        <div class="main_side" id="stage">
+                            <div class="memorize_card z-depth-1-half " id="spinner" style="background-image:url(@Url.Content("~/Content/assets/side_bg.jpg")">
+
+                                <div class="headerOptions">
+                                    <div class="flashcardNav">
+                                        <section>
+                                            <div style="float:left; font-size: 140%; color: #767d81; font-family: Trebuchet MS,Verdana,Helvetica,Arial,sans-serif;margin-top:18px; margin-left:50px ">
+                                                @*Subject Area: @ViewData["sub"]*@
+                                                <div>
+                                                    <label>Facts-To-Match Sound   &nbsp;&nbsp;</label>
+                                                    <div class="make-switch" id="bgmusic-toggle-switch">
+                                                        <input type="checkbox" class="tgmusic_chk" checked>
+                                                    </div>
+
+
+                                                    <div style="display:none">
+                                                        <audio class="ctlbgmusic" controls id="ctlbgmusic" preload="none">
+                                                            <source src="@Url.Content("~/App_Files/audios/tck1.mp3")" type="audio/mpeg">
+                                                            Your browser does not support the audio element.
+                                                        </audio>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+
+                                            <div style="float:right; font-size: 130%; color: #767d81; font-family: Trebuchet MS,Verdana,Helvetica,Arial,sans-serif;margin-top:18px; ">
+                                                <a href="#" id="btnGetAudio" style="color: #767d81;" title="Download Fact Audio"> <i class="fa fa-fw fa-download"></i>Get Audio</a>
+
+                                            </div>
+
+                                        </section>
+                                    </div>
+
+                                </div>
+                                <div class="cardContainer" style="text-align:center">
+                                    <div id="introbox" class="instructionsBox" style="display: block;">
+                                        <br /><br />
+                                        <h3>
+                                            Welcome to Fact to Match for @ViewData["sub"]
+                                        </h3>
+
+                                        @{if (Model.Count() != 0)
+                                            {
+                                                <p>
+                                                    <h4>
+                                                        Click the START button to begin the 4 Seconds facts
+                                                    </h4>
+                                                </p>
+                                            }
+                                            else
+                                            {
+                                                <p>
+
+                                                    <div class="alert alert-info">
+                                                        <h4>Sorry there are NOT ENOUGH cards in subject area currently.</h4>
+                                                    </div>
+
+                                                </p>
+                                                <a href="#" id="btnClose" title="Click here to EXIT"><img src="~/Content/icons/closebtn.png" /></a>
+                                            }
+                                        }
+
+
+                                    </div>
+
+                                    @{
+                                        var flashcount = Model.Count();
+                                        var count = 0;
+                                        var percentage = "";
+                                        var firstCard = "";
+
+                                        if (flashcount >= 1)
+                                        {
+                                            foreach (var carditem in Model)
+                                            {
+                                                percentage = ((double)count * 100 / flashcount).ToString() + "%";
+                                                if (count != 1)
+                                                {
+                                                    firstCard = "wizard-step cardContent mcard";
+                                                }
+                                                else
+                                                {
+                                                    firstCard = "wizard-step first cardContent mcard";
+                                                }
+                                                <div class="@firstCard" data-fact="@count" data-incl="0" style="background:transparent;">
+
+                                                    <input id="per" type="hidden" value="@percentage" />
+
+                                                    <div class="instructionsBox" style="display: none;">
+                                                        <h3>
+                                                            How to study your flashcards.
+                                                        </h3>
+                                                        <p>
+                                                            <strong>Right/Left arrow keys:</strong> Navigate between flashcards.<span class="keygraphic rightkey">
+                                                                right
+                                                                arrow key
+                                                            </span><span class="keygraphic leftkey">left arrow key</span>
+                                                        </p>
+                                                        <p>
+                                                            <strong>Up/Down arrow keys:</strong> Flip the card between the front and back.<span class="keygraphic downkey">down key</span><span class="keygraphic upkey">up key</span>
+                                                        </p>
+                                                        <p>
+                                                            <strong>H key:</strong> Show hint (3rd side).<span class="keygraphic hkey">h key</span>
+                                                        </p>
+                                                    </div>
+                                                    <div class="frontCard" id="frontCardSide" style="vertical-align: middle;">
+                                                        <p>
+                                                            <span>
+                                                                <div class="section_header">
+                                                                    <h3 style="border-bottom: 0px; margin-top: 60px; text-align:center">@carditem.factsheet</h3>
+                                                                </div>
+                                                                <input class="classcardid" id="cardid" type="hidden" value="@carditem.FactId" />
+
+                                                                <input type="hidden" value="@carditem.fsAudio" class="factAudio" />
+                                                            </span>
+                                                        </p>
+                                                    </div>
+                                                    <div class="backCard" id="backCardSide" style="display: none;vertical-align: middle;">
+                                                        <p>
+                                                            <span>
+                                                                <div class="section_header">
+                                                                    <h3 style="border-bottom: 0px; margin-top: 60px; color: Black; text-align:center">
+                                                                        @carditem.answer
+                                                                        <input type="hidden" value="@carditem.aAudio)" class="factAudio" />
+                                                                    </h3>
+                                                                </div>
+                                                            </span>
+                                                        </p>
+
+                                                    </div>
+
+
+                                                    <div id="hintCardSide" style="display: none;">
+                                                        <p style="display: none;">
+
+                                                        </p>
+                                                        <p>
+                                                            <span></span>
+                                                        </p>
+                                                    </div>
+                                                </div>
+
+                                                count += 2;
+                                            }
+                                        }
+                                        <div class="wizard-step confirm cardContent" style="text-align:center">
+
+                                        </div>
+
+
+                                    }
+
+                                    <div class="clearfix"></div>
+
+                                </div>
+                                @{if (Model.Count() >= 1)
+                                    {
+
+                                        <div class="progress_bar" style="display: block; background:transparent">
+
+                                        </div>
+
+                                        <div style="display:block; text-align:center">
+
+                                            <div style="margin-left:10px; margin-bottom:15px">
+                                                <a href="#" id="btnStart" title="Click here to START"><img src="~/Content/icons/start1.png" /></a>
+                                                <a href="#" id="btnPlay" title="Click here to PLAY"><img src="~/Content/icons/play.png" /></a>
+                                                <a href="#" id="btnPause" title="Click here to PAUSE"><img src="~/Content/icons/pause.png" /></a>
+                                                <a href="#" id="btnClose" title="Click here to EXIT"><img src="~/Content/icons/closebtn.png" /></a>
+
+                                            </div>
+                                        </div>
+                                    }
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2"></div>
+    </div>
+</div>
    @section scripts{
      <script type="text/javascript">
    
