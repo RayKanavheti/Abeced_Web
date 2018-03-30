@@ -20,7 +20,7 @@
                 <!--Grid Col-->
                 <div class="form-group col-md-1">
                     <label for="title">Title</label>
-                    @Html.DropDownListFor(m => m.title,
+                    @Html.DropDownListFor(m => m.Title,
                     new SelectList(Enum.GetValues(typeof(Title))),
                     "Title", new { id = "myDropdown3" })
                 </div>
@@ -28,13 +28,13 @@
                 <!--Grid Col-->
                 <div class="form-group col-md-5">                   
                         <label for="fname">First Name</label>
-                        @Html.TextBoxFor(m => m.fname, new { @class = "form-control" })                  
+                        @Html.TextBoxFor(m => m.Fname, new { @class = "form-control" })                  
                 </div>
                 <!--/.Grid Col-->
                 <!--Grid Col-->
                 <div class="form-group col-md-6">   
                          <label for="lname">Last Name</label>
-                        @Html.TextBoxFor(m => m.lname, new { @class = "form-control" })
+                        @Html.TextBoxFor(m => m.Lname, new { @class = "form-control" })
                     
                 </div>
                 <!--/.Grid Col-->
@@ -47,7 +47,7 @@
                 <!--Grid Col-->
                 <div class="form-group col-md-6">
                         <label for="username">User Name</label>
-                        @Html.TextBoxFor(m => m.username, new { @class = "form-control" })
+                        @Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })
                     
                 </div>
                 <!--/.Grid Col-->
@@ -84,7 +84,7 @@
                 <!--Grid Col-->
                 <div class="form-group col-md-2">
                     <label for="title">Title</label>
-                    @Html.DropDownListFor(m => m.gender,
+                    @Html.DropDownListFor(m => m.Gender,
                     new SelectList(Enum.GetValues(typeof(Gender))),
                     "Gender", new { id = "myDropdown4" })
 
@@ -93,14 +93,14 @@
                 <!--Grid Col-->
                 <div class="form-group col-md-4">
                     <label for="occupation">Occupation</label>
-                    @Html.TextBoxFor(m => m.occupation, new { @class = "form-control" })
+                    @Html.TextBoxFor(m => m.Occupation, new { @class = "form-control" })
 
                 </div>
                 <!--/.Grid Col-->
                 <!--Grid Col-->
                 <div class="form-group col-md-4">
                     <label for="educationLevel">Education Level</label>
-                    @Html.DropDownListFor(m => m.educationLevel,
+                    @Html.DropDownListFor(m => m.EducationLevel,
                     new SelectList(Enum.GetValues(typeof(EducLevel))),
                     "Education Level", new { id = "myDropdown5" })
 
@@ -116,7 +116,7 @@
                <!--Grid Col-->
                 <div class="form-group col-md-6">
                    <label for="streetAddress">Street Address</label>
-                    @Html.TextAreaFor(model => model.streetAddress, htmlAttributes: new { @class = "form-control", @placeholder = "Street Adress", @rows = "4", @cols = "60" })
+                    @Html.TextAreaFor(model => model.StreetAddress, htmlAttributes: new { @class = "form-control", @placeholder = "Street Adress", @rows = "4", @cols = "60" })
 
                 </div>
                 <!--/.Grid Col-->
@@ -125,14 +125,14 @@
                     <!--Grid Col-->
                     <div class="form-group col-md-12">
                         <label for="city">City</label>
-                        @Html.TextBoxFor(m => m.city, new { @class = "form-control" })
+                        @Html.TextBoxFor(m => m.City, new { @class = "form-control" })
                     </div>
                     <!--/.Grid Col-->
 
                     <!--Grid Col-->
                     <div class="form-group col-md-12">
                         <label for="Email">Province</label>
-                        @Html.TextBoxFor(m => m.province, new { @class = "form-control" })
+                        @Html.TextBoxFor(m => m.Province, new { @class = "form-control" })
                     </div>
                     <!--/.Grid Col-->
                 </div>
@@ -143,14 +143,14 @@
                 <!--Grid Col-->
                 <div class="form-group col-md-6">
                     <label for="postalCode">Postal Code</label>
-                    @Html.TextBoxFor(m => m.postalCode, new { @class = "form-control" })
+                    @Html.TextBoxFor(m => m.PostalCode, new { @class = "form-control" })
                 </div>
                 <!--/.Grid Col-->
 
                 <!--Grid Col-->
                 <div class="form-group col-md-6">
                     <label for="country">Country</label>
-                    @Html.TextBoxFor(m => m.country, new { @class = "form-control" })
+                    @Html.TextBoxFor(m => m.Country, new { @class = "form-control" })
                 </div>
                 <!--/.Grid Col-->
             </div>

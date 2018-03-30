@@ -11,7 +11,8 @@ namespace Abeced.UI.Web.Models
         public int MainCategoryId { get; set; }
         public string name { get; set; }
         public string description { get; set; }
-        public HttpPostedFileBase img { get; set; }
+        public HttpPostedFileBase imgFile { get; set; }
+        public string img { get; set; }
 
     }
     public class MainCategoryList
@@ -30,6 +31,7 @@ namespace Abeced.UI.Web.Models
         public int SubCategoryId { get; set; }
         public string name { get; set; }
         public string description { get; set; }
+        public HttpPostedFileBase ImageFile { get; set; }
         public string img { get; set; }
         public int mainCatID { get; set; }
         public IEnumerable<MainCategoryList> MainCat { get; set; }
@@ -42,6 +44,7 @@ namespace Abeced.UI.Web.Models
         public int CourseId { get; set; }
         public string name { get; set; }
         public string description { get; set; }
+        public HttpPostedFileBase imgFile { get; set; }
         public string img { get; set; }
         public string duration { get; set; }
         public DateTime? dateCreated { get; set; }
@@ -55,9 +58,25 @@ namespace Abeced.UI.Web.Models
         public string mainCatName { get; set; }
         public string averageRating { get; set; }
         public int? userID { get; set; }
+        public string AbecedUserId { get; set; }
+        public int? SubjectIds { get; set; }
 
 
-        public IEnumerable<SubCategory> subCategoryList { get; set; }
+        public IEnumerable<SubjectModel> SubjectList { get; set; }
+
+    }
+
+
+    public class SubjectModel
+    {
+
+        public int SubjectId { get; set; }
+        public string SubjectName { get; set; }
+        public string SubjectDesc { get; set; }
+        public string SubjectImage { get; set; }
+        public int? SubCatId { get; set; }
+        public IEnumerable<SubCategory> SubCategoryList { get; set; }
+
 
     }
 
@@ -81,7 +100,13 @@ namespace Abeced.UI.Web.Models
         public string Correct { get; set; }
         public double Score { get; set; }
         public string Outcome { get; set; }
+        public int trials { get; set; }
         public IEnumerable<CourseModel> CourseList { get; set; }
+
+        //public FactModelRetrieve()
+        //{
+        //   Outcome = new string[4];
+        //}
 
        
 

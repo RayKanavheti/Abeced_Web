@@ -35,6 +35,13 @@
         <AssociationConnector Association="AbecedModel.FK_QuizSession_User" />
         <EntityTypeShape EntityType="AbecedModel.Sharing" Width="1.5" PointX="3.25" PointY="30.25" />
         <AssociationConnector Association="AbecedModel.FK_Sharing_User" />
+        <EntityTypeShape EntityType="AbecedModel.AspNetRole" Width="1.5" PointX="8.375" PointY="2.5" />
+        <EntityTypeShape EntityType="AbecedModel.AspNetUserClaim" Width="1.5" PointX="12.875" PointY="1" />
+        <EntityTypeShape EntityType="AbecedModel.AspNetUserLogin" Width="1.5" PointX="12.875" PointY="3.75" />
+        <EntityTypeShape EntityType="AbecedModel.AspNetUser" Width="1.5" PointX="10.625" PointY="1.375" />
+        <AssociationConnector Association="AbecedModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="AbecedModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="AbecedModel.AspNetUserRoles" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

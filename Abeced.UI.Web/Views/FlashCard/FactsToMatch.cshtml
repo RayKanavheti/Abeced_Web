@@ -2,7 +2,7 @@
 
 @{
     ViewBag.Title = "AddorEditCard";
-    Layout = "~/Views/Shared/_MainLayout.cshtml";
+    Layout = "~/Views/Shared/_AbecedDashboard.cshtml";
 }
 
 
@@ -31,17 +31,19 @@
         background-image: linear-gradient(120deg, #e0c3fc 0%, #8ec5fc 100%);
     }
 </style>
-<div class="form-header deep-blue-gradient rounded">
-    <h3 class="text-center">Welcome To Facts To Match</h3>
-</div>
 
 
-<div class="container align-items-center justify-content-center">
-        <div class="row">
-            <div class="col-md-12">
-                
-                <div id="fldcardCol1"  style="float:left; width:100%">
-                       <div class="main_side" id="stage">
+
+<div class="container-fluid align-items-center justify-content-center">
+    <div class="row">
+        <div class="col-md-10">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="heading-grey text-center p-2 mb-3 z-depth-1">
+                        <span class=" h3-responsive">Facts To Match</span>
+                    </div>
+                    <div id="fldcardCol1" style="float:left; width:100%">
+                        <div class="main_side" id="stage">
                             <div class="memorize_card z-depth-1-half " id="spinner" style="background-image:url(@Url.Content("~/Content/assets/side_bg.jpg")">
 
                                 <div class="headerOptions">
@@ -65,7 +67,7 @@
 
                                                 </div>
                                             </div>
-                                            
+
 
                                             <div style="float:right; font-size: 130%; color: #767d81; font-family: Trebuchet MS,Verdana,Helvetica,Arial,sans-serif;margin-top:18px; ">
                                                 <a href="#" id="btnGetAudio" style="color: #767d81;" title="Download Fact Audio"> <i class="fa fa-fw fa-download"></i>Get Audio</a>
@@ -118,9 +120,12 @@
                                             foreach (var carditem in Model)
                                             {
                                                 percentage = ((double)count * 100 / flashcount).ToString() + "%";
-                                                if (count != 1) {
+                                                if (count != 1)
+                                                {
                                                     firstCard = "wizard-step cardContent mcard";
-                                                } else {
+                                                }
+                                                else
+                                                {
                                                     firstCard = "wizard-step first cardContent mcard";
                                                 }
                                                 <div class="@firstCard" data-fact="@count" data-incl="0" style="background:transparent;">
@@ -151,7 +156,7 @@
                                                                     <h3 style="border-bottom: 0px; margin-top: 60px; text-align:center">@carditem.factsheet</h3>
                                                                 </div>
                                                                 <input class="classcardid" id="cardid" type="hidden" value="@carditem.FactId" />
-                                                    
+
                                                                 <input type="hidden" value="@carditem.fsAudio" class="factAudio" />
                                                             </span>
                                                         </p>
@@ -169,11 +174,11 @@
                                                         </p>
 
                                                     </div>
-                                        
-                             
+
+
                                                     <div id="hintCardSide" style="display: none;">
                                                         <p style="display: none;">
-                               
+
                                                         </p>
                                                         <p>
                                                             <span></span>
@@ -193,7 +198,7 @@
 
                                     <div class="clearfix"></div>
 
-                            </div>
+                                </div>
                                 @{if (Model.Count() >= 1)
                                     {
 
@@ -211,13 +216,16 @@
 
                                             </div>
                                         </div>
-                                     }
+                                    }
                                 }
                             </div>
-                      </div>
-                  </div>
+                        </div>
+                    </div>
                 </div>
+            </div>
         </div>
+        <div class="col-md-2"></div>
+    </div>
 </div>
    @section scripts{
      <script type="text/javascript">

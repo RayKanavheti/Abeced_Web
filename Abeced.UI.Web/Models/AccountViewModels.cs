@@ -67,7 +67,7 @@ namespace Abeced.UI.Web.Models
     public class RegisterViewModel
     {
 
-        public int UserId { get; set; }
+        public string UserId { get; set; }
 
         [Required]
         [EmailAddress]
@@ -87,52 +87,53 @@ namespace Abeced.UI.Web.Models
 
         [Required]
         [Display(Name = "First Name")]
-        public string fname { get; set; }
+        public string Fname { get; set; }
 
-        [Required]
+       [Required]
         [Display(Name = "Last Name")]
-        public string lname { get; set; }
+        public string Lname { get; set; }
 
         
         [Display(Name = "User Name")]
-        public string username { get; set; }
+        public string UserName { get; set; }
 
         [Display(Name = "Gender")]
-        public string gender { get; set; }
+        public string Gender { get; set; }
 
         [Display(Name = "Age")]
-        public int? age { get; set; }
+        public int? Age { get; set; }
 
         [Display(Name = "Date Of Birth")]
-        public string dob { get; set; }
+        public string DOB { get; set; }
 
         [Display(Name = "Occupation")]
-        public string occupation { get; set; }
+        public string Occupation { get; set; }
 
         [Display(Name = "Education Level")]
-        public string educationLevel { get; set; }
+        public string EducationLevel { get; set; }
 
         [Display(Name = "Title")]
-        public string title { get; set; }
+        public string Title { get; set; }
 
         [Display(Name = "Street Address")]
-        public string streetAddress { get; set; }
+        public string StreetAddress { get; set; }
 
         [Display(Name = "City")]
-        public string city { get; set; }
+        public string City { get; set; }
 
         [Display(Name = "Province")]
-        public string province { get; set; }
+        public string Province { get; set; }
 
         [Display(Name = "Postal Code")]
-        public string postalCode { get; set; }
+        public string PostalCode { get; set; }
 
         [Display(Name = "Country")]
-        public string country { get; set; }
+        public string Country { get; set; }
 
         [Display(Name = "Phone Number")]
-        public string phoneNumber { get; set; }
-
+        public string PhoneNumber { get; set; }
+        
+      
         public Gender Usergender { get; set; }
         public Title titles { get; set; }
         public EducLevel level { get; set; }
@@ -163,7 +164,7 @@ namespace Abeced.UI.Web.Models
     }
     public class Sharing{
         public int ShareId { get; set; }
-        public int SenderId { get; set; }
+       
         public string SenderName { get; set; }
         public string SenderEmail { get; set; }
         public string CourseName { get; set; }

@@ -12,6 +12,8 @@ using Abeced.UI.Web.Models;
 using System.Net.Http;
 using Abeced.UI.Web.Helpers;
 using System.Web.Security;
+using Abeced_Data.Abeced.Data;
+using Abeced_Data.Repositery;
 
 namespace Abeced.UI.Web.Controllers
 {
@@ -69,38 +71,26 @@ namespace Abeced.UI.Web.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public ActionResult Login(LoginViewModel model, string returnUrl)
+        public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
         {
-            HttpResponseMessage response = DataAccess.WebClient.GetAsync("User/LoginUser/"+model.Email+"/"+model.Password).Result;
-           
-            if (response.IsSuccessStatusCode )// persistCookie: model.RememberMe)))
+            Repositery _repo = new Repositery();
+            if (!ModelState.IsValid)
             {
-             
-             RegisterViewModel user = response.Content.ReadAsAsync<RegisterViewModel>().Result;
+                return View(model);
+            }
 
-                if (model.Email == user.Email && model.Password == user.Password)
-                {
-                    FormsAuthentication.SetAuthCookie(model.Email, model.RememberMe);
-                    Session["UserId"] = user.UserId;
-                    Session["Email"] = user.Email;
-                    Session["UserName"] = user.username;
-                    Session["FirstName"] = user.fname;
-                    Session["LastName"] = user.lname;
-                    if (returnUrl != null)
-                    {
-                        return Redirect(returnUrl);
-                    }
-                    else
-                    {
-                        return RedirectToAction("Dashboard", "FlashCard");
-                    }
-                    
-                }
-                else
-                {
-                    ModelState.AddModelError("", "The Email or password provided is incorrect.");
-                    return View(model);
-                }
+            // This doesn't count login failures towards account lockout
+            // To enable password failures to trigger account lockout, change to shouldLockout: true
+            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+            if (result == SignInStatus.Success)
+            {
+                FormsAuthentication.SetAuthCookie(model.Email, model.RememberMe);
+                AspNetUser Person = _repo.getPerson(model.Email);
+                Session["UserId"] = Person.Id;
+                Session["Email"] = Person.Email;
+                Session["UserName"] = Person.UserName;
+
+                return RedirectToAction("Dashboard", "FlashCard");
             }
 
             // If we got this far, something failed, redisplay form
@@ -108,24 +98,19 @@ namespace Abeced.UI.Web.Controllers
             return View(model);
 
 
-
-
-            // This doesn't count login failures towards account lockout
-            // To enable Password failures to trigger account lockout, change to shouldLockout: true
-            //    var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
-            //    switch (result)
-            //    {
-            //        case SignInStatus.Success:
-            //            return RedirectToLocal(returnUrl);
-            //        case SignInStatus.LockedOut:
-            //            return View("Lockout");
-            //        case SignInStatus.RequiresVerification:
-            //            return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
-            //        case SignInStatus.Failure:
-            //        default:
-            //            ModelState.AddModelError("", "Invalid login attempt.");
-            //            return View(model);
-            //    }
+            //switch (result)
+            //{
+            //    case SignInStatus.Success:
+            //        return RedirectToLocal(returnUrl);
+            //    case SignInStatus.LockedOut:
+            //        return View("Lockout");
+            //    case SignInStatus.RequiresVerification:
+            //        return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
+            //    case SignInStatus.Failure:
+            //    default:
+            //        ModelState.AddModelError("", "Invalid login attempt.");
+            //        return View(model);
+            //}         
         }
 
         //
@@ -184,46 +169,46 @@ namespace Abeced.UI.Web.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public ActionResult Register(RegisterViewModel user)
+        public async Task<ActionResult> Register(RegisterViewModel model)
         {
-            
-                
-           if (ModelState.IsValid) { 
-            
-                HttpResponseMessage response = DataAccess.WebClient.PostAsJsonAsync("User", user).Result;
-                TempData["SuccessMessage"] = "Registered Successfully";
-                return RedirectToAction("Login");
+
+
+            if (ModelState.IsValid)
+            {
+                var user = new ApplicationUser {
+                    UserName = model.UserName,
+                    Email = model.Email,
+                    Fname = model.Fname,
+                    Lname = model.Lname,
+                    DOB= model.DOB,
+                    Gender = model.Gender,
+                    EducationLevel = model.EducationLevel,
+                    Occupation = model.Occupation,
+                    Title = model.Title,
+                    StreetAddress = model.StreetAddress,
+                    City = model.City,
+                    Province = model.Province,
+                    Country = model.Country,
+                    PostalCode = model.PostalCode,
+                };
+                var result = await UserManager.CreateAsync(user, model.Password);
+                if (result.Succeeded)
+                {
+                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+
+                    // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
+                    // Send an email with this link
+                    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                    // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+
+                    return RedirectToAction("Index", "Home");
+                }
+                AddErrors(result);
             }
-            else {
-                TempData["SuccessMessage"] = "Registration Failed !!!";
-                return View(user);
-            }
-
-            
-
-
-
-
-            //var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
-            //var result = await UserManager.CreateAsync(user, model.Password);
-            //if (result.Succeeded)
-            //{
-            //    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-
-            //    // For more information on how to enable account confirmation and Password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
-            //    // Send an email with this link
-            //    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-            //    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-            //    // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
-
-
-            //}
-            //AddErrors(result);
-            // }
-
 
             // If we got this far, something failed, redisplay form
-            // return View(user);
+            return View(model);
 
         }
 
@@ -447,6 +432,7 @@ namespace Abeced.UI.Web.Controllers
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+            FormsAuthentication.SignOut();
             return RedirectToAction("Index", "Home");
         }
 

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="04617f44455e4c989ce00fd45dc38e0d" Name="Diagram1" ZoomLevel="55">
+        <EntityTypeShape EntityType="Abeced.MDFModel.C__MigrationHistory" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Abeced.MDFModel.AspNetRole" Width="1.5" PointX="0.75" PointY="13.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Abeced.MDFModel.AspNetUserClaim" Width="1.5" PointX="5.25" PointY="10.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Abeced.MDFModel.AspNetUserLogin" Width="1.5" PointX="5.25" PointY="13" IsExpanded="true" />
+        <EntityTypeShape EntityType="Abeced.MDFModel.AspNetUser" Width="1.5" PointX="3" PointY="10.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Abeced.MDFModel.Course" Width="1.5" PointX="8.25" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Abeced.MDFModel.Fact" Width="1.5" PointX="13.5" PointY="12.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Abeced.MDFModel.FactInfo" Width="1.5" PointX="15.75" PointY="13" IsExpanded="true" />
+        <EntityTypeShape EntityType="Abeced.MDFModel.FactList" Width="1.5" PointX="13.5" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Abeced.MDFModel.LeaderBoard" Width="1.5" PointX="5.25" PointY="16.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Abeced.MDFModel.MainCategory" Width="1.5" PointX="1.5" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Abeced.MDFModel.QuizSession" Width="1.5" PointX="8.25" PointY="19.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Abeced.MDFModel.Rating" Width="1.5" PointX="10.5" PointY="18.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Abeced.MDFModel.Revision" Width="1.5" PointX="11.25" PointY="12.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Abeced.MDFModel.Reward" Width="1.5" PointX="8.25" PointY="23.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Abeced.MDFModel.Sharing" Width="1.5" PointX="5.25" PointY="28.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Abeced.MDFModel.StudySession" Width="1.5" PointX="15.75" PointY="17" IsExpanded="true" />
+        <EntityTypeShape EntityType="Abeced.MDFModel.SubCategory" Width="1.5" PointX="3.75" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="Abeced.MDFModel.Subject" Width="1.5" PointX="6" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="Abeced.MDFModel.User" Width="1.5" PointX="6" PointY="20.125" IsExpanded="true" />
+        <AssociationConnector Association="Abeced.MDFModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="Abeced.MDFModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="Abeced.MDFModel.FK_Course_AspnetUsers" ManuallyRouted="false" />
+        <AssociationConnector Association="Abeced.MDFModel.FK_Fact_AspnetUser" ManuallyRouted="false" />
+        <AssociationConnector Association="Abeced.MDFModel.FK_LeaderBoard_AspnetUser" ManuallyRouted="false" />
+        <AssociationConnector Association="Abeced.MDFModel.FK_Revision_To_Session" ManuallyRouted="false" />
+        <AssociationConnector Association="Abeced.MDFModel.FK_Sharing_AspNetUsers" ManuallyRouted="false" />
+        <AssociationConnector Association="Abeced.MDFModel.FK_Course_Subjects" ManuallyRouted="false" />
+        <AssociationConnector Association="Abeced.MDFModel.FK_Course_To_User" ManuallyRouted="false" />
+        <AssociationConnector Association="Abeced.MDFModel.FK_Fact_To_Course" ManuallyRouted="false" />
+        <AssociationConnector Association="Abeced.MDFModel.FK_Rating_To_Course" ManuallyRouted="false" />
+        <AssociationConnector Association="Abeced.MDFModel.FK_Fact_To_User" ManuallyRouted="false" />
+        <AssociationConnector Association="Abeced.MDFModel.FK_FactInfo_To_Fact" ManuallyRouted="false" />
+        <AssociationConnector Association="Abeced.MDFModel.FK_FactInfo_To_FactList" ManuallyRouted="false" />
+        <AssociationConnector Association="Abeced.MDFModel.FK_StudySession_To_FactList" ManuallyRouted="false" />
+        <AssociationConnector Association="Abeced.MDFModel.FK_LeaderBoard_To_User" ManuallyRouted="false" />
+        <AssociationConnector Association="Abeced.MDFModel.FK_SubCategory_To_MainCategory" ManuallyRouted="false" />
+        <AssociationConnector Association="Abeced.MDFModel.FK_QuizSession_User" ManuallyRouted="false" />
+        <AssociationConnector Association="Abeced.MDFModel.FK_Revision_To_User" ManuallyRouted="false" />
+        <AssociationConnector Association="Abeced.MDFModel.FK_Table_To_User" ManuallyRouted="false" />
+        <AssociationConnector Association="Abeced.MDFModel.FK_StudySession_To_User" ManuallyRouted="false" />
+        <AssociationConnector Association="Abeced.MDFModel.FK_Subjects_SubCat" ManuallyRouted="false" />
+        <AssociationConnector Association="Abeced.MDFModel.AspNetUserRoles" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

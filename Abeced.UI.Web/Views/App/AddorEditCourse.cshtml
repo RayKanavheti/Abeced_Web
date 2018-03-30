@@ -49,27 +49,27 @@
                         <div class="form-row">
                             <div class="form-group col-md-12">
                                 <label for="subCatID">Select 2nd Level Category</label>
-                                @Html.DropDownListFor(model => model.subCatID, new SelectList(Model.subCategoryList, "SubCategoryId", "name"), "Select Sub Category", new { id = "myDropdown2" })
+                                @Html.DropDownListFor(model => model.SubjectIds, new SelectList(Model.SubjectList, "SubjectId", "SubjectName"), "Select Subject", new { id = "myDropdown2" })
                                 @Html.ValidationMessageFor(model => model.subCatID, "", new { @class = "text-danger" })
 
                             </div>
                         </div>
                         <div class="form-group">
 
-                            @Html.EditorFor(model => model.name, new { htmlAttributes = new { @class = "form-control", @placeholder = "Category Name" } })
+                            @Html.EditorFor(model => model.name, new { htmlAttributes = new { @class = "form-control", @placeholder = "Course Name" } })
                             @Html.ValidationMessageFor(model => model.name, "", new { @class = "text-danger" })
                         </div>
 
                             <div class="form-group">
 
-                                @Html.TextAreaFor(model => model.description, htmlAttributes: new { @class = "form-control md-textarea-auto", @placeholder = "Category Description", @rows = "2" })
+                                @Html.TextAreaFor(model => model.description, htmlAttributes: new { @class = "form-control md-textarea-auto", @placeholder = "Course Description", @rows = "2" })
                                 @Html.ValidationMessageFor(model => model.description, "", new { @class = "text-danger" })
                             </div>
 
                             <div class="form-group text-center">
                                 <label>Upload Category Level Image</label><br />
                                 <i class="fa fa-upload prefix grey-text"></i>
-                                <input type="file" name="img" class="btn btn-blue-grey btn-sm" accept="image/*" onchange="showImagePreview(this, document.getElementById('courseImagePreview'))" />
+                                <input type="file" name="imgFile" class="btn btn-blue-grey btn-sm" accept="image/*" onchange="showImagePreview(this, document.getElementById('courseImagePreview'))" />
                             </div>
                             <div class="text-center" style="margin-top:-10px">
 
@@ -104,7 +104,7 @@
 
             $.ajax({
                 type: 'POST',
-                url: 'http://localhost:20503/api/Courses',
+                url: '/app/addoreditcourse',
                 data: new FormData(form),
                 contentType: contentType,
                 processData: processData,

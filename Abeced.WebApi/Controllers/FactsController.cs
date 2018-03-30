@@ -114,7 +114,7 @@ namespace Abeced.WebApi.Controllers
                     
                     Uri baseuri = new Uri(Request.RequestUri.AbsoluteUri.Replace(Request.RequestUri.PathAndQuery, string.Empty));
                     Uri fileFullPath = new Uri(baseuri, VirtualPathUtility.ToAbsolute(fileRelativePath));
-                   
+                  
                     if (PostName == "qImage")
                     {
                         qImage = fileFullPath.ToString();

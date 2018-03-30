@@ -26,7 +26,7 @@
                                     <!--Content-->
                                     <div class="content text-center">
                                         
-                                        <p style="font-size:25px">{{FactList.data.factList[FactList.ActiveCard].question}}</p>
+                                        <p style="font-size:25px">{{FactList.FlashcardData.factList[FactList.ActiveCard].question}}</p>
                                         <br />
                                         <br />
                                         <br />
@@ -51,7 +51,7 @@
                                 <div class="card-body pt-0" >
                                     <h4 class="card-title">Answer</h4>
                                     <div class="content text-center" >
-                                        <p style="font-size:25px">{{FactList.data.factList[FactList.ActiveCard].answer}}</p>
+                                        <p style="font-size:25px">{{FactList.FlashcardData.factList[FactList.ActiveCard].answer}}</p>
                                         <br />
                                         <br />
                                         <br />
@@ -63,7 +63,7 @@
                                     <div class="text-center">
                                         <ul class="list-unstyled list-inline font-small mt-3">
                                            
-                                            <li class="list-inline-item pr-2 white-text"><button id="btnFlip1" class="btn rotate-btn btn-outline-green" data-card="card-2"  ng-click="FactList.RightAnswer()"><i class="fa fa-thumbs-o-up pr-1"></i> Right</button></li>
+                                            <li class="list-inline-item pr-2 white-text"><button  ng-click="FactList.RightAnswer()" class="btn rotate-btn btn-outline-green" data-card="2" ><i class="fa fa-thumbs-o-up pr-1"></i> Right</button></li>
                                             <li class="list-inline-item pr-2"><button id="btnFlip2" ng-click="FactList.WrongAnswer()" data-card="card-2" class="btn  rotate-btn btn-outline-red"><i class="fa fa-thumbs-o-down pr-1"></i>  Wrong</button></li>
 
                                         </ul>

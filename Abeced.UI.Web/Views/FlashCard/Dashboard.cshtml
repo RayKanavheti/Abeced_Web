@@ -1,7 +1,7 @@
 ﻿
 @{
     ViewBag.Title = "Dashboard";
-    Layout = "~/Views/Shared/_MainLayout.cshtml";
+    Layout = "~/Views/Shared/_AbecedDashboard.cshtml";
 }
 <style>
     .form-header {
@@ -45,17 +45,21 @@
     .img-circle {
         border-radius: 50%;
     }
+   
 </style>
 
-<div class="container" style="margin-top:25px">
-
-
+<div class="container-fluid">
+<!-- Grid Row -->
+<div class="row">
+    <!-- Grid column -->
+    <div class="col-md-9">
+        <!-- Grid Row -->
     <div class="row">
         <!-- Grid column -->
         <div class="col-md-12 mb-4">
 
             <!--Card Primary-->
-            <div class="card rgba-grey-light text-center z-depth-2">
+            <div class="card heading-grey text-center  z-depth-1">
                 <div class="card-body">
                   
                     <p class="pull-left mb-0 text-uppercase" align="justify">Welcome @Session["FirstName"] @Session["LastName"]</p>
@@ -76,7 +80,7 @@
 
             <!--Panel-->
             <div class="card">
-                <div class="card-header rgba-black-strong white-text">
+                <div class="card-header heading-grey">
                     Flash Cards
                 </div>
                 <div class="card-body">
@@ -95,7 +99,7 @@
 
             <!--Panel-->
             <div class="card">
-                <h3 class="card-header rgba-black-light white-text">Facts-To-Match</h3>
+                <h3 class="card-header heading-grey">Facts-To-Match</h3>
                 <div class="card-body">
                     <h4 class="card-title">Listen and know</h4>
                     <hr />
@@ -111,7 +115,7 @@
 
             <!--Panel-->
             <div class="card text-center">
-                <div class="card-header rgba-black-strong white-text">
+                <div class="card-header heading-grey">
                     Quizes
                 </div>
                 <div class="card-body">
@@ -175,5 +179,8 @@
 
     </div>
     <!-- Grid row -->
-
+</div>
+    <!--Grid Column-->
+</div>
+<!--/. Grid row-->
 </div>

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Net.Http;
 using System.Web;
@@ -18,11 +19,13 @@ namespace Abeced.UI.Web.Models
         public string question { get; set; }
 
         [Display(Name = "Question Image")]
-        //public MultipartFormDataContent qImage { get; set; }
+        public string qImagePath { get; set; }
+        [NotMapped]
         public HttpPostedFileBase qImage { get; set; }
 
         [Display(Name = "Question Audio")]
-        //public string qAudio { get; set; }
+        public string qAudioPath { get; set; }
+        [NotMapped]
         public HttpPostedFileBase qAudio { get; set; }
   
         [Required]
@@ -31,11 +34,13 @@ namespace Abeced.UI.Web.Models
 
 
         [Display(Name = "Answer Image")]
-        //public MultipartFormDataContent aImage { get; set; }
-       public HttpPostedFileBase aImage { get; set; }
+        public string aImagePath { get; set; }
+        [NotMapped]
+        public HttpPostedFileBase aImage { get; set; }
 
         [Display(Name = "Answer Audio")]
-       // public string aAudio { get; set; }
+        public string aAudioPath { get; set; }
+        [NotMapped]
         public HttpPostedFileBase aAudio { get; set; }
 
         [Required]
@@ -43,7 +48,9 @@ namespace Abeced.UI.Web.Models
         public string factsheet { get; set; }
 
         [Display(Name = "FactSheet Audio")]
-        //public string fsAudio { get; set; }
+        public string fsAudioPath { get; set; }
+
+        [NotMapped]
         public HttpPostedFileBase fsAudio { get; set; }
 
         public int? userID { get; set; }

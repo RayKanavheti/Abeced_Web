@@ -1,0 +1,419 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Material Design Bootstrap</title>
+    <!-- Font Awesome -->
+    @*<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">*@
+    <link href="~/fonts/font-awesome.min.css" rel="stylesheet" />
+    <!-- Bootstrap core CSS -->
+
+    <link href="~/mdb2/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- Material Design Bootstrap -->
+    
+    <link href="~/mdb2/css/mdb.min.css" rel="stylesheet" />
+
+    <!--Vendors-->
+    <link href="~/Content/chosen.min.css" rel="stylesheet" />
+    <link href="~/Content/alertifyjs/alertify.min.css" rel="stylesheet" />
+    <link href="~/Content/alertifyjs/themes/default.min.css" rel="stylesheet" />
+    <!-- Your custom styles (optional) -->
+    <style>
+        .blue-gradient {
+            background: -webkit-linear-gradient(50deg, #45cafc, #303f9f);
+            background: linear-gradient(40deg, #45cafc, #4285f4);
+        }
+
+
+        .white-skin .navbar .navbar-nav .nav-item .dropdown-item:hover {
+            background-color: #4e342e;
+        }
+        .dropdown .dropdown-menu .dropdown-item:active, .dropdown .dropdown-menu .dropdown-item:hover {
+            background-color: #4e342e;
+        }
+        .heading-grey {
+            background-color: #dddde4;
+            color: #112f6b;
+        }
+
+        .white-skin .card-header {
+            background-color: #dddde4;
+        }
+    </style>
+</head>
+<body class="fixed-sn white-skin">
+
+
+    <!--Main Navigation-->
+    <header>
+
+        <!-- Sidebar navigation -->
+        <div id="slide-out" class="side-nav sn-bg-4 fixed">
+            <ul class="custom-scrollbar">
+                <!-- Logo -->
+                <li class="logo-sn waves-effect">
+                    <div class="text-center">
+                        <a href="#" class="pl-0"><img src="~/Images/logo.png" width="30" height="30" class="mr-1"/> Learning Letter</a>
+                    </div>
+                </li>
+                <!--/. Logo -->
+                <!--Search Form-->
+                <li>
+                    <form class="search-form" role="search">
+                        <div class="form-group md-form mt-0 pt-1 waves-light">
+                            <input type="text" class="form-control" placeholder="Search">
+                        </div>
+                    </form>
+                </li>
+                <!--/.Search Form-->
+                <!-- Side navigation links -->
+                <li>
+                    <ul class="collapsible collapsible-accordion">
+                        <li>
+                            <a class="collapsible-header waves-effect arrow-r"><i class="fa fa-tachometer"></i>Study Now<i class="fa fa-angle-down rotate-icon"></i></a>
+                            <div class="collapsible-body">
+                                <ul>
+                                    <li>
+                                        <a href="dashboards/v-1.html" class="waves-effect">Flash Cards</a>
+                                    </li>
+                                    <li>
+                                        <a href="dashboards/v-2.html" class="waves-effect">Facts-To-Match</a>
+                                    </li>
+                                    <li>
+                                        <a href="dashboards/v-3.html" class="waves-effect">Quizes</a>
+                                    </li>
+                                    <li>
+                                        <a href="dashboards/v-4.html" class="waves-effect">Take a Test</a>
+                                    </li>
+
+                                </ul>
+                            </div>
+                        </li>
+
+                        <li>
+                            <a class="collapsible-header waves-effect arrow-r"><i class="fa fa-tachometer"></i> Your Courses<i class="fa fa-angle-down rotate-icon"></i></a>
+                            <div class="collapsible-body">
+                                <ul>
+                                    <li>
+                                        <a href="dashboards/v-1.html" class="waves-effect">View All</a>
+                                    </li>
+                                    <li>
+                                        <a href="dashboards/v-2.html" class="waves-effect">Share Courses</a>
+                                    </li>
+                                    <li>
+                                        <a href="dashboards/v-3.html" class="waves-effect">Edit</a>
+                                    </li>
+                                    <li>
+                                        <a href="dashboards/v-4.html" class="waves-effect">Create New</a>
+                                    </li>
+                                    
+                                </ul>
+                            </div>
+                        </li>
+                        <li>
+                            <a class="collapsible-header waves-effect arrow-r"><i class="fa fa-photo"></i>Your Recent Activity<i class="fa fa-angle-down rotate-icon"></i></a>
+                            <div class="collapsible-body">
+                                <ul>
+                                    <li>
+                                        <a href="pages/login.html" class="waves-effect">Revisions</a>
+                                    </li>
+                                    <li>
+                                        <a href="pages/register.html" class="waves-effect">Study History</a>
+                                    </li>
+                                
+                                </ul>
+                            </div>
+                        </li>
+                        <li>
+                            <a class="collapsible-header waves-effect arrow-r"><i class="fa fa-user"></i> Profile<i class="fa fa-angle-down rotate-icon"></i></a>
+                            <div class="collapsible-body">
+                                <ul>
+                                    <li>
+                                        <a href="profile/basic-1.html" class="waves-effect">Update Your Profile</a>
+                                    </li>
+                                    <li>
+                                        <a href="profile/basic-2.html" class="waves-effect">Change Password</a>
+                                    </li>
+                                   
+                                </ul>
+                            </div>
+                        </li>
+                       
+                        <!-- Simple link -->
+                        <li><a href="charts/charts.html" class="collapsible-header waves-effect"><i class="fa fa-pie-chart"></i>Settings</a></li>
+                        <li><a href="charts/charts.html" class="collapsible-header waves-effect"><i class="fa fa-pie-chart"></i>Help Center?</a></li>
+                        <li><a href="modals/modals.html" class="collapsible-header waves-effect"><i class="fa fa-bolt"></i>Contact Us</a></li>
+                        <li><a href="alerts/alerts.html" class="collapsible-header waves-effect"><i class="fa fa-bell-o"></i>Logout</a></li>
+
+                  
+
+
+                    </ul>
+                </li>
+                <!--/. Side navigation links -->
+            </ul>
+            <div class="sidenav-bg mask-strong"></div>
+        </div>
+        <!--/. Sidebar navigation -->
+        <!-- Navbar -->
+        <nav class="navbar fixed-top navbar-expand-lg scrolling-navbar double-nav">
+            <!-- SideNav slide-out button -->
+            <div class="float-left">
+                <a href="#" data-activates="slide-out" class="button-collapse black-text"><i class="fa fa-bars"></i></a>
+            </div>
+            <!-- Breadcrumb-->
+            <div class="breadcrumb-dn mr-auto">
+                <p>Learning Letters</p>
+            </div>
+
+            <!--Navbar links-->
+            <ul class="nav navbar-nav nav-flex-icons ml-auto">
+
+                <!-- Dropdown -->
+                <li class="nav-item dropdown notifications-nav">
+                    <a class="nav-link dropdown-toggle waves-effect" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
+                       aria-expanded="false">
+                        <span class="badge red">3</span> <i class="fa fa-bell"></i>
+                        <span class="d-none d-md-inline-block">Notifications</span>
+                    </a>
+                    <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="#">
+                            <i class="fa fa-money mr-2" aria-hidden="true"></i>
+                            <span>New study sets shared for you</span>
+                            <span class="float-right"><i class="fa fa-clock-o" aria-hidden="true"></i> 13 min</span>
+                        </a>
+
+                        <a class="dropdown-item" href="#">
+                            <i class="fa fa-money mr-2" aria-hidden="true"></i>
+                            <span>You have new unread Messages</span>
+                            <span class="float-right"><i class="fa fa-clock-o" aria-hidden="true"></i> 57 mins</span>
+                        </a>
+                        
+                       
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link waves-effect"><i class="fa fa-envelope"></i> <span class="clearfix d-none d-sm-inline-block">Send a Message</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link waves-effect"><i class="fa fa-comments-o"></i> <span class="clearfix d-none d-sm-inline-block">New Chat Messages</span></a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle waves-effect" href="#" id="userDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fa fa-user"></i> <span class="clearfix d-none d-sm-inline-block">@Session["FirstName"] @Session["LastName"]</span>
+                    </a>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+                        <a class="dropdown-item" href="#">Log Out</a>
+                        <a class="dropdown-item" href="#">My account</a>
+                    </div>
+                </li>
+
+            </ul>
+            <!--/Navbar links-->
+        </nav>
+        <!-- /.Navbar -->
+
+    </header>
+    <!--Main Navigation-->
+
+
+
+    <!--Main layout-->
+    <main>
+        @RenderBody()
+    </main>
+
+
+    <!--/. Main layout-->
+
+
+
+
+
+    <!--Footer-->
+    <footer class="page-footer font-small unique-color-dark pt-0">
+
+        <div class="bg-white heading-grey">
+            <div class="container">
+                <!--Grid row-->
+                <div class="row py-4 d-flex align-items-center">
+
+                    <!--Grid column-->
+                    <div class="col-md-6 col-lg-5 text-center text-md-left mb-4 mb-md-0">
+                        <h6 class="mb-0 ">Get connected with us on social networks!</h6>
+                    </div>
+                    <!--Grid column-->
+                    <!--Grid column-->
+                    <div class="col-md-6 col-lg-7 text-center text-md-right">
+                        <!--Facebook-->
+                        <a class="fb-ic ml-0">
+                            <i class="fa fa-facebook  mr-lg-4"> </i>
+                        </a>
+                        <!--Twitter-->
+                        <a class="tw-ic">
+                            <i class="fa fa-twitter mr-lg-4"> </i>
+                        </a>
+                        <!--Google +-->
+                        <a class="gplus-ic">
+                            <i class="fa fa-google-plus mr-lg-4"> </i>
+                        </a>
+                        <!--Linkedin-->
+                        <a class="li-ic">
+                            <i class="fa fa-linkedin mr-lg-4"> </i>
+                        </a>
+                        <!--Instagram-->
+                        <a class="ins-ic">
+                            <i class="fa fa-instagram mr-lg-4"> </i>
+                        </a>
+                    </div>
+                    <!--Grid column-->
+
+                </div>
+                <!--Grid row-->
+            </div>
+        </div>
+
+        <!--Footer Links-->
+        <div class="container mt-5 mb-4 text-center text-md-left">
+            <div class="row mt-3">
+
+                <!--First column-->
+                <div class="col-md-3 col-lg-4 col-xl-3 mb-4">
+                    <h6 class="text-uppercase font-weight-bold">
+                        <strong>Learning Letters</strong>
+                    </h6>
+                    <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+                    <p>
+                        Here you can use rows and columns here to organize your footer content. Lorem ipsum dolor sit
+                        amet, consectetur adipisicing elit.
+                    </p>
+                </div>
+                <!--/.First column-->
+                <!--Second column-->
+                <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+                    <h6 class="text-uppercase font-weight-bold">
+                        <strong>Master A Fact</strong>
+                    </h6>
+                    <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+                    <p>
+                        <a href="#!">Flash Cards</a>
+                    </p>
+                    <p>
+                        <a href="#!">Facst-To-Match</a>
+                    </p>
+                    <p>
+                        <a href="#!">Quizez</a>
+                    </p>
+                    <p>
+                        <a href="#!">Take A Test</a>
+                    </p>
+                </div>
+                <!--/.Second column-->
+                <!--Third column-->
+                <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+                    <h6 class="text-uppercase font-weight-bold">
+                        <strong>Useful links</strong>
+                    </h6>
+                    <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+                    <p>
+                        <a href="#!">Your Account</a>
+                    </p>
+                    <p>
+                        <a href="#!">Become an Affiliate</a>
+                    </p>
+                    <p>
+                        <a href="#!">Shipping Rates</a>
+                    </p>
+                    <p>
+                        <a href="#!">Help</a>
+                    </p>
+                </div>
+                <!--/.Third column-->
+                <!--Fourth column-->
+                <div class="col-md-4 col-lg-3 col-xl-3">
+                    <h6 class="text-uppercase font-weight-bold">
+                        <strong>Contact</strong>
+                    </h6>
+                    <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+                    <p>
+                        <i class="fa fa-home mr-3"></i> New York, NY 10012, US
+                    </p>
+                    <p>
+                        <i class="fa fa-envelope mr-3"></i> info@example.com
+                    </p>
+                    <p>
+                        <i class="fa fa-phone mr-3"></i> + 01 234 567 88
+                    </p>
+                    <p>
+                        <i class="fa fa-print mr-3"></i> + 01 234 567 89
+                    </p>
+                </div>
+                <!--/.Fourth column-->
+
+            </div>
+        </div>
+        <!--/.Footer Links-->
+        <!-- Copyright-->
+        <div class="footer-copyright py-3 text-center">
+            © 2018 Copyright:
+            <a href="https://mdbootstrap.com/material-design-for-bootstrap/">
+                <strong>LearningLetters.co.za</strong>
+            </a>
+        </div>
+        <!--/.Copyright -->
+
+    </footer>
+    <!--/.Footer-->
+
+
+
+
+
+
+
+
+
+
+        <!-- SCRIPTS -->
+        <!-- JQuery -->
+
+        <script src="~/mdb2/js/jQuery-3.2.1.min.js"></script>
+        <!-- Bootstrap tooltips -->
+        <script src="~/mdb2/js/popper.min.js"></script>
+        <!-- Bootstrap core JavaScript -->
+        <script src="~/mdb2/js/bootstrap.min.js"></script>
+        <!-- MDB core JavaScript -->
+        <script src="~/mdb2/js/mdb.min.js"></script>
+        <!--Custom scripts-->
+        <script src="~/Scripts/alertify.min.js"></script>
+        <script>
+            // SideNav Initialization
+            $(".button-collapse").sideNav();
+
+            var container = document.querySelector('.custom-scrollbar');
+            Ps.initialize(container, {
+                wheelSpeed: 2,
+                wheelPropagation: true,
+                minScrollbarLength: 20
+            });
+
+            // Data Picker Initialization
+            $('.datepicker').pickadate();
+
+            // Material Select Initialization
+            $(document).ready(function () {
+                $('.mdb-select').material_select();
+            });
+
+            // Tooltips Initialization
+            $(function () {
+                $('[data-toggle="tooltip"]').tooltip()
+            })
+        </script>
+        @RenderSection("scripts", required: false)
+</body>
+</html>

@@ -8,73 +8,91 @@
 
         var ViewModel = this;
         ViewModel.ActiveCard = 0;
+        ViewModel.Outcomes = 0;
         ViewModel.setActiveCard = setActiveCard;
-        ViewModel.RightAnswer = RightAnswer;
-        ViewModel.WrongAnswer = WrongAnswer;
         ViewModel.NumRightAnswers = 0;
         ViewModel.NumWrongAnswers = 0;
-        ViewModel.Questions = [];
-        ViewModel.Answers = [];
+        ViewModel.RightAnswer = RightAnswer;
         ViewModel.RightAnswers = [];
-        var answeredQuestions;
+        ViewModel.List = [];
+        
 
         FactListService.GetFactList().then(function (response) {
-            ViewModel.data = response.data;// setting the ViewModel.data to our factList json File
+            ViewModel.data= response.data;// setting the ViewModel.FlashcardData to our factList json File
+            ViewModel.FlashcardData = response.data;
             ViewModel.NumFacts = response.data.factList.length;
-            answeredQuestions[ViewModel.NumFacts];
+           
             for (var i = 0; i < ViewModel.NumFacts; i++) {
-
-                ViewModel.Questions[i].push(ViewModel.data.factList[i].question);
-                ViewModel.Answers[i].push(ViewModel.data.factList[i].answer)
+                ViewModel.List.push(ViewModel.FlashcardData.factList[i])
             }
 
         });
-
-        function setActiveCard(index) {
-            if (index === undefined) { // if index is not passed then the following will be executed
+        ViewModel.FlashcardData.factList[ViewModel.ActiveCard].trials = 1;
+        function setActiveCard() {
+          
                 var stopLoop = false;
                 var factsLength = ViewModel.data.factList.length - 1; // remember computers starts at zero
                 // while stopLoop == false
                 while (!stopLoop) {
                     // if  activeCard is equal to that active Card but less than facts then increment active card with one else set activeCard to zero and start all over to search for a wrong card clicked in the list
-                    ViewModel.ActiveCard = ViewModel.ActiveCard < factsLength ? ++ViewModel.ActiveCard : 0;
-                    if (ViewModel.ActiveQuestion === 0) {
+                    //ViewModel.ActiveCard = ViewModel.ActiveCard < factsLength ? ++ViewModel.ActiveCard : 0;
+                   
 
-                        ViewModel.UnCompletedError = true;
+                    if (ViewModel.ActiveCard < factsLength) {
+                        ViewModel.ActiveCard++;
+                    } else {
+                        ViewModel.ActiveCard = 0;
                     }
-
-                    if (ViewModel.data.factList[ViewModel.ActiveCard].Outcome === null || ViewModel.data.factList[ViewModel.ActiveCard].Outcome === false) {
-                        stopLoop = true; // if an fact in the loop is equal to false or equal to null then the loop stops at that point
-                    }
+                  
+                  
+                        if (ViewModel.FlashcardData.factList[ViewModel.ActiveCard].Outcome === null || ViewModel.FlashcardData.factList[ViewModel.ActiveCard].Outcome === false) {
+                            stopLoop = true; // if an fact in the loop is equal to false or equal to null then the loop stops at that point
+                        }
+                    
+                  
 
                 }
 
-            } else {
-
-                ViewModel.ActiveCard = index;
-            }
+          
 
 
         }
-        var TimesRightAnswerClicked = 0
+       
         function RightAnswer() {
-            TimesRightAnswerClicked ++;
-            ViewModel.data.factList[ViewModel.ActiveCard].Outcome = true;
 
-            for (var i = 0; i < TimesRightAnswerClicked; i++) {
+            ViewModel.RightAnswers.push(ViewModel.FlashcardData.factList[ViewModel.ActiveCard])
+            if (ViewModel.RightAnswers.length > 0) {
+                for (var i = 0; i < ViewModel.RightAnswers.length; i++) {
+                    if (ViewModel.FlashcardData.factList[ViewModel.ActiveCard] == ViewModel.RightAnswers[i] ) {
+                        setActiveCard();
+                        return;
+                    } else if (ViewModel.FlashcardData.factList[ViewModel.ActiveCard] == ViewModel.RightAnswers[i]){
 
-                ViewModel.RightAnswers[i].push(ViewModel.data.factList[ViewModel.ActiveCard].Outcome)
+                        setActiveCard();
+                        return;
+                    } else if (ViewModel.FlashcardData.factList[ViewModel.ActiveCard - 2] == ViewModel.RightAnswers[i]){
+                        ViewModel.ActiveCard = ViewModel.ActiveCard - 2;
+                        ViewModel.FlashcardData.factList[ViewModel.ActiveCard].trials = 2;
+                        return;
+
+                    }
+                }
+
 
             }
 
+
+           
+
+         
 
 
         }
 
        //function RightAnswer() {
 
-       //     ViewModel.data.factList[ViewModel.ActiveCard].Outcome = true;
-       //     if (ViewModel.data.factList[ViewModel.ActiveCard].Outcome == true ) {
+       //     ViewModel.FlashcardData.factList[ViewModel.ActiveCard].Outcome = true;
+       //     if (ViewModel.FlashcardData.factList[ViewModel.ActiveCard].Outcome == true ) {
        //         ViewModel.NumRightAnswers++;
 
 
@@ -83,7 +101,7 @@
        //             //However we have to be very sure that all the questions have been answered by implementing this for loop which checks if there is a question which is still equal to null
        //             for (var i = 0; i < ViewModel.NumFacts; i++) {
 
-       //                 if (ViewModel.data.factList[i].Outcome === false || ViewModel.data.factList[i].Outcome === null ) {
+       //                 if (ViewModel.FlashcardData.factList[i].Outcome === false || ViewModel.FlashcardData.factList[i].Outcome === null ) {
        //                     setActiveCard(i) // call this function if there is unaswered question 
        //                     return; // stops the loop to stop further looping
        //                 }
@@ -100,8 +118,8 @@
 
         //function WrongAnswer() {
 
-        //    ViewModel.data.factList[ViewModel.ActiveCard].Outcome = false;
-        //    if (ViewModel.data.factList[ViewModel.ActiveQuestion].Outcome == false) {
+        //    ViewModel.FlashcardData.factList[ViewModel.ActiveCard].Outcome = false;
+        //    if (ViewModel.FlashcardData.factList[ViewModel.ActiveQuestion].Outcome == false) {
         //        ViewModel.NumWrongAnswers++;
         //        ViewModel.NumRightAnswers--;
 
@@ -110,7 +128,7 @@
         //            //However we have to be very sure that all the questions have been answered by implementing this for loop which checks if there is a question which is still equal to null
         //            for (var i = 0; i < ViewModel.NumFacts; i++) {
 
-        //                if (ViewModel.data.factList[i].Outcome === false || ViewModel.data.factList[i].Outcome === null) {
+        //                if (ViewModel.FlashcardData.factList[i].Outcome === false || ViewModel.FlashcardData.factList[i].Outcome === null) {
         //                    setActiveCard(i) // call this function if there is unaswered question 
         //                    return; // stops the loop to stop further looping
         //                }

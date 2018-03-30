@@ -257,7 +257,7 @@
           ViewModel.WrongWords = "";
           ViewModel.CorrectWords = "";
           ViewModel.UnCompletedError = false;
-          ViewModel.CourseName = document.getElementById("CourseName").innerText;
+          //ViewModel.CourseName = document.getElementById("CourseName").innerText;
 
 
           var numQuestionsAnswered = 0;
@@ -305,17 +305,6 @@
               ViewModel.WrongWords = "";
               ViewModel.CorrectWords = "";
               ViewModel.DisplayAnswer = false;
-              
-
-
-
-
-
-
-
-
-
-
 
               ViewModel.data.factList[ViewModel.ActiveQuestion].Answered = ViewModel.InputedAnswer; // keeping track of the inputed answer
               ViewModel.InputedAnswerArray[ViewModel.ActiveQuestion] = ViewModel.InputedAnswer;
@@ -405,15 +394,6 @@
               ViewModel.progressTop = {
                   "width": ViewModel.NumFacts,
               }
-
-
-
-
-
-
-
-
-
 
               var quizLength = ViewModel.data.factList.length; // finding the number of facts the user want to be tested upon
 

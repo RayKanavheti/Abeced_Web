@@ -255,6 +255,18 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Abeced.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\Abeced.Data\AspNetRole.cs">
+      <DependentUpon>Abeced.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Abeced.Data\AspNetUser.cs">
+      <DependentUpon>Abeced.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Abeced.Data\AspNetUserClaim.cs">
+      <DependentUpon>Abeced.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Abeced.Data\AspNetUserLogin.cs">
+      <DependentUpon>Abeced.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Abeced.Data\Course.cs">
       <DependentUpon>Abeced.tt</DependentUpon>
     </Compile>

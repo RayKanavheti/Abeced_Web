@@ -1,5 +1,6 @@
 ﻿using Abeced.UI.Web.Helpers;
 using Abeced.UI.Web.Models;
+using Abeced_Data.Repositery;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -21,30 +22,43 @@ namespace Abeced.UI.Web.Controllers
             //ViewData["CouseName"] = CourseName;
             TempData["CourseId"] = Int32.Parse(CourseID);
             TempData.Keep();
-            //SelectCards(newCourseId);
-
-
+           
             Sharing shares = new Sharing();
-            IEnumerable<RegisterViewModel> AllUsersList = null;
+            Repositery _repo = new Repositery();
+            List<Abeced_Data.Abeced.Data.AspNetUser> AllUsers = _repo.getAllAbecedUsers();
 
-            var response = DataAccess.WebClient.GetAsync("User");
-            response.Wait();
-            var result = response.Result;
+            List<RegisterViewModel> users = AllUsers.Select(x => new RegisterViewModel {
+
+                UserId = x.Id,
+                UserName = x.UserName,
+                Email = x.Email,
+                Fname = x.Fname,
+                Lname = x.Lname
+
+            }).ToList();
+
+            shares.User = users;
+
+                //IEnumerable<RegisterViewModel> AllUsersList = null;
+
+                //var response = DataAccess.WebClient.GetAsync("User");
+                //response.Wait();
+                //var result = response.Result;
 
 
-            if (result.IsSuccessStatusCode)
-            {
-                var readTask = result.Content.ReadAsAsync<List<RegisterViewModel>>();
-                readTask.Wait();
-                AllUsersList = readTask.Result;
-                shares.User = AllUsersList.ToList();
-            }
-            else
-            {
+                //if (result.IsSuccessStatusCode)
+                //{
+                //    var readTask = result.Content.ReadAsAsync<List<RegisterViewModel>>();
+                //    readTask.Wait();
+                //    AllUsersList = readTask.Result;
+                //    shares.User = AllUsersList.ToList();
+                //}
+                //else
+                //{
 
-                AllUsersList = Enumerable.Empty<RegisterViewModel>();
-                ModelState.AddModelError(string.Empty, "Server Error");
-            }
+                //    AllUsersList = Enumerable.Empty<RegisterViewModel>();
+                //    ModelState.AddModelError(string.Empty, "Server Error");
+                //}
 
 
 
@@ -55,34 +69,64 @@ namespace Abeced.UI.Web.Controllers
         // GET: FlashCard
         public ActionResult SelectCards()
         {
-            IEnumerable<FactModelRetrieve> factModelList = null;
+
+
+
+            //try
+            //{ IEnumerable<FactModelRetrieve> factModelList = null;
+
+            //    var response = DataAccess.WebClient.GetAsync("flashcards/cards/" + TempData["CourseId"]);
+            //    response.Wait();
+            //    var result = response.Result;
+
+            //    if (result.IsSuccessStatusCode)
+            //    {
+
+            //        var readTask = result.Content.ReadAsAsync<List<FactModelRetrieve>>();
+            //        readTask.Wait();
+            //        factModelList = readTask.Result;
+
+            //    }
+            //    else
+            //    {
+            //        factModelList = Enumerable.Empty<FactModelRetrieve>();
+            //        ModelState.AddModelError(string.Empty, "Server Error");
+
+            //    }
+            //    TempData["SelectedCards"] = factModelList;
+            //    TempData.Keep();
+            //    //ViewBag.Facts = factModelList;
+            //    return Json(new {data =  factModelList},JsonRequestBehavior.AllowGet);
+
+
+            //}
+            //catch (Exception)
+            //{
+
+            //    throw;
+            //}
+
+
 
             try
             {
+            
+               
+                Repositery _repo = new Repositery();
+                List<Abeced_Data.Abeced.Data.Fact> FactsList = _repo.getCourseFacts(Convert.ToInt32 (TempData["CourseId"]));
 
-                var response = DataAccess.WebClient.GetAsync("flashcards/cards/" + TempData["CourseId"]);
-                response.Wait();
-                var result = response.Result;
+                List<FactModelRetrieve> factModelList = FactsList.Select(x => new FactModelRetrieve {
 
-                if (result.IsSuccessStatusCode)
-                {
+                    FactId = x.FactId,
+                    question = x.question,
+                    answer = x.answer,
+                    factsheet = x.factsheet
 
-                    var readTask = result.Content.ReadAsAsync<List<FactModelRetrieve>>();
-                    readTask.Wait();
-                    factModelList = readTask.Result;
+                }).ToList();
 
-                }
-                else
-                {
-                    factModelList = Enumerable.Empty<FactModelRetrieve>();
-                    ModelState.AddModelError(string.Empty, "Server Error");
-
-                }
                 TempData["SelectedCards"] = factModelList;
                 TempData.Keep();
-                //ViewBag.Facts = factModelList;
-                return Json(new {data =  factModelList},JsonRequestBehavior.AllowGet);
-
+                return Json(new { data = factModelList }, JsonRequestBehavior.AllowGet);
 
             }
             catch (Exception)
@@ -115,27 +159,44 @@ namespace Abeced.UI.Web.Controllers
             //factIds variable to be consistent with the parameter in the web apis
             string factIds = SelectedCards;
 
-            IEnumerable<FactModelRetrieve> selectedFactsList = null;
-            var response = DataAccess.WebClient.GetAsync("flashcards/selectedCards/"+ factIds);
-            
-            response.Wait();
+            //IEnumerable<FactModelRetrieve> selectedFactsList = null;
+            //var response = DataAccess.WebClient.GetAsync("flashcards/selectedCards/"+ factIds);
 
-            var result = response.Result;
-           
-            if (result.IsSuccessStatusCode)
+            //response.Wait();
+
+            //var result = response.Result;
+
+            //if (result.IsSuccessStatusCode)
+            //{
+
+            //    var readTask = result.Content.ReadAsAsync<List<FactModelRetrieve>>();
+            //    readTask.Wait();
+            //    selectedFactsList = readTask.Result;
+            //}
+            //else
+            //{
+            //    selectedFactsList = Enumerable.Empty<FactModelRetrieve>();
+            //    ModelState.AddModelError(string.Empty, "Server Error");
+            //}
+
+            Repositery _repo = new Repositery();
+            List<Abeced_Data.Abeced.Data.Fact> getFacts = _repo.GetSelectedFacts(factIds);
+
+            // mapping the factlist with the facts model  
+            List<FactModelRetrieve> selectedFactsList = getFacts.Select(x => new FactModelRetrieve
             {
 
-                var readTask = result.Content.ReadAsAsync<List<FactModelRetrieve>>();
-                readTask.Wait();
-                selectedFactsList = readTask.Result;
-            }
-            else
-            {
-                selectedFactsList = Enumerable.Empty<FactModelRetrieve>();
-                ModelState.AddModelError(string.Empty, "Server Error");
-            }
-            
-            
+                FactId = x.FactId,
+                question = x.question,
+                answer = x.answer,
+                factsheet = x.factsheet,
+                qAudio = x.qAudio,
+                aAudio = x.aAudio,
+                fsAudio = x.fsAudio,
+                qImage = x.qImage,
+                aImage = x.aImage,
+
+            }).ToList();
             return View(selectedFactsList);
 
         }
@@ -175,26 +236,43 @@ namespace Abeced.UI.Web.Controllers
         public ActionResult flashCardsJSONData(string SelectedCards)
         {
             string factIds = TempData["SelectedFlashCardIds"] as string;
-            IEnumerable<FactModelRetrieve> selectedFactsList = null;
-            var response = DataAccess.WebClient.GetAsync("flashcards/selectedCards/" + factIds);
+            //IEnumerable<FactModelRetrieve> selectedFactsList = null;
+            //var response = DataAccess.WebClient.GetAsync("flashcards/selectedCards/" + factIds);
 
-            response.Wait();
+            //response.Wait();
 
-            var result = response.Result;
+            //var result = response.Result;
 
-            if (result.IsSuccessStatusCode)
+            //if (result.IsSuccessStatusCode)
+            //{
+
+            //    var readTask = result.Content.ReadAsAsync<List<FactModelRetrieve>>();
+            //    readTask.Wait();
+            //    selectedFactsList = readTask.Result;
+            //}
+            //else
+            //{
+            //    selectedFactsList = Enumerable.Empty<FactModelRetrieve>();
+            //    ModelState.AddModelError(string.Empty, "Server Error");
+            //}
+            Repositery _repo = new Repositery();
+            List<Abeced_Data.Abeced.Data.Fact> getFacts = _repo.GetSelectedFacts(factIds);
+
+            // mapping the factlist with the facts model  
+            List<FactModelRetrieve> selectedFactsList = getFacts.Select(x => new FactModelRetrieve
             {
 
-                var readTask = result.Content.ReadAsAsync<List<FactModelRetrieve>>();
-                readTask.Wait();
-                selectedFactsList = readTask.Result;
-            }
-            else
-            {
-                selectedFactsList = Enumerable.Empty<FactModelRetrieve>();
-                ModelState.AddModelError(string.Empty, "Server Error");
-            }
+                FactId = x.FactId,
+                question = x.question,
+                answer = x.answer,
+                factsheet = x.factsheet,
+                qAudio = x.qAudio,
+                aAudio = x.aAudio,
+                fsAudio = x.fsAudio,
+                qImage = x.qImage,
+                aImage = x.aImage,
 
+            }).ToList();
 
             return Json(new { factList = selectedFactsList }, JsonRequestBehavior.AllowGet);
 
@@ -206,26 +284,43 @@ namespace Abeced.UI.Web.Controllers
 
             string factIds = TempData["SelectedFactsToMatchIds"] as string;
 
-            IEnumerable<FactModelRetrieve> selectedFactsList = null;
-            var response = DataAccess.WebClient.GetAsync("flashcards/selectedCards/" + factIds);
+            //IEnumerable<FactModelRetrieve> selectedFactsList = null;
+            //var response = DataAccess.WebClient.GetAsync("flashcards/selectedCards/" + factIds);
 
-            response.Wait();
+            //response.Wait();
 
-            var result = response.Result;
+            //var result = response.Result;
 
-            if (result.IsSuccessStatusCode)
+            //if (result.IsSuccessStatusCode)
+            //{
+
+            //    var readTask = result.Content.ReadAsAsync<List<FactModelRetrieve>>();
+            //    readTask.Wait();
+            //    selectedFactsList = readTask.Result;
+            //}
+            //else
+            //{
+            //    selectedFactsList = Enumerable.Empty<FactModelRetrieve>();
+            //    ModelState.AddModelError(string.Empty, "Server Error");
+            //}
+            Repositery _repo = new Repositery();
+            List<Abeced_Data.Abeced.Data.Fact> getFacts = _repo.GetSelectedFacts(factIds);
+
+            // mapping the factlist with the facts model  
+            List<FactModelRetrieve> selectedFactsList = getFacts.Select(x => new FactModelRetrieve
             {
 
-                var readTask = result.Content.ReadAsAsync<List<FactModelRetrieve>>();
-                readTask.Wait();
-                selectedFactsList = readTask.Result;
-            }
-            else
-            {
-                selectedFactsList = Enumerable.Empty<FactModelRetrieve>();
-                ModelState.AddModelError(string.Empty, "Server Error");
-            }
+                FactId = x.FactId,
+                question = x.question,
+                answer = x.answer,
+                factsheet = x.factsheet,
+                qAudio = x.qAudio,
+                aAudio = x.aAudio,
+                fsAudio = x.fsAudio,
+                qImage = x.qImage,
+                aImage = x.aImage,
 
+            }).ToList();
 
             return Json(new { factList = selectedFactsList }, JsonRequestBehavior.AllowGet);
 
@@ -239,61 +334,93 @@ namespace Abeced.UI.Web.Controllers
         {
 
             Sharing shares = new Sharing();
-            IEnumerable<RegisterViewModel> AllUsersList = null;
+            //IEnumerable<RegisterViewModel> AllUsersList = null;
 
-            var response = DataAccess.WebClient.GetAsync("User");
-            response.Wait();
-            var result = response.Result;
+            //var response = DataAccess.WebClient.GetAsync("User");
+            //response.Wait();
+            //var result = response.Result;
 
 
-            if (result.IsSuccessStatusCode)
+            //if (result.IsSuccessStatusCode)
+            //{
+            //    var readTask = result.Content.ReadAsAsync<List<RegisterViewModel>>();
+            //    readTask.Wait();
+            //    AllUsersList = readTask.Result;
+            //    shares.User = AllUsersList.ToList();
+            //}
+            //else
+            //{
+
+            //    AllUsersList = Enumerable.Empty<RegisterViewModel>();
+            //    ModelState.AddModelError(string.Empty, "Server Error");
+            //}
+            
+            Repositery _repo = new Repositery();
+            List<Abeced_Data.Abeced.Data.AspNetUser> AllUsers = _repo.getAllAbecedUsers();
+
+            List<RegisterViewModel> users = AllUsers.Select(x => new RegisterViewModel
             {
-                var readTask = result.Content.ReadAsAsync<List<RegisterViewModel>>();
-                readTask.Wait();
-                AllUsersList = readTask.Result;
-                shares.User = AllUsersList.ToList();
-            }
-            else
-            {
 
-                AllUsersList = Enumerable.Empty<RegisterViewModel>();
-                ModelState.AddModelError(string.Empty, "Server Error");
-            }
+                UserId = x.Id,
+                UserName = x.UserName,
+                Email = x.Email,
+                Fname = x.Fname,
+                Lname = x.Lname
 
+            }).ToList();
+
+            shares.User = users;
             return PartialView(shares);
             
 
         }
         [HttpPost]
-        public ActionResult ShareCards(Sharing sharing)
+        public ActionResult ShareCards(Sharing sharing) // this objected is posted from the view and consist of user selected for sharing
         {
 
-            
+
+            //if (Session["SelectedCardsString"] != null)
+            //{
+            //    sharing.SenderId = 2;
+            //    sharing.SharedWithIds = string.Join(",", sharing.SelectedIds);
+            //    sharing.FactList = Session["SelectedCardsString"].ToString();
+            //    HttpResponseMessage response = DataAccess.WebClient.PostAsJsonAsync("Sharings", sharing).Result;
+            //    if (response.IsSuccessStatusCode)
+            //    {
+            //        Console.Write("Shared");
+
+            //    }
+            //    else
+            //    {
+            //        Console.Write("Not shared");
+
+            //    }
+            //}
+            //else
+            //{
+
+            //     ViewBag.Success = "Select Cards First";
+
+            //}
+
             if (Session["SelectedCardsString"] != null)
             {
-                sharing.SenderId = 2;
-                sharing.SharedWithIds = string.Join(",", sharing.SelectedIds);
-                sharing.FactList = Session["SelectedCardsString"].ToString();
-                HttpResponseMessage response = DataAccess.WebClient.PostAsJsonAsync("Sharings", sharing).Result;
-                if (response.IsSuccessStatusCode)
-                {
-                    Console.Write("Shared");
 
-                }
-                else
-                {
-                    Console.Write("Not shared");
 
-                }
-            }
-            else
-            {
+                Abeced_Data.Abeced.Data.Sharing cardsShared = new Abeced_Data.Abeced.Data.Sharing {
+                    AbecedUserId_Sharer= "ed08da0c-f25f-4da1-b2e3-ba39e5cd1246",
+                    SharedWithIds = string.Join(",", sharing.SelectedIds),
+                    FactList = Session["SelectedCardsString"].ToString()
 
-                 ViewBag.Success = "Select Cards First";
+                };
 
+                Repositery _repo = new Repositery();
+                _repo.SaveSharing(cardsShared);
+
+                return Json(new { returnmsg = "Success" }, JsonRequestBehavior.AllowGet);
             }
 
-            return Json(new { returnmsg = "Success" }, JsonRequestBehavior.AllowGet);
+            return Json(new { returnmsg = "failure" }, JsonRequestBehavior.AllowGet);
         }
         [Authorize]
         public ActionResult Dashboard()

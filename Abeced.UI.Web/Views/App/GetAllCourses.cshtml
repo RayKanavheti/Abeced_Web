@@ -2,7 +2,7 @@
 
 @{
     ViewBag.Title = "AddorEditCard";
-    Layout = "~/Views/Shared/_MainLayout.cshtml";
+    Layout = "~/Views/Shared/_AbecedDashboard.cshtml";
 }
 
 
@@ -35,53 +35,64 @@
 
 </style>
 
-<div class="form-header deep-blue-gradient rounded">
-    <h3 class="text-center">Get All Courses</h3>
-</div>
-      
-
 
 <div class="container-fluid">
     <div class="row">
-        @foreach (var item in Model)
-        {
-            <!--First columnn-->
-            <div style="margin-bottom: 10px; margin-top:10px" class="col-lg-4">
-                <!--Card-->
-                    <div class="card mb-r wow fadeIn" data-wow-delay="0.2s">
-                        <!--Card image-->
-                        <div class="Course-img">
-                            <a href="@Url.Content("~/FlashCard/selectCardIndex?CourseID="+item.CourseId+"&CourseName="+item.name)"><img class="img-fluid img-thumbnail card-img"  src="@item.img"  alt="Course Image"/></a>
-                        </div>
-                        <!--Card content-->
-                        <div class="card-body">
-                            <!--Title-->
-                            <h5 class="font-bold">
-                                <strong>@item.name</strong>
-                                <span class="badge badge-danger">4 Cards</span>
-                            </h5>
-                            <hr>
-                            <h4>
-                                <strong>2 Hrs 30 mins</strong>
-                            </h4>
-                            <!--Text-->
-                            <p class="card-text mt-4">
-                                @item.description
-                            </p>
+        <div class="col-md-10">
+            <div class="heading-grey text-center p-2 z-depth-1">
+                <span class=" h3-responsive">Your Courses</span>
+            </div>
+       <div class="row mb-3">
+          
+            @foreach (var item in Model)
+                    {
+                        <!--First columnn-->
+                        <div  class="col-lg-4 col-md-6 col-sm-12 col-xs-12" style="padding:10px">
+                            <!--Card-->
+                                <div class="card wow fadeIn" data-wow-delay="0.2s">
+                                    <!--Card image-->
+                                    <div class="Course-img">
+                                        <a href="@Url.Content("~/FlashCard/selectCardIndex?CourseID="+item.CourseId+"&CourseName="+item.name)"><img class="img-fluid img-thumbnail card-img"  src="@item.img"  alt="Course Image"/></a>
+                                    </div>
+                                    <!--Card content-->
+                                    <div class="card-body">
+                                        <!--Title-->
+                                        <h5 class="font-bold">
+                                            <strong>@item.name</strong>
+                                            <span class="badge badge-danger">4 Cards</span>
+                                        </h5>
+                                        <hr>
+                                        <h4>
+                                            <strong>2 Hrs 30 mins</strong>
+                                        </h4>
+                                        <!--Text-->
+                                        <p class="card-text mt-4">
+                                            @item.description
+                                        </p>
 
-                            <a href="@Url.Content("~/FlashCard/selectCardIndex?CourseID="+item.CourseId+"&CourseName="+item.name)" class="btn btn-info btn-sm">Study now </a>
-                        </div>
-                        <!--/.Card content-->
-                    </div>
-                <!--/.Card-->
+                                        <a href="@Url.Content("~/FlashCard/selectCardIndex?CourseID="+item.CourseId+"&CourseName="+item.name)" class="btn btn-info btn-sm">Study now </a>
+                                    </div>
+                                    <!--/.Card content-->
+                                </div>
+                            <!--/.Card-->
+                            </div>
+                        <!--First columnn-->
+
+                    }
+
+
                 </div>
-            <!--First columnn-->
+            </div>
+        <div class="col-md-2 heading-grey z-depth-1-half">
+            <div>
+                <h3>Adds Section</h3>
 
-        }
+            </div>
 
 
-    </div>
 
+        </div>
+     </div>
 </div>
        
 
